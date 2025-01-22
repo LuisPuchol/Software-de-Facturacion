@@ -1,5 +1,6 @@
 package com.luis.facturacion.view;
 
+import com.luis.facturacion.controller.MainMenuController;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Menu;
@@ -9,6 +10,11 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 public class MainView {
+private MainMenuController mainMenuController;
+    public MainView(MainMenuController mainMenuController) {
+        //this.mainMenuController = mainMenuController;
+    }
+
     public void startMainMenu(Stage primaryStage) {
         // Configurar la ventana principal
         BorderPane root = new BorderPane();
