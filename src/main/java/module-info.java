@@ -4,6 +4,7 @@ module com.luis.facturacion {
 
     requires org.controlsfx.controls;
     requires com.dlsc.formsfx;
+    requires java.desktop;
 
     opens com.luis.facturacion to javafx.fxml;
     opens com.luis.facturacion.controller to javafx.fxml;

@@ -1,12 +1,9 @@
 package com.luis.facturacion;
 
-import com.luis.facturacion.controller.LoginController;
+import com.luis.facturacion.controller.AppController;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.image.Image;
 import javafx.stage.Stage;
+
 
 /**
  * @author Luis
@@ -23,20 +20,13 @@ import javafx.stage.Stage;
 public class Main extends Application {
 
     public static void main(String[] args) {
-        new LoginController();
         launch(args);
     }
 
     @Override
-    public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("login-menu.fxml"));
-        Scene scene = new Scene(root);
-
-        stage.getIcons().add(new Image("/logo.png"));
-        stage.setTitle("Frutas");
-        stage.setScene(scene);
-        stage.show();
+    public void start(Stage primaryStage) {
+        AppController appController = new AppController(primaryStage);
+        appController.showLoginView(); // Mostrar la ventana de login inicialmente
     }
-
 
 }

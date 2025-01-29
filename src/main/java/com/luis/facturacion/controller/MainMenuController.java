@@ -1,37 +1,39 @@
 package com.luis.facturacion.controller;
 
-import com.luis.facturacion.model.Model;
-import com.luis.facturacion.view.MainView;
 import javafx.fxml.FXML;
-import javafx.scene.layout.BorderPane;
+import javafx.scene.Scene;
 import javafx.scene.Parent;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
+import java.awt.*;
+import java.awt.event.ActionEvent;
+
 public class MainMenuController {
+    private AppController appController;
 
-    @FXML
-    private BorderPane mainPane;
-    private Model model;
-    private MainView mainView;
     public MainMenuController() {
-        this.model = new Model(this);
-        this.mainView = new MainView(this);
+
     }
+
+    public void setAppController(AppController appController) {
+        this.appController = appController;
+    }
+
     @FXML
-    private void handleMenuAction() {
-        try {
-            // Ejemplo: Cargar la vista de clientes
-            Parent clientesView = FXMLLoader.load(getClass().getResource("/com/example/facturacion/view/clientes-view.fxml"));
-            mainPane.setCenter(clientesView);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    public void handleArticulosClick(javafx.event.ActionEvent actionEvent) {
+        System.out.println("El menú 'Clientes' fue seleccionado.");
     }
 
+    @FXML
+    public void handleClientesClick(javafx.event.ActionEvent actionEvent) {
+        System.out.println("El menú 'Clientes' fue seleccionado.");
+    }
 
-    // Método para cambiar a MainView después del login
-    public void showMainMenu(Stage stage) {
-        mainView.startMainMenu(stage);
+    @FXML
+    public void handleConfigIVA(javafx.event.ActionEvent actionEvent) {
+        System.out.println("El menú 'Configuración IVA' fue seleccionado.");
     }
 }

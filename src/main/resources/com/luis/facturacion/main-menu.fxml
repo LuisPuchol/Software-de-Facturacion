@@ -9,9 +9,9 @@
     <top>
         <MenuBar>
             <Menu fx:id="Archivos" text="Archivos">
-                <MenuItem fx:id="Artículos" text="Artículos" />
-                <MenuItem fx:id="Clientes" text="Clientes" />
-                <MenuItem fx:id="ConfigIVA" text="Configuración IVA" />
+                <MenuItem fx:id="Articulos" text="Artículos" onAction="#handleArticulosClick" />
+                <MenuItem fx:id="Clientes" text="Clientes" onAction="#handleClientesClick" />
+                <MenuItem fx:id="ConfigIVA" text="Configuración IVA" onAction="#handleConfigIVA" />
             </Menu>
             <Menu fx:id="Albaran" text="Emitir Albarán">
                 <MenuItem fx:id="Emitir" text="Emitir Albarán" />
