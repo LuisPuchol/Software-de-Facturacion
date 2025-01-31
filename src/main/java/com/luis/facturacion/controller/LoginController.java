@@ -19,7 +19,6 @@ public class LoginController {
         this.appController = appController;
     }
 
-
     @FXML
     private void handleUserClick(MouseEvent event) {
         // Llamar al método para mostrar el menú principal

@@ -9,7 +9,7 @@
     <top>
         <MenuBar>
             <Menu fx:id="Archivos" text="Archivos">
-                <MenuItem fx:id="Articulos" text="Artículos" onAction="#handleArticulosClick" />
+                <MenuItem fx:id="Articulo" text="Artículos" onAction="#handleArticulosClick" />
                 <MenuItem fx:id="Clientes" text="Clientes" onAction="#handleClientesClick" />
                 <MenuItem fx:id="ConfigIVA" text="Configuración IVA" onAction="#handleConfigIVA" />
             </Menu>

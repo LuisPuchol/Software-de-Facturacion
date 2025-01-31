@@ -20,4 +20,8 @@ public class AppController {
         MainMenuView mainMenuView = new MainMenuView(this); // Crear la vista del menú principal
         mainMenuView.show(primaryStage); // Mostrarla en el escenario principal
     }
+
+    public Stage getStage () {
+        return this.primaryStage;
+    }
 }

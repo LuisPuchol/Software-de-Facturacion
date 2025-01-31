@@ -5,8 +5,7 @@ import com.luis.facturacion.controller.MainMenuController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.MenuBar;
-import javafx.scene.layout.BorderPane;
+import javafx.scene.input.KeyCombination;
 import javafx.stage.Stage;
 
 public class MainMenuView {
@@ -27,9 +26,12 @@ private AppController appController;
             MainMenuController mainMenuController = loader.getController();
             mainMenuController.setAppController(appController);
 
-            Scene scene = new Scene(root, 800, 600);
-            primaryStage.setTitle("Sistema de Facturación");
+            Scene scene = new Scene(root);
             primaryStage.setScene(scene);
+
+            primaryStage.setMaximized(true);
+            primaryStage.setTitle("Sistema de Facturación");
+
             primaryStage.show();
         } catch (Exception e) {
             e.printStackTrace();
