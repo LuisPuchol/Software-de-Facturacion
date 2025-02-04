@@ -1,8 +1,8 @@
-package com.luis.facturacion.view;
+package com.luis.facturacion.model.entitiesfx;
 
 import javafx.beans.property.*;
 
-public class Articulo {
+public class ArticuloFX {
     private final IntegerProperty idArticulo = new SimpleIntegerProperty();
     private final StringProperty codigoArticulo = new SimpleStringProperty();
     private final StringProperty codigoBarrasArticulo = new SimpleStringProperty();
@@ -15,36 +15,7 @@ public class Articulo {
     private final DoubleProperty stockArticulo = new SimpleDoubleProperty();
     private final StringProperty observacionesArticulo = new SimpleStringProperty();
 
-    private final StringProperty codigo;
-    private final StringProperty nombre;
-
-    public Articulo(String codigo, String nombre) {
-        this.codigo = new SimpleStringProperty(codigo);
-        this.nombre = new SimpleStringProperty(nombre);
-    }
-
-    public String getCodigo() {
-        return codigo.get();
-    }
-
-    public void setCodigo(String codigo) {
-        this.codigo.set(codigo);
-    }
-
-    public StringProperty codigoProperty() {
-        return codigo;
-    }
-
-    public String getNombre() {
-        return nombre.get();
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre.set(nombre);
-    }
-
-    public StringProperty nombreProperty() {
-        return nombre;
+    public ArticuloFX() {
     }
 
     //los otros getters y setters

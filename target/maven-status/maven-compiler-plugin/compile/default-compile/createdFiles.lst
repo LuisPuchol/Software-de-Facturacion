@@ -1,0 +1,16 @@
+com\luis\facturacion\view\HandlersMenu.class
+com\luis\facturacion\view\ArticulosView.class
+com\luis\facturacion\controller\MainMenuController.class
+com\luis\facturacion\Main.class
+com\luis\facturacion\view\AlbaranView.class
+com\luis\facturacion\view\FacturacionView.class
+com\luis\facturacion\view\Articulo.class
+com\luis\facturacion\view\LoginView.class
+com\luis\facturacion\view\MainMenuView.class
+com\luis\facturacion\model\Model.class
+module-info.class
+com\luis\facturacion\view\ClientView.class
+com\luis\facturacion\controller\ArticulosController.class
+com\luis\facturacion\controller\LoginController.class
+com\luis\facturacion\controller\AppController.class
+com\luis\facturacion\view\ResumenView.class

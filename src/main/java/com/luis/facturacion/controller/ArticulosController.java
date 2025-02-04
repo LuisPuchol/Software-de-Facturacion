@@ -2,22 +2,26 @@ package com.luis.facturacion.controller;
 
 //package com.luis.facturacion.controller;
 
-import com.luis.facturacion.view.Articulo;
+import com.luis.facturacion.model.Model;
+import com.luis.facturacion.model.entitiesfx.ArticuloFX;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import com.luis.facturacion.model.entitiesfx.ArticuloFX;
 
 public class ArticulosController {
+    private final Model model = Model.getInstance(); // Obtener la instancia única
+    private final ObservableList<ArticuloFX> listaArticulos = FXCollections.observableArrayList();
     private AppController appController;
     private MainMenuController mainMenuController;
 
     @FXML
-    private TableColumn<Articulo, String> codigoColumn;
+    private TableColumn<ArticuloFX, String> codigoColumn;
 
     @FXML
-    private TableColumn<Articulo, String> nombreColumn;
+    private TableColumn<ArticuloFX, String> nombreColumn;
 
     @FXML
     private TextField codigoField;
@@ -30,14 +34,14 @@ public class ArticulosController {
 
 
 
-    private final ObservableList<Articulo> articulosList = FXCollections.observableArrayList();
+    private final ObservableList<ArticuloFX> articulosList = FXCollections.observableArrayList();
 
     @FXML
-    private TableView<Articulo> articulosTable;
+    private TableView<ArticuloFX> articulosTable;
     @FXML
-    private TableColumn<Articulo, Integer> idArticuloColumn;
+    private TableColumn<ArticuloFX, Integer> idArticuloColumn;
     @FXML
-    private TableColumn<Articulo, String> codigoArticuloColumn;
+    private TableColumn<ArticuloFX, String> codigoArticuloColumn;
     @FXML
     private TextField idArticuloField;
     @FXML
@@ -101,7 +105,22 @@ public class ArticulosController {
         eliminarButton.setOnAction(event -> handleEliminar());
         salirButton.setOnAction(event -> handleSalir());
     }
+
+        private void handleNuevo() {
+        // Agregar un nuevo artículo a la lista
+        String codigo = codigoField.getText().trim();
+        String nombre = nombreField.getText().trim();
+
+        if (!codigo.isEmpty() && !nombre.isEmpty()) {
+            articulosList.add(new Articulo(codigo, nombre));
+            codigoField.clear();
+            nombreField.clear();
+        } else {
+            showAlert("Error", "Debe completar los campos Código y Nombre.");
+        }
+    }
      */
+
     @FXML
     public void initialize() {
         // Inicializar columnas de la tabla
@@ -116,33 +135,18 @@ public class ArticulosController {
         });
     }
 
-    private void handleNuevo() {
-        // Agregar un nuevo artículo a la lista
-        String codigo = codigoField.getText().trim();
-        String nombre = nombreField.getText().trim();
-
-        if (!codigo.isEmpty() && !nombre.isEmpty()) {
-            articulosList.add(new Articulo(codigo, nombre));
-            codigoField.clear();
-            nombreField.clear();
-        } else {
-            showAlert("Error", "Debe completar los campos Código y Nombre.");
-        }
-    }
-
-
-    private void cargarDatosArticulo(Articulo articulo) {
-        idArticuloField.setText(String.valueOf(articulo.getIdArticulo()));
-        codigoArticuloField.setText(articulo.getCodigoArticulo());
-        codigoBarrasField.setText(articulo.getCodigoBarrasArticulo());
-        descripcionField.setText(articulo.getDescripcionArticulo());
-        familiaField.setText(String.valueOf(articulo.getFamiliaArticulo()));
-        costeField.setText(String.valueOf(articulo.getCosteArticulo()));
-        margenComercialField.setText(String.valueOf(articulo.getMargenComercialArticulo()));
-        pvpField.setText(String.valueOf(articulo.getPvpArticulo()));
-        proveedorField.setText(String.valueOf(articulo.getProveedorArticulo()));
-        stockField.setText(String.valueOf(articulo.getStockArticulo()));
-        observacionesField.setText(articulo.getObservacionesArticulo());
+    private void cargarDatosArticulo(ArticuloFX articuloFX) {
+        idArticuloField.setText(String.valueOf(articuloFX.getIdArticulo()));
+        codigoArticuloField.setText(articuloFX.getCodigoArticulo());
+        codigoBarrasField.setText(articuloFX.getCodigoBarrasArticulo());
+        descripcionField.setText(articuloFX.getDescripcionArticulo());
+        familiaField.setText(String.valueOf(articuloFX.getFamiliaArticulo()));
+        costeField.setText(String.valueOf(articuloFX.getCosteArticulo()));
+        margenComercialField.setText(String.valueOf(articuloFX.getMargenComercialArticulo()));
+        pvpField.setText(String.valueOf(articuloFX.getPvpArticulo()));
+        proveedorField.setText(String.valueOf(articuloFX.getProveedorArticulo()));
+        stockField.setText(String.valueOf(articuloFX.getStockArticulo()));
+        observacionesField.setText(articuloFX.getObservacionesArticulo());
     }
 
     private void handleAbrir() {
@@ -152,9 +156,9 @@ public class ArticulosController {
 
     private void handleEliminar() {
         // Eliminar el artículo seleccionado
-        Articulo selectedArticulo = articulosTable.getSelectionModel().getSelectedItem();
-        if (selectedArticulo != null) {
-            articulosList.remove(selectedArticulo);
+        ArticuloFX selectedArticuloFX = articulosTable.getSelectionModel().getSelectedItem();
+        if (selectedArticuloFX != null) {
+            articulosList.remove(selectedArticuloFX);
         } else {
             showAlert("Error", "Debe seleccionar un artículo para eliminar.");
         }

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.luis.facturacion.controller.MainMenuController">
+    <top>
+        <MenuBar>
+            <Menu fx:id="Archivos" text="Archivos">
+                <MenuItem fx:id="Articulo" text="Artículos" onAction="#handleArticulosClick" />
+                <MenuItem fx:id="Clientes" text="Clientes" onAction="#handleClientesClick" />
+                <MenuItem fx:id="ConfigIVA" text="Configuración IVA" onAction="#handleConfigIVA" />
+            </Menu>
+            <Menu fx:id="Albaran" text="Emitir Albarán">
+                <MenuItem fx:id="Emitir" text="Emitir Albarán" />
+                <MenuItem fx:id="ListadoAlbaran" text="Listado" />
+            </Menu>
+            <Menu fx:id="Facturacion" text="Facturación">
+                <MenuItem fx:id="ListadoFacturar" text="Listado a Facturar" />
+                <MenuItem fx:id="LibroIngreso" text="Libro Ingreso" />
+            </Menu>
+            <Menu fx:id="Resumen" text="Resumen">
+                <MenuItem fx:id="ListadoClientes" text="Listado resumen clientes" />
+                <MenuItem fx:id="Trazabilidad" text="Trazabilidad" />
+            </Menu>
+        </MenuBar>
+    </top>
+    <center>
+    </center>
+</BorderPane>

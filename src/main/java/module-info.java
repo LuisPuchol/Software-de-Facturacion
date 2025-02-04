@@ -5,6 +5,7 @@ module com.luis.facturacion {
     requires org.controlsfx.controls;
     requires com.dlsc.formsfx;
     requires java.desktop;
+    requires jakarta.persistence;
 
     opens com.luis.facturacion to javafx.fxml;
     opens com.luis.facturacion.controller to javafx.fxml;
@@ -12,4 +13,6 @@ module com.luis.facturacion {
 
     exports com.luis.facturacion;
     exports com.luis.facturacion.view;
+    exports com.luis.facturacion.model.entitiesfx;
+    opens com.luis.facturacion.model.entitiesfx to javafx.fxml;
 }
