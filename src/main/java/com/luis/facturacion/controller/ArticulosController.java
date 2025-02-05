@@ -12,36 +12,10 @@ import javafx.stage.Stage;
 import com.luis.facturacion.model.entitiesfx.ArticuloFX;
 
 public class ArticulosController {
-    private final Model model = Model.getInstance(); // Obtener la instancia única
-    private final ObservableList<ArticuloFX> listaArticulos = FXCollections.observableArrayList();
-    private AppController appController;
+    private final Model model = Model.getInstance(); // Singleton del modelo
     private MainMenuController mainMenuController;
-
     @FXML
-    private TableColumn<ArticuloFX, String> codigoColumn;
-
-    @FXML
-    private TableColumn<ArticuloFX, String> nombreColumn;
-
-    @FXML
-    private TextField codigoField;
-
-    @FXML
-    private TextField nombreField;
-
-    @FXML
-    private Button abrirButton;
-
-
-
-    private final ObservableList<ArticuloFX> articulosList = FXCollections.observableArrayList();
-
-    @FXML
-    private TableView<ArticuloFX> articulosTable;
-    @FXML
-    private TableColumn<ArticuloFX, Integer> idArticuloColumn;
-    @FXML
-    private TableColumn<ArticuloFX, String> codigoArticuloColumn;
+    private TableView<ArticuloFX> articulosTable; // Eliminamos el uso directo de ArticuloFX
     @FXML
     private TextField idArticuloField;
     @FXML
@@ -123,7 +97,11 @@ public class ArticulosController {
 
     @FXML
     public void initialize() {
-        // Inicializar columnas de la tabla
+        articulosTable.setItems(model.getListaArticulos());
+        model.cargarArticulos();
+
+        /*
+                // Inicializar columnas de la tabla
         idArticuloColumn.setCellValueFactory(cellData -> cellData.getValue().idArticuloProperty().asObject());
         codigoArticuloColumn.setCellValueFactory(cellData -> cellData.getValue().codigoArticuloProperty());
 
@@ -133,6 +111,8 @@ public class ArticulosController {
                 cargarDatosArticulo(newSelection);
             }
         });
+         */
+
     }
 
     private void cargarDatosArticulo(ArticuloFX articuloFX) {
@@ -149,26 +129,7 @@ public class ArticulosController {
         observacionesField.setText(articuloFX.getObservacionesArticulo());
     }
 
-    private void handleAbrir() {
-        // De momento, no hace nada
-        System.out.println("Abrir presionado");
-    }
 
-    private void handleEliminar() {
-        // Eliminar el artículo seleccionado
-        ArticuloFX selectedArticuloFX = articulosTable.getSelectionModel().getSelectedItem();
-        if (selectedArticuloFX != null) {
-            articulosList.remove(selectedArticuloFX);
-        } else {
-            showAlert("Error", "Debe seleccionar un artículo para eliminar.");
-        }
-    }
-
-    private void handleSalir() {
-        // Cerrar la ventana actual
-        Stage stage = (Stage) salirButton.getScene().getWindow();
-        stage.close();
-    }
 
     private void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -179,23 +140,43 @@ public class ArticulosController {
 
     @FXML
     private void handleNuevoButton() {
+        //añadir a la BBDD y limpiar los campos
+        model.agregarArticuloDesdeFormulario(
+                codigoArticuloField.getText(),
+                codigoBarrasField.getText(),
+                descripcionField.getText(),
+                familiaField.getText(),
+                costeField.getText(),
+                margenComercialField.getText(),
+                pvpField.getText(),
+                proveedorField.getText(),
+                stockField.getText(),
+                observacionesField.getText()
+        );
         limpiarFormulario();
     }
 
     @FXML
     private void handleEditarButton() {
-        // Lógica para editar un artículo
+        //
     }
 
     @FXML
     private void handleEliminarButton() {
-        // Lógica para eliminar un artículo
+        model.eliminarArticuloSeleccionado(articulosTable.getSelectionModel().getSelectedItem());
     }
+
 
     @FXML
     private void handleSalirButton() {
         // Cerrar la ventana actual
         salirButton.getScene().getWindow().hide();
+    }
+
+    private void handleSalir() {
+        // Cerrar la ventana actual
+        Stage stage = (Stage) salirButton.getScene().getWindow();
+        stage.close();
     }
 
     private void limpiarFormulario() {

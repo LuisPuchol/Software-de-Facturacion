@@ -1,11 +1,13 @@
 package com.luis.facturacion.controller;
 
+import com.luis.facturacion.model.Model;
 import com.luis.facturacion.view.LoginView;
 import com.luis.facturacion.view.MainMenuView;
 import javafx.stage.Stage;
 
 public class AppController {
     private Stage primaryStage;
+
 
     public AppController(Stage primaryStage) {
         this.primaryStage = primaryStage;

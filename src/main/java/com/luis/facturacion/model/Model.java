@@ -15,7 +15,7 @@ public class Model {
     private final ArticuloDAO articuloDAO;
     private final ObservableList<ArticuloFX> listaArticulos;
 
-    public Model() {
+    private Model() {
         System.out.println("Model created");
         this.articuloDAO = new ArticuloDAO();
         this.listaArticulos = FXCollections.observableArrayList();
@@ -28,13 +28,34 @@ public class Model {
         return instance;
     }
 
+    public void agregarArticuloDesdeFormulario(
+            String codigo, String codigoBarras, String descripcion, String familia,
+            String coste, String margenComercial, String pvp, String proveedor, String stock, String observaciones) {
+
+        ArticuloFX articuloFX = new ArticuloFX();
+        articuloFX.codigoArticuloProperty().set(codigo);
+        articuloFX.codigoBarrasArticuloProperty().set(codigoBarras);
+        articuloFX.descripcionArticuloProperty().set(descripcion);
+        articuloFX.familiaArticuloProperty().set(Integer.parseInt(familia));
+        articuloFX.costeArticuloProperty().set(Double.parseDouble(coste));
+        articuloFX.margenComercialArticuloProperty().set(Double.parseDouble(margenComercial));
+        articuloFX.pvpArticuloProperty().set(Double.parseDouble(pvp));
+        articuloFX.proveedorArticuloProperty().set(Integer.parseInt(proveedor));
+        articuloFX.stockArticuloProperty().set(Double.parseDouble(stock));
+        articuloFX.observacionesArticuloProperty().set(observaciones);
+
+        ArticuloHibernate articuloHibernate = ArticuloAdapter.toHibernate(articuloFX);
+        articuloDAO.save(articuloHibernate);
+        cargarArticulos(); // Recargar la lista después de agregar
+    }
+
     /**
      * Obtiene todos los artículos de la base de datos y los convierte en ArticuloFX para la interfaz.
      */
     public void cargarArticulos() {
         List<ArticuloHibernate> articulosBD = articuloDAO.getAll();
         List<ArticuloFX> articulosFX = articulosBD.stream()
-                .map(ArticuloAdapter::fromEntity)
+                .map(ArticuloAdapter::fromHibernate)
                 .toList();
         listaArticulos.setAll(articulosFX);
     }
@@ -58,9 +79,11 @@ public class Model {
     /**
      * Elimina un artículo de la base de datos y actualiza la lista.
      */
-    public void eliminarArticulo(ArticuloFX articuloFX) {
-        ArticuloHibernate articuloHibernate = ArticuloAdapter.toHibernate(articuloFX);
-        articuloDAO.delete(articuloHibernate);
-        cargarArticulos();
+    public void eliminarArticuloSeleccionado(Object seleccionado) {
+        if (seleccionado instanceof ArticuloFX articuloFX) {
+            ArticuloHibernate articuloHibernate = ArticuloAdapter.toHibernate(articuloFX);
+            articuloDAO.delete(articuloHibernate);
+            cargarArticulos();
+        }
     }
 }
