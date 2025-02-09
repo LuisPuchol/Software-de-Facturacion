@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<BorderPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.luis.facturacion.controller.ArticulosController">
+<BorderPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.luis.facturacion.mvc_articulo.ArticulosController">
     <!-- Tabla de artículos a la izquierda -->
     <left>
         <TableView fx:id="articulosTable" prefWidth="300">
@@ -73,23 +73,6 @@
             <!-- Observaciones -->
             <Label text="Observaciones:" GridPane.columnIndex="0" GridPane.rowIndex="10" />
             <TextArea fx:id="observacionesField" prefHeight="80" GridPane.columnIndex="1" GridPane.rowIndex="10" />
-         <columnConstraints>
-            <ColumnConstraints />
-            <ColumnConstraints />
-         </columnConstraints>
-         <rowConstraints>
-            <RowConstraints />
-            <RowConstraints />
-            <RowConstraints />
-            <RowConstraints />
-            <RowConstraints />
-            <RowConstraints />
-            <RowConstraints />
-            <RowConstraints />
-            <RowConstraints />
-            <RowConstraints />
-            <RowConstraints />
-         </rowConstraints>
         </GridPane>
     </center>
 

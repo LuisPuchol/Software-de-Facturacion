@@ -1,6 +1,5 @@
 package com.luis.facturacion;
 
-import com.luis.facturacion.controller.AppController;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -9,7 +8,7 @@ import javafx.stage.Stage;
  * @author Luis
  *
  * Main se encargara de:
- *
+ * <p>
  *
  * Iniciar la logica completa con la llamada al new LoginController
  * Iniciar la primera interfaz, en este caso el Login

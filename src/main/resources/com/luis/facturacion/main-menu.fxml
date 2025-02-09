@@ -5,13 +5,13 @@
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.luis.facturacion.controller.MainMenuController">
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.luis.facturacion.mvc_mainmenu.MainMenuController">
     <top>
         <MenuBar>
             <Menu fx:id="Archivos" text="Archivos">
                 <MenuItem fx:id="Articulo" text="Artículos" onAction="#handleArticulosClick" />
                 <MenuItem fx:id="Clientes" text="Clientes" onAction="#handleClientesClick" />
-                <MenuItem fx:id="ConfigIVA" text="Configuración IVA" onAction="#handleConfigIVA" />
+                <MenuItem fx:id="ConfigIVA" text="Configuración IVA" onAction="#handleConfigIVAClick" />
             </Menu>
             <Menu fx:id="Albaran" text="Emitir Albarán">
                 <MenuItem fx:id="Emitir" text="Emitir Albarán" />
