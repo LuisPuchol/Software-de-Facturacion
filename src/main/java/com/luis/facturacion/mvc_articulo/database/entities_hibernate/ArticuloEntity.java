@@ -5,42 +5,46 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "articulos")
-public class ArticuloHibernate {
+public class ArticuloEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idArticulo;
 
-    @Column(name = "codigo_articulo", nullable = false, unique = true)
+    @Column(name = "codigoArticulo", nullable = false, unique = true)
     private String codigoArticulo;
 
-    @Column(name = "codigo_barras", length = 80)
+    @Column(name = "codigoBarrasArticulo", length = 80)
     private String codigoBarrasArticulo;
 
-    @Column(name = "descripcion", length = 60)
+    @Column(name = "descripcionArticulo", length = 60)
     private String descripcionArticulo;
 
-    @Column(name = "familia")
+    @Column(name = "familiaArticulo")
     private int familiaArticulo;
 
-    @Column(name = "coste")
+    @Column(name = "costeArticulo")
     private double costeArticulo;
 
-    @Column(name = "margen_comercial")
+    @Column(name = "margenComercialArticulo")
     private double margenComercialArticulo;
 
-    @Column(name = "pvp")
+    @Column(name = "pvpArticulo")
     private double pvpArticulo;
 
-    @Column(name = "proveedor")
+    @Column(name = "proveedorArticulo")
     private int proveedorArticulo;
 
-    @Column(name = "stock")
+    @Column(name = "stockArticulo")
     private double stockArticulo;
 
-    @Column(name = "observaciones", columnDefinition = "TEXT")
+    @Column(name = "observacionesArticulo", columnDefinition = "TEXT")
     private String observacionesArticulo;
 
     // Getters y Setters
+
+
+    public ArticuloEntity() {
+    }
 
     public int getIdArticulo() {
         return idArticulo;

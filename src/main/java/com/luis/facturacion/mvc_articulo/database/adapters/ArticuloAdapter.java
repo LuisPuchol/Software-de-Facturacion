@@ -1,42 +1,42 @@
 package com.luis.facturacion.mvc_articulo.database.adapters;
 
-import com.luis.facturacion.mvc_articulo.database.entities_hibernate.ArticuloHibernate;
+import com.luis.facturacion.mvc_articulo.database.entities_hibernate.ArticuloEntity;
 import com.luis.facturacion.mvc_articulo.database.entitiesfx.ArticuloFX;
 
 public class ArticuloAdapter {
 
         // Convertir de ArticuloEntity a Articulo (JavaFX)
-        public static ArticuloFX fromHibernate(ArticuloHibernate articuloHibernate) {
+        public static ArticuloFX fromHibernate(ArticuloEntity articuloEntity) {
             ArticuloFX articulo = new ArticuloFX();
-            articulo.idArticuloProperty().set(articuloHibernate.getIdArticulo());
-            articulo.codigoArticuloProperty().set(articuloHibernate.getCodigoArticulo());
-            articulo.codigoBarrasArticuloProperty().set(articuloHibernate.getCodigoBarrasArticulo());
-            articulo.descripcionArticuloProperty().set(articuloHibernate.getDescripcionArticulo());
-            articulo.familiaArticuloProperty().set(articuloHibernate.getFamiliaArticulo());
-            articulo.costeArticuloProperty().set(articuloHibernate.getCosteArticulo());
-            articulo.margenComercialArticuloProperty().set(articuloHibernate.getMargenComercialArticulo());
-            articulo.pvpArticuloProperty().set(articuloHibernate.getPvpArticulo());
-            articulo.proveedorArticuloProperty().set(articuloHibernate.getProveedorArticulo());
-            articulo.stockArticuloProperty().set(articuloHibernate.getStockArticulo());
-            articulo.observacionesArticuloProperty().set(articuloHibernate.getObservacionesArticulo());
+            articulo.idArticuloProperty().set(articuloEntity.getIdArticulo());
+            articulo.codigoArticuloProperty().set(articuloEntity.getCodigoArticulo());
+            articulo.codigoBarrasArticuloProperty().set(articuloEntity.getCodigoBarrasArticulo());
+            articulo.descripcionArticuloProperty().set(articuloEntity.getDescripcionArticulo());
+            articulo.familiaArticuloProperty().set(articuloEntity.getFamiliaArticulo());
+            articulo.costeArticuloProperty().set(articuloEntity.getCosteArticulo());
+            articulo.margenComercialArticuloProperty().set(articuloEntity.getMargenComercialArticulo());
+            articulo.pvpArticuloProperty().set(articuloEntity.getPvpArticulo());
+            articulo.proveedorArticuloProperty().set(articuloEntity.getProveedorArticulo());
+            articulo.stockArticuloProperty().set(articuloEntity.getStockArticulo());
+            articulo.observacionesArticuloProperty().set(articuloEntity.getObservacionesArticulo());
             return articulo;
         }
 
         // Convertir de Articulo (JavaFX) a ArticuloEntity (Hibernate)
-        public static ArticuloHibernate toHibernate(ArticuloFX articuloFX) {
-            ArticuloHibernate articuloHibernate = new ArticuloHibernate();
-            articuloHibernate.setIdArticulo(articuloFX.idArticuloProperty().get());
-            articuloHibernate.setCodigoArticulo(articuloFX.codigoArticuloProperty().get());
-            articuloHibernate.setCodigoBarrasArticulo(articuloFX.codigoBarrasArticuloProperty().get());
-            articuloHibernate.setDescripcionArticulo(articuloFX.descripcionArticuloProperty().get());
-            articuloHibernate.setFamiliaArticulo(articuloFX.familiaArticuloProperty().get());
-            articuloHibernate.setCosteArticulo(articuloFX.costeArticuloProperty().get());
-            articuloHibernate.setMargenComercialArticulo(articuloFX.margenComercialArticuloProperty().get());
-            articuloHibernate.setPvpArticulo(articuloFX.pvpArticuloProperty().get());
-            articuloHibernate.setProveedorArticulo(articuloFX.proveedorArticuloProperty().get());
-            articuloHibernate.setStockArticulo(articuloFX.stockArticuloProperty().get());
-            articuloHibernate.setObservacionesArticulo(articuloFX.observacionesArticuloProperty().get());
-            return articuloHibernate;
+        public static ArticuloEntity toHibernate(ArticuloFX articuloFX) {
+            ArticuloEntity articuloEntity = new ArticuloEntity();
+            articuloEntity.setIdArticulo(articuloFX.idArticuloProperty().get());
+            articuloEntity.setCodigoArticulo(articuloFX.codigoArticuloProperty().get());
+            articuloEntity.setCodigoBarrasArticulo(articuloFX.codigoBarrasArticuloProperty().get());
+            articuloEntity.setDescripcionArticulo(articuloFX.descripcionArticuloProperty().get());
+            articuloEntity.setFamiliaArticulo(articuloFX.familiaArticuloProperty().get());
+            articuloEntity.setCosteArticulo(articuloFX.costeArticuloProperty().get());
+            articuloEntity.setMargenComercialArticulo(articuloFX.margenComercialArticuloProperty().get());
+            articuloEntity.setPvpArticulo(articuloFX.pvpArticuloProperty().get());
+            articuloEntity.setProveedorArticulo(articuloFX.proveedorArticuloProperty().get());
+            articuloEntity.setStockArticulo(articuloFX.stockArticuloProperty().get());
+            articuloEntity.setObservacionesArticulo(articuloFX.observacionesArticuloProperty().get());
+            return articuloEntity;
         }
 
 

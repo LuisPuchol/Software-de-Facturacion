@@ -2,17 +2,27 @@ package com.luis.facturacion.mvc_articulo;
 
 //package com.luis.facturacion.controller;
 
+import com.luis.facturacion.mvc_articulo.database.entities_hibernate.ArticuloEntity;
 import com.luis.facturacion.mvc_articulo.database.entitiesfx.ArticuloFX;
 import com.luis.facturacion.mvc_mainmenu.MainMenuController;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+
+import java.util.List;
 
 public class ArticulosController {
     private final ArticuloModel articuloModel = ArticuloModel.getInstance(); // Singleton del modelo
-    private MainMenuController mainMenuController;
     @FXML
-    private TableView<ArticuloFX> articulosTable;
+    private TableView<ArticuloEntity> articulosTable;
+
+    @FXML
+    private TableColumn<ArticuloEntity, Integer> columnId;
+    @FXML
+    private TableColumn<ArticuloEntity, Integer> columnName;
+
+
     @FXML
     private TextField idArticuloField;
     @FXML
@@ -49,7 +59,6 @@ public class ArticulosController {
     }
 
     public void setMainMenuController(MainMenuController mainMenuController) {
-        this.mainMenuController = mainMenuController;
     }
 
     /*
@@ -94,8 +103,14 @@ public class ArticulosController {
 
     @FXML
     public void initialize() {
-        articulosTable.setItems(articuloModel.getListaArticulos());
-        articuloModel.cargarArticulos();
+        //columnId.setCellValueFactory(new PropertyValueFactory<>("id"));
+        //columnName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        //
+        //List<ArticuloEntity> articulosBD = articuloModel.cargarArticulos();
+        //articulosTable.getItems().setAll(articulosBD);
+
+        //articulosTable.setItems(articuloModel.getListaArticulos());
+        //articuloModel.cargarArticulos();
 
         /*
                 // Inicializar columnas de la tabla
@@ -126,7 +141,7 @@ public class ArticulosController {
                 stockField.getText(),
                 observacionesField.getText()
         );
-        limpiarFormulario();
+        //limpiarFormulario();
     }
 
     @FXML

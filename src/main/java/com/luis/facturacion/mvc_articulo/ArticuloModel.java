@@ -2,7 +2,7 @@ package com.luis.facturacion.mvc_articulo;
 
 import com.luis.facturacion.mvc_articulo.database.adapters.ArticuloAdapter;
 import com.luis.facturacion.mvc_articulo.database.dao.ArticuloDAO;
-import com.luis.facturacion.mvc_articulo.database.entities_hibernate.ArticuloHibernate;
+import com.luis.facturacion.mvc_articulo.database.entities_hibernate.ArticuloEntity;
 import com.luis.facturacion.mvc_articulo.database.entitiesfx.ArticuloFX;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -30,32 +30,78 @@ public class ArticuloModel {
             String codigo, String codigoBarras, String descripcion, String familia,
             String coste, String margenComercial, String pvp, String proveedor, String stock, String observaciones) {
 
-        ArticuloFX articuloFX = new ArticuloFX();
-        articuloFX.codigoArticuloProperty().set(codigo);
-        articuloFX.codigoBarrasArticuloProperty().set(codigoBarras);
-        articuloFX.descripcionArticuloProperty().set(descripcion);
-        articuloFX.familiaArticuloProperty().set(Integer.parseInt(familia));
-        articuloFX.costeArticuloProperty().set(Double.parseDouble(coste));
-        articuloFX.margenComercialArticuloProperty().set(Double.parseDouble(margenComercial));
-        articuloFX.pvpArticuloProperty().set(Double.parseDouble(pvp));
-        articuloFX.proveedorArticuloProperty().set(Integer.parseInt(proveedor));
-        articuloFX.stockArticuloProperty().set(Double.parseDouble(stock));
-        articuloFX.observacionesArticuloProperty().set(observaciones);
+        try {
+            // Validaciones básicas: asegurarse de que los valores obligatorios no sean nulos o vacíos
+            if (codigo == null || codigo.trim().isEmpty()) {
+                throw new IllegalArgumentException("El código del artículo es obligatorio.");
+            }
+            if (descripcion == null || descripcion.trim().isEmpty()) {
+                throw new IllegalArgumentException("La descripción del artículo es obligatoria.");
+            }
 
-        ArticuloHibernate articuloHibernate = ArticuloAdapter.toHibernate(articuloFX);
-        articuloDAO.save(articuloHibernate);
-        cargarArticulos(); // Recargar la lista después de agregar
+            // Conversión de tipos (de String a tipos numéricos)
+            int familiaArticulo = convertirEntero(familia, "familia");
+            double costeArticulo = convertirDouble(coste, "coste");
+            double margenComercialArticulo = convertirDouble(margenComercial, "margen comercial");
+            double pvpArticulo = convertirDouble(pvp, "pvp");
+            int proveedorArticulo = convertirEntero(proveedor, "proveedor");
+            double stockArticulo = convertirDouble(stock, "stock");
+
+            // Creación del objeto ArticuloEntity con los valores convertidos
+            ArticuloEntity articuloEntity = new ArticuloEntity();
+            articuloEntity.setCodigoArticulo(codigo);
+            articuloEntity.setCodigoBarrasArticulo(codigoBarras);
+            articuloEntity.setDescripcionArticulo(descripcion);
+            articuloEntity.setFamiliaArticulo(familiaArticulo);
+            articuloEntity.setCosteArticulo(costeArticulo);
+            articuloEntity.setMargenComercialArticulo(margenComercialArticulo);
+            articuloEntity.setPvpArticulo(pvpArticulo);
+            articuloEntity.setProveedorArticulo(proveedorArticulo);
+            articuloEntity.setStockArticulo(stockArticulo);
+            articuloEntity.setObservacionesArticulo(observaciones);
+
+            // Guardar en la base de datos
+            articuloDAO.save(articuloEntity);
+
+            System.out.println("Artículo guardado correctamente.");
+
+        } catch (IllegalArgumentException e) {
+            System.err.println("Error al agregar artículo: " + e.getMessage());
+        } catch (Exception e) {
+            System.err.println("Error inesperado al agregar artículo: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
+
+    private int convertirEntero(String valor, String campo) {
+        try {
+            return Integer.parseInt(valor);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("El campo '" + campo + "' debe ser un número entero válido.");
+        }
+    }
+
+    private double convertirDouble(String valor, String campo) {
+        try {
+            return Double.parseDouble(valor);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("El campo '" + campo + "' debe ser un número decimal válido.");
+        }
+    }
+
+
 
     /**
      * Obtiene todos los artículos de la base de datos y los convierte en ArticuloFX para la interfaz.
      */
-    public void cargarArticulos() {
-        List<ArticuloHibernate> articulosBD = articuloDAO.getAll();
-        List<ArticuloFX> articulosFX = articulosBD.stream()
-                .map(ArticuloAdapter::fromHibernate)
-                .toList();
-        listaArticulos.setAll(articulosFX);
+    public List<ArticuloEntity> cargarArticulos() {
+        List<ArticuloEntity> articulosBD = articuloDAO.getAll();
+
+        return articulosBD;
+        //List<ArticuloFX> articulosFX = articulosBD.stream()
+        //        .map(ArticuloAdapter::fromHibernate)
+        //        .toList();
+        //listaArticulos.setAll(articulosFX);
     }
 
     /**
@@ -69,8 +115,8 @@ public class ArticuloModel {
      * Agrega un nuevo artículo, lo guarda en la base de datos y actualiza la lista.
      */
     public void agregarArticulo(ArticuloFX articuloFX) {
-        ArticuloHibernate articuloHibernate = ArticuloAdapter.toHibernate(articuloFX);
-        articuloDAO.save(articuloHibernate);
+        ArticuloEntity articuloEntity = ArticuloAdapter.toHibernate(articuloFX);
+        articuloDAO.save(articuloEntity);
         cargarArticulos();
     }
 
@@ -79,8 +125,8 @@ public class ArticuloModel {
      */
     public void eliminarArticuloSeleccionado(Object seleccionado) {
         if (seleccionado instanceof ArticuloFX articuloFX) {
-            ArticuloHibernate articuloHibernate = ArticuloAdapter.toHibernate(articuloFX);
-            articuloDAO.delete(articuloHibernate);
+            ArticuloEntity articuloEntity = ArticuloAdapter.toHibernate(articuloFX);
+            articuloDAO.delete(articuloEntity);
             cargarArticulos();
         }
     }

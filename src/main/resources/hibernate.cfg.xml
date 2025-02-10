@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+    <session-factory>
+
+        <!-- Configuración de la base de datos -->
+        <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/gestion</property>
+        <property name="hibernate.connection.username">root</property>
+        <property name="hibernate.connection.password">1234</property>
+
+        <!-- Dialecto de MySQL -->
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+
+        <!-- Configuración de Hibernate -->
+        <property name="hibernate.show_sql">true</property>  <!-- Muestra las consultas SQL en consola -->
+        <property name="hibernate.format_sql">true</property>
+        <property name="hibernate.hbm2ddl.auto">validate</property>
+        <!-- update: crea tablas si no existen -->
+        <property name="hibernate.connection.autocommit">true</property>
+        <property name="hibernate.transaction.coordinator_class">jdbc</property>
+        <property name="hibernate.globally_quoted_identifiers">true</property>
+
+        <!-- Definir la clase mapeada -->
+        <mapping class="com.luis.facturacion.mvc_articulo.database.entities_hibernate.ArticuloEntity"/>
+
+    </session-factory>
+</hibernate-configuration>

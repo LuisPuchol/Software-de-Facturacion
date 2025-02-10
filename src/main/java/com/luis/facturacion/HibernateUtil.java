@@ -3,13 +3,13 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 public class HibernateUtil {
-    private static final SessionFactory sessionFactory;
+    private static SessionFactory sessionFactory;
 
     static {
         try {
             sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
         } catch (Throwable ex) {
-            System.err.println("La inicialización de SessionFactory falló: " + ex);
+            System.err.println("Error al inicializar Hibernate: " + ex);
             throw new ExceptionInInitializerError(ex);
         }
     }
@@ -19,7 +19,8 @@ public class HibernateUtil {
     }
 
     public static void shutdown() {
-        //getSessionFactory().close();
+        if (sessionFactory != null) {
+            sessionFactory.close();
+        }
     }
 }
-

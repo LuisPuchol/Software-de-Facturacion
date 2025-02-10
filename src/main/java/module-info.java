@@ -6,6 +6,8 @@ module com.luis.facturacion {
     requires java.desktop;
     requires jakarta.persistence;
     requires org.hibernate.orm.core;
+    requires java.naming;
+    requires java.sql;
 
     // Apertura para todas las vistas y controladores
     opens com.luis.facturacion.mvc_articulo to javafx.fxml;
@@ -16,6 +18,7 @@ module com.luis.facturacion {
     opens com.luis.facturacion.mvc_client to javafx.fxml;
     opens com.luis.facturacion.mvc_facturacion to javafx.fxml;
     opens com.luis.facturacion.mvc_resumen to javafx.fxml;
+    opens com.luis.facturacion.mvc_articulo.database.entities_hibernate to org.hibernate.orm.core;
 
     // Exportación para el AppController y las clases principales
     exports com.luis.facturacion;

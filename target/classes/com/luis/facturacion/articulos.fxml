@@ -18,8 +18,8 @@
     <left>
         <TableView fx:id="articulosTable" prefWidth="300">
             <columns>
-                <TableColumn fx:id="idArticuloColumn" prefWidth="100" text="ID" />
-                <TableColumn fx:id="codigoArticuloColumn" prefWidth="200" text="Nombre" />
+                <TableColumn fx:id="columnId" prefWidth="100" text="ID" />
+                <TableColumn fx:id="columnName" prefWidth="200" text="Nombre" />
             </columns>
         </TableView>
     </left>
