@@ -1,11 +1,9 @@
-package com.luis.facturacion.mvc_articulo.database.dao;
+package com.luis.facturacion.mvc_articulo.database;
 
 import com.luis.facturacion.HibernateUtil;
-import com.luis.facturacion.mvc_articulo.database.entities_hibernate.ArticuloEntity;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import java.util.Collections;
 import java.util.List;
 
 public class ArticuloDAO{

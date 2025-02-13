@@ -1,14 +1,12 @@
 package com.luis.facturacion.mvc_articulo;
 
-//package com.luis.facturacion.controller;
-
-import com.luis.facturacion.mvc_articulo.database.entities_hibernate.ArticuloEntity;
-import com.luis.facturacion.mvc_articulo.database.entitiesfx.ArticuloFX;
+import com.luis.facturacion.mvc_articulo.database.ArticuloEntity;
 import com.luis.facturacion.mvc_mainmenu.MainMenuController;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.stage.Stage;
 
 import java.util.List;
 
@@ -24,35 +22,12 @@ public class ArticulosController {
 
 
     @FXML
-    private TextField idArticuloField;
-    @FXML
-    private TextField codigoArticuloField;
-    @FXML
-    private TextField codigoBarrasField;
-    @FXML
-    private TextField descripcionField;
-    @FXML
-    private TextField familiaField;
-    @FXML
-    private TextField costeField;
-    @FXML
-    private TextField margenComercialField;
-    @FXML
-    private TextField pvpField;
-    @FXML
-    private TextField proveedorField;
-    @FXML
-    private TextField stockField;
+    private TextField idArticuloField, codigoArticuloField, codigoBarrasField, descripcionField, familiaField,
+            costeField, margenComercialField, pvpField, proveedorField, stockField;
     @FXML
     private TextArea observacionesField;
     @FXML
-    private Button nuevoButton;
-    @FXML
-    private Button editarButton;
-    @FXML
-    private Button eliminarButton;
-    @FXML
-    private Button salirButton;
+    private Button nuevoButton, editarButton, eliminarButton, salirButton;
 
     public ArticulosController() {
         System.out.println("Articulos Controller created");
@@ -61,69 +36,19 @@ public class ArticulosController {
     public void setMainMenuController(MainMenuController mainMenuController) {
     }
 
-    /*
-        @FXML
-    public void initialize() {
-        // Configurar las columnas de la tabla
-        codigoColumn.setCellValueFactory(cellData -> cellData.getValue().codigoProperty());
-        nombreColumn.setCellValueFactory(cellData -> cellData.getValue().nombreProperty());
-
-        // Conectar la lista con la tabla
-        articulosTable.setItems(articulosList);
-
-        // Manejar selección de fila
-        articulosTable.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
-            if (newSelection != null) {
-                codigoField.setText(newSelection.getCodigo());
-                nombreField.setText(newSelection.getNombre());
-            }
-        });
-
-        // Configurar botones
-        nuevoButton.setOnAction(event -> handleNuevo());
-        abrirButton.setOnAction(event -> handleAbrir());
-        eliminarButton.setOnAction(event -> handleEliminar());
-        salirButton.setOnAction(event -> handleSalir());
-    }
-
-        private void handleNuevo() {
-        // Agregar un nuevo artículo a la lista
-        String codigo = codigoField.getText().trim();
-        String nombre = nombreField.getText().trim();
-
-        if (!codigo.isEmpty() && !nombre.isEmpty()) {
-            articulosList.add(new Articulo(codigo, nombre));
-            codigoField.clear();
-            nombreField.clear();
-        } else {
-            showAlert("Error", "Debe completar los campos Código y Nombre.");
-        }
-    }
-     */
 
     @FXML
     public void initialize() {
-        //columnId.setCellValueFactory(new PropertyValueFactory<>("id"));
-        //columnName.setCellValueFactory(new PropertyValueFactory<>("name"));
-        //
-        //List<ArticuloEntity> articulosBD = articuloModel.cargarArticulos();
-        //articulosTable.getItems().setAll(articulosBD);
+        columnId.setCellValueFactory(new PropertyValueFactory<>("idArticulo"));
+        columnName.setCellValueFactory(new PropertyValueFactory<>("descripcionArticulo"));
 
-        //articulosTable.setItems(articuloModel.getListaArticulos());
-        //articuloModel.cargarArticulos();
+        cargarDatos();
+    }
 
-        /*
-                // Inicializar columnas de la tabla
-        idArticuloColumn.setCellValueFactory(cellData -> cellData.getValue().idArticuloProperty().asObject());
-        codigoArticuloColumn.setCellValueFactory(cellData -> cellData.getValue().codigoArticuloProperty());
-
-        // Listener para mostrar los datos al seleccionar un artículo
-        articulosTable.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
-            if (newSelection != null) {
-                cargarDatosArticulo(newSelection);
-            }
-        });
-         */
+    private void cargarDatos() {
+        List<ArticuloEntity> articulosBD = articuloModel.cargarArticulos();
+        ObservableList<ArticuloEntity> articuloEntityObservableList = FXCollections.observableArrayList(articulosBD);
+        articulosTable.setItems(articuloEntityObservableList);
     }
 
     @FXML
@@ -141,7 +66,8 @@ public class ArticulosController {
                 stockField.getText(),
                 observacionesField.getText()
         );
-        //limpiarFormulario();
+        limpiarFormulario();
+        cargarDatos();
     }
 
     @FXML
@@ -151,7 +77,7 @@ public class ArticulosController {
 
     @FXML
     private void handleEliminarButton() {
-        articuloModel.eliminarArticuloSeleccionado(articulosTable.getSelectionModel().getSelectedItem());
+        //No elimina, "desactiva"
     }
 
 
@@ -161,11 +87,6 @@ public class ArticulosController {
         salirButton.getScene().getWindow().hide();
     }
 
-    private void handleSalir() {
-        // Cerrar la ventana actual
-        Stage stage = (Stage) salirButton.getScene().getWindow();
-        stage.close();
-    }
 
     private void limpiarFormulario() {
         idArticuloField.clear();

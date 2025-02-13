@@ -1,4 +1,4 @@
-package com.luis.facturacion.mvc_articulo.database.entities_hibernate;
+package com.luis.facturacion.mvc_articulo.database;
 
 
 import jakarta.persistence.*;
@@ -6,11 +6,14 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "articulos")
 public class ArticuloEntity {
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "idArticulo")
     private int idArticulo;
 
-    @Column(name = "codigoArticulo", nullable = false, unique = true)
+    @Column(name = "codigoArticulo", unique = true, nullable = false, length = 40)
     private String codigoArticulo;
 
     @Column(name = "codigoBarrasArticulo", length = 80)

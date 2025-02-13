@@ -1,9 +1,7 @@
 package com.luis.facturacion.mvc_articulo;
 
-import com.luis.facturacion.mvc_articulo.database.adapters.ArticuloAdapter;
-import com.luis.facturacion.mvc_articulo.database.dao.ArticuloDAO;
-import com.luis.facturacion.mvc_articulo.database.entities_hibernate.ArticuloEntity;
-import com.luis.facturacion.mvc_articulo.database.entitiesfx.ArticuloFX;
+import com.luis.facturacion.mvc_articulo.database.ArticuloDAO;
+import com.luis.facturacion.mvc_articulo.database.ArticuloEntity;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import java.util.List;
@@ -11,7 +9,7 @@ import java.util.List;
 public class ArticuloModel {
     private static ArticuloModel instance;
     private final ArticuloDAO articuloDAO;
-    private final ObservableList<ArticuloFX> listaArticulos;
+    private final ObservableList<ArticuloEntity> listaArticulos;
 
     private ArticuloModel() {
         System.out.println("Model created");
@@ -107,27 +105,27 @@ public class ArticuloModel {
     /**
      * Retorna la lista observable de artículos para la interfaz gráfica.
      */
-    public ObservableList<ArticuloFX> getListaArticulos() {
+    public ObservableList<ArticuloEntity> getListaArticulos() {
         return listaArticulos;
     }
 
     /**
      * Agrega un nuevo artículo, lo guarda en la base de datos y actualiza la lista.
      */
-    public void agregarArticulo(ArticuloFX articuloFX) {
-        ArticuloEntity articuloEntity = ArticuloAdapter.toHibernate(articuloFX);
-        articuloDAO.save(articuloEntity);
-        cargarArticulos();
+    public void agregarArticulo(ArticuloEntity articuloEntity) {
+        //ArticuloEntity articuloEntity = ArticuloAdapter.toHibernate(articuloFX);
+        //articuloDAO.save(articuloEntity);
+        //cargarArticulos();
     }
 
     /**
      * Elimina un artículo de la base de datos y actualiza la lista.
      */
-    public void eliminarArticuloSeleccionado(Object seleccionado) {
-        if (seleccionado instanceof ArticuloFX articuloFX) {
-            ArticuloEntity articuloEntity = ArticuloAdapter.toHibernate(articuloFX);
-            articuloDAO.delete(articuloEntity);
-            cargarArticulos();
-        }
+    public void eliminarArticuloSeleccionado(ArticuloEntity articuloEntity) {
+        //if (seleccionado instanceof ArticuloFX articuloFX) {
+        //    ArticuloEntity articuloEntity = ArticuloAdapter.toHibernate(articuloFX);
+        //    articuloDAO.delete(articuloEntity);
+        //    cargarArticulos();
+        //}
     }
 }

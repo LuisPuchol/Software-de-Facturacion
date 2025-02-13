@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="69df8e73-10d4-4aca-bdf2-6460b6e74463" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dbnavigator.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dbnavigator.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/luis/facturacion/mvc_articulo/ArticuloModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/luis/facturacion/mvc_articulo/ArticuloModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/luis/facturacion/mvc_articulo/ArticulosController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/luis/facturacion/mvc_articulo/ArticulosController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/luis/facturacion/mvc_articulo/database/adapters/ArticuloAdapter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/luis/facturacion/mvc_articulo/database/dao/ArticuloDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/luis/facturacion/mvc_articulo/database/ArticuloDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/luis/facturacion/mvc_articulo/database/entities_hibernate/ArticuloEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/luis/facturacion/mvc_articulo/database/ArticuloEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/luis/facturacion/mvc_articulo/database/entitiesfx/ArticuloFX.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/luis/facturacion/mvc_articulo/ArticuloModel.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/luis/facturacion/mvc_articulo/ArticuloModel.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/luis/facturacion/mvc_articulo/ArticulosController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/luis/facturacion/mvc_articulo/ArticulosController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/luis/facturacion/mvc_articulo/database/adapters/ArticuloAdapter.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/luis/facturacion/mvc_articulo/database/dao/ArticuloDAO.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/luis/facturacion/mvc_articulo/database/entitiesfx/ArticuloFX.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/module-info.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/module-info.class" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ChangesViewManager">
+    <option name="groupingKeys">
+      <option value="directory" />
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;LuisPuchol&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/LuisPuchol/Software-de-Facturacion.git&quot;,
+    &quot;accountId&quot;: &quot;ccf6e994-8476-42a5-9c18-8c9c216ca2d6&quot;
+  }
+}</component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHomeTypeForPersistence" value="WRAPPER" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 0
+}</component>
+  <component name="ProjectId" id="2szYSkSDt4OT6Zy6icTuOUXDRrP" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.Main.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "master",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/luisi/Documents/DAW2/Acceso a Datos/Github/El bueno/Software-de-Facturacion",
+    "settings.editor.selected.configurable": "preferences.pluginManager"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="69df8e73-10d4-4aca-bdf2-6460b6e74463" name="Changes" comment="" />
+      <created>1739459872064</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1739459872064</updated>
+    </task>
+    <servers />
+  </component>
+</project>
