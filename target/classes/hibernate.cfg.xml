@@ -26,6 +26,7 @@
 
         <!-- Definir la clase mapeada -->
         <mapping class="com.luis.facturacion.mvc_articulo.database.ArticuloEntity"/>
+        <mapping class="com.luis.facturacion.mvc_familiaArticulos.database.FamiliaArticulosEntity"/>
 
     </session-factory>
 </hibernate-configuration>

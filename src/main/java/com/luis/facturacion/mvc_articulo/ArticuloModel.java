@@ -9,12 +9,12 @@ import java.util.List;
 public class ArticuloModel {
     private static ArticuloModel instance;
     private final ArticuloDAO articuloDAO;
-    private final ObservableList<ArticuloEntity> listaArticulos;
+    private final ObservableList<ArticuloEntity> articulosList;
 
     private ArticuloModel() {
         System.out.println("Model created");
         this.articuloDAO = new ArticuloDAO();
-        this.listaArticulos = FXCollections.observableArrayList();
+        this.articulosList = FXCollections.observableArrayList();
     }
 
     public static ArticuloModel getInstance() {
@@ -87,45 +87,23 @@ public class ArticuloModel {
         }
     }
 
-
-
-    /**
-     * Obtiene todos los artículos de la base de datos y los convierte en ArticuloFX para la interfaz.
-     */
     public List<ArticuloEntity> cargarArticulos() {
         List<ArticuloEntity> articulosBD = articuloDAO.getAll();
 
         return articulosBD;
-        //List<ArticuloFX> articulosFX = articulosBD.stream()
-        //        .map(ArticuloAdapter::fromHibernate)
-        //        .toList();
-        //listaArticulos.setAll(articulosFX);
     }
 
-    /**
-     * Retorna la lista observable de artículos para la interfaz gráfica.
-     */
-    public ObservableList<ArticuloEntity> getListaArticulos() {
-        return listaArticulos;
+
+    public ObservableList<ArticuloEntity> getArticulosList() {
+        return articulosList;
     }
 
-    /**
-     * Agrega un nuevo artículo, lo guarda en la base de datos y actualiza la lista.
-     */
     public void agregarArticulo(ArticuloEntity articuloEntity) {
-        //ArticuloEntity articuloEntity = ArticuloAdapter.toHibernate(articuloFX);
-        //articuloDAO.save(articuloEntity);
-        //cargarArticulos();
+
     }
 
-    /**
-     * Elimina un artículo de la base de datos y actualiza la lista.
-     */
+
     public void eliminarArticuloSeleccionado(ArticuloEntity articuloEntity) {
-        //if (seleccionado instanceof ArticuloFX articuloFX) {
-        //    ArticuloEntity articuloEntity = ArticuloAdapter.toHibernate(articuloFX);
-        //    articuloDAO.delete(articuloEntity);
-        //    cargarArticulos();
-        //}
+
     }
 }

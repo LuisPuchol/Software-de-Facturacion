@@ -9,7 +9,7 @@ import java.util.List;
 public class ArticuloDAO{
 
     public ArticuloDAO() {
-        System.out.println("ArticuloDAO inicializado");
+        System.out.println("ArticuloDAO creado");
     }
 
     public void save(ArticuloEntity articulo) {
@@ -41,7 +41,7 @@ public class ArticuloDAO{
 
     }
 
-    //public ArticuloHibernate getById(int id) {
+    //public ArticuloEntity getById(int id) {
 
     //}
 

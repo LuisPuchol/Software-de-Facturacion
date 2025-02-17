@@ -8,24 +8,36 @@
 <BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.luis.facturacion.mvc_mainmenu.MainMenuController">
     <top>
         <MenuBar>
-            <Menu fx:id="Archivos" text="Archivos">
-                <MenuItem fx:id="Articulo" text="Artículos" onAction="#handleArticulosClick" />
-                <MenuItem fx:id="Clientes" text="Clientes" onAction="#handleClientesClick" />
-                <MenuItem fx:id="ConfigIVA" text="Configuración IVA" onAction="#handleConfigIVAClick" />
+            <!-- Gestión de Productos -->
+            <Menu fx:id="ProductosMenu" text="Productos">
+                <MenuItem fx:id="Articulo" text="Artículos" onAction="#handleArticulosClick"/>
+                <MenuItem fx:id="FamiliaArticulo" text="Familias de Artículos" onAction="#handleFamiliaArticulosClick"/>
+                <MenuItem fx:id="ConfigIVA" text="Tipos de IVA" onAction="#handleConfigIVAClick"/>
             </Menu>
-            <Menu fx:id="Albaran" text="Emitir Albarán">
-                <MenuItem fx:id="Emitir" text="Emitir Albarán" />
-                <MenuItem fx:id="ListadoAlbaran" text="Listado" />
+
+            <!-- Gestión de Clientes -->
+            <Menu fx:id="ClientesMenu" text="Clientes">
+                <MenuItem fx:id="Clientes" text="Listado de Clientes" onAction="#handleClientesClick"/>
+                <MenuItem fx:id="FormasPago" text="Formas de Pago" onAction="#handleFormasPagoClick"/>
             </Menu>
-            <Menu fx:id="Facturacion" text="Facturación">
-                <MenuItem fx:id="ListadoFacturar" text="Listado a Facturar" />
-                <MenuItem fx:id="LibroIngreso" text="Libro Ingreso" />
+
+            <!-- Gestión de Ventas -->
+            <Menu fx:id="VentasMenu" text="Ventas">
+                <MenuItem fx:id="EmitirAlbaran" text="Emitir Albarán"/>
+                <MenuItem fx:id="ListadoAlbaran" text="Listado de Albaranes"/>
+                <MenuItem fx:id="ListadoFacturar" text="Facturación Pendiente"/>
+                <MenuItem fx:id="FacturasEmitidas" text="Facturas Emitidas"/>
+                <MenuItem fx:id="RectificativasClientes" text="Facturas Rectificativas (Abonos)"/>
             </Menu>
-            <Menu fx:id="Resumen" text="Resumen">
-                <MenuItem fx:id="ListadoClientes" text="Listado resumen clientes" />
-                <MenuItem fx:id="Trazabilidad" text="Trazabilidad" />
+
+            <!-- Resúmenes y Reportes -->
+            <Menu fx:id="ReportesMenu" text="Reportes">
+                <MenuItem fx:id="LibroIngreso" text="Libro de Ingresos"/>
+                <MenuItem fx:id="ResumenClientes" text="Resumen de Clientes"/>
+                <MenuItem fx:id="Trazabilidad" text="Trazabilidad de Productos"/>
             </Menu>
         </MenuBar>
+
     </top>
     <center>
     </center>

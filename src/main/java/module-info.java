@@ -10,9 +10,11 @@ module com.luis.facturacion {
     requires java.sql;
 
     // Apertura para todas las vistas y controladores
-    opens com.luis.facturacion.mvc_articulo.database to javafx.base, org.hibernate.orm.core;
-
     opens com.luis.facturacion.mvc_articulo to javafx.fxml;
+    opens com.luis.facturacion.mvc_articulo.database to javafx.base, org.hibernate.orm.core;
+    opens com.luis.facturacion.mvc_familiaArticulos to javafx.fxml;
+    opens com.luis.facturacion.mvc_familiaArticulos.database to javafx.base, org.hibernate.orm.core;
+
     opens com.luis.facturacion.mvc_login to javafx.fxml;
     opens com.luis.facturacion.mvc_mainmenu to javafx.fxml;
     opens com.luis.facturacion.mvc_albaran to javafx.fxml;
@@ -29,4 +31,6 @@ module com.luis.facturacion {
     exports com.luis.facturacion.mvc_client;
     exports com.luis.facturacion.mvc_facturacion;
     exports com.luis.facturacion.mvc_resumen;
+    exports com.luis.facturacion.mvc_familiaArticulos;
+
 }
