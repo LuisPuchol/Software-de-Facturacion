@@ -1,6 +1,7 @@
 package com.luis.facturacion.mvc_articulo.database;
 
 
+import com.luis.facturacion.mvc_familiaArticulos.database.FamiliaArticulosEntity;
 import jakarta.persistence.*;
 
 @Entity
@@ -21,8 +22,9 @@ public class ArticuloEntity {
     @Column(name = "descripcionArticulo", length = 60)
     private String descripcionArticulo;
 
-    @Column(name = "familiaArticulo")
-    private int familiaArticulo;
+    @ManyToOne
+    @JoinColumn(name = "familiaArticulo", referencedColumnName = "idFamiliaArticulos", nullable = false)
+    private FamiliaArticulosEntity familiaArticulo;
 
     @Column(name = "costeArticulo")
     private double costeArticulo;
@@ -80,11 +82,11 @@ public class ArticuloEntity {
         this.descripcionArticulo = descripcionArticulo;
     }
 
-    public int getFamiliaArticulo() {
+    public FamiliaArticulosEntity getFamiliaArticulo() {
         return familiaArticulo;
     }
 
-    public void setFamiliaArticulo(int familiaArticulo) {
+    public void setFamiliaArticulo(FamiliaArticulosEntity familiaArticulo) {
         this.familiaArticulo = familiaArticulo;
     }
 

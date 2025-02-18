@@ -37,9 +37,11 @@ public class FamiliaArticulosDAO {
 
     }
 
-    //public FamiliaArticulosEntity getById(int id) {
-
-    //}
+    public FamiliaArticulosEntity getFamilyById(int id) {
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            return session.get(FamiliaArticulosEntity.class, id);
+        }
+    }
 
     public List<FamiliaArticulosEntity> getAll() {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {

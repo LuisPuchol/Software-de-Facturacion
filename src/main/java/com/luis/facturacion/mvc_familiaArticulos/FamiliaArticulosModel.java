@@ -9,6 +9,7 @@ import java.util.List;
 
 public class FamiliaArticulosModel {
     private static FamiliaArticulosModel instance;
+    private FamiliaArticulosController familiaArticulosController;
     private final FamiliaArticulosDAO familiaDao;
     private final ObservableList<FamiliaArticulosEntity> familiaArticulosList;
 
@@ -23,6 +24,12 @@ public class FamiliaArticulosModel {
             instance = new FamiliaArticulosModel();
         }
         return instance;
+    }
+
+    public void setController(FamiliaArticulosController familiaArticulosController){
+        if (this.familiaArticulosController == null){
+            this.familiaArticulosController = familiaArticulosController;
+        }
     }
 
     public void addFamiliaArticulo(String codigo, String denominacion) {
@@ -44,6 +51,14 @@ public class FamiliaArticulosModel {
     public List<FamiliaArticulosEntity> loadFamiliaArticulos() {
         List<FamiliaArticulosEntity> familiaDB = familiaDao.getAll();
         return familiaDB;
+    }
+
+    public FamiliaArticulosEntity getFamilyById(Integer id) {
+        if (familiaArticulosController == null) {
+            System.err.println("Error: `familiaArticulosController` aún no está inicializado en `FamiliaArticulosModel`.");
+            return null; // En lugar de lanzar una excepción, devolvemos `null`
+        }
+        return familiaDao.getFamilyById(id);
     }
 
 }

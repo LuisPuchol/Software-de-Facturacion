@@ -1,5 +1,6 @@
 package com.luis.facturacion.mvc_articulo;
 
+import com.luis.facturacion.AppController;
 import com.luis.facturacion.mvc_articulo.database.ArticuloEntity;
 import com.luis.facturacion.mvc_mainmenu.MainMenuController;
 import javafx.collections.FXCollections;
@@ -11,19 +12,20 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import java.util.List;
 
 public class ArticulosController {
-    private final ArticuloModel articuloModel = ArticuloModel.getInstance(); // Singleton del modelo
+    private ArticuloModel articuloModel;
+    private AppController appController;
+
     @FXML
     private TableView<ArticuloEntity> articulosTable;
-
     @FXML
     private TableColumn<ArticuloEntity, Integer> columnId;
     @FXML
     private TableColumn<ArticuloEntity, Integer> columnName;
 
-
     @FXML
     private TextField idArticuloField, codigoArticuloField, codigoBarrasField, descripcionField, familiaField,
             costeField, margenComercialField, pvpField, proveedorField, stockField;
+
     @FXML
     private TextArea observacionesField;
     @FXML
@@ -31,12 +33,16 @@ public class ArticulosController {
 
     public ArticulosController() {
         System.out.println("Articulos Controller created");
+        this.articuloModel = ArticuloModel.getInstance();
     }
 
-    public void setMainMenuController(MainMenuController mainMenuController) {
+    public void setAppController(AppController appController) {
+        this.appController = appController;
+        articuloModel.setController(this);
     }
 
 
+    // Cosas que pide la View
     @FXML
     public void initialize() {
         columnId.setCellValueFactory(new PropertyValueFactory<>("idArticulo"));
@@ -66,7 +72,7 @@ public class ArticulosController {
                 stockField.getText(),
                 observacionesField.getText()
         );
-        limpiarFormulario();
+        //limpiarFormulario();
         cargarDatos();
     }
 
@@ -101,6 +107,17 @@ public class ArticulosController {
         stockField.clear();
         observacionesField.clear();
     }
+
+    public void setUpModel(ArticulosController articulosController){
+        articuloModel.setController(articulosController);
+    }
+
+    //Cosas que pide el Model
+    public Object getFamilyById(Integer id){
+        return appController.getFamilyById(id);
+    }
+
+
 }
 
 

@@ -2,16 +2,18 @@ package com.luis.facturacion.mvc_articulo;
 
 import com.luis.facturacion.mvc_articulo.database.ArticuloDAO;
 import com.luis.facturacion.mvc_articulo.database.ArticuloEntity;
+import com.luis.facturacion.mvc_familiaArticulos.database.FamiliaArticulosEntity;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import java.util.List;
 
 public class ArticuloModel {
     private static ArticuloModel instance;
+    private ArticulosController articulosController;
     private final ArticuloDAO articuloDAO;
     private final ObservableList<ArticuloEntity> articulosList;
 
-    private ArticuloModel() {
+    ArticuloModel() {
         System.out.println("Model created");
         this.articuloDAO = new ArticuloDAO();
         this.articulosList = FXCollections.observableArrayList();
@@ -22,6 +24,12 @@ public class ArticuloModel {
             instance = new ArticuloModel();
         }
         return instance;
+    }
+
+    public void setController(ArticulosController articulosController){
+        if (this.articulosController == null){
+            this.articulosController = articulosController;
+        }
     }
 
     public void agregarArticuloDesdeFormulario(
@@ -47,10 +55,12 @@ public class ArticuloModel {
 
             // Creación del objeto ArticuloEntity con los valores convertidos
             ArticuloEntity articuloEntity = new ArticuloEntity();
+            Object family = articulosController.getFamilyById(familiaArticulo);
+
             articuloEntity.setCodigoArticulo(codigo);
             articuloEntity.setCodigoBarrasArticulo(codigoBarras);
             articuloEntity.setDescripcionArticulo(descripcion);
-            articuloEntity.setFamiliaArticulo(familiaArticulo);
+            articuloEntity.setFamiliaArticulo((FamiliaArticulosEntity) family);
             articuloEntity.setCosteArticulo(costeArticulo);
             articuloEntity.setMargenComercialArticulo(margenComercialArticulo);
             articuloEntity.setPvpArticulo(pvpArticulo);
@@ -93,17 +103,4 @@ public class ArticuloModel {
         return articulosBD;
     }
 
-
-    public ObservableList<ArticuloEntity> getArticulosList() {
-        return articulosList;
-    }
-
-    public void agregarArticulo(ArticuloEntity articuloEntity) {
-
-    }
-
-
-    public void eliminarArticuloSeleccionado(ArticuloEntity articuloEntity) {
-
-    }
 }

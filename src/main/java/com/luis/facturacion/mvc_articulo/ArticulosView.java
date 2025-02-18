@@ -1,6 +1,6 @@
 package com.luis.facturacion.mvc_articulo;
 
-import com.luis.facturacion.mvc_mainmenu.MainMenuController;
+import com.luis.facturacion.AppController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -8,11 +8,11 @@ import javafx.stage.Stage;
 
 public class ArticulosView {
     private ArticulosController articulosController;
-    private MainMenuController mainMenuController;
+    private AppController appController;
 
-    public ArticulosView(MainMenuController mainMenuController) {
+    public ArticulosView(AppController appController) {
         System.out.println("ArticulosView created");
-        this.mainMenuController = mainMenuController;
+        this.appController = appController;
     }
 
     public void show(Stage primaryStage) {
@@ -22,12 +22,14 @@ public class ArticulosView {
 
             // Obtener el controlador y asignarle el AppController
             articulosController = loader.getController();
-            articulosController.setMainMenuController(mainMenuController);
+            articulosController.setAppController(appController);
 
             Scene scene = new Scene(root, 1000, 600);
             primaryStage.setTitle("Gestión de articulos");
             primaryStage.setScene(scene);
             primaryStage.show();
+
+            articulosController.setUpModel(articulosController);
         } catch (Exception e) {
             e.printStackTrace();
         }

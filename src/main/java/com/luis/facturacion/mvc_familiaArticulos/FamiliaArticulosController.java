@@ -1,5 +1,6 @@
 package com.luis.facturacion.mvc_familiaArticulos;
 
+import com.luis.facturacion.AppController;
 import com.luis.facturacion.mvc_familiaArticulos.database.FamiliaArticulosEntity;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -14,7 +15,9 @@ import javafx.scene.input.MouseEvent;
 import java.util.List;
 
 public class FamiliaArticulosController {
-    private final FamiliaArticulosModel familiaModel = FamiliaArticulosModel.getInstance();
+    private FamiliaArticulosModel familiaModel;
+    private AppController appController;
+
     @FXML
     private TableView<FamiliaArticulosEntity> familiaTable;
     @FXML
@@ -30,6 +33,12 @@ public class FamiliaArticulosController {
 
     public FamiliaArticulosController() {
         System.out.println("Familia Articulos created");
+        this.familiaModel = FamiliaArticulosModel.getInstance();
+    }
+
+    public void setAppController(AppController appController) {
+        this.appController = appController;
+        familiaModel.setController(this);
     }
 
     @FXML
@@ -77,5 +86,14 @@ public class FamiliaArticulosController {
         idArticuloField.clear();
         codigoFamiliaField.clear();
         denominacionFamiliaField.clear();
+    }
+
+    public void setUpModel(FamiliaArticulosController familiaArticulosController){
+        familiaModel.setController(familiaArticulosController);
+    }
+
+
+    public FamiliaArticulosEntity getFamilyById(Integer id) {
+        return familiaModel.getFamilyById(id);
     }
 }

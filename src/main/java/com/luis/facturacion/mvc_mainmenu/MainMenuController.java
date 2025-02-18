@@ -24,33 +24,19 @@ public class MainMenuController {
     @FXML
     public void handleArticulosClick(javafx.event.ActionEvent actionEvent) {
         System.out.println("El menú 'Articulos' fue seleccionado.");
-        this.showArticuloView();
-    }
-
-    public void showArticuloView() {
-        Stage stage = new Stage();
-        ArticulosView articulosView = new ArticulosView(this); // Crear la vista del login
-        articulosView.show(stage);
+        appController.showArticuloView();
     }
 
     @FXML
     public void handleFamiliaArticulosClick(ActionEvent actionEvent) {
         System.out.println("El menú 'Familia Articulos ' fue seleccionado");
-        Stage stage = new Stage();
-        FamiliaArticulosView familiaArticulosView = new FamiliaArticulosView();
-        familiaArticulosView.show(stage);
+        appController.showFamiliaArticulosView();
     }
 
     @FXML
     public void handleClientesClick(javafx.event.ActionEvent actionEvent) {
         System.out.println("El menú 'Clientes' fue seleccionado.");
-        this.showClienteView();
-    }
-
-    public void showClienteView() {
-        Stage stage = new Stage();
-        ClienteView clienteView = new ClienteView();
-        clienteView.show(stage);
+        appController.showClienteView();
     }
 
     @FXML
