@@ -6,26 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="69df8e73-10d4-4aca-bdf2-6460b6e74463" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/luis/facturacion/AppController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/luis/facturacion/AppController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/luis/facturacion/mvc_articulo/ArticuloModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/luis/facturacion/mvc_articulo/ArticuloModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/luis/facturacion/mvc_articulo/ArticulosController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/luis/facturacion/mvc_articulo/ArticulosController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/luis/facturacion/mvc_articulo/ArticulosView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/luis/facturacion/mvc_articulo/ArticulosView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/luis/facturacion/mvc_articulo/database/ArticuloEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/luis/facturacion/mvc_articulo/database/ArticuloEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/luis/facturacion/mvc_familiaArticulos/FamiliaArticulosController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/luis/facturacion/mvc_familiaArticulos/FamiliaArticulosController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/luis/facturacion/mvc_familiaArticulos/FamiliaArticulosModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/luis/facturacion/mvc_familiaArticulos/FamiliaArticulosModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/luis/facturacion/mvc_familiaArticulos/FamiliaArticulosView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/luis/facturacion/mvc_familiaArticulos/FamiliaArticulosView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/luis/facturacion/mvc_familiaArticulos/database/FamiliaArticulosDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/luis/facturacion/mvc_familiaArticulos/database/FamiliaArticulosDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/luis/facturacion/mvc_mainmenu/MainMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/luis/facturacion/mvc_mainmenu/MainMenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/luis/facturacion/AppController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/luis/facturacion/AppController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/luis/facturacion/mvc_articulo/ArticuloModel.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/luis/facturacion/mvc_articulo/ArticuloModel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/luis/facturacion/mvc_articulo/ArticulosController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/luis/facturacion/mvc_articulo/ArticulosController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/luis/facturacion/mvc_articulo/ArticulosView.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/luis/facturacion/mvc_articulo/ArticulosView.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/luis/facturacion/mvc_articulo/database/ArticuloEntity.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/luis/facturacion/mvc_articulo/database/ArticuloEntity.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/luis/facturacion/mvc_familiaArticulos/FamiliaArticulosController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/luis/facturacion/mvc_familiaArticulos/FamiliaArticulosController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/luis/facturacion/mvc_familiaArticulos/FamiliaArticulosModel.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/luis/facturacion/mvc_familiaArticulos/FamiliaArticulosModel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/luis/facturacion/mvc_familiaArticulos/FamiliaArticulosView.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/luis/facturacion/mvc_familiaArticulos/FamiliaArticulosView.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/luis/facturacion/mvc_familiaArticulos/database/FamiliaArticulosDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/luis/facturacion/mvc_familiaArticulos/database/FamiliaArticulosDAO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/luis/facturacion/mvc_mainmenu/MainMenuController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/luis/facturacion/mvc_mainmenu/MainMenuController.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -75,20 +55,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.Main.executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "master",
-    "ignore.virus.scanning.warn.message": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/Luis/Documents/Proyectos/Github/Software-de-Facturacion",
-    "settings.editor.selected.configurable": "preferences.pluginManager"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Luis/Documents/Proyectos/Github/Software-de-Facturacion&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
   }
-}]]></component>
+}</component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
