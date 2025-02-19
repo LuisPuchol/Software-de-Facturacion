@@ -5,7 +5,41 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="69df8e73-10d4-4aca-bdf2-6460b6e74463" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/luis/facturacion/mvc_factura/FacturaController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/luis/facturacion/mvc_factura/FacturaModel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/luis/facturacion/mvc_factura/database/FacturaDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/luis/facturacion/mvc_factura/database/FacturaEntity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/luis/facturacion/mvc_formaPago/FormaDePagoController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/luis/facturacion/mvc_formaPago/FormaDePagoModel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/luis/facturacion/mvc_formaPago/FormasDePagoView.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/luis/facturacion/mvc_formaPago/database/FormaDePagoDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/luis/facturacion/mvc_formaPago/database/FormaDePagoEntity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/luis/facturacion/mvc_rectificativa/RectificativaController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/luis/facturacion/mvc_rectificativa/RectificativaModel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/luis/facturacion/mvc_rectificativa/RectificativasView.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/luis/facturacion/mvc_rectificativa/database/RectificativaDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/luis/facturacion/mvc_rectificativa/database/RectificativaEntity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/luis/facturacion/mvc_tipoIva/TipoDeIvaController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/luis/facturacion/mvc_tipoIva/TipoDeIvaModel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/luis/facturacion/mvc_tipoIva/TiposDeIvaView.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/luis/facturacion/mvc_tipoIva/database/TipoDeIvaDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/luis/facturacion/mvc_tipoIva/database/TipoDeIvaEntity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/luis/facturacion/AppController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/luis/facturacion/AppController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/luis/facturacion/mvc_albaran/AlbaranView.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/luis/facturacion/mvc_articulo/ArticuloModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/luis/facturacion/mvc_articulo/ArticuloModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/luis/facturacion/mvc_articulo/ArticulosController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/luis/facturacion/mvc_articulo/ArticuloController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/luis/facturacion/mvc_articulo/ArticulosView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/luis/facturacion/mvc_articulo/ArticulosView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/luis/facturacion/mvc_client/ClienteController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/luis/facturacion/mvc_client/ClienteController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/luis/facturacion/mvc_client/ClienteView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/luis/facturacion/mvc_client/ClientesView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/luis/facturacion/mvc_facturacion/FacturacionView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/luis/facturacion/mvc_factura/FacturasView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/luis/facturacion/mvc_mainmenu/MainMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/luis/facturacion/mvc_mainmenu/MainMenuController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/luis/facturacion/articulos.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/luis/facturacion/articulos.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/luis/facturacion/articulosOLD.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/luis/facturacion/articulosOLD.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/luis/facturacion/main-menu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/luis/facturacion/main-menu.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/luis/facturacion/AppController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/luis/facturacion/AppController.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,13 +103,6 @@
     &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
   }
 }</component>
-  <component name="SharedIndexes">
-    <attachedChunks>
-      <set>
-        <option value="jdk-21.0.1-openjdk-21.0.1-4caba194b151-23eed401" />
-      </set>
-    </attachedChunks>
-  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">

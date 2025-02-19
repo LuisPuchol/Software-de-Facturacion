@@ -12,22 +12,19 @@
             <Menu fx:id="ProductosMenu" text="Productos">
                 <MenuItem fx:id="Articulo" text="Artículos" onAction="#handleArticulosClick"/>
                 <MenuItem fx:id="FamiliaArticulo" text="Familias de Artículos" onAction="#handleFamiliaArticulosClick"/>
-                <MenuItem fx:id="ConfigIVA" text="Tipos de IVA" onAction="#handleConfigIVAClick"/>
+                <MenuItem fx:id="TiposIVA" text="Tipos de IVA" onAction="#handleConfigIVAClick"/>
+                <MenuItem fx:id="FormasPago" text="Formas de Pago" onAction="#handleFormasPagoClick"/>
             </Menu>
 
             <!-- Gestión de Clientes -->
             <Menu fx:id="ClientesMenu" text="Clientes">
                 <MenuItem fx:id="Clientes" text="Listado de Clientes" onAction="#handleClientesClick"/>
-                <MenuItem fx:id="FormasPago" text="Formas de Pago" onAction="#handleFormasPagoClick"/>
             </Menu>
 
             <!-- Gestión de Ventas -->
             <Menu fx:id="VentasMenu" text="Ventas">
-                <MenuItem fx:id="EmitirAlbaran" text="Emitir Albarán"/>
-                <MenuItem fx:id="ListadoAlbaran" text="Listado de Albaranes"/>
-                <MenuItem fx:id="ListadoFacturar" text="Facturación Pendiente"/>
-                <MenuItem fx:id="FacturasEmitidas" text="Facturas Emitidas"/>
-                <MenuItem fx:id="RectificativasClientes" text="Facturas Rectificativas (Abonos)"/>
+                <MenuItem fx:id="Facturas" text="Facturas"/>
+                <MenuItem fx:id="Rectificativas" text="Rectificativas" onAction="#handleRectificativasClick"/>
             </Menu>
 
             <!-- Resúmenes y Reportes -->

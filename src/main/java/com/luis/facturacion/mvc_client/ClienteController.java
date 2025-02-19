@@ -1,94 +1,42 @@
 package com.luis.facturacion.mvc_client;
 
+import com.luis.facturacion.AppController;
+import com.luis.facturacion.mvc_client.database.ClienteEntity;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
 public class ClienteController {
-    // Tabla de clientes
-    @FXML
-    private TableView<?> clientesTable;
+    private ClienteModel clienteModel;
+    private AppController appController;
 
     @FXML
-    private TableColumn<?, Integer> idClienteColumn;
+    private TableView<ClienteEntity> clienteTable;
+    @FXML
+    private TableColumn<ClienteEntity, Integer> columnId;
+    @FXML
+    private TableColumn<ClienteEntity, String> columnNombre;
+    @FXML
+    private TableColumn<ClienteEntity, String> columnCif;
 
     @FXML
-    private TableColumn<?, String> nombreClienteColumn;
-
-    // Campos del formulario
+    private TextField idField, nombreClienteField, direccionClienteField,
+            cpClienteField, poblacionClienteField, provinciaClienteField,
+            paisClienteField, cifClienteField, telClienteField,
+            emailClienteField, ibanClienteField;
     @FXML
-    private TextField idClienteField;
-
+    private TextField riesgoClienteField, descuentoClienteField;
     @FXML
-    private TextField nombreField;
-
+    private TextArea observacionesClienteField;
     @FXML
-    private TextField direccionField;
+    private Button nuevoButton, editarButton, eliminarButton, salirButton;
 
-    @FXML
-    private TextField cpField;
-
-    @FXML
-    private TextField poblacionField;
-
-    @FXML
-    private TextField provinciaField;
-
-    @FXML
-    private TextField paisField;
-
-    @FXML
-    private TextField cifField;
-
-    @FXML
-    private TextField telField;
-
-    @FXML
-    private TextField emailField;
-
-    @FXML
-    private TextField ibanField;
-
-    @FXML
-    private TextField riesgoField;
-
-    @FXML
-    private TextField descuentoField;
-
-    @FXML
-    private TextArea observacionesField;
-
-    // Botones
-    @FXML
-    private Button nuevoButton;
-
-    @FXML
-    private Button editarButton;
-
-    @FXML
-    private Button eliminarButton;
-
-    @FXML
-    private Button salirButton;
-
-
-    @FXML
-    private void handleNuevoButton() {
-
+    public ClienteController() {
+        System.out.println("Cliente created");
+        this.clienteModel = ClienteModel.getInstance();
     }
 
-    @FXML
-    private void handleEditarButton() {
-        //
-    }
-
-    @FXML
-    private void handleEliminarButton() {
-    }
-
-
-    @FXML
-    private void handleSalirButton() {
-        // Cerrar la ventana actual
-        //salirButton.getScene().getWindow().hide();
+    public void setAppController(AppController appController) {
+        this.appController = appController;
+        clienteModel.setController(this);
     }
 }

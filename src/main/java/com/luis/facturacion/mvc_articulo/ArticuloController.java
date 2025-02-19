@@ -2,7 +2,6 @@ package com.luis.facturacion.mvc_articulo;
 
 import com.luis.facturacion.AppController;
 import com.luis.facturacion.mvc_articulo.database.ArticuloEntity;
-import com.luis.facturacion.mvc_mainmenu.MainMenuController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -11,7 +10,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.util.List;
 
-public class ArticulosController {
+public class ArticuloController {
     private ArticuloModel articuloModel;
     private AppController appController;
 
@@ -31,7 +30,7 @@ public class ArticulosController {
     @FXML
     private Button nuevoButton, editarButton, eliminarButton, salirButton;
 
-    public ArticulosController() {
+    public ArticuloController() {
         System.out.println("Articulos Controller created");
         this.articuloModel = ArticuloModel.getInstance();
     }
@@ -108,8 +107,8 @@ public class ArticulosController {
         observacionesField.clear();
     }
 
-    public void setUpModel(ArticulosController articulosController){
-        articuloModel.setController(articulosController);
+    public void setUpModel(ArticuloController articuloController){
+        articuloModel.setController(articuloController);
     }
 
     //Cosas que pide el Model

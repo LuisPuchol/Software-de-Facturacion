@@ -7,7 +7,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class ArticulosView {
-    private ArticulosController articulosController;
+    private ArticuloController articuloController;
     private AppController appController;
 
     public ArticulosView(AppController appController) {
@@ -21,15 +21,15 @@ public class ArticulosView {
             Parent root = loader.load();
 
             // Obtener el controlador y asignarle el AppController
-            articulosController = loader.getController();
-            articulosController.setAppController(appController);
+            articuloController = loader.getController();
+            articuloController.setAppController(appController);
 
             Scene scene = new Scene(root, 1000, 600);
             primaryStage.setTitle("Gestión de articulos");
             primaryStage.setScene(scene);
             primaryStage.show();
 
-            articulosController.setUpModel(articulosController);
+            articuloController.setUpModel(articuloController);
         } catch (Exception e) {
             e.printStackTrace();
         }

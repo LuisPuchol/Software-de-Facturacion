@@ -1,48 +1,54 @@
 package com.luis.facturacion;
 
-import com.luis.facturacion.mvc_articulo.ArticulosController;
+import com.luis.facturacion.mvc_factura.FacturasView;
+import com.luis.facturacion.mvc_formaPago.FormaDePagoController;
+import com.luis.facturacion.mvc_articulo.ArticuloController;
 import com.luis.facturacion.mvc_articulo.ArticulosView;
-import com.luis.facturacion.mvc_client.ClienteView;
+import com.luis.facturacion.mvc_client.ClienteController;
+import com.luis.facturacion.mvc_client.ClientesView;
+import com.luis.facturacion.mvc_factura.FacturaController;
 import com.luis.facturacion.mvc_familiaArticulos.FamiliaArticulosController;
 import com.luis.facturacion.mvc_familiaArticulos.FamiliaArticulosView;
+import com.luis.facturacion.mvc_formaPago.FormasDePagoView;
 import com.luis.facturacion.mvc_login.LoginView;
 import com.luis.facturacion.mvc_mainmenu.MainMenuView;
+import com.luis.facturacion.mvc_rectificativa.RectificativaController;
+import com.luis.facturacion.mvc_rectificativa.RectificativasView;
+import com.luis.facturacion.mvc_tipoIva.TipoDeIvaController;
+import com.luis.facturacion.mvc_tipoIva.TiposDeIvaView;
 import javafx.stage.Stage;
 
 public class AppController {
     private Stage primaryStage;
-    // 🔥 Agregar todas las instancias de los controladores y modelos
-    private final ArticulosController articulosController;
+    // Agregar todas las instancias de los controladores y modelos
+    private final ArticuloController articuloController;
     private final FamiliaArticulosController familiaArticulosController;
-    //private final ProveedoresController proveedoresController;
-    //private final FacturasController facturasController;
-    //private final AlbaranesController albaranesController;
-    //private final ConfigIvaController configIvaController;
-    //private final FormasPagoController formasPagoController;
-    //private final FacturasRectificativasController facturasRectificativasController;
+    private final TipoDeIvaController tiposDeIvaController;
+    private final FormaDePagoController formasPagoController;
+    private final ClienteController clienteController;
+    private final FacturaController facturaController;
+    private final RectificativaController rectificativaController;
 
     public AppController(Stage primaryStage) {
         this.primaryStage = primaryStage;
 
         // Inicializar todos los controladores desde el inicio
-        this.articulosController = new ArticulosController();
+        this.articuloController = new ArticuloController();
         this.familiaArticulosController = new FamiliaArticulosController();
-        //this.proveedoresController = new ProveedoresController();
-        //this.facturasController = new FacturasController();
-        //this.albaranesController = new AlbaranesController();
-        //this.configIvaController = new ConfigIvaController();
-        //this.formasPagoController = new FormasPagoController();
-        //this.facturasRectificativasController = new FacturasRectificativasController();
+        this.tiposDeIvaController = new TipoDeIvaController();
+        this.formasPagoController = new FormaDePagoController();
+        this.clienteController = new ClienteController();
+        this.facturaController = new FacturaController();
+        this.rectificativaController = new RectificativaController();
 
         // Conectar los controladores con AppController
-        this.articulosController.setAppController(this);
+        this.articuloController.setAppController(this);
         this.familiaArticulosController.setAppController(this);
-        //this.proveedoresController.setAppController(this);
-        //this.facturasController.setAppController(this);
-        //this.albaranesController.setAppController(this);
-        //this.configIvaController.setAppController(this);
-        //this.formasPagoController.setAppController(this);
-        //this.facturasRectificativasController.setAppController(this);
+        this.tiposDeIvaController.setAppController(this);
+        this.formasPagoController.setAppController(this);
+        this.clienteController.setAppController(this);
+        this.facturaController.setAppController(this);
+        this.rectificativaController.setAppController(this);
     }
 
     public void showLoginView() {
@@ -63,8 +69,8 @@ public class AppController {
 
     public void showClienteView() {
         Stage stage = new Stage();
-        ClienteView clienteView = new ClienteView();
-        clienteView.show(stage);
+        ClientesView clientesView = new ClientesView();
+        clientesView.show(stage);
     }
 
     public void showFamiliaArticulosView(){
@@ -72,6 +78,31 @@ public class AppController {
         FamiliaArticulosView familiaArticulosView = new FamiliaArticulosView(this);
         familiaArticulosView.show(stage);
     }
+
+    public void showTipoDeIvaView() {
+        Stage stage = new Stage();
+        TiposDeIvaView tipoDeIvaView = new TiposDeIvaView(this);
+        tipoDeIvaView.show(stage);
+    }
+
+    public void showFormaDePagoView() {
+        Stage stage = new Stage();
+        FormasDePagoView formaDePagoView = new FormasDePagoView(this);
+        formaDePagoView.show(stage);
+    }
+
+    public void showFacturaView() {
+        Stage stage = new Stage();
+        FacturasView facturaView = new FacturasView(this);
+        facturaView.show(stage);
+    }
+
+    public void showRectificativaView() {
+        Stage stage = new Stage();
+        RectificativasView rectificativaView = new RectificativasView(this);
+        rectificativaView.show(stage);
+    }
+
 
     public Stage getStage () {
         return this.primaryStage;

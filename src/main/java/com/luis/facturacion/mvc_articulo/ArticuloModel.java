@@ -9,7 +9,7 @@ import java.util.List;
 
 public class ArticuloModel {
     private static ArticuloModel instance;
-    private ArticulosController articulosController;
+    private ArticuloController articuloController;
     private final ArticuloDAO articuloDAO;
     private final ObservableList<ArticuloEntity> articulosList;
 
@@ -26,9 +26,9 @@ public class ArticuloModel {
         return instance;
     }
 
-    public void setController(ArticulosController articulosController){
-        if (this.articulosController == null){
-            this.articulosController = articulosController;
+    public void setController(ArticuloController articuloController){
+        if (this.articuloController == null){
+            this.articuloController = articuloController;
         }
     }
 
@@ -55,7 +55,7 @@ public class ArticuloModel {
 
             // Creación del objeto ArticuloEntity con los valores convertidos
             ArticuloEntity articuloEntity = new ArticuloEntity();
-            Object family = articulosController.getFamilyById(familiaArticulo);
+            Object family = articuloController.getFamilyById(familiaArticulo);
 
             articuloEntity.setCodigoArticulo(codigo);
             articuloEntity.setCodigoBarrasArticulo(codigoBarras);

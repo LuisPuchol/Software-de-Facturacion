@@ -1,9 +1,6 @@
 package com.luis.facturacion.mvc_mainmenu;
 
 import com.luis.facturacion.AppController;
-import com.luis.facturacion.mvc_articulo.ArticulosView;
-import com.luis.facturacion.mvc_client.ClienteView;
-import com.luis.facturacion.mvc_familiaArticulos.FamiliaArticulosView;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.stage.Stage;
@@ -46,5 +43,9 @@ public class MainMenuController {
 
 
     public void handleFormasPagoClick(ActionEvent actionEvent) {
+    }
+
+    public void handleRectificativasClick(ActionEvent actionEvent) {
+
     }
 }
