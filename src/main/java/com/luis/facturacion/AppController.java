@@ -69,7 +69,7 @@ public class AppController {
 
     public void showClienteView() {
         Stage stage = new Stage();
-        ClientesView clientesView = new ClientesView();
+        ClientesView clientesView = new ClientesView(this);
         clientesView.show(stage);
     }
 

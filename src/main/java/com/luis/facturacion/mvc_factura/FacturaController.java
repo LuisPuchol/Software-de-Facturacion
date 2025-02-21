@@ -1,6 +1,7 @@
 package com.luis.facturacion.mvc_factura;
 
 import com.luis.facturacion.AppController;
+import com.luis.facturacion.mvc_client.ClienteController;
 import com.luis.facturacion.mvc_client.database.ClienteEntity;
 import com.luis.facturacion.mvc_factura.database.FacturaEntity;
 import com.luis.facturacion.mvc_formaPago.database.FormaDePagoEntity;
@@ -44,5 +45,9 @@ public class FacturaController {
     public void setAppController(AppController appController) {
         this.appController = appController;
         facturaModel.setController(this);
+    }
+
+    public void setUpModel(FacturaController facturaController){
+        facturaModel.setController(facturaController);
     }
 }

@@ -17,7 +17,7 @@ public class FamiliaArticulosView {
 
     public void show(Stage primaryStage) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/luis/facturacion/FamiliaArticulos.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/luis/facturacion/familiaArticulos.fxml"));
             Parent root = loader.load();
 
             familiaArticulosController = loader.getController();

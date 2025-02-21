@@ -7,6 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 
 public class TipoDeIvaController {
     private TipoDeIvaModel tipoIvaModel;
@@ -37,5 +38,17 @@ public class TipoDeIvaController {
 
     public void setUpModel(TipoDeIvaController tipoDeIvaController){
         tipoIvaModel.setController(tipoDeIvaController);
+    }
+
+    public void handleNuevoButton(MouseEvent mouseEvent) {
+    }
+
+    public void handleEditarButton(MouseEvent mouseEvent) {
+    }
+
+    public void handleEliminarButton(MouseEvent mouseEvent) {
+    }
+
+    public void handleSalirButton(MouseEvent mouseEvent) {
     }
 }

@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<BorderPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.luis.facturacion.mvc_articulo.ArticulosController">
+<BorderPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.luis.facturacion.mvc_articulo.ArticuloController">
     <!-- Tabla de artículos a la izquierda -->
     <left>
         <TableView fx:id="articulosTable" prefWidth="300">

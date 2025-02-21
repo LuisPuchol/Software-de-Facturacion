@@ -40,6 +40,9 @@ public class ArticuloController {
         articuloModel.setController(this);
     }
 
+    public void setUpModel(ArticuloController articuloController){
+        articuloModel.setController(articuloController);
+    }
 
     // Cosas que pide la View
     @FXML
@@ -107,9 +110,7 @@ public class ArticuloController {
         observacionesField.clear();
     }
 
-    public void setUpModel(ArticuloController articuloController){
-        articuloModel.setController(articuloController);
-    }
+
 
     //Cosas que pide el Model
     public Object getFamilyById(Integer id){

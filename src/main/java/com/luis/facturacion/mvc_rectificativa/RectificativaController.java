@@ -1,6 +1,7 @@
 package com.luis.facturacion.mvc_rectificativa;
 
 import com.luis.facturacion.AppController;
+import com.luis.facturacion.mvc_client.ClienteController;
 import com.luis.facturacion.mvc_client.database.ClienteEntity;
 import com.luis.facturacion.mvc_rectificativa.database.RectificativaEntity;
 import javafx.fxml.FXML;
@@ -35,11 +36,16 @@ public class RectificativaController {
 
     public RectificativaController() {
         System.out.println("Rectificativa created");
-        this.rectificativaModel = RectificativaModel.getInstance();
+        //this.rectificativaModel = RectificativaModel.getInstance();
     }
 
     public void setAppController(AppController appController) {
         this.appController = appController;
-        rectificativaModel.setController(this);
+        //rectificativaModel.setController(this);
     }
+
+    public void setUpModel(RectificativaController rectificativaController){
+        //rectificativaModel.setController(rectificativaController);
+    }
+
 }

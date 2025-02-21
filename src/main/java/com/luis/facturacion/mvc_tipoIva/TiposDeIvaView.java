@@ -17,7 +17,7 @@ public class TiposDeIvaView {
 
     public void show(Stage primaryStage) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/luis/facturacion/tipoiva.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/luis/facturacion/tipoIva.fxml"));
             Parent root = loader.load();
 
             tipoIvaController = loader.getController();

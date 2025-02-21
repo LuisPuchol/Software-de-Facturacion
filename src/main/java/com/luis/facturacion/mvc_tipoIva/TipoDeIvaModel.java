@@ -8,7 +8,7 @@ import javafx.collections.ObservableList;
 public class TipoDeIvaModel {
     private static TipoDeIvaModel instance;
     private TipoDeIvaController tipoDeIvaController;
-    private final TipoDeIvaDAO tipDeIvaDAO;
+    private final TipoDeIvaDAO tipoDeIvaDAO;
     private final ObservableList<TipoDeIvaEntity> tipoDeIvaList;
 
     TipoDeIvaModel() {

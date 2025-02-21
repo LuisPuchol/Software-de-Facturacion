@@ -41,6 +41,10 @@ public class FamiliaArticulosController {
         familiaModel.setController(this);
     }
 
+    public void setUpModel(FamiliaArticulosController familiaArticulosController){
+        familiaModel.setController(familiaArticulosController);
+    }
+
     @FXML
     public void initialize() {
         columnId.setCellValueFactory(new PropertyValueFactory<>("idFamiliaArticulos"));
@@ -88,9 +92,6 @@ public class FamiliaArticulosController {
         denominacionFamiliaField.clear();
     }
 
-    public void setUpModel(FamiliaArticulosController familiaArticulosController){
-        familiaModel.setController(familiaArticulosController);
-    }
 
 
     public FamiliaArticulosEntity getFamilyById(Integer id) {

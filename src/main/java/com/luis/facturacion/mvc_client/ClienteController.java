@@ -2,6 +2,7 @@ package com.luis.facturacion.mvc_client;
 
 import com.luis.facturacion.AppController;
 import com.luis.facturacion.mvc_client.database.ClienteEntity;
+import com.luis.facturacion.mvc_familiaArticulos.FamiliaArticulosController;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
@@ -38,5 +39,9 @@ public class ClienteController {
     public void setAppController(AppController appController) {
         this.appController = appController;
         clienteModel.setController(this);
+    }
+
+    public void setUpModel(ClienteController clienteController){
+        clienteModel.setController(clienteController);
     }
 }

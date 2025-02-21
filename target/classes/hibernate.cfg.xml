@@ -27,6 +27,11 @@
         <!-- Definir la clase mapeada -->
         <mapping class="com.luis.facturacion.mvc_articulo.database.ArticuloEntity"/>
         <mapping class="com.luis.facturacion.mvc_familiaArticulos.database.FamiliaArticulosEntity"/>
+        <mapping class="com.luis.facturacion.mvc_client.database.ClienteEntity"/>
+        <mapping class="com.luis.facturacion.mvc_factura.database.FacturaEntity"/>
+        <mapping class="com.luis.facturacion.mvc_formaPago.database.FormaDePagoEntity"/>
+        <mapping class="com.luis.facturacion.mvc_rectificativa.database.RectificativaEntity"/>
+        <mapping class="com.luis.facturacion.mvc_tipoIva.database.TipoDeIvaEntity"/>
 
     </session-factory>
 </hibernate-configuration>
