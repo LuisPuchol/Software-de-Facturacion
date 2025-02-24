@@ -28,7 +28,6 @@ public class FormasDePagoView {
             primaryStage.setScene(scene);
             primaryStage.show();
 
-            //formaPagoController.setUpModel(formaPagoController);
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -40,9 +40,6 @@ public class ArticuloController {
         articuloModel.setController(this);
     }
 
-    public void setUpModel(ArticuloController articuloController){
-        articuloModel.setController(articuloController);
-    }
 
     // Cosas que pide la View
     @FXML

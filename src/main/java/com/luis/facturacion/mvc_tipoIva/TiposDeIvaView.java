@@ -28,7 +28,6 @@ public class TiposDeIvaView {
             primaryStage.setScene(scene);
             primaryStage.show();
 
-            tipoIvaController.setUpModel(tipoIvaController);
         } catch (Exception e) {
             e.printStackTrace();
         }

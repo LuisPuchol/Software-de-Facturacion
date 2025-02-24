@@ -28,7 +28,6 @@ public class ClientesView {
             primaryStage.setScene(scene);
             primaryStage.show();
 
-            clienteController.setUpModel(clienteController);
         } catch (Exception e) {
             e.printStackTrace();
         }

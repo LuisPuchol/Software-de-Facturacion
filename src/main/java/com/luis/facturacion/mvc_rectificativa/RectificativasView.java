@@ -28,7 +28,6 @@ public class RectificativasView {
             primaryStage.setScene(scene);
             primaryStage.show();
 
-            rectificativaController.setUpModel(rectificativaController);
         } catch (Exception e) {
             e.printStackTrace();
         }

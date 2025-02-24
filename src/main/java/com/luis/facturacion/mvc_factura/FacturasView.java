@@ -28,7 +28,6 @@ public class FacturasView {
             primaryStage.setScene(scene);
             primaryStage.show();
 
-            facturaController.setUpModel(facturaController);
         } catch (Exception e) {
             e.printStackTrace();
         }

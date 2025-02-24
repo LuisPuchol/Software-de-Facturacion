@@ -44,8 +44,5 @@ public class RectificativaController {
         //rectificativaModel.setController(this);
     }
 
-    public void setUpModel(RectificativaController rectificativaController){
-        //rectificativaModel.setController(rectificativaController);
-    }
 
 }

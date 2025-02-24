@@ -36,9 +36,6 @@ public class TipoDeIvaController {
         tipoIvaModel.setController(this);
     }
 
-    public void setUpModel(TipoDeIvaController tipoDeIvaController){
-        tipoIvaModel.setController(tipoDeIvaController);
-    }
 
     public void handleNuevoButton(MouseEvent mouseEvent) {
     }

@@ -28,7 +28,6 @@ public class FamiliaArticulosView {
             primaryStage.setScene(scene);
             primaryStage.show();
 
-            familiaArticulosController.setUpModel(familiaArticulosController);
         } catch (Exception e) {
             e.printStackTrace();
         }

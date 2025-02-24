@@ -47,7 +47,4 @@ public class FacturaController {
         facturaModel.setController(this);
     }
 
-    public void setUpModel(FacturaController facturaController){
-        facturaModel.setController(facturaController);
-    }
 }

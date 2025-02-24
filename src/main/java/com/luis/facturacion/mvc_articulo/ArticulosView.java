@@ -29,7 +29,6 @@ public class ArticulosView {
             primaryStage.setScene(scene);
             primaryStage.show();
 
-            //articuloController.setUpModel(articuloController);
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -41,7 +41,4 @@ public class ClienteController {
         clienteModel.setController(this);
     }
 
-    public void setUpModel(ClienteController clienteController){
-        clienteModel.setController(clienteController);
-    }
 }
