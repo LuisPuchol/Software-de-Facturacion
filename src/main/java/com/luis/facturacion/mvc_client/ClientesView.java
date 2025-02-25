@@ -17,7 +17,7 @@ public class ClientesView {
 
     public void show(Stage primaryStage) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/luis/facturacion/cliente.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/luis/facturacion/clientes.fxml"));
             Parent root = loader.load();
 
             clienteController = loader.getController();

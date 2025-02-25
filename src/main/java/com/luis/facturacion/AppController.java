@@ -10,6 +10,7 @@ import com.luis.facturacion.mvc_factura.FacturaController;
 import com.luis.facturacion.mvc_familiaArticulos.FamiliaArticulosController;
 import com.luis.facturacion.mvc_familiaArticulos.FamiliaArticulosView;
 import com.luis.facturacion.mvc_formaPago.FormasDePagoView;
+import com.luis.facturacion.mvc_listadoFacturas.ListadoFacturasView;
 import com.luis.facturacion.mvc_login.LoginView;
 import com.luis.facturacion.mvc_mainmenu.MainMenuView;
 import com.luis.facturacion.mvc_rectificativa.RectificativaController;
@@ -103,6 +104,11 @@ public class AppController {
         rectificativaView.show(stage);
     }
 
+    public void showListadoFacturasView() {
+        Stage stage = new Stage();
+        ListadoFacturasView listadoFacturasView = new ListadoFacturasView(this);
+        listadoFacturasView.show(stage);
+    }
 
     public Stage getStage () {
         return this.primaryStage;
@@ -111,4 +117,5 @@ public class AppController {
     public Object getFamilyById(Integer id){
         return familiaArticulosController.getFamilyById(id);
     }
+
 }

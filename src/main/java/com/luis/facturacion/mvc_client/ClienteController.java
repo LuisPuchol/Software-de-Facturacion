@@ -5,6 +5,7 @@ import com.luis.facturacion.mvc_client.database.ClienteEntity;
 import com.luis.facturacion.mvc_familiaArticulos.FamiliaArticulosController;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 
 public class ClienteController {
     private ClienteModel clienteModel;
@@ -41,4 +42,16 @@ public class ClienteController {
         clienteModel.setController(this);
     }
 
+    public void handleNuevoButton(MouseEvent mouseEvent) {
+    }
+
+    public void handleEditarButton(MouseEvent mouseEvent) {
+    }
+
+    public void handleEliminarButton(MouseEvent mouseEvent) {
+    }
+
+    public void handleSalirButton(MouseEvent mouseEvent) {
+        salirButton.getScene().getWindow().hide();
+    }
 }

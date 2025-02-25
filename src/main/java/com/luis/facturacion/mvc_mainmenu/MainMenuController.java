@@ -39,13 +39,30 @@ public class MainMenuController {
     @FXML
     public void handleConfigIVAClick(javafx.event.ActionEvent actionEvent) {
         System.out.println("El menú 'Configuración IVA' fue seleccionado.");
+        appController.showTipoDeIvaView();
     }
 
-
+    @FXML
     public void handleFormasPagoClick(ActionEvent actionEvent) {
+        System.out.println("creado formas de pago");
+        appController.showFormaDePagoView();
     }
 
+    @FXML
     public void handleRectificativasClick(ActionEvent actionEvent) {
+        System.out.println("creado rectificativas");
+        appController.showRectificativaView();
+    }
 
+    @FXML
+    public void handleListadoFacturasClick(ActionEvent actionEvent) {
+        System.out.println("creado crearFacturas");
+        appController.showListadoFacturasView();
+    }
+
+    @FXML
+    public void handleCrearFacturaClick(ActionEvent actionEvent) {
+        System.out.println("Creado crearFacturas");
+        appController.showFacturaView();
     }
 }

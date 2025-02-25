@@ -23,7 +23,8 @@
 
             <!-- Gestión de Ventas -->
             <Menu fx:id="VentasMenu" text="Ventas">
-                <MenuItem fx:id="Facturas" text="Facturas"/>
+                <MenuItem fx:id="Factura" text="Crear Factura" onAction="#handleCrearFacturaClick"/>
+                <MenuItem fx:id="Facturas" text="Listado Facturas" onAction="#handleListadoFacturasClick"/>
                 <MenuItem fx:id="Rectificativas" text="Rectificativas" onAction="#handleRectificativasClick"/>
             </Menu>
 

@@ -25,7 +25,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
         AppController appController = new AppController(primaryStage);
-        appController.showLoginView(); // Mostrar la ventana de login inicialmente
+        appController.showLoginView();
     }
 
 }

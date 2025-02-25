@@ -1,29 +1,15 @@
 package com.luis.facturacion.mvc_factura;
 
 import com.luis.facturacion.AppController;
-import com.luis.facturacion.mvc_client.ClienteController;
-import com.luis.facturacion.mvc_client.database.ClienteEntity;
-import com.luis.facturacion.mvc_factura.database.FacturaEntity;
-import com.luis.facturacion.mvc_formaPago.database.FormaDePagoEntity;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 
 import java.util.Date;
 
 public class FacturaController {
     private FacturaModel facturaModel;
     private AppController appController;
-
-    @FXML
-    private TableView<FacturaEntity> facturaTable;
-    @FXML
-    private TableColumn<FacturaEntity, Integer> columnId;
-    @FXML
-    private TableColumn<FacturaEntity, Integer> columnNumero;
-    @FXML
-    private TableColumn<FacturaEntity, Date> columnFecha;
-    @FXML
-    private TableColumn<FacturaEntity, Integer> columnIdCliente;
 
     @FXML
     private DatePicker fechaFacturaField, fechaCobroFacturaField;
@@ -47,4 +33,10 @@ public class FacturaController {
         facturaModel.setController(this);
     }
 
+    public void handleNuevoButton(MouseEvent mouseEvent) {
+    }
+
+    public void handleSalirButton(MouseEvent mouseEvent) {
+        salirButton.getScene().getWindow().hide();
+    }
 }

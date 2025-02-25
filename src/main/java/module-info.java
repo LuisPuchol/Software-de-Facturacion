@@ -27,6 +27,7 @@ module com.luis.facturacion {
     opens com.luis.facturacion.mvc_client.database to javafx.base, org.hibernate.orm.core;
     opens com.luis.facturacion.mvc_factura to javafx.fxml;
     opens com.luis.facturacion.mvc_factura.database to javafx.base, org.hibernate.orm.core;
+    opens com.luis.facturacion.mvc_listadoFacturas to javafx.fxml;
     opens com.luis.facturacion.mvc_rectificativa to javafx.fxml;
     opens com.luis.facturacion.mvc_rectificativa.database to javafx.base, org.hibernate.orm.core;
 
