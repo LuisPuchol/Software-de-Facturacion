@@ -5,11 +5,14 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 
-import java.util.Date;
+import java.io.File;
+import java.time.LocalDate;
+import java.util.Optional;
 
 public class FacturaController {
     private FacturaModel facturaModel;
     private AppController appController;
+    private FacturasView facturasView;
 
     @FXML
     private DatePicker fechaFacturaField, fechaCobroFacturaField;
@@ -33,10 +36,26 @@ public class FacturaController {
         facturaModel.setController(this);
     }
 
-    public void handleNuevoButton(MouseEvent mouseEvent) {
+    public void setView(FacturasView facturasView){
+        this.facturasView = facturasView;
+    }
+
+    public void handleAgregarButton(MouseEvent mouseEvent) {
+        int numeroFactura = Integer.parseInt(numeroFacturaField.getText()); // Número de factura como entero
+        LocalDate fechaFactura = fechaFacturaField.getValue(); // Fecha de factura como LocalDate
+        String clienteFactura = clienteFacturaField.getText(); // Cliente como String
+        double ivaFactura = Double.parseDouble(ivaFacturaField.getText()); // IVA como Double
+        String observaciones = observacionesFacturaField.getText(); // Observaciones como String
+
+        // Llamar al método con los valores convertidos
+        facturaModel.startFactura(numeroFactura, fechaFactura, clienteFactura, ivaFactura, observaciones);
+
+        CreateFacturaView createFacturaView = new CreateFacturaView(appController);
+        createFacturaView.show(facturasView.getPrimaryStage());
     }
 
     public void handleSalirButton(MouseEvent mouseEvent) {
         salirButton.getScene().getWindow().hide();
     }
+
 }

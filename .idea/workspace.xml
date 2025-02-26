@@ -5,39 +5,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="69df8e73-10d4-4aca-bdf2-6460b6e74463" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/luis/facturacion/mvc_listadoFacturas/ListadoFacturasController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/luis/facturacion/mvc_listadoFacturas/ListadoFacturasModel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/luis/facturacion/mvc_listadoFacturas/ListadoFacturasView.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/luis/facturacion/crearFactura.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/luis/facturacion/listadoFacturas.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/luis/facturacion/mvc_factura/CreateFacturaController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/luis/facturacion/mvc_factura/CreateFacturaView.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/luis/facturacion/mvc_factura/FacturaPDFGenerator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/luis/facturacion/lineasFactura.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.name" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/luis/facturacion/AppController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/luis/facturacion/AppController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/luis/facturacion/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/luis/facturacion/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/luis/facturacion/mvc_client/ClienteController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/luis/facturacion/mvc_client/ClienteController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/luis/facturacion/mvc_client/ClientesView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/luis/facturacion/mvc_client/ClientesView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/luis/facturacion/mvc_factura/FacturaController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/luis/facturacion/mvc_factura/FacturaController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/luis/facturacion/mvc_factura/FacturaModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/luis/facturacion/mvc_factura/FacturaModel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/luis/facturacion/mvc_factura/FacturasView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/luis/facturacion/mvc_factura/FacturasView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/luis/facturacion/mvc_mainmenu/MainMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/luis/facturacion/mvc_mainmenu/MainMenuController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/luis/facturacion/mainMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/luis/facturacion/mainMenu.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/luis/facturacion/AppController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/luis/facturacion/AppController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/luis/facturacion/mainMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/luis/facturacion/mainMenu.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/luis/facturacion/mvc_articulo/ArticuloController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/luis/facturacion/mvc_articulo/ArticuloController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/luis/facturacion/mvc_articulo/ArticulosController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/luis/facturacion/mvc_articulo/ArticulosView.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/luis/facturacion/mvc_articulo/ArticulosView.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/luis/facturacion/crearFactura.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/luis/facturacion/crearFactura.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/luis/facturacion/crearFactura.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/luis/facturacion/crearFactura.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/luis/facturacion/mvc_client/ClienteController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/luis/facturacion/mvc_client/ClienteController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/luis/facturacion/mvc_client/ClientesView.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/luis/facturacion/mvc_client/ClientesView.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/luis/facturacion/mvc_factura/FacturaController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/luis/facturacion/mvc_factura/FacturaController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/luis/facturacion/mvc_factura/FacturaModel.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/luis/facturacion/mvc_factura/FacturaModel.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/luis/facturacion/mvc_factura/FacturasView.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/luis/facturacion/mvc_factura/FacturasView.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/luis/facturacion/mvc_familiaArticulos/FamiliaArticulosController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/luis/facturacion/mvc_familiaArticulos/FamiliaArticulosController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/luis/facturacion/mvc_familiaArticulos/FamiliaArticulosView.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/luis/facturacion/mvc_familiaArticulos/FamiliaArticulosView.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/luis/facturacion/mvc_formaPago/FormasDePagoView.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/luis/facturacion/mvc_formaPago/FormasDePagoView.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/luis/facturacion/mvc_mainmenu/MainMenuController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/luis/facturacion/mvc_mainmenu/MainMenuController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/luis/facturacion/mvc_rectificativa/RectificativaController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/luis/facturacion/mvc_rectificativa/RectificativaController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/luis/facturacion/mvc_rectificativa/RectificativaModel.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/luis/facturacion/mvc_rectificativa/RectificativaModel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/luis/facturacion/mvc_rectificativa/RectificativasView.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/luis/facturacion/mvc_rectificativa/RectificativasView.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/luis/facturacion/mvc_tipoIva/TipoDeIvaController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/luis/facturacion/mvc_tipoIva/TipoDeIvaController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/luis/facturacion/mvc_tipoIva/TiposDeIvaView.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/luis/facturacion/mvc_tipoIva/TiposDeIvaView.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,18 +46,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "LuisPuchol"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;LuisPuchol&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/LuisPuchol/Software-de-Facturacion.git",
-    "accountId": "ccf6e994-8476-42a5-9c18-8c9c216ca2d6"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/LuisPuchol/Software-de-Facturacion.git&quot;,
+    &quot;accountId&quot;: &quot;ccf6e994-8476-42a5-9c18-8c9c216ca2d6&quot;
   }
-}]]></component>
+}</component>
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
@@ -87,20 +73,24 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.Main.executor": "Run",
-    "Application.Unnamed.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "master",
-    "ignore.virus.scanning.warn.message": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/luisi/Documents/DAW2/Programacion multiproceso/Github/P2P",
-    "settings.editor.selected.configurable": "preferences.pluginManager"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Unnamed.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/luisi/Documents/DAW2/Programacion multiproceso/Github/P2P&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="com.luis.facturacion" />
@@ -114,6 +104,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="jdk-21.0.1-openjdk-21.0.1-4caba194b151-23eed401" />
+      </set>
+    </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">

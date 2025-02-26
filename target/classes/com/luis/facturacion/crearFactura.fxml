@@ -17,10 +17,6 @@
                 <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
             </padding>
 
-            <!-- ID Factura -->
-            <Label text="ID Factura:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
-            <TextField fx:id="idFacturaField" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
-
             <!-- Número Factura -->
             <Label text="Número Factura:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
             <TextField fx:id="numeroFacturaField" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
@@ -33,37 +29,10 @@
             <Label text="Cliente Factura:" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
             <TextField fx:id="clienteFacturaField" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
 
-            <!-- Base Imponible -->
-            <Label text="Base Imponible:" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
-            <TextField fx:id="baseImponibleFacturaField" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
 
             <!-- IVA -->
             <Label text="IVA:" GridPane.columnIndex="0" GridPane.rowIndex="5"/>
             <TextField fx:id="ivaFacturaField" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
-
-            <!-- Total Factura -->
-            <Label text="Total Factura:" GridPane.columnIndex="0" GridPane.rowIndex="6"/>
-            <TextField fx:id="totalFacturaField" GridPane.columnIndex="1" GridPane.rowIndex="6"/>
-
-            <!-- Forma de Cobro -->
-            <Label text="Forma de Cobro:" GridPane.columnIndex="0" GridPane.rowIndex="7"/>
-            <TextField fx:id="formaCobroFacturaField" GridPane.columnIndex="1" GridPane.rowIndex="7"/>
-
-            <!-- Fecha de Cobro -->
-            <Label text="Fecha de Cobro:" GridPane.columnIndex="0" GridPane.rowIndex="8"/>
-            <DatePicker fx:id="fechaCobroFacturaField" GridPane.columnIndex="1" GridPane.rowIndex="8"/>
-
-            <!-- Cobrado -->
-            <Label text="Cobrado:" GridPane.columnIndex="0" GridPane.rowIndex="9"/>
-            <CheckBox fx:id="cobradaFacturaField" GridPane.columnIndex="1" GridPane.rowIndex="9"/>
-
-            <!-- Hash Factura -->
-            <Label text="Hash Factura:" GridPane.columnIndex="0" GridPane.rowIndex="10"/>
-            <TextField fx:id="hashFacturaField" GridPane.columnIndex="1" GridPane.rowIndex="10"/>
-
-            <!-- QR Factura -->
-            <Label text="QR Factura:" GridPane.columnIndex="0" GridPane.rowIndex="11"/>
-            <TextArea fx:id="qrFacturaField" prefHeight="50" GridPane.columnIndex="1" GridPane.rowIndex="11"/>
 
             <!-- Observaciones -->
             <Label text="Observaciones:" GridPane.columnIndex="0" GridPane.rowIndex="12"/>
@@ -77,7 +46,7 @@
             <padding>
                 <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
             </padding>
-            <Button fx:id="nuevoButton" text="Nuevo" onMouseClicked="#handleNuevoButton"/>
+            <Button fx:id="nuevoButton" text="Nuevo" onMouseClicked="#handleAgregarButton"/>
             <Button fx:id="salirButton" text="Salir" onMouseClicked="#handleSalirButton"/>
         </HBox>
     </bottom>

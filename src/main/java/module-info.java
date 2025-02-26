@@ -8,6 +8,8 @@ module com.luis.facturacion {
     requires org.hibernate.orm.core;
     requires java.naming;
     requires java.sql;
+    requires kernel;
+    requires layout;
 
     // Apertura para todas las vistas y controladores
     opens com.luis.facturacion.mvc_login to javafx.fxml;

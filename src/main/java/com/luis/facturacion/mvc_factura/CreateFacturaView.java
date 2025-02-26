@@ -6,25 +6,24 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class FacturasView {
-    private FacturaController facturaController;
+public class CreateFacturaView {
+    private CreateFacturaController createFacturaController;
     private AppController appController;
     private Stage primaryStage;
 
-    public FacturasView(AppController appController) {
-        System.out.println("FacturaView created");
+    public CreateFacturaView(AppController appController) {
+        System.out.println("CreateFacturaView created");
         this.appController = appController;
     }
 
     public void show(Stage primaryStage) {
         this.primaryStage = primaryStage;
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/luis/facturacion/crearFactura.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/luis/facturacion/lineasFactura.fxml"));
             Parent root = loader.load();
 
-            facturaController = loader.getController();
-            facturaController.setAppController(appController);
-            facturaController.setView(this);
+            createFacturaController = loader.getController();
+            createFacturaController.setAppController(appController);
 
             Scene scene = new Scene(root, 1000, 600);
             primaryStage.setTitle("Gestión de Facturas");
@@ -42,5 +41,4 @@ public class FacturasView {
 
     public void setPrimaryStage(Stage primaryStage) {
         this.primaryStage = primaryStage;
-    }
-}
+    }}
