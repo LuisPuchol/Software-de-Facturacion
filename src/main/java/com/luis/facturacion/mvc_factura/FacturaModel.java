@@ -50,7 +50,12 @@ public class FacturaModel {
         // asigna: Número, Fecha, Cliente, IVA, Observaciones
         this.numeroFactura = numeroFactura;
         this.fechaFactura = fechaFactura;
+
+
         this.clienteFactura = clienteFactura;
+
+
+
         this.ivaFactura = ivaFactura;
         this.observaciones = observaciones;
 

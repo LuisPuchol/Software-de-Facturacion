@@ -32,35 +32,35 @@ public class ClienteModel {
         }
     }
 
-    //public void addCliente(String nombre, String direccion, String cp, String poblacion,
-    //                       String provincia, String pais, String cif, String telefono,
-    //                       String email, String iban, double riesgo, double descuento, String observaciones) {
-    //    try {
-    //        ClienteEntity cliente = new ClienteEntity();
-    //        cliente.setNombreCliente(nombre);
-    //        cliente.setDireccionCliente(direccion);
-    //        cliente.setCpCliente(cp);
-    //        cliente.setPoblacionCliente(poblacion);
-    //        cliente.setProvinciaCliente(provincia);
-    //        cliente.setPaisCliente(pais);
-    //        cliente.setCifCliente(cif);
-    //        cliente.setTelCliente(telefono);
-    //        cliente.setEmailCliente(email);
-    //        cliente.setIbanCliente(iban);
-    //        cliente.setRiesgoCliente(riesgo);
-    //        cliente.setDescuentoCliente(descuento);
-    //        cliente.setObservacionesCliente(observaciones);
-    //
-    //        clienteDao.save(cliente);
-    //        System.out.println("Cliente guardado correctamente");
-    //    } catch (Exception e) {
-    //        System.err.println("Error inesperado al agregar cliente: " + e.getMessage());
-    //        e.printStackTrace();
-    //    }
-    //}
-    //
-    //public List<ClienteEntity> loadClientes() {
-    //    return clienteDao.getAll();
-    //}
+    public void addCliente(String nombre, String direccion, String cp, String poblacion,
+                           String provincia, String pais, String cif, String telefono,
+                           String email, String iban, double riesgo, double descuento, String observaciones) {
+        try {
+            ClienteEntity cliente = new ClienteEntity();
+            cliente.setNombreCliente(nombre);
+            cliente.setDireccionCliente(direccion);
+            cliente.setCpCliente(cp);
+            cliente.setPoblacionCliente(poblacion);
+            cliente.setProvinciaCliente(provincia);
+            cliente.setPaisCliente(pais);
+            cliente.setCifCliente(cif);
+            cliente.setTelCliente(telefono);
+            cliente.setEmailCliente(email);
+            cliente.setIbanCliente(iban);
+            cliente.setRiesgoCliente(riesgo);
+            cliente.setDescuentoCliente(descuento);
+            cliente.setObservacionesCliente(observaciones);
+
+            clienteDao.save(cliente);
+            System.out.println("Cliente guardado correctamente");
+        } catch (Exception e) {
+            System.err.println("Error inesperado al agregar cliente: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    public List<ClienteEntity> loadClientes() {
+        return clienteDao.getAll();
+    }
 }
 

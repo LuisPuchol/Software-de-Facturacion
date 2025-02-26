@@ -5,25 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="69df8e73-10d4-4aca-bdf2-6460b6e74463" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/luis/facturacion/mvc_factura/CreateFacturaController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/luis/facturacion/mvc_factura/CreateFacturaView.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/luis/facturacion/mvc_factura/FacturaPDFGenerator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/luis/facturacion/lineasFactura.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.name" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/luis/facturacion/mvc_factura/FacturaController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/luis/facturacion/mvc_factura/FacturaController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/luis/facturacion/mvc_client/ClienteController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/luis/facturacion/mvc_client/ClienteController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/luis/facturacion/mvc_client/ClienteModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/luis/facturacion/mvc_client/ClienteModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/luis/facturacion/mvc_client/database/ClienteDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/luis/facturacion/mvc_client/database/ClienteDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/luis/facturacion/mvc_client/database/ClienteEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/luis/facturacion/mvc_client/database/ClienteEntity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/luis/facturacion/mvc_factura/FacturaModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/luis/facturacion/mvc_factura/FacturaModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/luis/facturacion/mvc_factura/FacturasView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/luis/facturacion/mvc_factura/FacturasView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/luis/facturacion/crearFactura.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/luis/facturacion/crearFactura.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/luis/facturacion/crearFactura.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/luis/facturacion/crearFactura.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/luis/facturacion/mvc_client/ClienteController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/luis/facturacion/mvc_client/ClienteController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/luis/facturacion/mvc_client/ClientesView.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/luis/facturacion/mvc_client/ClientesView.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/luis/facturacion/mvc_factura/FacturaController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/luis/facturacion/mvc_factura/FacturaController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/luis/facturacion/mvc_factura/FacturaModel.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/luis/facturacion/mvc_factura/FacturaModel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/luis/facturacion/mvc_factura/FacturasView.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/luis/facturacion/mvc_factura/FacturasView.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/luis/facturacion/clientes.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/luis/facturacion/clientes.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

@@ -71,7 +71,7 @@ public class ArticuloController {
                 stockField.getText(),
                 observacionesField.getText()
         );
-        //limpiarFormulario();
+        limpiarFormulario();
         cargarDatos();
     }
 

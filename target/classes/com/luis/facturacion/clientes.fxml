@@ -18,6 +18,7 @@
             <columns>
                 <TableColumn fx:id="idClienteColumn" prefWidth="100" text="ID" />
                 <TableColumn fx:id="nombreClienteColumn" prefWidth="200" text="Nombre" />
+                <TableColumn fx:id="cifClienteColumn" prefWidth="200" text="Nombre" />
             </columns>
         </TableView>
     </left>
