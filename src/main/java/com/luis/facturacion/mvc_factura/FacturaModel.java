@@ -46,16 +46,11 @@ public class FacturaModel {
         }
     }
 
-    public void startFactura(int numeroFactura, LocalDate fechaFactura, String clienteFactura, double ivaFactura, String observaciones) {
+    public void startFactura(int numeroFactura, LocalDate fechaFactura, Integer idCliente, double ivaFactura, String observaciones) {
         // asigna: Número, Fecha, Cliente, IVA, Observaciones
         this.numeroFactura = numeroFactura;
         this.fechaFactura = fechaFactura;
-
-
-        this.clienteFactura = clienteFactura;
-
-
-
+        this.clienteFactura = facturaController.getClienteByID(idCliente);
         this.ivaFactura = ivaFactura;
         this.observaciones = observaciones;
 
@@ -64,8 +59,7 @@ public class FacturaModel {
     }
 
     public void addLine(Integer id, Integer quantity, Double price) {
-        // Obtener nombre del producto (ejemplo, deberás implementar esto según tu sistema)
-        String nombreProducto = obtenerNombreProducto(id);
+        String nombreProducto = facturaController.getProductByID(id);
 
         // Calcular importe
         double importe = quantity * price;
@@ -75,12 +69,6 @@ public class FacturaModel {
         lineasFactura.add(linea);
     }
 
-    // Método auxiliar - deberás implementarlo según tu sistema
-    private String obtenerNombreProducto(Integer id) {
-        // Aquí deberías obtener el nombre del producto de tu base de datos
-        // Por ahora, retorno un valor de ejemplo
-        return "Producto " + id;
-    }
 
     public void finishFactura() {
         // Calcular total sin IVA
@@ -89,10 +77,8 @@ public class FacturaModel {
             totalSinIVA += (double) linea[4]; // El importe está en la posición 4
         }
 
-        // Calcular IVA
         double importeIVA = totalSinIVA * (ivaFactura / 100);
 
-        // Calcular total con IVA
         double totalConIVA = totalSinIVA + importeIVA;
 
         // Crear entidad de factura para guardar en BD

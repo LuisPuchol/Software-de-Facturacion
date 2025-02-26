@@ -62,5 +62,9 @@ public class ClienteModel {
     public List<ClienteEntity> loadClientes() {
         return clienteDao.getAll();
     }
+
+    public String getClienteById(Integer id) {
+        return clienteDao.getNameByID(id);
+    }
 }
 

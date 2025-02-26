@@ -103,4 +103,7 @@ public class ArticuloModel {
         return articulosBD;
     }
 
+    public String getProductByID(Integer id) {
+        return articuloDAO.getProductNameById(id);
+    }
 }

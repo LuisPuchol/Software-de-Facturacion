@@ -60,6 +60,14 @@ public class ClienteDAO {
         }
     }
 
+    public String getNameByID(int id) {
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            ClienteEntity cliente = session.get(ClienteEntity.class, id);
+            return (cliente != null) ? cliente.getNombreCliente() : null;
+        }
+    }
+
+
     public List<ClienteEntity> getAll() {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             return session.createQuery("FROM ClienteEntity", ClienteEntity.class).list();

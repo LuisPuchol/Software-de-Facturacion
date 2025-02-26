@@ -43,7 +43,7 @@ public class FacturaController {
     public void handleAgregarButton(MouseEvent mouseEvent) {
         int numeroFactura = Integer.parseInt(numeroFacturaField.getText()); // Número de factura como entero
         LocalDate fechaFactura = fechaFacturaField.getValue(); // Fecha de factura como LocalDate
-        String clienteFactura = clienteFacturaField.getText(); // Cliente como String
+        int clienteFactura = Integer.parseInt(clienteFacturaField.getText()); // Cliente como String
         double ivaFactura = Double.parseDouble(ivaFacturaField.getText()); // IVA como Double
         String observaciones = observacionesFacturaField.getText(); // Observaciones como String
 
@@ -58,4 +58,11 @@ public class FacturaController {
         salirButton.getScene().getWindow().hide();
     }
 
+    public String getClienteByID(Integer id) {
+        return appController.getClienteByID(id);
+    }
+
+    public String getProductByID(Integer id) {
+        return appController.getProductByID(id);
+    }
 }

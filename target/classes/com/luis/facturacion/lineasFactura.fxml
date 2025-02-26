@@ -82,7 +82,7 @@
                 <Button fx:id="btnCancelar" mnemonicParsing="false" onAction="#handleCancelar" prefHeight="30.0"
                         prefWidth="100.0" text="Cancelar"/>
                 <Button fx:id="btnFinalizar" mnemonicParsing="false" onAction="#handleFinalizar" prefHeight="30.0"
-                        prefWidth="100.0" text="Cancelar"/>
+                        prefWidth="100.0" text="Finalizar"/>
             </children>
             <padding>
                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>

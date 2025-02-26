@@ -6,12 +6,16 @@
   <component name="ChangeListManager">
     <list default="true" id="69df8e73-10d4-4aca-bdf2-6460b6e74463" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/luis/facturacion/AppController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/luis/facturacion/AppController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/luis/facturacion/mvc_articulo/ArticuloController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/luis/facturacion/mvc_articulo/ArticuloController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/luis/facturacion/mvc_articulo/ArticuloModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/luis/facturacion/mvc_articulo/ArticuloModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/luis/facturacion/mvc_articulo/database/ArticuloDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/luis/facturacion/mvc_articulo/database/ArticuloDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/luis/facturacion/mvc_client/ClienteController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/luis/facturacion/mvc_client/ClienteController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/luis/facturacion/mvc_client/ClienteModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/luis/facturacion/mvc_client/ClienteModel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/luis/facturacion/mvc_client/database/ClienteDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/luis/facturacion/mvc_client/database/ClienteDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/luis/facturacion/mvc_client/database/ClienteEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/luis/facturacion/mvc_client/database/ClienteEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/luis/facturacion/mvc_factura/FacturaController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/luis/facturacion/mvc_factura/FacturaController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/luis/facturacion/mvc_factura/FacturaModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/luis/facturacion/mvc_factura/FacturaModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/luis/facturacion/clientes.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/luis/facturacion/clientes.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/luis/facturacion/lineasFactura.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/luis/facturacion/lineasFactura.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

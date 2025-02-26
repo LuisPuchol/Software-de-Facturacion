@@ -118,4 +118,11 @@ public class AppController {
         return familiaArticulosController.getFamilyById(id);
     }
 
+    public String getClienteByID(Integer id) {
+        return clienteController.getClienteById(id);
+    }
+
+    public String getProductByID(Integer id) {
+        return articuloController.getProductByID(id);
+    }
 }

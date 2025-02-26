@@ -122,4 +122,8 @@ public class ClienteController {
     public void handleSalirButton(MouseEvent mouseEvent) {
         salirButton.getScene().getWindow().hide();
     }
+
+    public String getClienteById(Integer id) {
+        return clienteModel.getClienteById(id);
+    }
 }

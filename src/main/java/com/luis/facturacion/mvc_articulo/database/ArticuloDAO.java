@@ -50,4 +50,11 @@ public class ArticuloDAO{
             return session.createQuery("FROM ArticuloEntity", ArticuloEntity.class).list();
         }
     }
+
+    public String getProductNameById(Integer id) {
+        try (Session session = HibernateUtil.getSessionFactory().openSession()){
+            ArticuloEntity articulo = session.get(ArticuloEntity.class, id);
+            return (articulo != null) ? articulo.getDescripcionArticulo() : null;
+        }
+    }
 }
