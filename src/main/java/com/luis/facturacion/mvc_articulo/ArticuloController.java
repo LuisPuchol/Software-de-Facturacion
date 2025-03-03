@@ -56,6 +56,7 @@ public class ArticuloController {
         columnId.setCellValueFactory(new PropertyValueFactory<>("idArticulo"));
         columnName.setCellValueFactory(new PropertyValueFactory<>("descripcionArticulo"));
 
+        cargarDatos();
 
         //Gestionar la tecla enter como tabulador
 

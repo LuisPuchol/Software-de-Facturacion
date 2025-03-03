@@ -98,9 +98,7 @@ public class ArticuloModel {
     }
 
     public List<ArticuloEntity> cargarArticulos() {
-        List<ArticuloEntity> articulosBD = articuloDAO.getAll();
-
-        return articulosBD;
+        return articuloDAO.getAll();
     }
 
     public String getProductByID(Integer id) {
