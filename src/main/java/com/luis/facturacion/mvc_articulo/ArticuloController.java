@@ -23,16 +23,13 @@ public class ArticuloController {
     @FXML
     private TableView<ArticuloEntity> articulosTable;
     @FXML
-    private TableColumn<ArticuloEntity, Integer> columnId;
+    private TableColumn<ArticuloEntity, Integer> columnInd;
     @FXML
     private TableColumn<ArticuloEntity, Integer> columnName;
 
     @FXML
-    private TextField idArticuloField, codigoArticuloField, codigoBarrasField, descripcionField, familiaField,
-            costeField, margenComercialField, pvpField, proveedorField, stockField;
+    private TextField indArticle, nameArticle;
 
-    @FXML
-    private TextArea observacionesField;
     @FXML
     private Button nuevoButton, editarButton, eliminarButton, salirButton;
 
@@ -53,14 +50,10 @@ public class ArticuloController {
     // Cosas que pide la View
     @FXML
     public void initialize() {
-        columnId.setCellValueFactory(new PropertyValueFactory<>("idArticulo"));
-        columnName.setCellValueFactory(new PropertyValueFactory<>("descripcionArticulo"));
-
-        cargarDatos();
+        columnInd.setCellValueFactory(new PropertyValueFactory<>("indice"));
+        columnName.setCellValueFactory(new PropertyValueFactory<>("nombre"));
 
         //Gestionar la tecla enter como tabulador
-
-
 
         // Obtener el GridPane del centro del BorderPane (donde están los campos)
         GridPane formGrid = (GridPane) rootPane.getCenter();
@@ -80,10 +73,11 @@ public class ArticuloController {
             lastTextField.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
                 if (event.getCode() == KeyCode.ENTER) {
                     event.consume();
-                    observacionesField.requestFocus();
                 }
             });
         }
+
+        cargarDatos();
     }
 
     private void cargarDatos() {
@@ -95,18 +89,8 @@ public class ArticuloController {
     @FXML
     private void handleNuevoButton() {
         //añadir a la BBDD y limpiar los campos
-        articuloModel.agregarArticuloDesdeFormulario(
-                codigoArticuloField.getText(),
-                codigoBarrasField.getText(),
-                descripcionField.getText(),
-                familiaField.getText(),
-                costeField.getText(),
-                margenComercialField.getText(),
-                pvpField.getText(),
-                proveedorField.getText(),
-                stockField.getText(),
-                observacionesField.getText()
-        );
+        articuloModel.agregarArticuloDesdeFormulario(indArticle.getText(), nameArticle.getText());
+
         limpiarFormulario();
         cargarDatos();
     }
@@ -130,25 +114,15 @@ public class ArticuloController {
 
 
     private void limpiarFormulario() {
-        idArticuloField.clear();
-        codigoArticuloField.clear();
-        codigoBarrasField.clear();
-        descripcionField.clear();
-        familiaField.clear();
-        costeField.clear();
-        margenComercialField.clear();
-        pvpField.clear();
-        proveedorField.clear();
-        stockField.clear();
-        observacionesField.clear();
+        indArticle.clear();
+        nameArticle.clear();
+
     }
 
 
 
     //Cosas que pide el Model
-    public Object getFamilyById(Integer id){
-        return appController.getFamilyById(id);
-    }
+
 
 
     public String getProductByID(Integer id) {
@@ -158,7 +132,7 @@ public class ArticuloController {
 
     /***
      * Estos 2 metodos se encargan de hacer que la tecla enter funcione como tabulador.
-     * Posiblemente se externalice de algun modo en una clase Externa para reutilizarse
+     * Posiblemente se externalice de algun modo en una clase para reutilizarse
      */
     private List<TextField> getAllTextFields(GridPane gridPane) {
         List<TextField> textFields = new ArrayList<>();
@@ -167,7 +141,7 @@ public class ArticuloController {
         for (Node node : gridPane.getChildren()) {
             if (node instanceof TextField) {
                 // No incluimos el campo ID que es no editable
-                if (!node.equals(idArticuloField)) {
+                if (!node.equals(indArticle)) {
                     textFields.add((TextField) node);
                 }
             }

@@ -3,11 +3,14 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 public class HibernateUtil {
-    private static SessionFactory sessionFactory;
+    private static final SessionFactory sessionFactory;
 
     static {
         try {
-            sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
+            // Crear la SessionFactory
+            Configuration configuration = new Configuration();
+            configuration.configure("hibernate.cfg.xml");
+            sessionFactory = configuration.buildSessionFactory();
         } catch (Throwable ex) {
             System.err.println("Error al inicializar Hibernate: " + ex);
             throw new ExceptionInInitializerError(ex);
@@ -18,8 +21,9 @@ public class HibernateUtil {
         return sessionFactory;
     }
 
+    // Solo llamar este método cuando la aplicación se cierre completamente
     public static void shutdown() {
-        if (sessionFactory != null) {
+        if (sessionFactory != null && !sessionFactory.isClosed()) {
             sessionFactory.close();
         }
     }

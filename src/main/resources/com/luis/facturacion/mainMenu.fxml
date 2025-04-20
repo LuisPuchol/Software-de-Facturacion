@@ -11,9 +11,7 @@
             <!-- Gestión de Productos -->
             <Menu fx:id="ProductosMenu" text="Productos">
                 <MenuItem fx:id="Articulo" text="Artículos" onAction="#handleArticulosClick"/>
-                <MenuItem fx:id="FamiliaArticulo" text="Familias de Artículos" onAction="#handleFamiliaArticulosClick"/>
                 <MenuItem fx:id="TiposIVA" text="Tipos de IVA" onAction="#handleConfigIVAClick"/>
-                <MenuItem fx:id="FormasPago" text="Formas de Pago" onAction="#handleFormasPagoClick"/>
             </Menu>
 
             <!-- Gestión de Clientes -->

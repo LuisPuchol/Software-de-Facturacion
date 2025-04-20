@@ -17,7 +17,7 @@
     <left>
         <TableView fx:id="articulosTable" prefWidth="300">
             <columns>
-                <TableColumn fx:id="columnId" prefWidth="100" text="ID" />
+                <TableColumn fx:id="columnInd" prefWidth="100" text="IND" />
                 <TableColumn fx:id="columnName" prefWidth="200" text="Nombre" />
             </columns>
         </TableView>
@@ -31,47 +31,12 @@
             </padding>
             <!-- ID Artículo -->
             <Label text="ID Artículo:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-            <TextField fx:id="idArticuloField" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+            <TextField fx:id="indArticle" GridPane.columnIndex="1" GridPane.rowIndex="0" />
 
             <!-- Código Artículo -->
-            <Label text="Código Artículo:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-            <TextField fx:id="codigoArticuloField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label text="Nombre:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+            <TextField fx:id="nameArticle" GridPane.columnIndex="1" GridPane.rowIndex="1" />
 
-            <!-- Código de Barras -->
-            <Label text="Código Barras:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-            <TextField fx:id="codigoBarrasField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-
-            <!-- Descripción -->
-            <Label text="Descripción:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
-            <TextField fx:id="descripcionField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-
-            <!-- Familia -->
-            <Label text="Familia:" GridPane.columnIndex="0" GridPane.rowIndex="4" />
-            <TextField fx:id="familiaField" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-
-            <!-- Coste -->
-            <Label text="Coste:" GridPane.columnIndex="0" GridPane.rowIndex="5" />
-            <TextField fx:id="costeField" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-
-            <!-- Margen Comercial -->
-            <Label text="Margen Comercial:" GridPane.columnIndex="0" GridPane.rowIndex="6" />
-            <TextField fx:id="margenComercialField" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-
-            <!-- PVP -->
-            <Label text="PVP:" GridPane.columnIndex="0" GridPane.rowIndex="7" />
-            <TextField fx:id="pvpField" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-
-            <!-- Proveedor -->
-            <Label text="Proveedor:" GridPane.columnIndex="0" GridPane.rowIndex="8" />
-            <TextField fx:id="proveedorField" GridPane.columnIndex="1" GridPane.rowIndex="8" />
-
-            <!-- Stock -->
-            <Label text="Stock:" GridPane.columnIndex="0" GridPane.rowIndex="9" />
-            <TextField fx:id="stockField" GridPane.columnIndex="1" GridPane.rowIndex="9" />
-
-            <!-- Observaciones -->
-            <Label text="Observaciones:" GridPane.columnIndex="0" GridPane.rowIndex="10" />
-            <TextArea fx:id="observacionesField" prefHeight="80" GridPane.columnIndex="1" GridPane.rowIndex="10" />
         </GridPane>
     </center>
 

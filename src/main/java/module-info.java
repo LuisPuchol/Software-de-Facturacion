@@ -19,12 +19,8 @@ module com.luis.facturacion {
 
     opens com.luis.facturacion.mvc_articulo to javafx.fxml;
     opens com.luis.facturacion.mvc_articulo.database to javafx.base, org.hibernate.orm.core;
-    opens com.luis.facturacion.mvc_familiaArticulos to javafx.fxml;
-    opens com.luis.facturacion.mvc_familiaArticulos.database to javafx.base, org.hibernate.orm.core;
     opens com.luis.facturacion.mvc_tipoIva to javafx.fxml;
     opens com.luis.facturacion.mvc_tipoIva.database to javafx.base, org.hibernate.orm.core;
-    opens com.luis.facturacion.mvc_formaPago to javafx.fxml;
-    opens com.luis.facturacion.mvc_formaPago.database to javafx.base, org.hibernate.orm.core;
     opens com.luis.facturacion.mvc_client to javafx.fxml;
     opens com.luis.facturacion.mvc_client.database to javafx.base, org.hibernate.orm.core;
     opens com.luis.facturacion.mvc_factura to javafx.fxml;
@@ -44,6 +40,5 @@ module com.luis.facturacion {
     exports com.luis.facturacion.mvc_client;
     exports com.luis.facturacion.mvc_factura;
     exports com.luis.facturacion.mvc_resumen;
-    exports com.luis.facturacion.mvc_familiaArticulos;
 
 }

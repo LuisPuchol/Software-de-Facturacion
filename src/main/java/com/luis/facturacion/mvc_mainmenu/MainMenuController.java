@@ -27,7 +27,7 @@ public class MainMenuController {
     @FXML
     public void handleFamiliaArticulosClick(ActionEvent actionEvent) {
         System.out.println("El menú 'Familia Articulos ' fue seleccionado");
-        appController.showFamiliaArticulosView();
+        //appController.showFamiliaArticulosView();
     }
 
     @FXML
@@ -42,11 +42,6 @@ public class MainMenuController {
         appController.showTipoDeIvaView();
     }
 
-    @FXML
-    public void handleFormasPagoClick(ActionEvent actionEvent) {
-        System.out.println("creado formas de pago");
-        appController.showFormaDePagoView();
-    }
 
     @FXML
     public void handleRectificativasClick(ActionEvent actionEvent) {
