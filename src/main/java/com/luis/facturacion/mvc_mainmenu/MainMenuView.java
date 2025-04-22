@@ -16,7 +16,7 @@ private AppController appController;
 
     public void show(Stage primaryStage) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/luis/facturacion/main-menu.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/luis/facturacion/mainMenu.fxml"));
             Parent root = loader.load();
 
             // Obtener el controlador y asignarle el AppController

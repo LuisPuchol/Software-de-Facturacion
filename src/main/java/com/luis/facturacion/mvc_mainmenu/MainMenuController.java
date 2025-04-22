@@ -1,8 +1,7 @@
 package com.luis.facturacion.mvc_mainmenu;
 
 import com.luis.facturacion.AppController;
-import com.luis.facturacion.mvc_articulo.ArticulosView;
-import com.luis.facturacion.mvc_client.ClienteView;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.stage.Stage;
 
@@ -22,30 +21,48 @@ public class MainMenuController {
     @FXML
     public void handleArticulosClick(javafx.event.ActionEvent actionEvent) {
         System.out.println("El menú 'Articulos' fue seleccionado.");
-        this.showArticuloView();
+        appController.showArticuloView();
     }
 
-    public void showArticuloView() {
-        Stage stage = new Stage();
-        ArticulosView articulosView = new ArticulosView(this); // Crear la vista del login
-        articulosView.show(stage); // Mostrarla en el escenario principal
+    @FXML
+    public void handleFamiliaArticulosClick(ActionEvent actionEvent) {
+        System.out.println("El menú 'Familia Articulos ' fue seleccionado");
+        appController.showFamiliaArticulosView();
     }
 
     @FXML
     public void handleClientesClick(javafx.event.ActionEvent actionEvent) {
         System.out.println("El menú 'Clientes' fue seleccionado.");
-        this.showClienteView();
-    }
-
-    public void showClienteView() {
-        Stage stage = new Stage();
-        ClienteView clienteView = new ClienteView(); // Crear la vista del login
-        clienteView.show(stage); // Mostrarla en el escenario principal
+        appController.showClienteView();
     }
 
     @FXML
     public void handleConfigIVAClick(javafx.event.ActionEvent actionEvent) {
         System.out.println("El menú 'Configuración IVA' fue seleccionado.");
+        appController.showTipoDeIvaView();
     }
 
+    @FXML
+    public void handleFormasPagoClick(ActionEvent actionEvent) {
+        System.out.println("creado formas de pago");
+        appController.showFormaDePagoView();
+    }
+
+    @FXML
+    public void handleRectificativasClick(ActionEvent actionEvent) {
+        System.out.println("creado rectificativas");
+        appController.showRectificativaView();
+    }
+
+    @FXML
+    public void handleListadoFacturasClick(ActionEvent actionEvent) {
+        System.out.println("creado crearFacturas");
+        appController.showListadoFacturasView();
+    }
+
+    @FXML
+    public void handleCrearFacturaClick(ActionEvent actionEvent) {
+        System.out.println("Creado crearFacturas");
+        appController.showFacturaView();
+    }
 }

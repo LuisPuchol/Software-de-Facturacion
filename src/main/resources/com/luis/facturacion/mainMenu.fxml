@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.luis.facturacion.mvc_mainmenu.MainMenuController">
+    <top>
+        <MenuBar>
+            <!-- Gestión de Productos -->
+            <Menu fx:id="ProductosMenu" text="Productos">
+                <MenuItem fx:id="Articulo" text="Artículos" onAction="#handleArticulosClick"/>
+                <MenuItem fx:id="FamiliaArticulo" text="Familias de Artículos" onAction="#handleFamiliaArticulosClick"/>
+                <MenuItem fx:id="TiposIVA" text="Tipos de IVA" onAction="#handleConfigIVAClick"/>
+                <MenuItem fx:id="FormasPago" text="Formas de Pago" onAction="#handleFormasPagoClick"/>
+            </Menu>
+
+            <!-- Gestión de Clientes -->
+            <Menu fx:id="ClientesMenu" text="Clientes">
+                <MenuItem fx:id="Clientes" text="Listado de Clientes" onAction="#handleClientesClick"/>
+            </Menu>
+
+            <!-- Gestión de Ventas -->
+            <Menu fx:id="VentasMenu" text="Ventas">
+                <MenuItem fx:id="Factura" text="Crear Factura" onAction="#handleCrearFacturaClick"/>
+                <MenuItem fx:id="Facturas" text="Listado Facturas" onAction="#handleListadoFacturasClick"/>
+                <MenuItem fx:id="Rectificativas" text="Rectificativas" onAction="#handleRectificativasClick"/>
+            </Menu>
+
+            <!-- Resúmenes y Reportes -->
+            <Menu fx:id="ReportesMenu" text="Reportes">
+                <MenuItem fx:id="LibroIngreso" text="Libro de Ingresos"/>
+                <MenuItem fx:id="ResumenClientes" text="Resumen de Clientes"/>
+                <MenuItem fx:id="Trazabilidad" text="Trazabilidad de Productos"/>
+            </Menu>
+        </MenuBar>
+
+    </top>
+    <center>
+    </center>
+</BorderPane>

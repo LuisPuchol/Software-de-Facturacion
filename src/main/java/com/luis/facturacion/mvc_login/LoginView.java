@@ -16,7 +16,7 @@ public class LoginView {
 
     public void show(Stage stage) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/luis/facturacion/login-menu.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/luis/facturacion/loginMenu.fxml"));
             Parent root = loader.load();
 
             // Obtener el controlador y configurarlo

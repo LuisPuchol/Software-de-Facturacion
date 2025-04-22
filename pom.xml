@@ -63,6 +63,23 @@
             <artifactId>hibernate-core</artifactId>
             <version>6.2.0.Final</version>
         </dependency>
+        <!-- Dependencias iText 7 -->
+        <dependency>
+            <groupId>com.itextpdf</groupId>
+            <artifactId>kernel</artifactId>
+            <version>7.2.5</version>
+        </dependency>
+        <dependency>
+            <groupId>com.itextpdf</groupId>
+            <artifactId>layout</artifactId>
+            <version>7.2.5</version>
+        </dependency>
+        <dependency>
+            <groupId>com.itextpdf</groupId>
+            <artifactId>io</artifactId>
+            <version>7.2.5</version>
+        </dependency>
+
 
         <!-- API JPA (Java Persistence API) -->
         <dependency>

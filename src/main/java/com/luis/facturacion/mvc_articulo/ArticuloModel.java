@@ -1,22 +1,22 @@
 package com.luis.facturacion.mvc_articulo;
 
-import com.luis.facturacion.mvc_articulo.database.adapters.ArticuloAdapter;
-import com.luis.facturacion.mvc_articulo.database.dao.ArticuloDAO;
-import com.luis.facturacion.mvc_articulo.database.entities_hibernate.ArticuloEntity;
-import com.luis.facturacion.mvc_articulo.database.entitiesfx.ArticuloFX;
+import com.luis.facturacion.mvc_articulo.database.ArticuloDAO;
+import com.luis.facturacion.mvc_articulo.database.ArticuloEntity;
+import com.luis.facturacion.mvc_familiaArticulos.database.FamiliaArticulosEntity;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import java.util.List;
 
 public class ArticuloModel {
     private static ArticuloModel instance;
+    private ArticuloController articuloController;
     private final ArticuloDAO articuloDAO;
-    private final ObservableList<ArticuloFX> listaArticulos;
+    private final ObservableList<ArticuloEntity> articulosList;
 
-    private ArticuloModel() {
+    ArticuloModel() {
         System.out.println("Model created");
         this.articuloDAO = new ArticuloDAO();
-        this.listaArticulos = FXCollections.observableArrayList();
+        this.articulosList = FXCollections.observableArrayList();
     }
 
     public static ArticuloModel getInstance() {
@@ -24,6 +24,12 @@ public class ArticuloModel {
             instance = new ArticuloModel();
         }
         return instance;
+    }
+
+    public void setController(ArticuloController articuloController){
+        if (this.articuloController == null){
+            this.articuloController = articuloController;
+        }
     }
 
     public void agregarArticuloDesdeFormulario(
@@ -49,10 +55,12 @@ public class ArticuloModel {
 
             // Creación del objeto ArticuloEntity con los valores convertidos
             ArticuloEntity articuloEntity = new ArticuloEntity();
+            Object family = articuloController.getFamilyById(familiaArticulo);
+
             articuloEntity.setCodigoArticulo(codigo);
             articuloEntity.setCodigoBarrasArticulo(codigoBarras);
             articuloEntity.setDescripcionArticulo(descripcion);
-            articuloEntity.setFamiliaArticulo(familiaArticulo);
+            articuloEntity.setFamiliaArticulo((FamiliaArticulosEntity) family);
             articuloEntity.setCosteArticulo(costeArticulo);
             articuloEntity.setMargenComercialArticulo(margenComercialArticulo);
             articuloEntity.setPvpArticulo(pvpArticulo);
@@ -89,45 +97,11 @@ public class ArticuloModel {
         }
     }
 
-
-
-    /**
-     * Obtiene todos los artículos de la base de datos y los convierte en ArticuloFX para la interfaz.
-     */
     public List<ArticuloEntity> cargarArticulos() {
-        List<ArticuloEntity> articulosBD = articuloDAO.getAll();
-
-        return articulosBD;
-        //List<ArticuloFX> articulosFX = articulosBD.stream()
-        //        .map(ArticuloAdapter::fromHibernate)
-        //        .toList();
-        //listaArticulos.setAll(articulosFX);
+        return articuloDAO.getAll();
     }
 
-    /**
-     * Retorna la lista observable de artículos para la interfaz gráfica.
-     */
-    public ObservableList<ArticuloFX> getListaArticulos() {
-        return listaArticulos;
-    }
-
-    /**
-     * Agrega un nuevo artículo, lo guarda en la base de datos y actualiza la lista.
-     */
-    public void agregarArticulo(ArticuloFX articuloFX) {
-        ArticuloEntity articuloEntity = ArticuloAdapter.toHibernate(articuloFX);
-        articuloDAO.save(articuloEntity);
-        cargarArticulos();
-    }
-
-    /**
-     * Elimina un artículo de la base de datos y actualiza la lista.
-     */
-    public void eliminarArticuloSeleccionado(Object seleccionado) {
-        if (seleccionado instanceof ArticuloFX articuloFX) {
-            ArticuloEntity articuloEntity = ArticuloAdapter.toHibernate(articuloFX);
-            articuloDAO.delete(articuloEntity);
-            cargarArticulos();
-        }
+    public String getProductByID(Integer id) {
+        return articuloDAO.getProductNameById(id);
     }
 }
