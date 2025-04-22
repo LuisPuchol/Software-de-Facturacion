@@ -19,10 +19,6 @@ public class LoginView {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/luis/facturacion/loginMenu.fxml"));
             Parent root = loader.load();
 
-            // Obtener el controlador y configurarlo
-            LoginController loginController = loader.getController();
-            loginController.setAppController(appController);
-
             // Configurar la escena y el escenario
             Scene scene = new Scene(root);
             stage.setTitle("Login");

@@ -50,7 +50,7 @@ public class FacturaModel {
         // asigna: Número, Fecha, Cliente, IVA, Observaciones
         this.numeroFactura = numeroFactura;
         this.fechaFactura = fechaFactura;
-        this.clienteFactura = facturaController.getClienteByID(idCliente);
+        //this.clienteFactura = facturaController.getClienteByID(idCliente);
         this.ivaFactura = ivaFactura;
         this.observaciones = observaciones;
 

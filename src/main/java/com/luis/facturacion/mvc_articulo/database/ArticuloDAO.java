@@ -13,10 +13,11 @@ public class ArticuloDAO{
     }
 
     public void save(ArticuloEntity articulo) {
+        Session session = null;
         Transaction transaction = null;
 
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            // Iniciar la transacción
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
             transaction = session.beginTransaction();
 
             // Guardar la entidad
@@ -25,13 +26,17 @@ public class ArticuloDAO{
             // Confirmar la transacción
             transaction.commit();
         } catch (Exception e) {
-            if (transaction != null) {
-                transaction.rollback(); // Revertir los cambios si ocurre un error
+            System.err.println("Error al guardar artículo: " + e.getMessage());
+            if (transaction != null && transaction.isActive()) {
+                transaction.rollback();
             }
-            e.printStackTrace();
+            throw e; // Re-lanzar la excepción para manejarla en el nivel superior
+        } finally {
+            if (session != null && session.isOpen()) {
+                session.close();
+            }
         }
     }
-
 
     public void update(ArticuloEntity articulo) {
 
@@ -54,7 +59,7 @@ public class ArticuloDAO{
     public String getProductNameById(Integer id) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()){
             ArticuloEntity articulo = session.get(ArticuloEntity.class, id);
-            return (articulo != null) ? articulo.getDescripcionArticulo() : null;
+            return (articulo != null) ? articulo.getNombre() : null;
         }
     }
 }

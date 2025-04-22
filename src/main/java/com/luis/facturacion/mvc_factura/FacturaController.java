@@ -58,9 +58,9 @@ public class FacturaController {
         salirButton.getScene().getWindow().hide();
     }
 
-    public String getClienteByID(Integer id) {
-        return appController.getClienteByID(id);
-    }
+    //public String getClienteByID(Integer id) {
+    //    return appController.getClienteByID(id);
+    //}
 
     public String getProductByID(Integer id) {
         return appController.getProductByID(id);

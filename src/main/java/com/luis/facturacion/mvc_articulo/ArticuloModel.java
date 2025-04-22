@@ -2,7 +2,6 @@ package com.luis.facturacion.mvc_articulo;
 
 import com.luis.facturacion.mvc_articulo.database.ArticuloDAO;
 import com.luis.facturacion.mvc_articulo.database.ArticuloEntity;
-import com.luis.facturacion.mvc_familiaArticulos.database.FamiliaArticulosEntity;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import java.util.List;
@@ -32,41 +31,25 @@ public class ArticuloModel {
         }
     }
 
-    public void agregarArticuloDesdeFormulario(
-            String codigo, String codigoBarras, String descripcion, String familia,
-            String coste, String margenComercial, String pvp, String proveedor, String stock, String observaciones) {
+    public void agregarArticuloDesdeFormulario(String ind, String name) {
 
         try {
             // Validaciones básicas: asegurarse de que los valores obligatorios no sean nulos o vacíos
-            if (codigo == null || codigo.trim().isEmpty()) {
-                throw new IllegalArgumentException("El código del artículo es obligatorio.");
+            if (ind == null || ind.trim().isEmpty()) {
+                throw new IllegalArgumentException("El indice del artículo es obligatorio.");
             }
-            if (descripcion == null || descripcion.trim().isEmpty()) {
-                throw new IllegalArgumentException("La descripción del artículo es obligatoria.");
+            if (name == null || name.trim().isEmpty()) {
+                throw new IllegalArgumentException("El nombre del artículo es obligatorio.");
             }
 
             // Conversión de tipos (de String a tipos numéricos)
-            int familiaArticulo = convertirEntero(familia, "familia");
-            double costeArticulo = convertirDouble(coste, "coste");
-            double margenComercialArticulo = convertirDouble(margenComercial, "margen comercial");
-            double pvpArticulo = convertirDouble(pvp, "pvp");
-            int proveedorArticulo = convertirEntero(proveedor, "proveedor");
-            double stockArticulo = convertirDouble(stock, "stock");
+            int indice = convertirEntero(ind, "Indice");
 
             // Creación del objeto ArticuloEntity con los valores convertidos
             ArticuloEntity articuloEntity = new ArticuloEntity();
-            Object family = articuloController.getFamilyById(familiaArticulo);
 
-            articuloEntity.setCodigoArticulo(codigo);
-            articuloEntity.setCodigoBarrasArticulo(codigoBarras);
-            articuloEntity.setDescripcionArticulo(descripcion);
-            articuloEntity.setFamiliaArticulo((FamiliaArticulosEntity) family);
-            articuloEntity.setCosteArticulo(costeArticulo);
-            articuloEntity.setMargenComercialArticulo(margenComercialArticulo);
-            articuloEntity.setPvpArticulo(pvpArticulo);
-            articuloEntity.setProveedorArticulo(proveedorArticulo);
-            articuloEntity.setStockArticulo(stockArticulo);
-            articuloEntity.setObservacionesArticulo(observaciones);
+            articuloEntity.setIndice(indice);
+            articuloEntity.setNombre(name);
 
             // Guardar en la base de datos
             articuloDAO.save(articuloEntity);

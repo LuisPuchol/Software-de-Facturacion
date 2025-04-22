@@ -11,10 +11,11 @@ public class ClienteDAO {
     }
 
     public void save(ClienteEntity cliente) {
+        Session session = null;
         Transaction transaction = null;
 
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            // Iniciar la transacción
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
             transaction = session.beginTransaction();
 
             // Guardar la entidad
@@ -23,18 +24,24 @@ public class ClienteDAO {
             // Confirmar la transacción
             transaction.commit();
         } catch (Exception e) {
-            if (transaction != null) {
-                transaction.rollback(); // Revertir los cambios si ocurre un error
+            System.err.println("Error al guardar cliente: " + e.getMessage());
+            if (transaction != null && transaction.isActive()) {
+                transaction.rollback();
             }
-            e.printStackTrace();
+            throw e; // Re-lanzar la excepción para manejarla en el nivel superior
+        } finally {
+            if (session != null && session.isOpen()) {
+                session.close();
+            }
         }
     }
 
     public void update(ClienteEntity cliente) {
+        Session session = null;
         Transaction transaction = null;
 
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            // Iniciar la transacción
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
             transaction = session.beginTransaction();
 
             // Actualizar la entidad
@@ -43,35 +50,92 @@ public class ClienteDAO {
             // Confirmar la transacción
             transaction.commit();
         } catch (Exception e) {
-            if (transaction != null) {
+            System.err.println("Error al actualizar cliente: " + e.getMessage());
+            if (transaction != null && transaction.isActive()) {
                 transaction.rollback();
             }
-            e.printStackTrace();
+            throw e;
+        } finally {
+            if (session != null && session.isOpen()) {
+                session.close();
+            }
         }
     }
 
     public void delete(ClienteEntity cliente) {
+        Session session = null;
+        Transaction transaction = null;
 
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            transaction = session.beginTransaction();
+
+            // Si el cliente está "detached", primero lo cargamos
+            if (cliente.getId() != null) {
+                cliente = session.get(ClienteEntity.class, cliente.getId());
+                if (cliente != null) {
+                    session.remove(cliente);
+                }
+            }
+
+            // Confirmar la transacción
+            transaction.commit();
+        } catch (Exception e) {
+            System.err.println("Error al eliminar cliente: " + e.getMessage());
+            if (transaction != null && transaction.isActive()) {
+                transaction.rollback();
+            }
+            throw e;
+        } finally {
+            if (session != null && session.isOpen()) {
+                session.close();
+            }
+        }
     }
 
     public ClienteEntity getById(int id) {
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+        Session session = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
             return session.get(ClienteEntity.class, id);
+        } catch (Exception e) {
+            System.err.println("Error al obtener cliente por ID: " + e.getMessage());
+            throw e;
+        } finally {
+            if (session != null && session.isOpen()) {
+                session.close();
+            }
         }
     }
 
     public String getNameByID(int id) {
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+        Session session = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
             ClienteEntity cliente = session.get(ClienteEntity.class, id);
-            return (cliente != null) ? cliente.getNombreCliente() : null;
+            return (cliente != null) ? cliente.getNombre() : null;
+        } catch (Exception e) {
+            System.err.println("Error al obtener nombre de cliente por ID: " + e.getMessage());
+            throw e;
+        } finally {
+            if (session != null && session.isOpen()) {
+                session.close();
+            }
         }
     }
 
-
     public List<ClienteEntity> getAll() {
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+        Session session = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
             return session.createQuery("FROM ClienteEntity", ClienteEntity.class).list();
+        } catch (Exception e) {
+            System.err.println("Error al obtener todos los clientes: " + e.getMessage());
+            throw e;
+        } finally {
+            if (session != null && session.isOpen()) {
+                session.close();
+            }
         }
     }
 }
-

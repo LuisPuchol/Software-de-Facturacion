@@ -4,73 +4,68 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "clientes")
-public class ClienteEntity implements Serializable {
+public class ClienteEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Integer id;
+    private int id;
 
-    @Column(name = "nombreCliente", length = 80, nullable = false, unique = true)
-    private String nombreCliente;
+    @Column(name = "ind")
+    private Integer ind;
 
-    @Column(name = "direccionCliente", length = 80)
-    private String direccionCliente;
+    @Column(name = "nombre", length = 30)
+    private String nombre;
 
-    @Column(name = "cpCliente", length = 10)
-    private String cpCliente;
+    @Column(name = "direccion", length = 30)
+    private String direccion;
 
-    @Column(name = "poblacionCliente", length = 80)
-    private String poblacionCliente;
+    @Column(name = "cod_postal", length = 5)
+    private String codPostal;
 
-    @Column(name = "provinciaCliente", length = 60)
-    private String provinciaCliente;
+    @Column(name = "poblacion", length = 20)
+    private String poblacion;
 
-    @Column(name = "paisCliente", length = 60)
-    private String paisCliente;
+    @Column(name = "provincia", length = 20)
+    private String provincia;
+    @Column(name = "cif", length = 12)
+    private String cif;
 
-    @Column(name = "cifCliente", length = 12, nullable = false, unique = true)
-    private String cifCliente;
+    @Column(name = "tel", length = 20)
+    private String tel;
 
-    @Column(name = "telCliente", length = 16)
-    private String telCliente;
+    @Column(name = "tel2", length = 20)
+    private String tel2;
 
-    @Column(name = "emailCliente", length = 80)
-    private String emailCliente;
 
-    @Column(name = "ibanCliente", length = 40)
-    private String ibanCliente;
+    @Column(name = "req_equivalencia")
+    private Integer reqEquivalencia;
 
-    @Column(name = "riesgoCliente")
-    private Double riesgoCliente;
+    @Column(name = "tipo_cliente")
+    private Integer tipoCliente;
 
-    @Column(name = "descuentoCliente")
-    private Double descuentoCliente;
-
-    @Column(name = "observacionesCliente", columnDefinition = "TEXT")
-    private String observacionesCliente;
+    @Column(name = "factura_por_albaran")
+    private Integer facturaPorAlbaran;
 
     // Constructores
     public ClienteEntity() {
     }
 
-    public ClienteEntity(String nombreCliente, String direccionCliente, String cpCliente, String poblacionCliente,
-                         String provinciaCliente, String paisCliente, String cifCliente, String telCliente,
-                         String emailCliente, String ibanCliente, Double riesgoCliente, Double descuentoCliente,
-                         String observacionesCliente) {
-        this.nombreCliente = nombreCliente;
-        this.direccionCliente = direccionCliente;
-        this.cpCliente = cpCliente;
-        this.poblacionCliente = poblacionCliente;
-        this.provinciaCliente = provinciaCliente;
-        this.paisCliente = paisCliente;
-        this.cifCliente = cifCliente;
-        this.telCliente = telCliente;
-        this.emailCliente = emailCliente;
-        this.ibanCliente = ibanCliente;
-        this.riesgoCliente = riesgoCliente;
-        this.descuentoCliente = descuentoCliente;
-        this.observacionesCliente = observacionesCliente;
+    public ClienteEntity(Integer ind, String nombre, String direccion, String codPostal, String poblacion,
+                         String provincia, String cif, String tel, String tel2, Integer reqEquivalencia,
+                         Integer tipoCliente, Integer facturaPorAlbaran) {
+        this.ind = ind;
+        this.nombre = nombre;
+        this.direccion = direccion;
+        this.codPostal = codPostal;
+        this.poblacion = poblacion;
+        this.provincia = provincia;
+        this.cif = cif;
+        this.tel = tel;
+        this.tel2 = tel2;
+        this.reqEquivalencia = reqEquivalencia;
+        this.tipoCliente = tipoCliente;
+        this.facturaPorAlbaran = facturaPorAlbaran;
     }
 
     // Getters y Setters
@@ -82,128 +77,118 @@ public class ClienteEntity implements Serializable {
         this.id = id;
     }
 
-    public String getNombreCliente() {
-        return nombreCliente;
+    public Integer getInd() {
+        return ind;
     }
 
-    public void setNombreCliente(String nombreCliente) {
-        this.nombreCliente = nombreCliente;
+    public void setInd(Integer ind) {
+        this.ind = ind;
     }
 
-    public String getDireccionCliente() {
-        return direccionCliente;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setDireccionCliente(String direccionCliente) {
-        this.direccionCliente = direccionCliente;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
-    public String getCpCliente() {
-        return cpCliente;
+    public String getDireccion() {
+        return direccion;
     }
 
-    public void setCpCliente(String cpCliente) {
-        this.cpCliente = cpCliente;
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
     }
 
-    public String getPoblacionCliente() {
-        return poblacionCliente;
+    public String getCodPostal() {
+        return codPostal;
     }
 
-    public void setPoblacionCliente(String poblacionCliente) {
-        this.poblacionCliente = poblacionCliente;
+    public void setCodPostal(String codPostal) {
+        this.codPostal = codPostal;
     }
 
-    public String getProvinciaCliente() {
-        return provinciaCliente;
+    public String getPoblacion() {
+        return poblacion;
     }
 
-    public void setProvinciaCliente(String provinciaCliente) {
-        this.provinciaCliente = provinciaCliente;
+    public void setPoblacion(String poblacion) {
+        this.poblacion = poblacion;
     }
 
-    public String getPaisCliente() {
-        return paisCliente;
+    public String getProvincia() {
+        return provincia;
     }
 
-    public void setPaisCliente(String paisCliente) {
-        this.paisCliente = paisCliente;
+    public void setProvincia(String provincia) {
+        this.provincia = provincia;
     }
 
-    public String getCifCliente() {
-        return cifCliente;
+    public String getCif() {
+        return cif;
     }
 
-    public void setCifCliente(String cifCliente) {
-        this.cifCliente = cifCliente;
+    public void setCif(String cif) {
+        this.cif = cif;
     }
 
-    public String getTelCliente() {
-        return telCliente;
+    public String getTel() {
+        return tel;
     }
 
-    public void setTelCliente(String telCliente) {
-        this.telCliente = telCliente;
+    public void setTel(String tel) {
+        this.tel = tel;
     }
 
-    public String getEmailCliente() {
-        return emailCliente;
+    public String getTel2() {
+        return tel2;
     }
 
-    public void setEmailCliente(String emailCliente) {
-        this.emailCliente = emailCliente;
+    public void setTel2(String tel2) {
+        this.tel2 = tel2;
     }
 
-    public String getIbanCliente() {
-        return ibanCliente;
+    public Integer getReqEquivalencia() {
+        return reqEquivalencia;
     }
 
-    public void setIbanCliente(String ibanCliente) {
-        this.ibanCliente = ibanCliente;
+    public void setReqEquivalencia(Integer reqEquivalencia) {
+        this.reqEquivalencia = reqEquivalencia;
     }
 
-    public Double getRiesgoCliente() {
-        return riesgoCliente;
+    public Integer getTipoCliente() {
+        return tipoCliente;
     }
 
-    public void setRiesgoCliente(Double riesgoCliente) {
-        this.riesgoCliente = riesgoCliente;
+    public void setTipoCliente(Integer tipoCliente) {
+        this.tipoCliente = tipoCliente;
     }
 
-    public Double getDescuentoCliente() {
-        return descuentoCliente;
+    public Integer getFacturaPorAlbaran() {
+        return facturaPorAlbaran;
     }
 
-    public void setDescuentoCliente(Double descuentoCliente) {
-        this.descuentoCliente = descuentoCliente;
-    }
-
-    public String getObservacionesCliente() {
-        return observacionesCliente;
-    }
-
-    public void setObservacionesCliente(String observacionesCliente) {
-        this.observacionesCliente = observacionesCliente;
+    public void setFacturaPorAlbaran(Integer facturaPorAlbaran) {
+        this.facturaPorAlbaran = facturaPorAlbaran;
     }
 
     @Override
     public String toString() {
         return "ClienteEntity{" +
                 "id=" + id +
-                ", nombreCliente='" + nombreCliente + '\'' +
-                ", direccionCliente='" + direccionCliente + '\'' +
-                ", cpCliente='" + cpCliente + '\'' +
-                ", poblacionCliente='" + poblacionCliente + '\'' +
-                ", provinciaCliente='" + provinciaCliente + '\'' +
-                ", paisCliente='" + paisCliente + '\'' +
-                ", cifCliente='" + cifCliente + '\'' +
-                ", telCliente='" + telCliente + '\'' +
-                ", emailCliente='" + emailCliente + '\'' +
-                ", ibanCliente='" + ibanCliente + '\'' +
-                ", riesgoCliente=" + riesgoCliente +
-                ", descuentoCliente=" + descuentoCliente +
-                ", observacionesCliente='" + observacionesCliente + '\'' +
+                ", ind=" + ind +
+                ", nombre='" + nombre + '\'' +
+                ", direccion='" + direccion + '\'' +
+                ", codPostal='" + codPostal + '\'' +
+                ", poblacion='" + poblacion + '\'' +
+                ", provincia='" + provincia + '\'' +
+                ", cif='" + cif + '\'' +
+                ", tel='" + tel + '\'' +
+                ", tel2='" + tel2 + '\'' +
+                ", reqEquivalencia=" + reqEquivalencia +
+                ", tipoCliente=" + tipoCliente +
+                ", facturaPorAlbaran=" + facturaPorAlbaran +
                 '}';
     }
 }
-

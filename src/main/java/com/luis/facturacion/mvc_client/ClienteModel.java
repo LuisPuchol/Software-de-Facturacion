@@ -32,24 +32,23 @@ public class ClienteModel {
         }
     }
 
-    public void addCliente(String nombre, String direccion, String cp, String poblacion,
-                           String provincia, String pais, String cif, String telefono,
-                           String email, String iban, double riesgo, double descuento, String observaciones) {
+    public void addCliente(Integer ind, String nombre, String direccion, String cp, String poblacion,
+                           String provincia, String cif, String telefono,
+                           String tel2, Integer reqEquivalencia, Integer tipoCliente, Integer facturaPorAlbaran) {
         try {
             ClienteEntity cliente = new ClienteEntity();
-            cliente.setNombreCliente(nombre);
-            cliente.setDireccionCliente(direccion);
-            cliente.setCpCliente(cp);
-            cliente.setPoblacionCliente(poblacion);
-            cliente.setProvinciaCliente(provincia);
-            cliente.setPaisCliente(pais);
-            cliente.setCifCliente(cif);
-            cliente.setTelCliente(telefono);
-            cliente.setEmailCliente(email);
-            cliente.setIbanCliente(iban);
-            cliente.setRiesgoCliente(riesgo);
-            cliente.setDescuentoCliente(descuento);
-            cliente.setObservacionesCliente(observaciones);
+            cliente.setInd(ind);
+            cliente.setNombre(nombre);
+            cliente.setDireccion(direccion);
+            cliente.setCodPostal(cp);
+            cliente.setPoblacion(poblacion);
+            cliente.setProvincia(provincia);
+            cliente.setCif(cif);
+            cliente.setTel(telefono);
+            cliente.setTel2(tel2);
+            cliente.setReqEquivalencia(reqEquivalencia);
+            cliente.setTipoCliente(tipoCliente);
+            cliente.setFacturaPorAlbaran(facturaPorAlbaran);
 
             clienteDao.save(cliente);
             System.out.println("Cliente guardado correctamente");
