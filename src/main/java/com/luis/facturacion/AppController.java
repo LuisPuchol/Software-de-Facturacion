@@ -2,17 +2,11 @@ package com.luis.facturacion;
 
 import com.luis.facturacion.mvc_factura.FacturasView;
 import com.luis.facturacion.mvc_articulo.ArticuloController;
-import com.luis.facturacion.mvc_articulo.ArticulosView;
 import com.luis.facturacion.mvc_client.ClienteController;
-import com.luis.facturacion.mvc_client.ClientesView;
 import com.luis.facturacion.mvc_factura.FacturaController;
-import com.luis.facturacion.mvc_listadoFacturas.ListadoFacturasView;
 import com.luis.facturacion.mvc_login.LoginController;
-import com.luis.facturacion.mvc_login.LoginView;
 import com.luis.facturacion.mvc_mainmenu.MainMenuController;
-import com.luis.facturacion.mvc_mainmenu.MainMenuView;
 import com.luis.facturacion.mvc_rectificativa.RectificativaController;
-import com.luis.facturacion.mvc_rectificativa.RectificativasView;
 import com.luis.facturacion.mvc_tipoIva.TipoDeIvaController;
 import com.luis.facturacion.mvc_tipoIva.TiposDeIvaView;
 import javafx.fxml.FXMLLoader;
@@ -22,6 +16,7 @@ import javafx.stage.Stage;
 
 public class AppController {
     private Stage primaryStage;
+    private ViewLoader viewLoader;
     // Agregar todas las instancias de los controladores y modelos
     private final LoginController loginController;
     private final MainMenuController mainMenuController;
@@ -33,6 +28,7 @@ public class AppController {
 
     public AppController(Stage primaryStage) {
         this.primaryStage = primaryStage;
+        this.viewLoader = new ViewLoader();
 
         // Inicializar todos los controladores desde el inicio
         this.loginController = new LoginController();
@@ -55,26 +51,23 @@ public class AppController {
     }
 
     public void showLoginView() {
-        loadFXMLView("/com/luis/facturacion/loginMenu.fxml", LoginController.class, loginController, primaryStage, "Login");
+        viewLoader.loadView("/com/luis/facturacion/loginMenu.fxml", LoginController.class, loginController, primaryStage, "Login");
     }
 
     public void showMainMenuView() {
-        loadFXMLView("/com/luis/facturacion/mainMenu.fxml", MainMenuController.class, mainMenuController, primaryStage, "MainMenu");
+        viewLoader.loadView("/com/luis/facturacion/mainMenu.fxml", MainMenuController.class, mainMenuController, primaryStage, "MainMenu");
     }
 
     public void showArticuloView(){
-        Stage stage = new Stage();
-        loadFXMLView("/com/luis/facturacion/articulos.fxml", ArticuloController.class, articuloController, stage, "Listado Artículos");
+        viewLoader.loadViewInNewStage("/com/luis/facturacion/articulos.fxml", ArticuloController.class, articuloController, "Listado Artículos");
     }
 
     public void showTipoDeIvaView() {
-        Stage stage = new Stage();
-        loadFXMLView("/com/luis/facturacion/tipoIva.fxml", TipoDeIvaController.class, tiposDeIvaController, stage, "Configuración de IVA");
+        viewLoader.loadViewInNewStage("/com/luis/facturacion/tipoIva.fxml", TipoDeIvaController.class, tiposDeIvaController, "Configuración de IVA");
     }
 
     public void showClienteView() {
-        Stage stage = new Stage();
-        loadFXMLView("/com/luis/facturacion/clientes.fxml", ClienteController.class, clienteController, stage, "Listado Clientes");
+        viewLoader.loadViewInNewStage("/com/luis/facturacion/clientes.fxml", ClienteController.class, clienteController, "Listado Clientes");
     }
 
     public void showFacturaView() {
@@ -85,40 +78,17 @@ public class AppController {
 
     public void showRectificativaView() {
         Stage stage = new Stage();
-        RectificativasView rectificativaView = new RectificativasView(this);
-        rectificativaView.show(stage);
+        //RectificativasView rectificativaView = new RectificativasView(this);
+        //rectificativaView.show(stage);
     }
 
     public void showListadoFacturasView() {
         Stage stage = new Stage();
-        ListadoFacturasView listadoFacturasView = new ListadoFacturasView(this);
-        listadoFacturasView.show(stage);
+        //ListadoFacturasView listadoFacturasView = new ListadoFacturasView(this);
+        //listadoFacturasView.show(stage);
     }
 
-    private <T> void loadFXMLView(String fxmlPath, Class<T> controllerClass, T controller, Stage stage, String title) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
 
-            loader.setControllerFactory(clazz -> {
-                if (clazz == controllerClass) {
-                    return controller;
-                }
-                try {
-                    return clazz.getDeclaredConstructor().newInstance();
-                } catch (Exception e) {
-                    throw new RuntimeException(e);
-                }
-            });
-
-            Parent root = loader.load();
-            Scene scene = new Scene(root);
-            stage.setTitle(title);
-            stage.setScene(scene);
-            stage.show();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
     public Stage getStage () {
         return this.primaryStage;
