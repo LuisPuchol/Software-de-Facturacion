@@ -14,7 +14,7 @@ import javafx.stage.Stage;
  * Iniciar la primera interfaz, en este caso el Login
  * Cargar los datos de configuración de diferentes usuarios
  *
- * Conexion base de datos??? posiblemente clase aparte
+ * Prueba
  */
 public class Main extends Application {
 
