@@ -1,5 +1,6 @@
 package com.luis.facturacion;
 
+import com.luis.facturacion.mvc_albaran.AlbaranController;
 import com.luis.facturacion.mvc_factura.FacturasView;
 import com.luis.facturacion.mvc_articulo.ArticuloController;
 import com.luis.facturacion.mvc_client.ClienteController;
@@ -23,8 +24,9 @@ public class AppController {
     private final ArticuloController articuloController;
     private final TipoDeIvaController tiposDeIvaController;
     private final ClienteController clienteController;
-    //private final FacturaController facturaController;
-    //private final RectificativaController rectificativaController;
+    private final AlbaranController albaranController;
+    private final FacturaController facturaController;
+    private final RectificativaController rectificativaController;
 
     public AppController(Stage primaryStage) {
         this.primaryStage = primaryStage;
@@ -36,18 +38,19 @@ public class AppController {
         this.articuloController = new ArticuloController();
         this.tiposDeIvaController = new TipoDeIvaController();
         this.clienteController = new ClienteController();
-        //this.facturaController = new FacturaController();
-        //this.rectificativaController = new RectificativaController();
+        this.albaranController = new AlbaranController();
+        this.facturaController = new FacturaController();
+        this.rectificativaController = new RectificativaController();
 
         // Conectar los controladores con AppController
         this.loginController.setAppController(this);
         this.mainMenuController.setAppController(this);
         this.articuloController.setAppController(this);
         this.tiposDeIvaController.setAppController(this);
-        //this.formasPagoController.setAppController(this);
-        //this.clienteController.setAppController(this);
-        //this.facturaController.setAppController(this);
-        //this.rectificativaController.setAppController(this);
+        this.clienteController.setAppController(this);
+        this.albaranController.setAppController(this);
+        this.facturaController.setAppController(this);
+        this.rectificativaController.setAppController(this);
     }
 
     public void showLoginView() {
@@ -68,6 +71,10 @@ public class AppController {
 
     public void showClienteView() {
         viewLoader.loadViewInNewStage("/com/luis/facturacion/clientes.fxml", ClienteController.class, clienteController, "Listado Clientes");
+    }
+
+    public void showAlbaranView() {
+        viewLoader.loadViewInNewStage("/com/luis/facturacion/albaran.fxml", AlbaranController.class, albaranController, "Albaran");
     }
 
     public void showFacturaView() {

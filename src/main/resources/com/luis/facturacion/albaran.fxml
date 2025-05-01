@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.geometry.Insets?>
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.luis.facturacion.mvc_albaran.AlbaranController"
+            prefHeight="400.0" prefWidth="600.0">
+    <children>
+        <VBox spacing="10" AnchorPane.topAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0"
+              AnchorPane.bottomAnchor="10.0">
+            <!-- Primera fila: campos de información principal -->
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <children>
+                    <Label text="Fecha"/>
+                    <DatePicker fx:id="dateField" prefWidth="100" promptText="dd/MM/yyyy"/>
+
+                    <Label text="Cliente"/>
+                    <TextField fx:id="clientField" prefWidth="150"/>
+                    <TextField fx:id="clientInfoField" prefWidth="150" editable="false"/>
+
+                    <Label text="Num."/>
+                    <TextField fx:id="numField" prefWidth="80" editable="false"/>
+
+                    <Label text="Total"/>
+                    <TextField fx:id="totalField" prefWidth="100" editable="false" text="0.00"/>
+                </children>
+            </HBox>
+
+            <!-- Segunda fila: campos para añadir elementos -->
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <children>
+                    <TextField fx:id="codeField" prefWidth="80"/>
+                    <TextField fx:id="conceptField" prefWidth="300" editable="false"/>
+                    <TextField fx:id="trace1Field" prefWidth="80"/>
+                    <TextField fx:id="trace2Field" prefWidth="80"/>
+                    <TextField fx:id="quantityField" prefWidth="80"/>
+                    <TextField fx:id="priceField" prefWidth="80"/>
+                    <Button fx:id="addButton" text="Alta" onAction="#handleAddItem"/>
+                </children>
+            </HBox>
+
+            <!-- Tabla de items -->
+            <TableView fx:id="itemsTable" VBox.vgrow="ALWAYS">
+                <columns>
+                    <TableColumn fx:id="codeColumn" text="Cod." prefWidth="80">
+                        <cellValueFactory>
+                            <PropertyValueFactory property="code"/>
+                        </cellValueFactory>
+                    </TableColumn>
+                    <TableColumn fx:id="conceptColumn" text="Concepto" prefWidth="200">
+                        <cellValueFactory>
+                            <PropertyValueFactory property="concept"/>
+                        </cellValueFactory>
+                    </TableColumn>
+                    <TableColumn fx:id="trace1Column" text="Traz.(1)" prefWidth="80">
+                        <cellValueFactory>
+                            <PropertyValueFactory property="trace1"/>
+                        </cellValueFactory>
+                    </TableColumn>
+                    <TableColumn fx:id="trace2Column" text="Traz.(2)" prefWidth="80">
+                        <cellValueFactory>
+                            <PropertyValueFactory property="trace2"/>
+                        </cellValueFactory>
+                    </TableColumn>
+                    <TableColumn fx:id="quantityColumn" text="Ctd." prefWidth="60">
+                        <cellValueFactory>
+                            <PropertyValueFactory property="quantity"/>
+                        </cellValueFactory>
+                    </TableColumn>
+                    <TableColumn fx:id="priceColumn" text="Precio" prefWidth="80">
+                        <cellValueFactory>
+                            <PropertyValueFactory property="price"/>
+                        </cellValueFactory>
+                    </TableColumn>
+                    <TableColumn fx:id="amountColumn" text="Importe" prefWidth="80">
+                        <cellValueFactory>
+                            <PropertyValueFactory property="amount"/>
+                        </cellValueFactory>
+                    </TableColumn>
+                </columns>
+            </TableView>
+
+            <!-- Fila final: campo numérico, checkboxes y botones -->
+            <HBox spacing="20" alignment="CENTER">
+                <children>
+                    <TextField fx:id="summaryField" prefWidth="100" editable="false" text="0"/>
+
+                    <VBox alignment="CENTER" spacing="5">
+                        <children>
+                            <CheckBox fx:id="printAlbaranCheck" text="Imprime Albaran"/>
+                            <CheckBox fx:id="createInvoiceCheck" text="Emitir Factura"/>
+                        </children>
+                    </VBox>
+
+                    <HBox spacing="10" alignment="CENTER_RIGHT">
+                        <Button fx:id="saveButton" text="Guardar" onAction="#handleSave"/>
+                        <Button fx:id="exitButton" text="Salir" onAction="#handleExit"/>
+                    </HBox>
+                </children>
+                <VBox.margin>
+                    <Insets top="10.0"/>
+                </VBox.margin>
+            </HBox>
+        </VBox>
+    </children>
+</AnchorPane>

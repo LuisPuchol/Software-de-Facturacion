@@ -56,6 +56,12 @@ public class MainMenuController {
     }
 
     @FXML
+    public void handleCrearAlbaranClick(ActionEvent actionEvent) {
+        System.out.println("Creado craer albaran");
+        appController.showAlbaranView();
+    }
+
+    @FXML
     public void handleCrearFacturaClick(ActionEvent actionEvent) {
         System.out.println("Creado crearFacturas");
         appController.showFacturaView();
