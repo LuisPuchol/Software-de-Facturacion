@@ -2,6 +2,7 @@ package com.luis.facturacion.mvc_articulo;
 
 import com.luis.facturacion.AppController;
 import com.luis.facturacion.mvc_articulo.database.ArticuloEntity;
+import com.luis.facturacion.utils.TabFunction;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -19,6 +20,7 @@ import java.util.List;
 public class ArticuloController {
     private ArticuloModel articuloModel;
     private AppController appController;
+    private TabFunction tabFunction;
 
     @FXML
     private TableView<ArticuloEntity> articulosTable;
@@ -39,6 +41,7 @@ public class ArticuloController {
     public ArticuloController() {
         System.out.println("Articulos Controller created");
         this.articuloModel = ArticuloModel.getInstance();
+        tabFunction = new TabFunction();
     }
 
     public void setAppController(AppController appController) {
@@ -55,27 +58,19 @@ public class ArticuloController {
 
         //Gestionar la tecla enter como tabulador
 
-        // Obtener el GridPane del centro del BorderPane (donde están los campos)
-        GridPane formGrid = (GridPane) rootPane.getCenter();
+        tabFunction.configureTabFunction((GridPane) rootPane.getCenter());
 
-        // Obtener todos los TextFields del formulario
-        List<TextField> textFields = getAllTextFields(formGrid);
-
-        // Configurar el comportamiento de la tecla Enter para cada TextField
-        for (TextField textField : textFields) {
-            configureEnterKeyBehavior(textField);
-        }
 
         // También puedes agregar un comportamiento especial para el último TextField
         // para que al presionar Enter en el último campo, se enfoque en el TextArea
-        if (!textFields.isEmpty()) {
-            TextField lastTextField = textFields.get(textFields.size() - 1);
-            lastTextField.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
-                if (event.getCode() == KeyCode.ENTER) {
-                    event.consume();
-                }
-            });
-        }
+        //if (!textFields.isEmpty()) {
+        //    TextField lastTextField = textFields.get(textFields.size() - 1);
+        //    lastTextField.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
+        //        if (event.getCode() == KeyCode.ENTER) {
+        //            event.consume();
+        //        }
+        //    });
+        //}
 
         cargarDatos();
     }
@@ -116,53 +111,13 @@ public class ArticuloController {
     private void limpiarFormulario() {
         indArticle.clear();
         nameArticle.clear();
-
     }
 
-
-
     //Cosas que pide el Model
-
-
-
     public String getProductByID(Integer id) {
         return articuloModel.getProductByID(id);
     }
 
-
-    /***
-     * Estos 2 metodos se encargan de hacer que la tecla enter funcione como tabulador.
-     * Posiblemente se externalice de algun modo en una clase para reutilizarse
-     */
-    private List<TextField> getAllTextFields(GridPane gridPane) {
-        List<TextField> textFields = new ArrayList<>();
-
-        // Recorrer todos los nodos hijos del GridPane
-        for (Node node : gridPane.getChildren()) {
-            if (node instanceof TextField) {
-                // No incluimos el campo ID que es no editable
-                if (!node.equals(indArticle)) {
-                    textFields.add((TextField) node);
-                }
-            }
-        }
-
-        return textFields;
-    }
-
-    private void configureEnterKeyBehavior(TextField textField) {
-        textField.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
-            if (event.getCode() == KeyCode.ENTER) {
-                // Consume el evento para evitar que se procese de la forma predeterminada
-                event.consume();
-
-                // Simula la pulsación de la tecla Tab
-                textField.fireEvent(new KeyEvent(KeyEvent.KEY_PRESSED,
-                        "", "", KeyCode.TAB,
-                        false, false, false, false));
-            }
-        });
-    }
 
 }
 

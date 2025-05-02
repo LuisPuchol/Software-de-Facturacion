@@ -1,15 +1,25 @@
 package com.luis.facturacion.mvc_albaran;
 
 import com.luis.facturacion.AppController;
+import com.luis.facturacion.utils.TabFunction;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.*;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class AlbaranController {
 
     private AlbaranModel albaranModel;
     private AppController appController;
+
+    @FXML
+    private AnchorPane rootPane;
 
     // Campos de la primera fila
     @FXML private DatePicker dateField;
@@ -65,8 +75,28 @@ public class AlbaranController {
             priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
             amountColumn.setCellValueFactory(new PropertyValueFactory<>("amount"));
         }
+
+        configureNavigation();
     }
+
+    private void configureNavigation() {
+        TabFunction tabFunction = new TabFunction();
+
+        List<Node> navigationOrder = new ArrayList<>();
+        navigationOrder.add(dateField);
+        navigationOrder.add(clientField);
+        navigationOrder.add(codeField);
+        navigationOrder.add(trace1Field);
+        navigationOrder.add(trace2Field);
+        navigationOrder.add(quantityField);
+        navigationOrder.add(priceField);
+        navigationOrder.add(addButton);
+
+        tabFunction.configureCircularNavigation(navigationOrder, addButton, codeField);
+    }
+
     public void handleAddItem(ActionEvent actionEvent) {
+        System.out.println("añadir a la tabla");
     }
 
     public void handleSave(ActionEvent actionEvent) {
