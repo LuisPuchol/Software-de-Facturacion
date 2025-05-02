@@ -2,19 +2,25 @@ package com.luis.facturacion.mvc_client;
 
 import com.luis.facturacion.AppController;
 import com.luis.facturacion.mvc_client.database.ClienteEntity;
+import com.luis.facturacion.utils.TabFunction;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 
 import java.util.List;
 
 public class ClienteController {
     private ClienteModel clienteModel;
     private AppController appController;
+    private TabFunction tabFunction;
 
+    @FXML
+    private BorderPane rootPane;
     @FXML
     private TableView<ClienteEntity> clientesTable;
     @FXML
@@ -39,6 +45,7 @@ public class ClienteController {
     public ClienteController() {
         System.out.println("Cliente created");
         this.clienteModel = ClienteModel.getInstance();
+        tabFunction = new TabFunction();
     }
 
     public void setAppController(AppController appController) {
@@ -53,6 +60,7 @@ public class ClienteController {
         nombreClienteColumn.setCellValueFactory(new PropertyValueFactory<>("nombre"));
         tipoClienteCombo.getItems().addAll("BASE", "BASE + IVA");
 
+        tabFunction.configureTabFunction((GridPane) rootPane.getCenter());
 
         cargarDatos();
 
