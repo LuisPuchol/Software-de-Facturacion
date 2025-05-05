@@ -1,18 +1,14 @@
 package com.luis.facturacion;
 
-import com.luis.facturacion.mvc_albaran.AlbaranController;
+import com.luis.facturacion.mvc_deliveryNote.DeliveryNoteController;
 import com.luis.facturacion.mvc_factura.FacturasView;
-import com.luis.facturacion.mvc_articulo.ArticuloController;
+import com.luis.facturacion.mvc_article.ArticleController;
 import com.luis.facturacion.mvc_client.ClienteController;
 import com.luis.facturacion.mvc_factura.FacturaController;
 import com.luis.facturacion.mvc_login.LoginController;
 import com.luis.facturacion.mvc_mainmenu.MainMenuController;
 import com.luis.facturacion.mvc_rectificativa.RectificativaController;
 import com.luis.facturacion.mvc_tipoIva.TipoDeIvaController;
-import com.luis.facturacion.mvc_tipoIva.TiposDeIvaView;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class AppController {
@@ -21,10 +17,10 @@ public class AppController {
     // Agregar todas las instancias de los controladores y modelos
     private final LoginController loginController;
     private final MainMenuController mainMenuController;
-    private final ArticuloController articuloController;
+    private final ArticleController articleController;
     private final TipoDeIvaController tiposDeIvaController;
     private final ClienteController clienteController;
-    private final AlbaranController albaranController;
+    private final DeliveryNoteController deliveryNoteController;
     private final FacturaController facturaController;
     private final RectificativaController rectificativaController;
 
@@ -35,20 +31,20 @@ public class AppController {
         // Inicializar todos los controladores desde el inicio
         this.loginController = new LoginController();
         this.mainMenuController = new MainMenuController();
-        this.articuloController = new ArticuloController();
+        this.articleController = new ArticleController();
         this.tiposDeIvaController = new TipoDeIvaController();
         this.clienteController = new ClienteController();
-        this.albaranController = new AlbaranController();
+        this.deliveryNoteController = new DeliveryNoteController();
         this.facturaController = new FacturaController();
         this.rectificativaController = new RectificativaController();
 
         // Conectar los controladores con AppController
         this.loginController.setAppController(this);
         this.mainMenuController.setAppController(this);
-        this.articuloController.setAppController(this);
+        this.articleController.setAppController(this);
         this.tiposDeIvaController.setAppController(this);
         this.clienteController.setAppController(this);
-        this.albaranController.setAppController(this);
+        this.deliveryNoteController.setAppController(this);
         this.facturaController.setAppController(this);
         this.rectificativaController.setAppController(this);
     }
@@ -62,7 +58,7 @@ public class AppController {
     }
 
     public void showArticuloView(){
-        viewLoader.loadViewInNewStage("/com/luis/facturacion/articulos.fxml", ArticuloController.class, articuloController, "Listado Artículos");
+        viewLoader.loadViewInNewStage("/com/luis/facturacion/articulos.fxml", ArticleController.class, articleController, "Listado Artículos");
     }
 
     public void showTipoDeIvaView() {
@@ -74,7 +70,7 @@ public class AppController {
     }
 
     public void showAlbaranView() {
-        viewLoader.loadViewInNewStage("/com/luis/facturacion/albaran.fxml", AlbaranController.class, albaranController, "Albaran");
+        viewLoader.loadViewInNewStage("/com/luis/facturacion/albaran.fxml", DeliveryNoteController.class, deliveryNoteController, "Albaran");
     }
 
     public void showFacturaView() {
@@ -106,7 +102,7 @@ public class AppController {
     //}
 
     public String getProductByID(Integer id) {
-        return articuloController.getProductByID(id);
+        return articleController.getProductByID(id);
     }
 
 }

@@ -7,14 +7,6 @@ import javafx.stage.Stage;
 /**
  * @author Luis
  *
- * Main se encargara de:
- * <p>
- *
- * Iniciar la logica completa con la llamada al new LoginController
- * Iniciar la primera interfaz, en este caso el Login
- * Cargar los datos de configuración de diferentes usuarios
- *
- * Prueba
  */
 public class Main extends Application {
 

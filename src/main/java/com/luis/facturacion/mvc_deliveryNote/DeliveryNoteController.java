@@ -1,4 +1,4 @@
-package com.luis.facturacion.mvc_albaran;
+package com.luis.facturacion.mvc_deliveryNote;
 
 import com.luis.facturacion.AppController;
 import com.luis.facturacion.utils.TabFunction;
@@ -8,60 +8,49 @@ import javafx.scene.Node;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class AlbaranController {
+public class DeliveryNoteController {
 
-    private AlbaranModel albaranModel;
+    private DeliveryNoteModel deliveryNoteModel;
     private AppController appController;
 
     @FXML
     private AnchorPane rootPane;
 
-    // Campos de la primera fila
-    @FXML private DatePicker dateField;
-    @FXML private TextField clientField;
-    @FXML private TextField clientInfoField;
-    @FXML private TextField numField;
-    @FXML private TextField totalField;
+    @FXML
+    private DatePicker dateField;
+    @FXML
+    private TextField clientField, clientInfoField, numField, totalField;
 
-    // Campos de la segunda fila
-    @FXML private TextField codeField;
-    @FXML private TextField conceptField;
-    @FXML private TextField trace1Field;
-    @FXML private TextField trace2Field;
-    @FXML private TextField quantityField;
-    @FXML private TextField priceField;
-    @FXML private Button addButton;
+    @FXML
+    private TextField codeField, conceptField, trace1Field, trace2Field, quantityField, priceField;
+    @FXML
+    private Button addButton;
 
-    // Tabla y columnas
-    @FXML private TableView<AlbaranItem> itemsTable;
-    @FXML private TableColumn<AlbaranItem, String> codeColumn;
-    @FXML private TableColumn<AlbaranItem, String> conceptColumn;
-    @FXML private TableColumn<AlbaranItem, String> trace1Column;
-    @FXML private TableColumn<AlbaranItem, String> trace2Column;
-    @FXML private TableColumn<AlbaranItem, Integer> quantityColumn;
-    @FXML private TableColumn<AlbaranItem, Double> priceColumn;
-    @FXML private TableColumn<AlbaranItem, Double> amountColumn;
+    @FXML
+    private TableView<DeliveryNoteItem> itemsTable;
+    @FXML
+    private TableColumn<DeliveryNoteItem, String> codeColumn, conceptColumn, trace1Column,
+            trace2Column, quantityColumn, priceColumn, amountColumn;
 
-    // Campos finales
-    @FXML private TextField summaryField;
-    @FXML private CheckBox printAlbaranCheck;
-    @FXML private CheckBox createInvoiceCheck;
-    @FXML private Button saveButton;
-    @FXML private Button exitButton;
+    @FXML
+    private TextField summaryField;
+    @FXML
+    private CheckBox printAlbaranCheck, createInvoiceCheck;
+    @FXML
+    private Button saveButton, exitButton;
 
-    public AlbaranController() {
-        System.out.println("Alb Contr created");
-        this.albaranModel = AlbaranModel.getInstance();
+    public DeliveryNoteController() {
+        System.out.println("Albaran Controller created");
+        this.deliveryNoteModel = DeliveryNoteModel.getInstance();
     }
 
     public void setAppController(AppController appController) {
         this.appController = appController;
-        albaranModel.setController(this);
+        deliveryNoteModel.setController(this);
     }
 
     @FXML
@@ -96,7 +85,7 @@ public class AlbaranController {
     }
 
     public void handleAddItem(ActionEvent actionEvent) {
-        System.out.println("añadir a la tabla");
+        System.out.println("Add to table");
     }
 
     public void handleSave(ActionEvent actionEvent) {

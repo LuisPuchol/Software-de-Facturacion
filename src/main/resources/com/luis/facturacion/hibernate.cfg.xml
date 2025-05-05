@@ -20,6 +20,6 @@
         <property name="hibernate.hbm2ddl.auto">update</property>
 
         <!-- Entidades mapeadas -->
-        <mapping class="com.luis.facturacion.mvc_articulo.database.entitiesHibernate.ArticuloHibernate"/>
+        <mapping class="com.luis.facturacion.mvc_article.database.entitiesHibernate.ArticuloHibernate"/>
     </session-factory>
 </hibernate-configuration>

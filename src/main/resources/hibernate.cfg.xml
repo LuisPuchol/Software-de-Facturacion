@@ -27,7 +27,7 @@
 
 
         <!-- Definir la clase mapeada -->
-        <mapping class="com.luis.facturacion.mvc_articulo.database.ArticuloEntity"/>
+        <mapping class="com.luis.facturacion.mvc_article.database.ArticleEntity"/>
         <mapping class="com.luis.facturacion.mvc_client.database.ClienteEntity"/>
         <!--<mapping class="com.luis.facturacion.mvc_factura.database.FacturaEntity"/>
         <mapping class="com.luis.facturacion.mvc_formaPago.database.FormaDePagoEntity"/>

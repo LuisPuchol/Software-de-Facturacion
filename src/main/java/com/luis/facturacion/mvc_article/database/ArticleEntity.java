@@ -1,10 +1,10 @@
-package com.luis.facturacion.mvc_articulo.database;
+package com.luis.facturacion.mvc_article.database;
 
 import jakarta.persistence.*;
 
 @Entity
 @Table(name = "articulos")
-public class ArticuloEntity {
+public class ArticleEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -18,22 +18,22 @@ public class ArticuloEntity {
 
     // Getters y Setters
 
-    public ArticuloEntity() {
+    public ArticleEntity() {
     }
 
     public int getIndice() {
         return indice;
     }
 
-    public void setIndice(int indice) {
-        this.indice = indice;
+    public void setIndice(int index) {
+        this.indice = index;
     }
 
     public String getNombre() {
         return nombre;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setNombre(String name) {
+        this.nombre = name;
     }
 }

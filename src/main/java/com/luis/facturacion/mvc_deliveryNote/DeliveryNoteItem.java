@@ -1,12 +1,12 @@
-package com.luis.facturacion.mvc_albaran;
+package com.luis.facturacion.mvc_deliveryNote;
 
 
 import javafx.beans.property.*;
 
 /**
- * Clase que representa un ítem en un albarán
+ * Class that represents an item on a delivery note
  */
-public class AlbaranItem {
+public class DeliveryNoteItem {
     private final StringProperty code;
     private final StringProperty concept;
     private final StringProperty trace1;
@@ -16,9 +16,9 @@ public class AlbaranItem {
     private final DoubleProperty amount;
 
     /**
-     * Constructor principal
+     * Main constructor
      */
-    public AlbaranItem(String code, String concept, String trace1, String trace2, int quantity, double price) {
+    public DeliveryNoteItem(String code, String concept, String trace1, String trace2, int quantity, double price) {
         this.code = new SimpleStringProperty(code);
         this.concept = new SimpleStringProperty(concept);
         this.trace1 = new SimpleStringProperty(trace1);
@@ -28,9 +28,6 @@ public class AlbaranItem {
         this.amount = new SimpleDoubleProperty(calculateAmount());
     }
 
-    /**
-     * Calcula el importe (cantidad * precio)
-     */
     private double calculateAmount() {
         return getQuantity() * getPrice();
     }

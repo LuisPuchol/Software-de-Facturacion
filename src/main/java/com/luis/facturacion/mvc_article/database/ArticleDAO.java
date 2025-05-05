@@ -1,4 +1,4 @@
-package com.luis.facturacion.mvc_articulo.database;
+package com.luis.facturacion.mvc_article.database;
 
 import com.luis.facturacion.HibernateUtil;
 import org.hibernate.Session;
@@ -6,13 +6,13 @@ import org.hibernate.Transaction;
 
 import java.util.List;
 
-public class ArticuloDAO{
+public class ArticleDAO {
 
-    public ArticuloDAO() {
-        System.out.println("ArticuloDAO creado");
+    public ArticleDAO() {
+        System.out.println("ArticuloDAO created");
     }
 
-    public void save(ArticuloEntity articulo) {
+    public void save(ArticleEntity article) {
         Session session = null;
         Transaction transaction = null;
 
@@ -20,17 +20,17 @@ public class ArticuloDAO{
             session = HibernateUtil.getSessionFactory().openSession();
             transaction = session.beginTransaction();
 
-            // Guardar la entidad
-            session.persist(articulo);
+            // Save
+            session.persist(article);
 
-            // Confirmar la transacción
+            // Confirm
             transaction.commit();
         } catch (Exception e) {
-            System.err.println("Error al guardar artículo: " + e.getMessage());
+            System.err.println("Error saving article: " + e.getMessage());
             if (transaction != null && transaction.isActive()) {
                 transaction.rollback();
             }
-            throw e; // Re-lanzar la excepción para manejarla en el nivel superior
+            throw e; // Re-throw the exception to handle it at the higher level
         } finally {
             if (session != null && session.isOpen()) {
                 session.close();
@@ -38,27 +38,27 @@ public class ArticuloDAO{
         }
     }
 
-    public void update(ArticuloEntity articulo) {
+    public void update(ArticleEntity article) {
 
     }
 
-    public void delete(ArticuloEntity articulo) {
+    public void delete(ArticleEntity article) {
 
     }
 
-    //public ArticuloEntity getById(int id) {
+    public ArticleEntity getById(int id) {
+        return null;
+    }
 
-    //}
-
-    public List<ArticuloEntity> getAll() {
+    public List<ArticleEntity> getAll() {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            return session.createQuery("FROM ArticuloEntity", ArticuloEntity.class).list();
+            return session.createQuery("FROM ArticleEntity", ArticleEntity.class).list();
         }
     }
 
     public String getProductNameById(Integer id) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()){
-            ArticuloEntity articulo = session.get(ArticuloEntity.class, id);
+            ArticleEntity articulo = session.get(ArticleEntity.class, id);
             return (articulo != null) ? articulo.getNombre() : null;
         }
     }

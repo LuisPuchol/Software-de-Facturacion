@@ -7,7 +7,6 @@ public class HibernateUtil {
 
     static {
         try {
-            // Crear la SessionFactory
             Configuration configuration = new Configuration();
             configuration.configure("hibernate.cfg.xml");
             sessionFactory = configuration.buildSessionFactory();
@@ -21,7 +20,9 @@ public class HibernateUtil {
         return sessionFactory;
     }
 
-    // Solo llamar este método cuando la aplicación se cierre completamente
+    /**
+     * Only call this method at the end
+     */
     public static void shutdown() {
         if (sessionFactory != null && !sessionFactory.isClosed()) {
             sessionFactory.close();
