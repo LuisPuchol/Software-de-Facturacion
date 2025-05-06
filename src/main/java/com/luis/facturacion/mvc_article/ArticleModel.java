@@ -14,7 +14,7 @@ public class ArticleModel {
     private final ObservableList<ArticleEntity> articulosList;
 
     ArticleModel() {
-        System.out.println("Articulo Model created");
+        System.out.println("Article Model created");
         this.articleDAO = new ArticleDAO();
         this.articulosList = FXCollections.observableArrayList();
     }
@@ -48,8 +48,8 @@ public class ArticleModel {
             // Create Entity
             ArticleEntity articleEntity = new ArticleEntity();
 
-            articleEntity.setIndice(indice);
-            articleEntity.setNombre(name);
+            articleEntity.setIndex(indice);
+            articleEntity.setName(name);
 
             // Save on DDBB
             articleDAO.save(articleEntity);

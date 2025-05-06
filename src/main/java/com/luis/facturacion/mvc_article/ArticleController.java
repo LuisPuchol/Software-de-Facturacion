@@ -35,7 +35,7 @@ public class ArticleController {
     private BorderPane rootPane;
 
     public ArticleController() {
-        System.out.println("Articulos Controller created");
+        System.out.println("Article Controller created");
         this.articleModel = ArticleModel.getInstance();
         tabFunction = new TabFunction();
     }
@@ -51,8 +51,8 @@ public class ArticleController {
      */
     @FXML
     public void initialize() {
-        columnInd.setCellValueFactory(new PropertyValueFactory<>("indice"));
-        columnName.setCellValueFactory(new PropertyValueFactory<>("nombre"));
+        columnInd.setCellValueFactory(new PropertyValueFactory<>("index"));
+        columnName.setCellValueFactory(new PropertyValueFactory<>("name"));
 
         tabFunction.configureTabFunction((GridPane) rootPane.getCenter());
 

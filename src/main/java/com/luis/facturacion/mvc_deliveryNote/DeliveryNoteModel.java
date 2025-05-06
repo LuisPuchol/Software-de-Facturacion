@@ -7,7 +7,7 @@ public class DeliveryNoteModel {
     //private final ObservableList<AlbaranEntity> albaranList;
 
     private DeliveryNoteModel() {
-        System.out.println("Albaran Model created");
+        System.out.println("Delivery-Note Model created");
         //this.clienteDao = new ClienteDAO();
         //this.clienteList = FXCollections.observableArrayList();
     }

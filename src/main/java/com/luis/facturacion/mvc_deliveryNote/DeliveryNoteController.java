@@ -44,7 +44,7 @@ public class DeliveryNoteController {
     private Button saveButton, exitButton;
 
     public DeliveryNoteController() {
-        System.out.println("Albaran Controller created");
+        System.out.println("Delivery-Note Controller created");
         this.deliveryNoteModel = DeliveryNoteModel.getInstance();
     }
 

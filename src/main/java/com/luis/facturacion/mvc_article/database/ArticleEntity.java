@@ -8,32 +8,32 @@ public class ArticleEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private int idArticulo;
+    private int articleId;
 
     @Column(name = "ind", unique = true, nullable = false, length = 35)
-    private int indice;
+    private int index;
 
     @Column(name = "nombre", length = 35)
-    private String nombre;
+    private String name;
 
     // Getters y Setters
 
     public ArticleEntity() {
     }
 
-    public int getIndice() {
-        return indice;
+    public int getIndex() {
+        return index;
     }
 
-    public void setIndice(int index) {
-        this.indice = index;
+    public void setIndex(int index) {
+        this.index = index;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getName() {
+        return name;
     }
 
-    public void setNombre(String name) {
-        this.nombre = name;
+    public void setName(String name) {
+        this.name = name;
     }
 }

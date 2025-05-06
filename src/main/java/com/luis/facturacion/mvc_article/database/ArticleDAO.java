@@ -9,7 +9,7 @@ import java.util.List;
 public class ArticleDAO {
 
     public ArticleDAO() {
-        System.out.println("ArticuloDAO created");
+        System.out.println("ArticleDAO created");
     }
 
     public void save(ArticleEntity article) {
@@ -59,7 +59,7 @@ public class ArticleDAO {
     public String getProductNameById(Integer id) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()){
             ArticleEntity articulo = session.get(ArticleEntity.class, id);
-            return (articulo != null) ? articulo.getNombre() : null;
+            return (articulo != null) ? articulo.getName() : null;
         }
     }
 }
