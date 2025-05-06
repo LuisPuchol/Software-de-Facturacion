@@ -19,50 +19,44 @@ public class MainMenuController {
     }
 
     @FXML
-    public void handleArticulosClick(javafx.event.ActionEvent actionEvent) {
-        System.out.println("El menú 'Articulos' fue seleccionado.");
+    public void handleArticlesClick(javafx.event.ActionEvent actionEvent) {
+        System.out.println("Articles selected");
         appController.showArticuloView();
     }
 
     @FXML
-    public void handleFamiliaArticulosClick(ActionEvent actionEvent) {
-        System.out.println("El menú 'Familia Articulos ' fue seleccionado");
-        //appController.showFamiliaArticulosView();
-    }
-
-    @FXML
-    public void handleClientesClick(javafx.event.ActionEvent actionEvent) {
-        System.out.println("El menú 'Clientes' fue seleccionado.");
+    public void handleClientsClick(javafx.event.ActionEvent actionEvent) {
+        System.out.println("Clients selected");
         appController.showClienteView();
     }
 
     @FXML
-    public void handleConfigIVAClick(javafx.event.ActionEvent actionEvent) {
-        System.out.println("El menú 'Configuración IVA' fue seleccionado.");
+    public void handleVATConfigClick(javafx.event.ActionEvent actionEvent) {
+        System.out.println("VAT Config selected");
         appController.showTipoDeIvaView();
     }
 
 
     @FXML
-    public void handleRectificativasClick(ActionEvent actionEvent) {
-        System.out.println("creado rectificativas");
+    public void handleCorrectiveInvoiceClick(ActionEvent actionEvent) {
+        System.out.println("Corrective-Invoice selected");
         appController.showRectificativaView();
     }
 
     @FXML
-    public void handleListadoFacturasClick(ActionEvent actionEvent) {
-        System.out.println("creado crearFacturas");
+    public void handleInvoiceListClick(ActionEvent actionEvent) {
+        System.out.println("Invoice-List selected");
         appController.showListadoFacturasView();
     }
 
     @FXML
-    public void handleCrearAlbaranClick(ActionEvent actionEvent) {
-        System.out.println("Creado craer albaran");
+    public void handleDeliveryNoteClick(ActionEvent actionEvent) {
+        System.out.println("Delivery-Note Selected");
         appController.showAlbaranView();
     }
 
     @FXML
-    public void handleCrearFacturaClick(ActionEvent actionEvent) {
+    public void handleInvoiceClick(ActionEvent actionEvent) {
         System.out.println("Creado crearFacturas");
         appController.showFacturaView();
     }

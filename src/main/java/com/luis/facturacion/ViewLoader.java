@@ -35,14 +35,14 @@ public class ViewLoader {
     }
 
     /**
-     * Carga una vista FXML en una nueva ventana.
+     * Loads an FXML view in a new window.
      *
-     * @param <T> Tipo del controlador
-     * @param fxmlPath Ruta al archivo FXML
-     * @param controllerClass Clase del controlador
-     * @param controller Instancia del controlador
-     * @param title Título para la nueva ventana
-     * @return La instancia del controlador
+     * @param <T> Controller type
+     * @param fxmlPath Path to the FXML file
+     * @param controllerClass Controller class
+     * @param controller Controller instance
+     * @param title Title for the new window
+     * @return The controller instance
      */
     public <T> T loadViewInNewStage(String fxmlPath, Class<T> controllerClass, T controller, String title) {
         Stage stage = new Stage();

@@ -8,26 +8,23 @@
 <BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.luis.facturacion.mvc_mainmenu.MainMenuController">
     <top>
         <MenuBar>
-            <!-- Gestión de Productos -->
+
             <Menu fx:id="ProductosMenu" text="Productos">
-                <MenuItem fx:id="Articulo" text="Artículos" onAction="#handleArticulosClick"/>
-                <MenuItem fx:id="TiposIVA" text="Tipos de IVA" onAction="#handleConfigIVAClick"/>
+                <MenuItem fx:id="Articulo" text="Artículos" onAction="#handleArticlesClick"/>
+                <MenuItem fx:id="TiposIVA" text="Tipos de IVA" onAction="#handleVATConfigClick"/>
             </Menu>
 
-            <!-- Gestión de Clientes -->
             <Menu fx:id="ClientesMenu" text="Clientes">
-                <MenuItem fx:id="Clientes" text="Listado de Clientes" onAction="#handleClientesClick"/>
+                <MenuItem fx:id="Clientes" text="Listado de Clientes" onAction="#handleClientsClick"/>
             </Menu>
 
-            <!-- Gestión de Ventas -->
             <Menu fx:id="VentasMenu" text="Ventas">
-                <MenuItem fx:id="Albaran" text="Crear Albaran" onAction="#handleCrearAlbaranClick"/>
-                <MenuItem fx:id="Factura" text="Crear Factura" onAction="#handleCrearFacturaClick"/>
-                <MenuItem fx:id="Facturas" text="Listado Facturas" onAction="#handleListadoFacturasClick"/>
-                <MenuItem fx:id="Rectificativas" text="Rectificativas" onAction="#handleRectificativasClick"/>
+                <MenuItem fx:id="Albaran" text="Crear Albaran" onAction="#handleDeliveryNoteClick"/>
+                <MenuItem fx:id="Factura" text="Crear Factura" onAction="#handleInvoiceClick"/>
+                <MenuItem fx:id="Facturas" text="Listado Facturas" onAction="#handleInvoiceListClick"/>
+                <MenuItem fx:id="Rectificativas" text="Rectificativas" onAction="#handleCorrectiveInvoiceClick"/>
             </Menu>
 
-            <!-- Resúmenes y Reportes -->
             <Menu fx:id="ReportesMenu" text="Reportes">
                 <MenuItem fx:id="LibroIngreso" text="Libro de Ingresos"/>
                 <MenuItem fx:id="ResumenClientes" text="Resumen de Clientes"/>

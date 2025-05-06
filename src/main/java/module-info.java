@@ -17,31 +17,31 @@ module com.luis.facturacion {
     opens com.luis.facturacion.mvc_mainmenu to javafx.fxml;
     //opens com.luis.facturacion.mvc_mainmenu.database to javafx.base, org.hibernate.orm.core;
 
-    opens com.luis.facturacion.mvc_articulo to javafx.fxml;
-    opens com.luis.facturacion.mvc_articulo.database to javafx.base, org.hibernate.orm.core;
-    opens com.luis.facturacion.mvc_tipoIva to javafx.fxml;
-    opens com.luis.facturacion.mvc_tipoIva.database to javafx.base, org.hibernate.orm.core;
+    opens com.luis.facturacion.mvc_article to javafx.fxml;
+    opens com.luis.facturacion.mvc_article.database to javafx.base, org.hibernate.orm.core;
+    opens com.luis.facturacion.mvc_vatConfig to javafx.fxml;
+    opens com.luis.facturacion.mvc_vatConfig.database to javafx.base, org.hibernate.orm.core;
     opens com.luis.facturacion.mvc_client to javafx.fxml;
     opens com.luis.facturacion.mvc_client.database to javafx.base, org.hibernate.orm.core;
 
-    opens com.luis.facturacion.mvc_albaran to javafx.fxml;
+    opens com.luis.facturacion.mvc_deliveryNote to javafx.fxml;
 
-    opens com.luis.facturacion.mvc_factura to javafx.fxml;
-    opens com.luis.facturacion.mvc_factura.database to javafx.base, org.hibernate.orm.core;
-    opens com.luis.facturacion.mvc_listadoFacturas to javafx.fxml;
-    opens com.luis.facturacion.mvc_rectificativa to javafx.fxml;
-    opens com.luis.facturacion.mvc_rectificativa.database to javafx.base, org.hibernate.orm.core;
+    opens com.luis.facturacion.mvc_invoice to javafx.fxml;
+    opens com.luis.facturacion.mvc_invoice.database to javafx.base, org.hibernate.orm.core;
+    opens com.luis.facturacion.mvc_invoiceList to javafx.fxml;
+    opens com.luis.facturacion.mvc_correctiveInvoice to javafx.fxml;
+    opens com.luis.facturacion.mvc_correctiveInvoice.database to javafx.base, org.hibernate.orm.core;
 
-    opens com.luis.facturacion.mvc_resumen to javafx.fxml;
-    //opens com.luis.facturacion.mvc_resumen.database to javafx.base, org.hibernate.orm.core;
+    opens com.luis.facturacion.mvc_summary to javafx.fxml;
+    //opens com.luis.facturacion.mvc_summary.database to javafx.base, org.hibernate.orm.core;
 
     // Exportación para el AppController y las clases principales
     exports com.luis.facturacion;
-    exports com.luis.facturacion.mvc_articulo;
+    exports com.luis.facturacion.mvc_article;
     exports com.luis.facturacion.mvc_login;
     exports com.luis.facturacion.mvc_mainmenu;
     exports com.luis.facturacion.mvc_client;
-    exports com.luis.facturacion.mvc_factura;
-    exports com.luis.facturacion.mvc_resumen;
+    exports com.luis.facturacion.mvc_invoice;
+    exports com.luis.facturacion.mvc_summary;
 
 }
