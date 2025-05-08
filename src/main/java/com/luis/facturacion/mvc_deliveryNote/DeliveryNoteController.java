@@ -2,6 +2,8 @@ package com.luis.facturacion.mvc_deliveryNote;
 
 import com.luis.facturacion.AppController;
 import com.luis.facturacion.utils.TabFunction;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -9,6 +11,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,6 +19,8 @@ public class DeliveryNoteController {
 
     private DeliveryNoteModel deliveryNoteModel;
     private AppController appController;
+    private DeliveryNoteItem deliveryNoteItem;
+    private ObservableList<DeliveryNoteItem> deliveryNoteItems = FXCollections.observableArrayList();
 
     @FXML
     private AnchorPane rootPane;
@@ -63,6 +68,8 @@ public class DeliveryNoteController {
             quantityColumn.setCellValueFactory(new PropertyValueFactory<>("quantity"));
             priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
             amountColumn.setCellValueFactory(new PropertyValueFactory<>("amount"));
+
+            itemsTable.setItems(deliveryNoteItems);
         }
 
         configureNavigation();
@@ -84,8 +91,37 @@ public class DeliveryNoteController {
         tabFunction.configureCircularNavigation(navigationOrder, addButton, codeField);
     }
 
+    /**
+     * pilla la info de los textfield
+     * la pone en la tabla
+     * guarda los items en una List, no en una BBDD
+     * @param actionEvent
+     */
     public void handleAddItem(ActionEvent actionEvent) {
         System.out.println("Add to table");
+        String code = codeField.getText();
+        String concept = conceptField.getText();
+        String trace1 = trace1Field.getText();
+        String trace2 = trace2Field.getText();
+        Integer quantity = Integer.parseInt(quantityField.getText());
+        BigDecimal price = new BigDecimal(priceField.getText());
+        //aqui iria obtener el nombre del articulo haciendo la llamada correspondiente
+
+        deliveryNoteItem = new DeliveryNoteItem(code, concept, trace1, trace2, quantity, price);
+
+        deliveryNoteItems.add(deliveryNoteItem);
+
+        clearFields();
+
+    }
+
+    private void clearFields() {
+        codeField.clear();
+        trace1Field.clear();
+        trace2Field.clear();
+        quantityField.clear();
+        priceField.clear();
+        codeField.requestFocus(); // Establecer foco en el primer campo
     }
 
     public void handleSave(ActionEvent actionEvent) {
