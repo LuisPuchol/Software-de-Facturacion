@@ -13,7 +13,9 @@ import javafx.scene.layout.AnchorPane;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class DeliveryNoteController {
 
@@ -87,8 +89,15 @@ public class DeliveryNoteController {
         navigationOrder.add(quantityField);
         navigationOrder.add(priceField);
         navigationOrder.add(addButton);
+        Map<Node, Runnable> customActions = new HashMap<>();
+        customActions.put(clientField, () -> {
+            String clientID = clientField.getText();
+            String clientInfo = getClientByInd(Integer.parseInt(clientID));
+            clientInfoField.setText(clientInfo);
+        } );
+        customActions.put(codeField, this::getArticleByID);
 
-        tabFunction.configureCircularNavigation(navigationOrder, addButton, codeField);
+        tabFunction.configureCircularNavigation(navigationOrder, codeField, addButton, customActions);
     }
 
     /**
@@ -98,21 +107,18 @@ public class DeliveryNoteController {
      * @param actionEvent
      */
     public void handleAddItem(ActionEvent actionEvent) {
-        System.out.println("Add to table");
         String code = codeField.getText();
         String concept = conceptField.getText();
         String trace1 = trace1Field.getText();
         String trace2 = trace2Field.getText();
         Integer quantity = Integer.parseInt(quantityField.getText());
         BigDecimal price = new BigDecimal(priceField.getText());
-        //aqui iria obtener el nombre del articulo haciendo la llamada correspondiente
 
         deliveryNoteItem = new DeliveryNoteItem(code, concept, trace1, trace2, quantity, price);
 
         deliveryNoteItems.add(deliveryNoteItem);
 
         clearFields();
-
     }
 
     private void clearFields() {
@@ -121,12 +127,20 @@ public class DeliveryNoteController {
         trace2Field.clear();
         quantityField.clear();
         priceField.clear();
-        codeField.requestFocus(); // Establecer foco en el primer campo
     }
 
     public void handleSave(ActionEvent actionEvent) {
     }
 
     public void handleExit(ActionEvent actionEvent) {
+    }
+
+
+    private String getClientByInd(int ID){
+        return appController.getClienteByID(ID);
+    }
+
+    public void getArticleByID(){
+        System.out.println("hola");
     }
 }

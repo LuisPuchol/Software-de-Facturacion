@@ -17,7 +17,6 @@ public class DeliveryNoteItem {
     private final ObjectProperty<BigDecimal> price;
     private final ObjectProperty<BigDecimal> amount;
 
-    // Estos campos son para la BBDD, pero no los usamos ahora
     private Long id;
     private Long albaranId;
     private Long articuloId;

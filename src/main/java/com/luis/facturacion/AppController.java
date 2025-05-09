@@ -13,7 +13,6 @@ import javafx.stage.Stage;
 public class AppController {
     private Stage primaryStage;
     private ViewLoader viewLoader;
-
     private final LoginController loginController;
     private final MainMenuController mainMenuController;
     private final ArticleController articleController;
