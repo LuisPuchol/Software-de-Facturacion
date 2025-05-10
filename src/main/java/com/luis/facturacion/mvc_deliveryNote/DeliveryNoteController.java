@@ -2,6 +2,8 @@ package com.luis.facturacion.mvc_deliveryNote;
 
 import com.luis.facturacion.AppController;
 import com.luis.facturacion.utils.TabFunction;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -9,13 +11,20 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import static java.lang.Integer.parseInt;
 
 public class DeliveryNoteController {
 
     private DeliveryNoteModel deliveryNoteModel;
     private AppController appController;
+    private DeliveryNoteItem deliveryNoteItem;
+    private ObservableList<DeliveryNoteItem> deliveryNoteItems = FXCollections.observableArrayList();
 
     @FXML
     private AnchorPane rootPane;
@@ -53,44 +62,88 @@ public class DeliveryNoteController {
         deliveryNoteModel.setController(this);
     }
 
+    /**
+     * Initializes UI components by setting up table columns with their respective
+     * property values and configuring tab navigation between input fields.
+     */
     @FXML
     public void initialize() {
         if (itemsTable != null) {
-            codeColumn.setCellValueFactory(new PropertyValueFactory<>("code"));
-            conceptColumn.setCellValueFactory(new PropertyValueFactory<>("concept"));
-            trace1Column.setCellValueFactory(new PropertyValueFactory<>("trace1"));
-            trace2Column.setCellValueFactory(new PropertyValueFactory<>("trace2"));
-            quantityColumn.setCellValueFactory(new PropertyValueFactory<>("quantity"));
-            priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
-            amountColumn.setCellValueFactory(new PropertyValueFactory<>("amount"));
+            Map<TableColumn<DeliveryNoteItem, String>, String> columnMappings = Map.of(
+                    codeColumn, "code",
+                    conceptColumn, "concept",
+                    trace1Column, "trace1",
+                    trace2Column, "trace2",
+                    quantityColumn, "quantity",
+                    priceColumn, "price",
+                    amountColumn, "amount"
+            );
+
+            columnMappings.forEach((column, property) ->
+                    column.setCellValueFactory(new PropertyValueFactory<>(property))
+            );
+
+            itemsTable.setItems(deliveryNoteItems);
         }
 
         configureNavigation();
     }
 
+    /**
+     * Configures tab navigation order between UI components and sets custom actions
+     * for client and code fields that automatically fetch and display related information.
+     */
     private void configureNavigation() {
         TabFunction tabFunction = new TabFunction();
 
-        List<Node> navigationOrder = new ArrayList<>();
-        navigationOrder.add(dateField);
-        navigationOrder.add(clientField);
-        navigationOrder.add(codeField);
-        navigationOrder.add(trace1Field);
-        navigationOrder.add(trace2Field);
-        navigationOrder.add(quantityField);
-        navigationOrder.add(priceField);
-        navigationOrder.add(addButton);
+        List<Node> navigationOrder = List.of(
+                dateField, clientField, codeField, trace1Field,
+                trace2Field, quantityField, priceField, addButton
+        );
 
-        tabFunction.configureCircularNavigation(navigationOrder, addButton, codeField);
+        Map<Node, Runnable> customActions = Map.of(
+                clientField, () -> clientInfoField.setText(getClientByInd(parseInt(clientField.getText()))),
+                codeField, () -> conceptField.setText(getArticleByID(parseInt(codeField.getText())))
+        );
+
+        tabFunction.configureCircularNavigation(navigationOrder, codeField, addButton, customActions);
     }
 
+    /**
+     * Get the data from the TextFields and add the item in the table
+     *
+     * @param actionEvent
+     */
     public void handleAddItem(ActionEvent actionEvent) {
-        System.out.println("Add to table");
+        deliveryNoteItems.add(new DeliveryNoteItem(
+                codeField.getText(),
+                conceptField.getText(),
+                trace1Field.getText(),
+                trace2Field.getText(),
+                Double.parseDouble(quantityField.getText()),
+                new BigDecimal(priceField.getText())
+        ));
+
+        clearFields();
+    }
+
+    private void clearFields() {
+        List.of(codeField, trace1Field, trace2Field, quantityField, priceField)
+                .forEach(TextField::clear);
     }
 
     public void handleSave(ActionEvent actionEvent) {
     }
 
     public void handleExit(ActionEvent actionEvent) {
+    }
+
+
+    private String getClientByInd(int ID) {
+        return appController.getClienteByID(ID);
+    }
+
+    public String getArticleByID(int ID) {
+        return appController.getProductByID(ID);
     }
 }

@@ -10,6 +10,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class TabFunction {
@@ -36,7 +37,7 @@ public class TabFunction {
      * @param finishPoint The last node in the navigation sequence
      * @param starterPoint The first node in the navigation sequence
      */
-    public void configureCircularNavigation(List<Node> navigationOrder, Button finishPoint, TextField starterPoint) {
+    public void configureCircularNavigation(List<Node> navigationOrder, TextField starterPoint, Button finishPoint, Map<Node, Runnable> customActions) {
         for (int i = 0; i < navigationOrder.size(); i++) {
             final Node currentNode = navigationOrder.get(i);
             final Node nextNode = (currentNode == finishPoint)
@@ -50,7 +51,7 @@ public class TabFunction {
              *     nextNode = navigationOrder.get((currentIndex + 1) % navigationOrder.size());
              * }
              */
-            configureNodeEnterBehavior(currentNode, nextNode);
+            configureNodeEnterBehavior(currentNode, nextNode, customActions);
         }
 
         finishPoint.addEventHandler(ActionEvent.ACTION, event -> starterPoint.requestFocus());
@@ -61,10 +62,13 @@ public class TabFunction {
      * @param currentNode The current node
      * @param nextNode The node to focus on Enter key press
      */
-    private void configureNodeEnterBehavior(Node currentNode, Node nextNode) {
+    private void configureNodeEnterBehavior(Node currentNode, Node nextNode, Map<Node, Runnable> customActions) {
         if (currentNode instanceof TextField || currentNode instanceof DatePicker) {
             currentNode.setOnKeyPressed(event -> {
                 if (event.getCode() == KeyCode.ENTER) {
+                    if (customActions.containsKey(currentNode)){
+                        customActions.get(currentNode).run();
+                    }
                     nextNode.requestFocus();
                     event.consume();
                 }
