@@ -17,6 +17,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static java.lang.Integer.parseInt;
+
 public class DeliveryNoteController {
 
     private DeliveryNoteModel deliveryNoteModel;
@@ -60,16 +62,26 @@ public class DeliveryNoteController {
         deliveryNoteModel.setController(this);
     }
 
+    /**
+     * Initializes UI components by setting up table columns with their respective
+     * property values and configuring tab navigation between input fields.
+     */
     @FXML
     public void initialize() {
         if (itemsTable != null) {
-            codeColumn.setCellValueFactory(new PropertyValueFactory<>("code"));
-            conceptColumn.setCellValueFactory(new PropertyValueFactory<>("concept"));
-            trace1Column.setCellValueFactory(new PropertyValueFactory<>("trace1"));
-            trace2Column.setCellValueFactory(new PropertyValueFactory<>("trace2"));
-            quantityColumn.setCellValueFactory(new PropertyValueFactory<>("quantity"));
-            priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
-            amountColumn.setCellValueFactory(new PropertyValueFactory<>("amount"));
+            Map<TableColumn<DeliveryNoteItem, String>, String> columnMappings = Map.of(
+                    codeColumn, "code",
+                    conceptColumn, "concept",
+                    trace1Column, "trace1",
+                    trace2Column, "trace2",
+                    quantityColumn, "quantity",
+                    priceColumn, "price",
+                    amountColumn, "amount"
+            );
+
+            columnMappings.forEach((column, property) ->
+                    column.setCellValueFactory(new PropertyValueFactory<>(property))
+            );
 
             itemsTable.setItems(deliveryNoteItems);
         }
@@ -77,56 +89,47 @@ public class DeliveryNoteController {
         configureNavigation();
     }
 
+    /**
+     * Configures tab navigation order between UI components and sets custom actions
+     * for client and code fields that automatically fetch and display related information.
+     */
     private void configureNavigation() {
         TabFunction tabFunction = new TabFunction();
 
-        List<Node> navigationOrder = new ArrayList<>();
-        navigationOrder.add(dateField);
-        navigationOrder.add(clientField);
-        navigationOrder.add(codeField);
-        navigationOrder.add(trace1Field);
-        navigationOrder.add(trace2Field);
-        navigationOrder.add(quantityField);
-        navigationOrder.add(priceField);
-        navigationOrder.add(addButton);
-        Map<Node, Runnable> customActions = new HashMap<>();
-        customActions.put(clientField, () -> {
-            String clientID = clientField.getText();
-            String clientInfo = getClientByInd(Integer.parseInt(clientID));
-            clientInfoField.setText(clientInfo);
-        } );
-        customActions.put(codeField, this::getArticleByID);
+        List<Node> navigationOrder = List.of(
+                dateField, clientField, codeField, trace1Field,
+                trace2Field, quantityField, priceField, addButton
+        );
+
+        Map<Node, Runnable> customActions = Map.of(
+                clientField, () -> clientInfoField.setText(getClientByInd(parseInt(clientField.getText()))),
+                codeField, () -> conceptField.setText(getArticleByID(parseInt(codeField.getText())))
+        );
 
         tabFunction.configureCircularNavigation(navigationOrder, codeField, addButton, customActions);
     }
 
     /**
-     * pilla la info de los textfield
-     * la pone en la tabla
-     * guarda los items en una List, no en una BBDD
+     * Get the data from the TextFields and add the item in the table
+     *
      * @param actionEvent
      */
     public void handleAddItem(ActionEvent actionEvent) {
-        String code = codeField.getText();
-        String concept = conceptField.getText();
-        String trace1 = trace1Field.getText();
-        String trace2 = trace2Field.getText();
-        Integer quantity = Integer.parseInt(quantityField.getText());
-        BigDecimal price = new BigDecimal(priceField.getText());
-
-        deliveryNoteItem = new DeliveryNoteItem(code, concept, trace1, trace2, quantity, price);
-
-        deliveryNoteItems.add(deliveryNoteItem);
+        deliveryNoteItems.add(new DeliveryNoteItem(
+                codeField.getText(),
+                conceptField.getText(),
+                trace1Field.getText(),
+                trace2Field.getText(),
+                Double.parseDouble(quantityField.getText()),
+                new BigDecimal(priceField.getText())
+        ));
 
         clearFields();
     }
 
     private void clearFields() {
-        codeField.clear();
-        trace1Field.clear();
-        trace2Field.clear();
-        quantityField.clear();
-        priceField.clear();
+        List.of(codeField, trace1Field, trace2Field, quantityField, priceField)
+                .forEach(TextField::clear);
     }
 
     public void handleSave(ActionEvent actionEvent) {
@@ -136,11 +139,11 @@ public class DeliveryNoteController {
     }
 
 
-    private String getClientByInd(int ID){
+    private String getClientByInd(int ID) {
         return appController.getClienteByID(ID);
     }
 
-    public void getArticleByID(){
-        System.out.println("hola");
+    public String getArticleByID(int ID) {
+        return appController.getProductByID(ID);
     }
 }

@@ -66,11 +66,9 @@ public class TabFunction {
         if (currentNode instanceof TextField || currentNode instanceof DatePicker) {
             currentNode.setOnKeyPressed(event -> {
                 if (event.getCode() == KeyCode.ENTER) {
-
                     if (customActions.containsKey(currentNode)){
                         customActions.get(currentNode).run();
                     }
-
                     nextNode.requestFocus();
                     event.consume();
                 }
