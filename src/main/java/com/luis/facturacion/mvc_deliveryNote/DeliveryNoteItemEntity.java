@@ -1,35 +1,104 @@
 package com.luis.facturacion.mvc_deliveryNote;
 
+import jakarta.persistence.*;
+
 import java.math.BigDecimal;
 
+@Entity
+@Table(name = "registros")
 public class DeliveryNoteItemEntity {
-    private Long id;
-    private Long albaranId;
-    private Long articuloId;
-    private String trazabilidad1;
-    private String trazabilidad2;
-    private double cantidad;
-    private BigDecimal precio;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Long index;
+
+    @Column(name = "albaran_id")
+    private Long deliveryNoteID;
+
+    @Column(name = "articulo_id")
+    private Long articleID;
+
+    @Column(name = "tz1", length = 15)
+    private String trace1;
+
+    @Column(name = "tz2", length = 15)
+    private String trace2;
+
+    @Column(name = "cantidad", length = 15)
+    private double quantity;
+
+    @Column(name = "precio")
+    private BigDecimal amount;
+
+    public DeliveryNoteItemEntity() {
+    }
+
+    public DeliveryNoteItemEntity(Long index, Long deliveryNoteID, Long articleID, String trace1,
+                                  String trace2, double quantity, BigDecimal amount) {
+        this.index = index;
+        this.deliveryNoteID = deliveryNoteID;
+        this.articleID = articleID;
+        this.trace1 = trace1;
+        this.trace2 = trace2;
+        this.quantity = quantity;
+        this.amount = amount;
+    }
 
     // Getters y setters
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
+    public Long getIndex() {
+        return index;
+    }
 
-    public Long getAlbaranId() { return albaranId; }
-    public void setAlbaranId(Long albaranId) { this.albaranId = albaranId; }
+    public void setIndex(Long index) {
+        this.index = index;
+    }
 
-    public Long getArticuloId() { return articuloId; }
-    public void setArticuloId(Long articuloId) { this.articuloId = articuloId; }
+    public Long getDeliveryNoteID() {
+        return deliveryNoteID;
+    }
 
-    public String getTrazabilidad1() { return trazabilidad1; }
-    public void setTrazabilidad1(String trazabilidad1) { this.trazabilidad1 = trazabilidad1; }
+    public void setDeliveryNoteID(Long deliveryNoteID) {
+        this.deliveryNoteID = deliveryNoteID;
+    }
 
-    public String getTrazabilidad2() { return trazabilidad2; }
-    public void setTrazabilidad2(String trazabilidad2) { this.trazabilidad2 = trazabilidad2; }
+    public Long getArticleID() {
+        return articleID;
+    }
 
-    public double getCantidad() { return cantidad; }
-    public void setCantidad(double cantidad) { this.cantidad = cantidad; }
+    public void setArticleID(Long articleID) {
+        this.articleID = articleID;
+    }
 
-    public BigDecimal getPrecio() { return precio; }
-    public void setPrecio(BigDecimal precio) { this.precio = precio; }
+    public String getTrace1() {
+        return trace1;
+    }
+
+    public void setTrace1(String trace1) {
+        this.trace1 = trace1;
+    }
+
+    public String getTrace2() {
+        return trace2;
+    }
+
+    public void setTrace2(String trace2) {
+        this.trace2 = trace2;
+    }
+
+    public double getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(double quantity) {
+        this.quantity = quantity;
+    }
+
+    public BigDecimal getAmount() {
+        return amount;
+    }
+
+    public void setAmount(BigDecimal amount) {
+        this.amount = amount;
+    }
 }

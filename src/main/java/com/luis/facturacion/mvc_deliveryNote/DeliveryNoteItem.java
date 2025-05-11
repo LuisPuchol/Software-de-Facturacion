@@ -18,9 +18,8 @@ public class DeliveryNoteItem {
     private final ObjectProperty<BigDecimal> price;
     private final ObjectProperty<BigDecimal> amount;
 
-    private Long id;
-    private Long albaranId;
-    private Long articuloId;
+    private Long deliveryNoteID;
+    private Long articleID;
 
     /**
      * Main constructor
@@ -125,39 +124,30 @@ public class DeliveryNoteItem {
         amount.set(newAmount);
     }
 
-    public Long getId() {
-        return id;
+    public Long getDeliveryNoteID() {
+        return deliveryNoteID;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setDeliveryNoteID(Long deliveryNoteID) {
+        this.deliveryNoteID = deliveryNoteID;
     }
 
-    public Long getAlbaranId() {
-        return albaranId;
+    public Long getArticleID() {
+        return articleID;
     }
 
-    public void setAlbaranId(Long albaranId) {
-        this.albaranId = albaranId;
-    }
-
-    public Long getArticuloId() {
-        return articuloId;
-    }
-
-    public void setArticuloId(Long articuloId) {
-        this.articuloId = articuloId;
+    public void setArticleID(Long articleID) {
+        this.articleID = articleID;
     }
 
     public DeliveryNoteItemEntity toEntity() {
         DeliveryNoteItemEntity entity = new DeliveryNoteItemEntity();
-        entity.setId(id);
-        entity.setAlbaranId(albaranId);
-        entity.setArticuloId(articuloId); // this value should come from any side
-        entity.setTrazabilidad1(getTrace1());
-        entity.setTrazabilidad2(getTrace2());
-        entity.setCantidad(getQuantity());
-        entity.setPrecio(getPrice());
+        entity.setDeliveryNoteID(deliveryNoteID);
+        entity.setArticleID(articleID); // this value should come from any side
+        entity.setTrace1(getTrace1());
+        entity.setTrace2(getTrace2());
+        entity.setQuantity(getQuantity());
+        entity.setAmount(getPrice());
         return entity;
     }
 
