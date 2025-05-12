@@ -18,8 +18,8 @@ public class DeliveryNoteItem {
     private final ObjectProperty<BigDecimal> price;
     private final ObjectProperty<BigDecimal> amount;
 
-    private Long deliveryNoteID;
-    private Long articleID;
+    private Integer deliveryNoteID;
+    private Integer articleID;
 
     /**
      * Main constructor
@@ -124,19 +124,19 @@ public class DeliveryNoteItem {
         amount.set(newAmount);
     }
 
-    public Long getDeliveryNoteID() {
+    public Integer getDeliveryNoteID() {
         return deliveryNoteID;
     }
 
-    public void setDeliveryNoteID(Long deliveryNoteID) {
+    public void setDeliveryNoteID(Integer deliveryNoteID) {
         this.deliveryNoteID = deliveryNoteID;
     }
 
-    public Long getArticleID() {
+    public Integer getArticleID() {
         return articleID;
     }
 
-    public void setArticleID(Long articleID) {
+    public void setArticleID(Integer articleID) {
         this.articleID = articleID;
     }
 

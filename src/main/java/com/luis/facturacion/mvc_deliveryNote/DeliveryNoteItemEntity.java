@@ -11,13 +11,13 @@ public class DeliveryNoteItemEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Long index;
+    private Integer index;
 
     @Column(name = "albaran_id")
-    private Long deliveryNoteID;
+    private Integer deliveryNoteID;
 
     @Column(name = "articulo_id")
-    private Long articleID;
+    private Integer articleID;
 
     @Column(name = "tz1", length = 15)
     private String trace1;
@@ -34,7 +34,7 @@ public class DeliveryNoteItemEntity {
     public DeliveryNoteItemEntity() {
     }
 
-    public DeliveryNoteItemEntity(Long index, Long deliveryNoteID, Long articleID, String trace1,
+    public DeliveryNoteItemEntity(Integer index, Integer deliveryNoteID, Integer articleID, String trace1,
                                   String trace2, double quantity, BigDecimal amount) {
         this.index = index;
         this.deliveryNoteID = deliveryNoteID;
@@ -46,27 +46,27 @@ public class DeliveryNoteItemEntity {
     }
 
     // Getters y setters
-    public Long getIndex() {
+    public Integer getIndex() {
         return index;
     }
 
-    public void setIndex(Long index) {
+    public void setIndex(Integer index) {
         this.index = index;
     }
 
-    public Long getDeliveryNoteID() {
+    public Integer getDeliveryNoteID() {
         return deliveryNoteID;
     }
 
-    public void setDeliveryNoteID(Long deliveryNoteID) {
+    public void setDeliveryNoteID(Integer deliveryNoteID) {
         this.deliveryNoteID = deliveryNoteID;
     }
 
-    public Long getArticleID() {
+    public Integer getArticleID() {
         return articleID;
     }
 
-    public void setArticleID(Long articleID) {
+    public void setArticleID(Integer articleID) {
         this.articleID = articleID;
     }
 

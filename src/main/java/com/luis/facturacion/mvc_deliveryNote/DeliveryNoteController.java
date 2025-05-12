@@ -133,6 +133,21 @@ public class DeliveryNoteController {
     }
 
     public void handleSave(ActionEvent actionEvent) {
+        deliveryNoteModel.createNewDeliveryNote(
+                numField.getText(),
+                clientField.getText(),
+                clientInfoField.getText(),
+                dateField.getValue().toString(),
+                printAlbaranCheck.isSelected(),
+                createInvoiceCheck.isSelected()
+        );
+
+        for (DeliveryNoteItem uiItem : deliveryNoteItems) {
+            DeliveryNoteItemEntity itemEntity = deliveryNoteModel.convertToEntity(uiItem);
+            deliveryNoteModel.addItemToDeliveryNote(itemEntity);
+        }
+
+        deliveryNoteModel.saveDeliveryNoteWithItems();
     }
 
     public void handleExit(ActionEvent actionEvent) {
