@@ -1,32 +1,20 @@
 package com.luis.facturacion.mvc_deliveryNote;
 
-import com.luis.facturacion.HibernateUtil;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
+import com.luis.facturacion.mvc_article.database.ArticleEntity;
+import com.luis.facturacion.utils.GlobalDAO;
 
-public class DeliveryNoteDAO {
 
-    public void save(DeliveryNoteEntity deliveryNoteEntity) {
-        Session session = null;
-        Transaction transaction = null;
+public class DeliveryNoteDAO extends GlobalDAO<DeliveryNoteEntity, Integer> {
+    private static DeliveryNoteDAO instance;
 
-        try {
-            session = HibernateUtil.getSessionFactory().openSession();
-            transaction = session.beginTransaction();
+    private DeliveryNoteDAO() {
+        super(DeliveryNoteEntity.class);
+    }
 
-            session.persist(deliveryNoteEntity);
-
-            transaction.commit();
-        } catch (Exception e) {
-            System.err.println("Error al guardar cliente: " + e.getMessage());
-            if (transaction != null && transaction.isActive()) {
-                transaction.rollback();
-            }
-            throw e;
-        } finally {
-            if (session != null && session.isOpen()) {
-                session.close();
-            }
+    public static DeliveryNoteDAO getInstance() {
+        if (instance == null) {
+            instance = new DeliveryNoteDAO();
         }
+        return instance;
     }
 }

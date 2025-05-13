@@ -147,7 +147,7 @@ public class DeliveryNoteItem {
         entity.setTrace1(getTrace1());
         entity.setTrace2(getTrace2());
         entity.setQuantity(getQuantity());
-        entity.setAmount(getPrice());
+        entity.setPrice(getPrice());
         return entity;
     }
 

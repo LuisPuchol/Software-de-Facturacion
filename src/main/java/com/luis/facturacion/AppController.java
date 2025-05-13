@@ -82,19 +82,10 @@ public class AppController {
     public void showListadoFacturasView() {
 
     }
-
-
-
+    
     public Stage getStage () {
         return this.primaryStage;
     }
 
-    public String getClienteByID(Integer id) {
-        return clientController.getClienteById(id);
-    }
-
-    public String getProductByID(Integer id) {
-        return articleController.getProductByID(id);
-    }
 
 }

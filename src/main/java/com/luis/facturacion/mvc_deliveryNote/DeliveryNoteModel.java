@@ -1,11 +1,10 @@
 package com.luis.facturacion.mvc_deliveryNote;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.atomic.AtomicReference;
 
 public class DeliveryNoteModel {
     private static DeliveryNoteModel instance;
@@ -21,8 +20,8 @@ public class DeliveryNoteModel {
 
     private DeliveryNoteModel() {
         System.out.println("Delivery-Note Model created");
-        //this.de = new ClienteDAO();
-        //this.clienteList = FXCollections.observableArrayList();
+        this.deliveryNoteDAO = DeliveryNoteDAO.getInstance();
+        this.deliveryNoteItemDAO = DeliveryNoteItemDAO.getInstance();
     }
 
     public static DeliveryNoteModel getInstance() {
@@ -41,13 +40,12 @@ public class DeliveryNoteModel {
     /**
      * New deliveryNote with tha basic data
      */
-    public void createNewDeliveryNote(String number, String clientId, String clientInfo,
-                                      String date, boolean printDeliveryNote, boolean createInvoice) {
+    public void createNewDeliveryNote(String number, String clientId,
+                                      LocalDate date, boolean printDeliveryNote, boolean createInvoice) {
         currentDeliveryNoteEntity = new DeliveryNoteEntity();
         currentDeliveryNoteEntity.setIndex(Integer.valueOf(number));
         currentDeliveryNoteEntity.setClientId(Integer.valueOf(clientId));
-        currentDeliveryNoteEntity.setClientId(Integer.valueOf(clientInfo));
-        currentDeliveryNoteEntity.setDate(LocalDateTime.parse(date));
+        currentDeliveryNoteEntity.setDate(date);
 
 
         //Do what i have to do with these. One Prints directly and the other creates the invoice directly
@@ -70,11 +68,14 @@ public class DeliveryNoteModel {
      */
     public DeliveryNoteItemEntity convertToEntity(DeliveryNoteItem uiItem) {
         DeliveryNoteItemEntity entity = new DeliveryNoteItemEntity();
-        entity.setIndex(Integer.valueOf(uiItem.getCode()));
-        entity.setArticleID(Integer.valueOf(uiItem.getConcept()));
+
+        //TODO deliveryNoteID value comes from the DDBB picks the higher, if its null, then set it to 1
+        //entity.setDeliveryNoteID(uiItem.getDeliveryNoteID());
+        entity.setArticleID(uiItem.getArticleID());
         entity.setTrace1(uiItem.getTrace1());
         entity.setTrace2(uiItem.getTrace2());
         entity.setQuantity(uiItem.getQuantity());
+        entity.setPrice(uiItem.getPrice());
         return entity;
     }
 
@@ -112,7 +113,7 @@ public class DeliveryNoteModel {
                 startLatch.await();
 
                 // Save
-                deliveryNoteItemDAO.saveAll(currentItems);
+                currentItems.forEach(deliveryNoteItemDAO::save);
 
 
             } catch (Exception e) {
@@ -135,15 +136,6 @@ public class DeliveryNoteModel {
             noteThread.join();
             itemsThread.join();
 
-            // Check exceptions
-            if (threadException.get() != null) {
-                throw new RuntimeException("Error al guardar los datos concurrentemente", threadException.get());
-            }
-
-            // Notify controller ??
-            if (controller != null) {
-                controller.notifySaveSuccess();
-            }
 
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();

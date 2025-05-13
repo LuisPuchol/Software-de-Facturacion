@@ -1,7 +1,8 @@
 package com.luis.facturacion.mvc_deliveryNote;
 
 import jakarta.persistence.*;
-import java.time.LocalDateTime;
+
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "albaranes")
@@ -19,7 +20,7 @@ public class DeliveryNoteEntity {
     private Integer clientId;
 
     @Column(name = "fecha")
-    private LocalDateTime date;
+    private LocalDate date;
 
     @Column(name = "num_factura")
     private Integer invoiceNumber;
@@ -27,7 +28,7 @@ public class DeliveryNoteEntity {
     public DeliveryNoteEntity() {
     }
 
-    public DeliveryNoteEntity(Integer index, Integer clientId, LocalDateTime date, Integer invoiceNumber) {
+    public DeliveryNoteEntity(Integer index, Integer clientId, LocalDate date, Integer invoiceNumber) {
         this.index = index;
         this.clientId = clientId;
         this.date = date;
@@ -59,11 +60,11 @@ public class DeliveryNoteEntity {
         this.clientId = clientId;
     }
 
-    public LocalDateTime getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(LocalDateTime date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 

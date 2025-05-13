@@ -1,6 +1,8 @@
 package com.luis.facturacion.mvc_deliveryNote;
 
 import com.luis.facturacion.AppController;
+import com.luis.facturacion.mvc_article.database.ArticleDAO;
+import com.luis.facturacion.mvc_client.database.ClientDAO;
 import com.luis.facturacion.utils.TabFunction;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -136,8 +138,7 @@ public class DeliveryNoteController {
         deliveryNoteModel.createNewDeliveryNote(
                 numField.getText(),
                 clientField.getText(),
-                clientInfoField.getText(),
-                dateField.getValue().toString(),
+                dateField.getValue(),
                 printAlbaranCheck.isSelected(),
                 createInvoiceCheck.isSelected()
         );
@@ -155,10 +156,10 @@ public class DeliveryNoteController {
 
 
     private String getClientByInd(int ID) {
-        return appController.getClienteByID(ID);
+        return ClientDAO.getInstance().getNameById(ID);
     }
 
     public String getArticleByID(int ID) {
-        return appController.getProductByID(ID);
+        return ArticleDAO.getInstance().getNameById(ID);
     }
 }

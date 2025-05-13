@@ -23,7 +23,7 @@
                     <TextField fx:id="clientInfoField" prefWidth="150" editable="false"/>
 
                     <Label text="Num."/>
-                    <TextField fx:id="numField" prefWidth="80" editable="false"/>
+                    <TextField fx:id="numField" prefWidth="80" editable="true"/>
 
                     <Label text="Total"/>
                     <TextField fx:id="totalField" prefWidth="100" editable="false" text="0.00"/>

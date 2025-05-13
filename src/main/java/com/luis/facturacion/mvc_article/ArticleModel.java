@@ -10,12 +10,10 @@ import java.util.List;
 public class ArticleModel {
     private static ArticleModel instance;
     private ArticleController articleController;
-    private final ArticleDAO articleDAO;
     private final ObservableList<ArticleEntity> articulosList;
 
     ArticleModel() {
         System.out.println("Article Model created");
-        this.articleDAO = new ArticleDAO();
         this.articulosList = FXCollections.observableArrayList();
     }
 
@@ -52,7 +50,7 @@ public class ArticleModel {
             articleEntity.setName(name);
 
             // Save on DDBB
-            articleDAO.save(articleEntity);
+            ArticleDAO.getInstance().save(articleEntity);
 
             System.out.println("Article Saved.");
 
@@ -81,10 +79,10 @@ public class ArticleModel {
     }
 
     public List<ArticleEntity> getAllArticles() {
-        return articleDAO.getAll();
+        return ArticleDAO.getInstance().getAll();
     }
 
     public String getProductByID(Integer id) {
-        return articleDAO.getProductNameById(id);
+        return ArticleDAO.getInstance().getNameById(id);
     }
 }
