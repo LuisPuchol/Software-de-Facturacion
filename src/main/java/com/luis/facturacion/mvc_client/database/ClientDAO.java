@@ -1,5 +1,4 @@
 package com.luis.facturacion.mvc_client.database;
-import com.luis.facturacion.mvc_article.database.ArticleDAO;
 import com.luis.facturacion.utils.GlobalDAO;
 
 public class ClientDAO extends GlobalDAO<ClientEntity, Integer> {

@@ -82,8 +82,31 @@ public class DeliveryNoteController {
                     column.setCellValueFactory(new PropertyValueFactory<>(property))
             );
             itemsTable.setItems(deliveryNoteItems);
+
+            itemsTable.getSelectionModel().selectedItemProperty().addListener(
+                    (observable, oldValue, newValue) -> {
+                        if (newValue != null) {
+                            populateFormFields(newValue);
+                        }
+                    });
         }
         configureNavigation();
+    }
+
+    /**
+     * Populates the form fields with data from the selected item
+     */
+    private void populateFormFields(DeliveryNoteItem item) {
+        codeField.setText(item.getCode());
+        conceptField.setText(item.getConcept());
+        trace1Field.setText(item.getTrace1());
+        trace2Field.setText(item.getTrace2());
+        quantityField.setText(String.valueOf(item.getQuantity()));
+        priceField.setText(item.getPrice().toString());
+
+        addButton.setText("Update");
+
+        deliveryNoteItem = item;
     }
 
     /**
@@ -109,21 +132,42 @@ public class DeliveryNoteController {
     }
 
     /**
-     * Get the data from the TextFields and add the item in the table
+     * Handles adding a new item or updating an existing one based on selection state
      */
     public void handleAddItem(ActionEvent actionEvent) {
-        deliveryNoteItems.add(new DeliveryNoteItem(
-                codeField.getText(),
-                conceptField.getText(),
-                trace1Field.getText(),
-                trace2Field.getText(),
-                Double.parseDouble(quantityField.getText()),
-                new BigDecimal(priceField.getText())
-        ));
+        if (deliveryNoteItem != null) {
+            int index = deliveryNoteItems.indexOf(deliveryNoteItem);
+
+            DeliveryNoteItem updatedItem = new DeliveryNoteItem(
+                    codeField.getText(),
+                    conceptField.getText(),
+                    trace1Field.getText(),
+                    trace2Field.getText(),
+                    Double.parseDouble(quantityField.getText()),
+                    new BigDecimal(priceField.getText())
+            );
+            deliveryNoteItems.set(index, updatedItem);
+
+            deliveryNoteItem = null;
+            addButton.setText("Add");
+        } else {
+            deliveryNoteItems.add(new DeliveryNoteItem(
+                    codeField.getText(),
+                    conceptField.getText(),
+                    trace1Field.getText(),
+                    trace2Field.getText(),
+                    Double.parseDouble(quantityField.getText()),
+                    new BigDecimal(priceField.getText())
+            ));
+        }
+
         calculateTotalAmountFromDeliveryNote();
         clearFields();
     }
 
+    /**
+     * Calculates the sum of all delivery note items and updates the total amount field.
+     */
     private void calculateTotalAmountFromDeliveryNote() {
         BigDecimal totalAmount = deliveryNoteItems.stream()
                 .map(DeliveryNoteItem::getAmount)
@@ -132,11 +176,21 @@ public class DeliveryNoteController {
         totalAmountField.setText(String.valueOf(totalAmount));
     }
 
+    /**
+     * Clears all item input fields and resets the editing state.
+     */
     private void clearFields() {
         List.of(codeField, conceptField, trace1Field, trace2Field, quantityField, priceField)
                 .forEach(TextField::clear);
+
+        deliveryNoteItem = null;
+        addButton.setText("Add");
     }
 
+    /**
+     * Creates and saves a new delivery note with all items from the table.
+     * @param actionEvent The save button click event
+     */
     public void handleSave(ActionEvent actionEvent) {
         deliveryNoteModel.createNewDeliveryNote(
                 deliveryNoteNumberField.getText(),
