@@ -14,8 +14,6 @@ import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -34,7 +32,7 @@ public class DeliveryNoteController {
     @FXML
     private DatePicker dateField;
     @FXML
-    private TextField clientField, clientInfoField, numField, totalField;
+    private TextField clientIdField, clientNameField, deliveryNoteNumberField, totalAmountField;
 
     @FXML
     private TextField codeField, conceptField, trace1Field, trace2Field, quantityField, priceField;
@@ -50,7 +48,7 @@ public class DeliveryNoteController {
     @FXML
     private TextField summaryField;
     @FXML
-    private CheckBox printAlbaranCheck, createInvoiceCheck;
+    private CheckBox printDeliveryNoteCheck, createInvoiceCheck;
     @FXML
     private Button saveButton, exitButton;
 
@@ -80,14 +78,11 @@ public class DeliveryNoteController {
                     priceColumn, "price",
                     amountColumn, "amount"
             );
-
             columnMappings.forEach((column, property) ->
                     column.setCellValueFactory(new PropertyValueFactory<>(property))
             );
-
             itemsTable.setItems(deliveryNoteItems);
         }
-
         configureNavigation();
     }
 
@@ -99,22 +94,22 @@ public class DeliveryNoteController {
         TabFunction tabFunction = new TabFunction();
 
         List<Node> navigationOrder = List.of(
-                dateField, clientField, codeField, trace1Field,
+                dateField, clientIdField, codeField, trace1Field,
                 trace2Field, quantityField, priceField, addButton
         );
 
         Map<Node, Runnable> customActions = Map.of(
-                clientField, () -> clientInfoField.setText(getClientByInd(parseInt(clientField.getText()))),
+                clientIdField, () -> clientNameField.setText(getClientByInd(parseInt(clientIdField.getText()))),
                 codeField, () -> conceptField.setText(getArticleByID(parseInt(codeField.getText())))
         );
 
         tabFunction.configureCircularNavigation(navigationOrder, codeField, addButton, customActions);
+
+        deliveryNoteModel.setDeliveryNoteNumber(deliveryNoteNumberField);
     }
 
     /**
      * Get the data from the TextFields and add the item in the table
-     *
-     * @param actionEvent
      */
     public void handleAddItem(ActionEvent actionEvent) {
         deliveryNoteItems.add(new DeliveryNoteItem(
@@ -125,35 +120,52 @@ public class DeliveryNoteController {
                 Double.parseDouble(quantityField.getText()),
                 new BigDecimal(priceField.getText())
         ));
-
+        calculateTotalAmountFromDeliveryNote();
         clearFields();
     }
 
+    private void calculateTotalAmountFromDeliveryNote() {
+        BigDecimal totalAmount = deliveryNoteItems.stream()
+                .map(DeliveryNoteItem::getAmount)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+
+        totalAmountField.setText(String.valueOf(totalAmount));
+    }
+
     private void clearFields() {
-        List.of(codeField, trace1Field, trace2Field, quantityField, priceField)
+        List.of(codeField, conceptField, trace1Field, trace2Field, quantityField, priceField)
                 .forEach(TextField::clear);
     }
 
     public void handleSave(ActionEvent actionEvent) {
         deliveryNoteModel.createNewDeliveryNote(
-                numField.getText(),
-                clientField.getText(),
+                deliveryNoteNumberField.getText(),
+                clientIdField.getText(),
                 dateField.getValue(),
-                printAlbaranCheck.isSelected(),
+                printDeliveryNoteCheck.isSelected(),
                 createInvoiceCheck.isSelected()
         );
 
-        for (DeliveryNoteItem uiItem : deliveryNoteItems) {
-            DeliveryNoteItemEntity itemEntity = deliveryNoteModel.convertToEntity(uiItem);
-            deliveryNoteModel.addItemToDeliveryNote(itemEntity);
-        }
+        deliveryNoteItems.forEach(deliveryNoteModel::convertAndAddItemToDeliveryNote);
 
         deliveryNoteModel.saveDeliveryNoteWithItems();
+
+        resetUI();
+    }
+
+    public void resetUI() {
+        // TODO posible external class to clean TextFields
+        List.of(clientIdField, clientNameField, deliveryNoteNumberField).forEach(TextField::clear);
+
+        totalAmountField.setText("0.00");
+        deliveryNoteItems.clear();
+        createInvoiceCheck.setSelected(false);
+        deliveryNoteModel.setDeliveryNoteNumber(deliveryNoteNumberField);
     }
 
     public void handleExit(ActionEvent actionEvent) {
+        exitButton.getScene().getWindow().hide();
     }
-
 
     private String getClientByInd(int ID) {
         return ClientDAO.getInstance().getNameById(ID);

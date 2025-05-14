@@ -74,8 +74,8 @@
             <padding>
                 <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
             </padding>
-            <Button fx:id="newButton" text="Nuevo" onMouseClicked="#handleNuevoButton"/>
-            <Button fx:id="editButton" text="Editar" onMouseClicked="#handleEditarButton"/>
+            <Button fx:id="newButton" text="Nuevo" onMouseClicked="#handleNewButton"/>
+            <Button fx:id="editButton" text="Editar" onMouseClicked="#handleEditButton"/>
             <Button fx:id="exitButton" text="Salir" onMouseClicked="#handleExitButton"/>
         </HBox>
     </bottom>

@@ -28,11 +28,10 @@ public class DeliveryNoteEntity {
     public DeliveryNoteEntity() {
     }
 
-    public DeliveryNoteEntity(Integer index, Integer clientId, LocalDate date, Integer invoiceNumber) {
+    public DeliveryNoteEntity(Integer index, Integer clientId, LocalDate date) {
         this.index = index;
         this.clientId = clientId;
         this.date = date;
-        this.invoiceNumber = invoiceNumber;
     }
 
     // Getters and Setters

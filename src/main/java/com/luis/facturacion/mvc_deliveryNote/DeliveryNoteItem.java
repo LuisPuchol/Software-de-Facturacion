@@ -140,16 +140,4 @@ public class DeliveryNoteItem {
         this.articleID = articleID;
     }
 
-    public DeliveryNoteItemEntity toEntity() {
-        DeliveryNoteItemEntity entity = new DeliveryNoteItemEntity();
-        entity.setDeliveryNoteID(deliveryNoteID);
-        entity.setArticleID(articleID); // this value should come from any side
-        entity.setTrace1(getTrace1());
-        entity.setTrace2(getTrace2());
-        entity.setQuantity(getQuantity());
-        entity.setPrice(getPrice());
-        return entity;
-    }
-
-
 }

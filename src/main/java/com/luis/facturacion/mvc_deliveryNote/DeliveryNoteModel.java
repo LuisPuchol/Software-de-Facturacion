@@ -1,5 +1,7 @@
 package com.luis.facturacion.mvc_deliveryNote;
 
+import javafx.scene.control.TextField;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -10,7 +12,6 @@ public class DeliveryNoteModel {
     private static DeliveryNoteModel instance;
     private DeliveryNoteController deliveryNoteController;
 
-    //persistance
     private DeliveryNoteEntity currentDeliveryNoteEntity;
     private List<DeliveryNoteItemEntity> currentItems = new ArrayList<>();
 
@@ -38,117 +39,93 @@ public class DeliveryNoteModel {
     }
 
     /**
-     * New deliveryNote with tha basic data
+     * Creates new delivery note with basic data
      */
     public void createNewDeliveryNote(String number, String clientId,
                                       LocalDate date, boolean printDeliveryNote, boolean createInvoice) {
-        currentDeliveryNoteEntity = new DeliveryNoteEntity();
-        currentDeliveryNoteEntity.setIndex(Integer.valueOf(number));
-        currentDeliveryNoteEntity.setClientId(Integer.valueOf(clientId));
-        currentDeliveryNoteEntity.setDate(date);
+        currentDeliveryNoteEntity = new DeliveryNoteEntity(
+                Integer.valueOf(number),
+                Integer.valueOf(clientId),
+                date
+        );
 
+        //TODO what i have to do with these. One Prints directly and the other creates the invoice directly
+        //printDeliveryNote - > print DeliveryNotePDF
+        //Create a invoice Object and save it to DDBB - >createInvoice
 
-        //Do what i have to do with these. One Prints directly and the other creates the invoice directly
-        //currentDeliveryNoteEntity.setPrintAlbaran(printDeliveryNote);
-        //currentDeliveryNoteEntity.setCreateInvoice(createInvoice);
-
-        // Limpiar items anteriores
         currentItems.clear();
     }
 
     /**
-     * add item to the actual deliveryNote
+     * Adds item to the current delivery note
      */
-    public void addItemToDeliveryNote(DeliveryNoteItemEntity item) {
-        currentItems.add(item);
+    public void convertAndAddItemToDeliveryNote(DeliveryNoteItem item) {
+        DeliveryNoteItemEntity itemEntity = convertToEntity(item);
+        currentItems.add(itemEntity);
     }
 
     /**
-     * DeliveryNoteItem (UI) to DeliveryNoteItemEntity (DDBB)
+     * Converts DeliveryNoteItem (UI) to DeliveryNoteItemEntity (DB)
      */
     public DeliveryNoteItemEntity convertToEntity(DeliveryNoteItem uiItem) {
-        DeliveryNoteItemEntity entity = new DeliveryNoteItemEntity();
-
-        //TODO deliveryNoteID value comes from the DDBB picks the higher, if its null, then set it to 1
-        //entity.setDeliveryNoteID(uiItem.getDeliveryNoteID());
-        entity.setArticleID(uiItem.getArticleID());
-        entity.setTrace1(uiItem.getTrace1());
-        entity.setTrace2(uiItem.getTrace2());
-        entity.setQuantity(uiItem.getQuantity());
-        entity.setPrice(uiItem.getPrice());
-        return entity;
+        return new DeliveryNoteItemEntity(
+                uiItem.getDeliveryNoteID(),
+                uiItem.getArticleID(),
+                uiItem.getTrace1(),
+                uiItem.getTrace2(),
+                uiItem.getQuantity(),
+                uiItem.getPrice()
+        );
     }
 
     /**
-     * Guarda el albarán y sus items usando threads y guarded blocks
+     * Saves the delivery note and its items using threads and guarded blocks
      */
     public void saveDeliveryNoteWithItems() {
         final int threadCount = 2;
         CountDownLatch readyLatch = new CountDownLatch(threadCount);
         CountDownLatch startLatch = new CountDownLatch(1);
 
-        // Thread save DeliveryNote
         Thread noteThread = new Thread(() -> {
             try {
-                // Ready
                 readyLatch.countDown();
-                // W8 to the other
                 startLatch.await();
 
-                // Save
                 deliveryNoteDAO.save(currentDeliveryNoteEntity);
-
-
             } catch (Exception e) {
                 e.printStackTrace();
             }
         });
 
-        // Thread save items
         Thread itemsThread = new Thread(() -> {
             try {
-                // Ready
                 readyLatch.countDown();
-                // W8 to the other
                 startLatch.await();
 
-                // Save
                 currentItems.forEach(deliveryNoteItemDAO::save);
-
-
             } catch (Exception e) {
                 e.printStackTrace();
             }
         });
 
-        // Start threads
         noteThread.start();
         itemsThread.start();
 
         try {
-            // W8 al threads
             readyLatch.await();
-
-            // Start persistence
             startLatch.countDown();
 
-            // W8 until they finish
             noteThread.join();
             itemsThread.join();
-
-
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
-            throw new RuntimeException("Operación interrumpida", e);
+            throw new RuntimeException("Operation interrupted", e);
         }
     }
 
-    /**
-     * Amount of albaran
-     */
-    public BigDecimal calculateTotal() {
-        return currentItems.stream()
-                .map(item -> item.getPrice().multiply(BigDecimal.valueOf(item.getQuantity())))
-                .reduce(BigDecimal.ZERO, BigDecimal::add);
+    public void setDeliveryNoteNumber(TextField deliveryNoteNumberField) {
+        String nextNumber = String.valueOf(DeliveryNoteDAO.getInstance().getNextDeliveryNoteNumber());
+        deliveryNoteNumberField.setText(nextNumber);
     }
+
 }
