@@ -21,43 +21,50 @@ public class MainMenuController {
     @FXML
     public void handleArticlesClick(javafx.event.ActionEvent actionEvent) {
         System.out.println("Articles selected");
-        appController.showArticuloView();
+        appController.showArticleView();
     }
 
     @FXML
     public void handleClientsClick(javafx.event.ActionEvent actionEvent) {
         System.out.println("Clients selected");
-        appController.showClienteView();
+        appController.showClientView();
     }
 
     @FXML
     public void handleVATConfigClick(javafx.event.ActionEvent actionEvent) {
         System.out.println("VAT Config selected");
-        appController.showTipoDeIvaView();
+        appController.showVatConfigView();
     }
 
 
     @FXML
     public void handleCorrectiveInvoiceClick(ActionEvent actionEvent) {
         System.out.println("Corrective-Invoice selected");
-        appController.showRectificativaView();
+        appController.showCorrectiveInvoiceView();
     }
 
     @FXML
     public void handleInvoiceListClick(ActionEvent actionEvent) {
         System.out.println("Invoice-List selected");
-        appController.showListadoFacturasView();
+        appController.showDeliveryNoteListView();
     }
 
     @FXML
     public void handleDeliveryNoteClick(ActionEvent actionEvent) {
         System.out.println("Delivery-Note Selected");
-        appController.showAlbaranView();
+        appController.showDeliveryNoteView();
     }
 
     @FXML
     public void handleInvoiceClick(ActionEvent actionEvent) {
         System.out.println("Creado crearFacturas");
-        appController.showFacturaView();
+        appController.showInvoiceView();
     }
+    @FXML
+    public void handleDeliveryNoteListClick(ActionEvent actionEvent) {
+        System.out.println("Delivery-Notes-List Selected");
+        appController.showDeliveryNoteListView();
+    }
+
+
 }

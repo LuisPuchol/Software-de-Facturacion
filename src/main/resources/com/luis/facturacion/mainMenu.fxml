@@ -9,26 +9,27 @@
     <top>
         <MenuBar>
 
-            <Menu fx:id="ProductosMenu" text="Productos">
-                <MenuItem fx:id="Articulo" text="Artículos" onAction="#handleArticlesClick"/>
-                <MenuItem fx:id="TiposIVA" text="Tipos de IVA" onAction="#handleVATConfigClick"/>
+            <Menu fx:id="ProductsMenu" text="Productos">
+                <MenuItem fx:id="Article" text="Artículos" onAction="#handleArticlesClick"/>
+                <MenuItem fx:id="VATConfig" text="Tipos de IVA" onAction="#handleVATConfigClick"/>
             </Menu>
 
-            <Menu fx:id="ClientesMenu" text="Clientes">
-                <MenuItem fx:id="Clientes" text="Listado de Clientes" onAction="#handleClientsClick"/>
+            <Menu fx:id="ClientsMenu" text="Clientes">
+                <MenuItem fx:id="Clients" text="Listado de Clientes" onAction="#handleClientsClick"/>
             </Menu>
 
-            <Menu fx:id="VentasMenu" text="Ventas">
-                <MenuItem fx:id="Albaran" text="Crear Albaran" onAction="#handleDeliveryNoteClick"/>
-                <MenuItem fx:id="Factura" text="Crear Factura" onAction="#handleInvoiceClick"/>
-                <MenuItem fx:id="Facturas" text="Listado Facturas" onAction="#handleInvoiceListClick"/>
-                <MenuItem fx:id="Rectificativas" text="Rectificativas" onAction="#handleCorrectiveInvoiceClick"/>
+            <Menu fx:id="SalesMenu" text="Ventas">
+                <MenuItem fx:id="DeliveryNote" text="Crear Albaran" onAction="#handleDeliveryNoteClick"/>
+                <MenuItem fx:id="DeliveryNoteList" text="Listado Albaranes" onAction="#handleDeliveryNoteListClick"/>
+                <MenuItem fx:id="Invoice" text="Crear Factura" onAction="#handleInvoiceClick"/>
+                <MenuItem fx:id="InvoiceList" text="Listado Facturas" onAction="#handleInvoiceListClick"/>
+                <MenuItem fx:id="CorrectiveInvoice" text="Rectificativas" onAction="#handleCorrectiveInvoiceClick"/>
             </Menu>
 
-            <Menu fx:id="ReportesMenu" text="Reportes">
-                <MenuItem fx:id="LibroIngreso" text="Libro de Ingresos"/>
-                <MenuItem fx:id="ResumenClientes" text="Resumen de Clientes"/>
-                <MenuItem fx:id="Trazabilidad" text="Trazabilidad de Productos"/>
+            <Menu fx:id="SummaryMenu" text="Reportes">
+                <MenuItem fx:id="EntryBook" text="Libro de Ingresos"/>
+                <MenuItem fx:id="clientsSummary" text="Resumen de Clientes"/>
+                <MenuItem fx:id="traceability" text="Trazabilidad de Productos"/>
             </Menu>
         </MenuBar>
 
