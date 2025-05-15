@@ -1,20 +1,27 @@
 package com.luis.facturacion.mvc_deliveryNoteList;
 
 import com.luis.facturacion.mvc_deliveryNote.DeliveryNoteEntity;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Wrapper class for DeliveryNoteEntity with additional display properties.
- * This class extends DeliveryNoteEntity to provide additional fields
+ * Wrapper class for DeliveryNoteEntity with additional display properties
  * needed for the list view without modifying the original entity.
  */
 public class DeliveryNoteListItem extends DeliveryNoteEntity {
 
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
-    private String clientName;
-    private String totalAmount;
+    private final StringProperty formattedDate = new SimpleStringProperty();
+    private final StringProperty clientName = new SimpleStringProperty();
+    private final StringProperty totalAmount = new SimpleStringProperty();
+    private final StringProperty displayInvoiceNumber = new SimpleStringProperty();
+    private final StringProperty displayIndex = new SimpleStringProperty();
+    private final StringProperty displayClientId = new SimpleStringProperty();
 
     /**
      * Constructor that wraps a DeliveryNoteEntity.
@@ -22,65 +29,127 @@ public class DeliveryNoteListItem extends DeliveryNoteEntity {
      * @param entity The original DeliveryNoteEntity
      */
     public DeliveryNoteListItem(DeliveryNoteEntity entity) {
-        // Copy all properties from the original entity
         this.setId(entity.getId());
         this.setIndex(entity.getIndex());
         this.setClientId(entity.getClientId());
         this.setDate(entity.getDate());
+        this.setTotalAmount(entity.getTotalAmount());
         this.setInvoiceNumber(entity.getInvoiceNumber());
+
+        updateFormattedDate();
+        updateDisplayInvoiceNumber();
+        updateDisplayProperties();
     }
 
     /**
-     * Returns the formatted date as a string.
-     *
-     * @return Formatted date string
+     * Updates the formatted date property based on the entity date.
      */
+    private void updateFormattedDate() {
+        if (getDate() != null) {
+            formattedDate.set(getDate().format(DATE_FORMATTER));
+        } else {
+            formattedDate.set("");
+        }
+    }
+
+    /**
+     * Updates the display invoice number property based on the entity invoice number.
+     */
+    private void updateDisplayInvoiceNumber() {
+        if (getInvoiceNumber() != null) {
+            displayInvoiceNumber.set(getInvoiceNumber().toString());
+        } else {
+            displayInvoiceNumber.set("");
+        }
+    }
+
+    public void updateDisplayProperties() {
+        this.displayIndex.set(getIndex() != null ? getIndex().toString() : "");
+        this.displayClientId.set(getClientId() != null ? getClientId().toString() : "");
+    }
+
+    @Override
+    public void setDate(LocalDate date) {
+        super.setDate(date);
+        updateFormattedDate();
+    }
+
+    @Override
+    public void setInvoiceNumber(Integer invoiceNumber) {
+        super.setInvoiceNumber(invoiceNumber);
+        updateDisplayInvoiceNumber();
+    }
+
+    @Override
+    public void setIndex(Integer index) {
+        super.setIndex(index);
+        updateDisplayProperties();
+    }
+
+    @Override
+    public void setClientId(Integer clientId) {
+        super.setClientId(clientId);
+        updateDisplayProperties();
+    }
+
+    // Getters & Setters
+    public StringProperty formattedDateProperty() {
+        return formattedDate;
+    }
+
     public String getFormattedDate() {
-        return getDate() != null ? getDate().format(DATE_FORMATTER) : "";
+        return formattedDate.get();
     }
 
-    /**
-     * Gets the client name.
-     *
-     * @return Client name
-     */
-    public String getClientName() {
+    public StringProperty clientNameProperty() {
         return clientName;
     }
 
-    /**
-     * Sets the client name.
-     *
-     * @param clientName Client name
-     */
-    public void setClientName(String clientName) {
-        this.clientName = clientName;
+    public String getClientName() {
+        return clientName.get();
     }
 
-    /**
-     * Gets the total amount as a formatted string.
-     *
-     * @return Total amount
-     */
-    public String getTotalAmount() {
+    public void setClientName(String name) {
+        clientName.set(name);
+    }
+
+    public StringProperty totalAmountProperty() {
         return totalAmount;
     }
 
-    /**
-     * Sets the total amount.
-     *
-     * @param totalAmount Total amount as a string
-     */
-    public void setTotalAmount(String totalAmount) {
-        this.totalAmount = totalAmount;
+    public Double getTotalAmount() {
+        return Double.valueOf(totalAmount.get());
     }
 
-    /**
-     * Sets the total amount from a BigDecimal.
-     *
-     * @param amount Total amount as BigDecimal
-     */
+    public void setTotalAmount(Double amount) {
+        totalAmount.set(String.valueOf(amount));
+    }
+
     public void setTotalAmount(BigDecimal amount) {
-        this.totalAmount = amount != null ? amount.toString() : "0.00";
+        this.totalAmount.set(amount != null ? amount.toString() : "0.00");
+    }
+
+    public StringProperty displayInvoiceNumberProperty() {
+        return displayInvoiceNumber;
+    }
+
+    public String getDisplayInvoiceNumber() {
+        return displayInvoiceNumber.get();
+    }
+
+    public StringProperty displayIndexProperty() {
+        return displayIndex;
+    }
+
+    public String getDisplayIndex() {
+        return displayIndex.get();
+    }
+
+    public StringProperty displayClientIdProperty() {
+        return displayClientId;
+    }
+
+    public String getDisplayClientId() {
+        return displayClientId.get();
     }
 }

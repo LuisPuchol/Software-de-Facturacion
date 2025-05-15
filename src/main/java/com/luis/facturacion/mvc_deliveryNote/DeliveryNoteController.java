@@ -132,7 +132,7 @@ public class DeliveryNoteController {
         quantityField.setText(String.valueOf(item.getQuantity()));
         priceField.setText(item.getPrice().toString());
 
-        addButton.setText("Update");
+        addButton.setText("Modificar");
         selectedItem = item;
     }
 
@@ -235,6 +235,7 @@ public class DeliveryNoteController {
                 deliveryNoteNumberField.getText(),
                 clientIdField.getText(),
                 dateField.getValue(),
+                totalAmountField.getText(),
                 printDeliveryNoteCheck.isSelected(),
                 createInvoiceCheck.isSelected()
         );

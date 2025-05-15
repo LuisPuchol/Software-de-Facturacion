@@ -25,13 +25,17 @@ public class DeliveryNoteEntity {
     @Column(name = "num_factura")
     private Integer invoiceNumber;
 
+    @Column(name = "importe_total")
+    private Double totalAmount;
+
     public DeliveryNoteEntity() {
     }
 
-    public DeliveryNoteEntity(Integer index, Integer clientId, LocalDate date) {
+    public DeliveryNoteEntity(Integer index, Integer clientId, LocalDate date, Double totalAmount) {
         this.index = index;
         this.clientId = clientId;
         this.date = date;
+        this.totalAmount = totalAmount;
     }
 
     // Getters and Setters
@@ -73,6 +77,14 @@ public class DeliveryNoteEntity {
 
     public void setInvoiceNumber(Integer invoiceNumber) {
         this.invoiceNumber = invoiceNumber;
+    }
+
+    public Double getTotalAmount() {
+        return totalAmount;
+    }
+
+    public void setTotalAmount(Double totalAmount) {
+        this.totalAmount = totalAmount;
     }
 
     @Override

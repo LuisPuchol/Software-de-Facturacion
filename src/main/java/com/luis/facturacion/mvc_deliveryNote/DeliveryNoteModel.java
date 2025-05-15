@@ -41,12 +41,13 @@ public class DeliveryNoteModel {
     /**
      * Creates new delivery note with basic data
      */
-    public void createNewDeliveryNote(String number, String clientId,
-                                      LocalDate date, boolean printDeliveryNote, boolean createInvoice) {
+    public void createNewDeliveryNote(String number, String clientId, LocalDate date, String totalAmount,
+                                      boolean printDeliveryNote, boolean createInvoice) {
         currentDeliveryNoteEntity = new DeliveryNoteEntity(
                 Integer.valueOf(number),
                 Integer.valueOf(clientId),
-                date
+                date,
+                Double.valueOf(totalAmount)
         );
 
         //TODO what i have to do with these. One Prints directly and the other creates the invoice directly

@@ -77,10 +77,6 @@ public class ArticleController {
         loadTableData();
     }
 
-    @FXML
-    private void handleEditButton() {
-        //
-    }
 
     @FXML
     private void handleDeleteButton() {

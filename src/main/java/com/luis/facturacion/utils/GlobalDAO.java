@@ -1,6 +1,5 @@
 package com.luis.facturacion.utils;
 
-import com.luis.facturacion.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 

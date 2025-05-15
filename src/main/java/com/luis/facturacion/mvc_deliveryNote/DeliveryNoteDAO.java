@@ -1,7 +1,6 @@
 package com.luis.facturacion.mvc_deliveryNote;
 
-import com.luis.facturacion.HibernateUtil;
-import com.luis.facturacion.mvc_article.database.ArticleEntity;
+import com.luis.facturacion.utils.HibernateUtil;
 import com.luis.facturacion.utils.GlobalDAO;
 import org.hibernate.Session;
 import org.hibernate.query.Query;

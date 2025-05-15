@@ -1,8 +1,7 @@
 package com.luis.facturacion.mvc_deliveryNoteList;
 
 import com.luis.facturacion.AppController;
-import com.luis.facturacion.mvc_client.database.ClientDAO;
-import com.luis.facturacion.mvc_deliveryNote.DeliveryNoteEntity;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -44,12 +43,13 @@ public class DeliveryNoteListController {
      * Constructor for the controller.
      */
     public DeliveryNoteListController() {
-        System.out.println("Delivery-Note List Controller created");
         this.model = DeliveryNoteListModel.getInstance();
     }
 
     /**
      * Sets the application controller and registers this controller with the model.
+     *
+     * @param appController The main application controller
      */
     public void setAppController(AppController appController) {
         this.appController = appController;
@@ -69,33 +69,31 @@ public class DeliveryNoteListController {
      * Sets up the table columns with property value factories.
      */
     private void setupTableColumns() {
-        // Set cell value factories
-        dateColumn.setCellValueFactory(new PropertyValueFactory<>("formattedDate"));
-        deliveryNoteNumberColumn.setCellValueFactory(new PropertyValueFactory<>("index"));
-        codeColumn.setCellValueFactory(new PropertyValueFactory<>("clientId"));
-        clientNameColumn.setCellValueFactory(new PropertyValueFactory<>("clientName"));
-        amountColumn.setCellValueFactory(new PropertyValueFactory<>("totalAmount"));
-        invoiceNumberColumn.setCellValueFactory(new PropertyValueFactory<>("invoiceNumber"));
-
-        // Center column headers
-        List<TableColumn<DeliveryNoteListItem, ?>> columns = List.of(
-                dateColumn, deliveryNoteNumberColumn, codeColumn,
-                clientNameColumn, amountColumn, invoiceNumberColumn
+        Map<TableColumn<DeliveryNoteListItem, String>, String> columnMappings = Map.of(
+                dateColumn, "formattedDate",
+                deliveryNoteNumberColumn, "displayIndex",
+                codeColumn, "displayClientId",
+                clientNameColumn, "clientName",
+                amountColumn, "totalAmount",
+                invoiceNumberColumn, "displayInvoiceNumber"
         );
 
-        columns.forEach(column ->
+        columnMappings.forEach((column, property) ->
+                column.setCellValueFactory(new PropertyValueFactory<>(property))
+        );
+
+        columnMappings.keySet().forEach(column ->
                 column.setStyle("-fx-alignment: CENTER;")
         );
 
-        // Set items to table
         deliveryNotesTable.setItems(deliveryNoteItems);
     }
+
 
     /**
      * Sets up initial date values for the date pickers.
      */
     private void setupInitialDates() {
-        // Set default dates: From = first day of current month, To = current date
         LocalDate now = LocalDate.now();
         LocalDate firstDayOfMonth = LocalDate.of(now.getYear(), now.getMonth(), 1);
 
@@ -106,6 +104,8 @@ public class DeliveryNoteListController {
     /**
      * Handles the search button action.
      * Retrieves delivery notes based on the date range and filter options.
+     *
+     * @param actionEvent The event that triggered this method
      */
     @FXML
     public void handleSearch(ActionEvent actionEvent) {
@@ -123,24 +123,22 @@ public class DeliveryNoteListController {
             return;
         }
 
-        // Use the model to get delivery notes and update the table
         loadDeliveryNotes(fromDate, toDate, includeInvoices);
     }
 
     /**
      * Loads delivery notes from the model based on specified criteria.
+     *
+     * @param fromDate        Start date for the search
+     * @param toDate          End date for the search
+     * @param includeInvoices Whether to include only notes with associated invoices
      */
     private void loadDeliveryNotes(LocalDate fromDate, LocalDate toDate, boolean includeInvoices) {
-        // Clear previous items
         deliveryNoteItems.clear();
 
-        // Get delivery notes from the model
         List<DeliveryNoteListItem> notes = model.getDeliveryNotesByDateRange(fromDate, toDate, includeInvoices);
-
-        // Add to observable list
         deliveryNoteItems.addAll(notes);
 
-        // Show message if no items found
         if (deliveryNoteItems.isEmpty()) {
             showAlert("Información", "No se encontraron albaranes para el período seleccionado.");
         }
@@ -148,6 +146,9 @@ public class DeliveryNoteListController {
 
     /**
      * Displays an alert dialog with the specified title and message.
+     *
+     * @param title   The title of the alert
+     * @param message The message to display
      */
     private void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -159,6 +160,8 @@ public class DeliveryNoteListController {
 
     /**
      * Closes the list window.
+     *
+     * @param actionEvent The event that triggered this method
      */
     @FXML
     public void handleExit(ActionEvent actionEvent) {
