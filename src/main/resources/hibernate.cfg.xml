@@ -16,7 +16,7 @@
         <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
 
         <!-- Hibernate config -->
-        <property name="hibernate.show_sql">true</property>  <!-- Show SQL query on console -->
+        <property name="hibernate.show_sql">false</property>  <!-- Show SQL query on console -->
         <property name="hibernate.format_sql">true</property>
         <property name="hibernate.hbm2ddl.auto">validate</property>
 

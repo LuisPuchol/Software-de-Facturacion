@@ -1,4 +1,4 @@
-package com.luis.facturacion;
+package com.luis.facturacion.utils;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

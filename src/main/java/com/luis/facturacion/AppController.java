@@ -3,11 +3,13 @@ package com.luis.facturacion;
 import com.luis.facturacion.mvc_deliveryNote.DeliveryNoteController;
 import com.luis.facturacion.mvc_article.ArticleController;
 import com.luis.facturacion.mvc_client.ClientController;
+import com.luis.facturacion.mvc_deliveryNoteList.DeliveryNoteListController;
 import com.luis.facturacion.mvc_invoice.InvoiceController;
 import com.luis.facturacion.mvc_login.LoginController;
 import com.luis.facturacion.mvc_mainmenu.MainMenuController;
 import com.luis.facturacion.mvc_correctiveInvoice.CorrectiveInvoiceController;
 import com.luis.facturacion.mvc_vatConfig.VATConfigController;
+import com.luis.facturacion.utils.ViewLoader;
 import javafx.stage.Stage;
 
 public class AppController {
@@ -16,9 +18,10 @@ public class AppController {
     private final LoginController loginController;
     private final MainMenuController mainMenuController;
     private final ArticleController articleController;
-    private final VATConfigController tiposDeIvaController;
+    private final VATConfigController vatConfigController;
     private final ClientController clientController;
     private final DeliveryNoteController deliveryNoteController;
+    private final DeliveryNoteListController deliveryNoteListController;
     private final InvoiceController invoiceController;
     private final CorrectiveInvoiceController correctiveInvoiceController;
 
@@ -30,9 +33,10 @@ public class AppController {
         this.loginController = new LoginController();
         this.mainMenuController = new MainMenuController();
         this.articleController = new ArticleController();
-        this.tiposDeIvaController = new VATConfigController();
+        this.vatConfigController = new VATConfigController();
         this.clientController = new ClientController();
         this.deliveryNoteController = new DeliveryNoteController();
+        this.deliveryNoteListController = new DeliveryNoteListController();
         this.invoiceController = new InvoiceController();
         this.correctiveInvoiceController = new CorrectiveInvoiceController();
 
@@ -40,9 +44,10 @@ public class AppController {
         this.loginController.setAppController(this);
         this.mainMenuController.setAppController(this);
         this.articleController.setAppController(this);
-        this.tiposDeIvaController.setAppController(this);
+        this.vatConfigController.setAppController(this);
         this.clientController.setAppController(this);
         this.deliveryNoteController.setAppController(this);
+        this.deliveryNoteListController.setAppController(this);
         this.invoiceController.setAppController(this);
         this.correctiveInvoiceController.setAppController(this);
     }
@@ -55,34 +60,34 @@ public class AppController {
         viewLoader.loadView("/com/luis/facturacion/mainMenu.fxml", MainMenuController.class, mainMenuController, primaryStage, "MainMenu");
     }
 
-    public void showArticuloView(){
+    public void showArticleView(){
         viewLoader.loadViewInNewStage("/com/luis/facturacion/articles.fxml", ArticleController.class, articleController, "Listado Artículos");
     }
 
-    public void showTipoDeIvaView() {
-        viewLoader.loadViewInNewStage("/com/luis/facturacion/vatConfig.fxml", VATConfigController.class, tiposDeIvaController, "Configuración de IVA");
+    public void showVatConfigView() {
+        viewLoader.loadViewInNewStage("/com/luis/facturacion/vatConfig.fxml", VATConfigController.class, vatConfigController, "Configuración de IVA");
     }
 
-    public void showClienteView() {
+    public void showClientView() {
         viewLoader.loadViewInNewStage("/com/luis/facturacion/clients.fxml", ClientController.class, clientController, "Listado Clientes");
     }
 
-    public void showAlbaranView() {
+    public void showDeliveryNoteView() {
         viewLoader.loadViewInNewStage("/com/luis/facturacion/deliveryNote.fxml", DeliveryNoteController.class, deliveryNoteController, "Albaran");
     }
 
-    public void showFacturaView() {
+    public void showDeliveryNoteListView() {
+        viewLoader.loadViewInNewStage("/com/luis/facturacion/deliveryNoteList.fxml", DeliveryNoteListController.class, deliveryNoteListController, "Listado Albaranes");
+    }
+
+    public void showInvoiceView() {
         viewLoader.loadViewInNewStage("/com/luis/facturacion/InvoiceList.fxml", InvoiceController.class, invoiceController, "Factura");
     }
 
-    public void showRectificativaView() {
+    public void showCorrectiveInvoiceView() {
 
     }
 
-    public void showListadoFacturasView() {
-
-    }
-    
     public Stage getStage () {
         return this.primaryStage;
     }

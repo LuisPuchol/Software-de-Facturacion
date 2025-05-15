@@ -81,7 +81,7 @@ public class DeliveryNoteItemEntity {
         this.trace2 = trace2;
     }
 
-    public double getQuantity() {
+    public Double getQuantity() {
         return quantity;
     }
 

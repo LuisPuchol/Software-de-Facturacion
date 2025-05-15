@@ -24,6 +24,7 @@ module com.luis.facturacion {
     opens com.luis.facturacion.mvc_client to javafx.fxml;
     opens com.luis.facturacion.mvc_client.database to javafx.base, org.hibernate.orm.core;
     opens com.luis.facturacion.mvc_deliveryNote to javafx.fxml, javafx.base, org.hibernate.orm.core;
+    opens com.luis.facturacion.mvc_deliveryNoteList to javafx.fxml, javafx.base;
     opens com.luis.facturacion.utils to org.hibernate.orm.core;
 
 
@@ -44,5 +45,6 @@ module com.luis.facturacion {
     exports com.luis.facturacion.mvc_client;
     exports com.luis.facturacion.mvc_invoice;
     exports com.luis.facturacion.mvc_summary;
+    exports com.luis.facturacion.utils;
 
 }
