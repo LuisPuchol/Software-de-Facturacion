@@ -1,3 +1,5 @@
+package com.luis.facturacion.mvc_deliveryNoteList;
+
 import com.luis.facturacion.AppController;
 import com.luis.facturacion.mvc_client.database.ClientDAO;
 import com.luis.facturacion.mvc_deliveryNote.DeliveryNoteEntity;
@@ -20,7 +22,7 @@ public class DeliveryNoteListController {
 
     private AppController appController;
     private DeliveryNoteListModel model;
-    private ObservableList<DeliveryNoteEntity> deliveryNoteItems = FXCollections.observableArrayList();
+    private ObservableList<DeliveryNoteListItem> deliveryNoteItems = FXCollections.observableArrayList();
 
     @FXML
     private DatePicker fromDateField, toDateField;
@@ -32,10 +34,10 @@ public class DeliveryNoteListController {
     private Button searchButton, exitButton;
 
     @FXML
-    private TableView<DeliveryNoteEntity> deliveryNotesTable;
+    private TableView<DeliveryNoteListItem> deliveryNotesTable;
 
     @FXML
-    private TableColumn<DeliveryNoteEntity, String> dateColumn, deliveryNoteNumberColumn,
+    private TableColumn<DeliveryNoteListItem, String> dateColumn, deliveryNoteNumberColumn,
             codeColumn, clientNameColumn, amountColumn, invoiceNumberColumn;
 
     /**
@@ -67,22 +69,16 @@ public class DeliveryNoteListController {
      * Sets up the table columns with property value factories.
      */
     private void setupTableColumns() {
-        // Configure standard columns using PropertyValueFactory
+        // Set cell value factories
         dateColumn.setCellValueFactory(new PropertyValueFactory<>("formattedDate"));
-        deliveryNoteNumberColumn.setCellValueFactory(new PropertyValueFactory<>("number"));
+        deliveryNoteNumberColumn.setCellValueFactory(new PropertyValueFactory<>("index"));
         codeColumn.setCellValueFactory(new PropertyValueFactory<>("clientId"));
+        clientNameColumn.setCellValueFactory(new PropertyValueFactory<>("clientName"));
         amountColumn.setCellValueFactory(new PropertyValueFactory<>("totalAmount"));
         invoiceNumberColumn.setCellValueFactory(new PropertyValueFactory<>("invoiceNumber"));
 
-        // Custom cell factory for client name (since it's not directly in DeliveryNoteEntity)
-        clientNameColumn.setCellValueFactory(cellData -> {
-            int clientId = cellData.getValue().getClientId();
-            String clientName = ClientDAO.getInstance().getNameById(clientId);
-            return javafx.beans.binding.Bindings.createStringBinding(() -> clientName);
-        });
-
-        // Center align column headers
-        List<TableColumn<DeliveryNoteEntity, ?>> columns = List.of(
+        // Center column headers
+        List<TableColumn<DeliveryNoteListItem, ?>> columns = List.of(
                 dateColumn, deliveryNoteNumberColumn, codeColumn,
                 clientNameColumn, amountColumn, invoiceNumberColumn
         );
@@ -91,6 +87,7 @@ public class DeliveryNoteListController {
                 column.setStyle("-fx-alignment: CENTER;")
         );
 
+        // Set items to table
         deliveryNotesTable.setItems(deliveryNoteItems);
     }
 
@@ -138,7 +135,7 @@ public class DeliveryNoteListController {
         deliveryNoteItems.clear();
 
         // Get delivery notes from the model
-        List<DeliveryNoteEntity> notes = model.getDeliveryNotesByDateRange(fromDate, toDate, includeInvoices);
+        List<DeliveryNoteListItem> notes = model.getDeliveryNotesByDateRange(fromDate, toDate, includeInvoices);
 
         // Add to observable list
         deliveryNoteItems.addAll(notes);
