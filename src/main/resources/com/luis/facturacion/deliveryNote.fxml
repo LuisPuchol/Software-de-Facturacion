@@ -19,14 +19,14 @@
                     <DatePicker fx:id="dateField" prefWidth="100" promptText="dd/MM/yyyy"/>
 
                     <Label text="Cliente"/>
-                    <TextField fx:id="clientField" prefWidth="150"/>
-                    <TextField fx:id="clientInfoField" prefWidth="150" editable="false"/>
+                    <TextField fx:id="clientIdField" prefWidth="150"/>
+                    <TextField fx:id="clientNameField" prefWidth="150" editable="false"/>
 
                     <Label text="Num."/>
-                    <TextField fx:id="numField" prefWidth="80" editable="false"/>
+                    <TextField fx:id="deliveryNoteNumberField" prefWidth="80" editable="true"/>
 
                     <Label text="Total"/>
-                    <TextField fx:id="totalField" prefWidth="100" editable="false" text="0.00"/>
+                    <TextField fx:id="totalAmountField" prefWidth="100" editable="false" text="0.00"/>
                 </children>
             </HBox>
 
@@ -88,7 +88,7 @@
 
                     <VBox alignment="CENTER" spacing="5">
                         <children>
-                            <CheckBox fx:id="printAlbaranCheck" text="Imprime Albaran"/>
+                            <CheckBox fx:id="printDeliveryNoteCheck" text="Imprime Albaran"/>
                             <CheckBox fx:id="createInvoiceCheck" text="Emitir Factura"/>
                         </children>
                     </VBox>

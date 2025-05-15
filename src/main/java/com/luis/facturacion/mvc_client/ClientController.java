@@ -98,7 +98,7 @@ public class ClientController {
     }
 
     @FXML
-    public void handleNuevoButton(MouseEvent mouseEvent) {
+    public void handleNewButton(MouseEvent mouseEvent) {
         // Obtaining value from checkbox
         int tipoCliente = "BASE + IVA".equals(clientTypeCombo.getValue()) ? 2 : 1;
         clientModel.addCliente(
@@ -150,7 +150,7 @@ public class ClientController {
     }
 
     @FXML
-    public void handleEditarButton(MouseEvent mouseEvent) {
+    public void handleEditButton(MouseEvent mouseEvent) {
         //int clientType = "BASE + IVA".equals(clientTypeCombo.getValue()) ? 2 : 1;
         ClientEntity selectedClient = clientsTable.getSelectionModel().getSelectedItem();
         if (selectedClient != null) {

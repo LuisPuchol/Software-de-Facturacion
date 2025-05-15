@@ -1,6 +1,8 @@
 package com.luis.facturacion.mvc_invoice;
 
 import com.luis.facturacion.AppController;
+import com.luis.facturacion.mvc_article.database.ArticleDAO;
+import com.luis.facturacion.mvc_client.database.ClientDAO;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
@@ -52,10 +54,10 @@ public class InvoiceController {
     }
 
     public String getClientByID(Integer id) {
-        return appController.getClienteByID(id);
+        return ClientDAO.getInstance().getNameById(id);
     }
 
     public String getProductByID(Integer id) {
-        return appController.getProductByID(id);
+        return ArticleDAO.getInstance().getNameById(id);
     }
 }

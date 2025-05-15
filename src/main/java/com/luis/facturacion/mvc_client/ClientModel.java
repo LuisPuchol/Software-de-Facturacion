@@ -63,7 +63,7 @@ public class ClientModel {
     }
 
     public String getClienteById(Integer id) {
-        return clientDao.getNameByID(id);
+        return clientDao.getNameById(id);
     }
 }
 
