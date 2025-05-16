@@ -36,19 +36,6 @@ public class MainMenuController {
         appController.showVatConfigView();
     }
 
-
-    @FXML
-    public void handleCorrectiveInvoiceClick(ActionEvent actionEvent) {
-        System.out.println("Corrective-Invoice selected");
-        appController.showCorrectiveInvoiceView();
-    }
-
-    @FXML
-    public void handleInvoiceListClick(ActionEvent actionEvent) {
-        System.out.println("Invoice-List selected");
-        appController.showDeliveryNoteListView();
-    }
-
     @FXML
     public void handleDeliveryNoteClick(ActionEvent actionEvent) {
         System.out.println("Delivery-Note Selected");
@@ -56,15 +43,26 @@ public class MainMenuController {
     }
 
     @FXML
-    public void handleInvoiceClick(ActionEvent actionEvent) {
-        System.out.println("Creado crearFacturas");
-        appController.showInvoiceView();
-    }
-    @FXML
     public void handleDeliveryNoteListClick(ActionEvent actionEvent) {
         System.out.println("Delivery-Notes-List Selected");
         appController.showDeliveryNoteListView();
     }
 
+    @FXML
+    public void handleInvoiceClick(ActionEvent actionEvent) {
+        System.out.println("Create-Invoice Selected");
+        appController.showInvoiceView();
+    }
 
+    @FXML
+    public void handleInvoiceListClick(ActionEvent actionEvent) {
+        System.out.println("Invoice-List selected");
+        appController.showInvoiceListView();
+    }
+
+    @FXML
+    public void handleCorrectiveInvoiceClick(ActionEvent actionEvent) {
+        System.out.println("Corrective-Invoice selected");
+        appController.showCorrectiveInvoiceView();
+    }
 }
