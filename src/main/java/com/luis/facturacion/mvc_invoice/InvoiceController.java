@@ -1,6 +1,7 @@
 package com.luis.facturacion.mvc_invoice;
 
 import com.luis.facturacion.AppController;
+import com.luis.facturacion.mvc_deliveryNote.DeliveryNoteEntity;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -167,7 +168,6 @@ public class InvoiceController {
      */
     @FXML
     public void handleInvoice(ActionEvent actionEvent) {
-        // This functionality will be implemented later
         ClientInvoiceItem selectedClient = deliveryNotesTable.getSelectionModel().getSelectedItem();
 
         if (selectedClient == null) {
@@ -180,7 +180,29 @@ public class InvoiceController {
             return;
         }
 
-        showAlert("Información", "Funcionalidad de facturación pendiente de implementar.");
+        try {
+            // Get all delivery notes for this client
+            Integer clientId = Integer.parseInt(selectedClient.getClientId());
+            List<DeliveryNoteEntity> deliveryNotes = model.getDeliveryNoteEntitiesForClient(
+                    clientId, toDateField.getValue());
+
+            if (deliveryNotes.isEmpty()) {
+                showAlert("Error", "No se encontraron albaranes para facturar.");
+                return;
+            }
+
+            // Create the invoice
+            Integer invoiceId = model.createInvoice(clientId, deliveryNotes);
+
+            showAlert("Éxito", "Factura creada con éxito. Número de factura: " + invoiceId);
+
+            // Refresh the list to remove the invoiced client
+            handleSearch();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            showAlert("Error", "Error al crear la factura: " + e.getMessage());
+        }
     }
 
     /**
