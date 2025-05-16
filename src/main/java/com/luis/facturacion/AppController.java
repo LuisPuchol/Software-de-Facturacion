@@ -64,10 +64,6 @@ public class AppController {
         viewLoader.loadViewInNewStage("/com/luis/facturacion/articles.fxml", ArticleController.class, articleController, "Listado Artículos");
     }
 
-    public void showVatConfigView() {
-        viewLoader.loadViewInNewStage("/com/luis/facturacion/vatConfig.fxml", VATConfigController.class, vatConfigController, "Configuración de IVA");
-    }
-
     public void showClientView() {
         viewLoader.loadViewInNewStage("/com/luis/facturacion/clients.fxml", ClientController.class, clientController, "Listado Clientes");
     }
@@ -81,7 +77,15 @@ public class AppController {
     }
 
     public void showInvoiceView() {
-        viewLoader.loadViewInNewStage("/com/luis/facturacion/InvoiceList.fxml", InvoiceController.class, invoiceController, "Factura");
+        viewLoader.loadViewInNewStage("/com/luis/facturacion/Invoice.fxml", InvoiceController.class, invoiceController, "Listado a Facturar");
+    }
+
+    public void showInvoiceListView() {
+        viewLoader.loadViewInNewStage("/com/luis/facturacion/InvoiceList.fxml", InvoiceController.class, invoiceController, "Listado de facturas");
+    }
+
+    public void showVatConfigView() {
+        viewLoader.loadViewInNewStage("/com/luis/facturacion/vatConfig.fxml", VATConfigController.class, vatConfigController, "Configuración de IVA");
     }
 
     public void showCorrectiveInvoiceView() {
