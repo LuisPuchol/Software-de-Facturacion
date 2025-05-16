@@ -46,6 +46,7 @@ module com.luis.facturacion {
     // Corrective Invoices
     opens com.luis.facturacion.mvc_correctiveInvoice to javafx.fxml, javafx.base;
     opens com.luis.facturacion.mvc_correctiveInvoice.database to javafx.base, org.hibernate.orm.core;
+    exports com.luis.facturacion.mvc_invoiceList;
 
     // Summary
     opens com.luis.facturacion.mvc_summary to javafx.fxml, javafx.base;
