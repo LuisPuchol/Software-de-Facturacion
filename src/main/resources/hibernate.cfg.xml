@@ -31,8 +31,7 @@
         <mapping class="com.luis.facturacion.mvc_client.database.ClientEntity"/>
         <mapping class="com.luis.facturacion.mvc_deliveryNote.DeliveryNoteItemEntity"/>
         <mapping class="com.luis.facturacion.mvc_deliveryNote.DeliveryNoteEntity"/>
-        <!-- <mapping class="com.luis.facturacion.mvc_vatConfig.database.VATConfigEntity"/>
-         -->
+        <mapping class="com.luis.facturacion.mvc_vatConfig.database.VATConfigEntity"/>
 
    </session-factory>
 </hibernate-configuration>
