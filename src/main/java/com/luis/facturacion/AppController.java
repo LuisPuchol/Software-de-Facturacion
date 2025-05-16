@@ -5,6 +5,7 @@ import com.luis.facturacion.mvc_article.ArticleController;
 import com.luis.facturacion.mvc_client.ClientController;
 import com.luis.facturacion.mvc_deliveryNoteList.DeliveryNoteListController;
 import com.luis.facturacion.mvc_invoice.InvoiceController;
+import com.luis.facturacion.mvc_invoiceList.InvoiceListController;
 import com.luis.facturacion.mvc_login.LoginController;
 import com.luis.facturacion.mvc_mainmenu.MainMenuController;
 import com.luis.facturacion.mvc_correctiveInvoice.CorrectiveInvoiceController;
@@ -23,6 +24,7 @@ public class AppController {
     private final DeliveryNoteController deliveryNoteController;
     private final DeliveryNoteListController deliveryNoteListController;
     private final InvoiceController invoiceController;
+    private final InvoiceListController invoiceListController;
     private final CorrectiveInvoiceController correctiveInvoiceController;
 
     public AppController(Stage primaryStage) {
@@ -38,6 +40,7 @@ public class AppController {
         this.deliveryNoteController = new DeliveryNoteController();
         this.deliveryNoteListController = new DeliveryNoteListController();
         this.invoiceController = new InvoiceController();
+        this.invoiceListController = new InvoiceListController();
         this.correctiveInvoiceController = new CorrectiveInvoiceController();
 
         // Conect Controllers to AppController
@@ -49,6 +52,7 @@ public class AppController {
         this.deliveryNoteController.setAppController(this);
         this.deliveryNoteListController.setAppController(this);
         this.invoiceController.setAppController(this);
+        this.invoiceListController.setAppController(this);
         this.correctiveInvoiceController.setAppController(this);
     }
 
@@ -81,7 +85,7 @@ public class AppController {
     }
 
     public void showInvoiceListView() {
-        viewLoader.loadViewInNewStage("/com/luis/facturacion/InvoiceList.fxml", InvoiceController.class, invoiceController, "Listado de facturas");
+        viewLoader.loadViewInNewStage("/com/luis/facturacion/InvoiceList.fxml", InvoiceListController.class, invoiceListController, "Listado de facturas");
     }
 
     public void showVatConfigView() {
