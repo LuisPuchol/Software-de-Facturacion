@@ -19,14 +19,13 @@ module com.luis.facturacion {
 
     opens com.luis.facturacion.mvc_article to javafx.fxml;
     opens com.luis.facturacion.mvc_article.database to javafx.base, org.hibernate.orm.core;
-    opens com.luis.facturacion.mvc_vatConfig to javafx.fxml;
-    opens com.luis.facturacion.mvc_vatConfig.database to javafx.base, org.hibernate.orm.core;
+    opens com.luis.facturacion.mvc_vatConfig to javafx.fxml, javafx.base;
+    opens com.luis.facturacion.mvc_vatConfig.database to org.hibernate.orm.core;
     opens com.luis.facturacion.mvc_client to javafx.fxml;
     opens com.luis.facturacion.mvc_client.database to javafx.base, org.hibernate.orm.core;
     opens com.luis.facturacion.mvc_deliveryNote to javafx.fxml, javafx.base, org.hibernate.orm.core;
     opens com.luis.facturacion.mvc_deliveryNoteList to javafx.fxml, javafx.base;
     opens com.luis.facturacion.utils to org.hibernate.orm.core;
-
 
     opens com.luis.facturacion.mvc_invoice to javafx.fxml;
     opens com.luis.facturacion.mvc_invoice.database to javafx.base, org.hibernate.orm.core;
