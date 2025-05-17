@@ -3,10 +3,13 @@ package com.luis.facturacion.mvc_invoiceList;
 import com.luis.facturacion.mvc_client.database.ClientDAO;
 import com.luis.facturacion.mvc_deliveryNote.DeliveryNoteEntity;
 import com.luis.facturacion.mvc_deliveryNoteList.DeliveryNoteListItem;
+import com.luis.facturacion.mvc_invoice.database.InvoiceDAO;
 import com.luis.facturacion.mvc_invoice.database.InvoiceEntity;
 import com.luis.facturacion.mvc_vatConfig.database.VATConfigDAO;
 import com.luis.facturacion.mvc_vatConfig.database.VATConfigEntity;
 import com.luis.facturacion.utils.HibernateUtil;
+import com.luis.facturacion.utils.PDFManager;
+import javafx.scene.control.Alert;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
@@ -57,7 +60,7 @@ public class InvoiceListModel {
      * Retrieves invoices from the database within the specified date range.
      *
      * @param fromDate Start date for the search
-     * @param toDate End date for the search
+     * @param toDate   End date for the search
      * @return List of InvoiceListItem objects
      */
     public List<InvoiceListItem> getInvoicesByDateRange(LocalDate fromDate, LocalDate toDate) {
@@ -77,6 +80,22 @@ public class InvoiceListModel {
         }
 
         return convertToInvoiceItems(entities);
+    }
+
+    /**
+     * Helper method to get delivery note entities for PDF generation
+     *
+     * @param invoiceId ID of the invoice
+     * @return List of delivery note entities
+     */
+    private List<DeliveryNoteEntity> getDeliveryNoteEntitiesForPDF(Integer invoiceId) {
+        // Llamar al método existente que devuelve List<DeliveryNoteListItem>
+        List<DeliveryNoteListItem> items = getDeliveryNotesForInvoice(invoiceId);
+
+        // Convertir los items a entidades originales (no es necesario crear nuevas instancias)
+        // Como DeliveryNoteListItem extiende DeliveryNoteEntity, podemos usarlo directamente
+
+        return new ArrayList<>(items);
     }
 
     /**
@@ -197,7 +216,7 @@ public class InvoiceListModel {
                 if (vatRate > 0) {
                     // totalAmount = baseAmount * (1 + vatRate/100)
                     // baseAmount = totalAmount / (1 + vatRate/100)
-                    return totalAmount / (1 + vatRate/100);
+                    return totalAmount / (1 + vatRate / 100);
                 }
             }
         } catch (Exception e) {
@@ -223,5 +242,105 @@ public class InvoiceListModel {
         }
 
         return items;
+    }
+
+    /**
+     * Example method to add to InvoiceModel for generating and showing a PDF for an invoice
+     *
+     * @param invoiceId ID of the invoice to generate PDF for
+     * @return true if the PDF was successfully generated and shown
+     */
+    public boolean generateAndShowInvoicePDF(Integer invoiceId) {
+        try {
+            // Get the invoice entity
+            InvoiceEntity invoice = InvoiceDAO.getInstance().getById(invoiceId);
+
+            if (invoice == null) {
+                showAlert("Error", "No se encontró la factura con ID: " + invoiceId);
+                return false;
+            }
+
+            // Get all delivery notes for this invoice
+            List<DeliveryNoteEntity> deliveryNotes = getDeliveryNoteEntitiesForPDF(invoiceId);
+
+            if (deliveryNotes.isEmpty()) {
+                showAlert("Error", "No se encontraron albaranes asociados a esta factura.");
+                return false;
+            }
+
+            // Generate and show the PDF
+            return PDFManager.showInvoicePDF(invoice, deliveryNotes);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            showAlert("Error", "Error al generar el PDF de la factura: " + e.getMessage());
+            return false;
+        }
+    }
+
+    /**
+     * Example method to add to InvoiceModel for generating and printing a PDF for an invoice
+     *
+     * @param invoiceId ID of the invoice to generate and print
+     * @return true if the PDF was successfully generated and printed
+     */
+    public boolean generateAndPrintInvoicePDF(Integer invoiceId) {
+        try {
+            // Get the invoice entity
+            InvoiceEntity invoice = InvoiceDAO.getInstance().getById(invoiceId);
+
+            if (invoice == null) {
+                showAlert("Error", "No se encontró la factura con ID: " + invoiceId);
+                return false;
+            }
+
+            // Get all delivery notes for this invoice
+            List<DeliveryNoteEntity> deliveryNotes = getDeliveryNoteEntitiesForPDF(invoiceId);
+
+            if (deliveryNotes.isEmpty()) {
+                showAlert("Error", "No se encontraron albaranes asociados a esta factura.");
+                return false;
+            }
+
+            // Generate and print the PDF
+            return PDFManager.printInvoicePDF(invoice, deliveryNotes);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            showAlert("Error", "Error al imprimir el PDF de la factura: " + e.getMessage());
+            return false;
+        }
+    }
+
+    /**
+     * Helper method to get all delivery notes associated with an invoice
+     *
+     * @param invoiceId ID of the invoice
+     * @return List of delivery notes
+     */
+    private List<DeliveryNoteEntity> getDeliveryNotesForInvoice2(Integer invoiceId) {
+        try (org.hibernate.Session session = HibernateUtil.getSessionFactory().openSession()) {
+            org.hibernate.query.Query<DeliveryNoteEntity> query = session.createQuery(
+                    "FROM DeliveryNoteEntity WHERE invoiceNumber = :invoiceId",
+                    DeliveryNoteEntity.class
+            );
+            query.setParameter("invoiceId", invoiceId);
+            return query.list();
+        } catch (Exception e) {
+            System.err.println("Error getting delivery notes for invoice: " + e.getMessage());
+            e.printStackTrace();
+            return List.of(); // Return empty list in case of error
+        }
+    }
+
+    /**
+     * Helper method to show an alert
+     */
+    private void showAlert(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 }

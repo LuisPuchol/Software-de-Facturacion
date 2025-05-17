@@ -79,6 +79,7 @@ public class DeliveryNoteController {
             setupTableEventHandlers();
         }
         configureNavigation();
+        model.setDeliveryNoteNumber(deliveryNoteNumberField);
     }
 
     /**
@@ -121,20 +122,7 @@ public class DeliveryNoteController {
         });
     }
 
-    /**
-     * Populates form fields with data from the selected item.
-     */
-    private void populateFormFields(DeliveryNoteItem item) {
-        codeField.setText(item.getCode());
-        conceptField.setText(item.getConcept());
-        trace1Field.setText(item.getTrace1());
-        trace2Field.setText(item.getTrace2());
-        quantityField.setText(String.valueOf(item.getQuantity()));
-        priceField.setText(item.getPrice().toString());
 
-        addButton.setText("Modificar");
-        selectedItem = item;
-    }
 
     /**
      * Configures tab navigation between form fields.
@@ -153,7 +141,6 @@ public class DeliveryNoteController {
         );
 
         tabFunction.configureCircularNavigation(navigationOrder, codeField, addButton, customActions);
-        model.setDeliveryNoteNumber(deliveryNoteNumberField);
     }
 
     /**
@@ -215,6 +202,21 @@ public class DeliveryNoteController {
     }
 
     /**
+     * Populates form fields with data from the selected item.
+     */
+    private void populateFormFields(DeliveryNoteItem item) {
+        codeField.setText(item.getCode());
+        conceptField.setText(item.getConcept());
+        trace1Field.setText(item.getTrace1());
+        trace2Field.setText(item.getTrace2());
+        quantityField.setText(String.valueOf(item.getQuantity()));
+        priceField.setText(item.getPrice().toString());
+
+        addButton.setText("Modificar");
+        selectedItem = item;
+    }
+
+    /**
      * Deletes the currently selected row from the table.
      */
     private void deleteSelectedRow() {
@@ -231,6 +233,9 @@ public class DeliveryNoteController {
      */
     @FXML
     public void handleSave(ActionEvent actionEvent) {
+
+        deliveryNoteItems.forEach(model::convertAndAddItemToDeliveryNote);
+
         model.createNewDeliveryNote(
                 deliveryNoteNumberField.getText(),
                 clientIdField.getText(),
@@ -240,7 +245,6 @@ public class DeliveryNoteController {
                 createInvoiceCheck.isSelected()
         );
 
-        deliveryNoteItems.forEach(model::convertAndAddItemToDeliveryNote);
         model.saveDeliveryNoteWithItems();
         resetUI();
     }

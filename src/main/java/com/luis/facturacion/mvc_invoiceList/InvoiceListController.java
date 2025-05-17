@@ -126,7 +126,7 @@ public class InvoiceListController {
             if (event.getButton().equals(MouseButton.PRIMARY) && event.getClickCount() == 2) {
                 InvoiceListItem selectedInvoice = invoicesTable.getSelectionModel().getSelectedItem();
                 if (selectedInvoice != null) {
-                    openInvoiceDetailView(selectedInvoice);
+                    openInvoiceDetailView(selectedInvoice.getId());
                 }
             }
         });
@@ -136,11 +136,10 @@ public class InvoiceListController {
      * Opens invoice detail view for a selected invoice.
      * This will be implemented later.
      *
-     * @param invoice The selected invoice
+     * @param Id The selected invoice
      */
-    private void openInvoiceDetailView(InvoiceListItem invoice) {
-        showAlert("Información", "Se abrirá el detalle de la factura: " + invoice.getInvoiceNumber() +
-                "\nFuncionalidad pendiente de implementar.");
+    private void openInvoiceDetailView(Integer Id) {
+        model.generateAndShowInvoicePDF(Id);
     }
 
     /**

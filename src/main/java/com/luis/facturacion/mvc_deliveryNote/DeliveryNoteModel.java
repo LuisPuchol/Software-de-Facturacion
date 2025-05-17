@@ -45,10 +45,10 @@ public class DeliveryNoteModel {
     /**
      * Creates new delivery note with basic data
      */
-    public void createNewDeliveryNote(String number, String clientId, LocalDate date, String totalAmount,
+    public void createNewDeliveryNote(String DeliveryNoteNumber, String clientId, LocalDate date, String totalAmount,
                                       boolean printDeliveryNote, boolean createInvoice) {
         currentDeliveryNoteEntity = new DeliveryNoteEntity(
-                Integer.valueOf(number),
+                Integer.valueOf(DeliveryNoteNumber),
                 Integer.valueOf(clientId),
                 date,
                 Double.valueOf(totalAmount)
@@ -192,6 +192,8 @@ public class DeliveryNoteModel {
             Thread.currentThread().interrupt();
             throw new RuntimeException("Operation interrupted", e);
         }
+
+        currentItems.clear();
     }
 
     public void setDeliveryNoteNumber(TextField deliveryNoteNumberField) {
