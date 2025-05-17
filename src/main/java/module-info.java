@@ -10,6 +10,7 @@ module com.luis.facturacion {
     requires java.sql;
     requires kernel;
     requires layout;
+    requires pdfbox;
 
     // Login
     opens com.luis.facturacion.mvc_login to javafx.fxml, javafx.base;
