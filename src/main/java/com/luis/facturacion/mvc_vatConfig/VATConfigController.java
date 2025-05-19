@@ -2,6 +2,7 @@ package com.luis.facturacion.mvc_vatConfig;
 
 import com.luis.facturacion.AppController;
 import com.luis.facturacion.mvc_vatConfig.database.VATConfigEntity;
+import com.luis.facturacion.utils.ShowAlert;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -78,7 +79,7 @@ public class VATConfigController {
         double surchargeRate = Double.parseDouble(surchargeField.getText().replace(",", "."));
 
         model.saveVATConfiguration(vatRate, surchargeRate);
-        showAlert("Información", "Configuración de IVA guardada correctamente.");
+        ShowAlert.showInfo("Información", "Configuración de IVA guardada correctamente.");
         saveButton.getScene().getWindow().hide();
     }
 
@@ -92,7 +93,7 @@ public class VATConfigController {
         String surchargeText = surchargeField.getText().trim().replace(",", ".");
 
         if (vatText.isEmpty() || surchargeText.isEmpty()) {
-            showAlert("Error", "Ambos campos son obligatorios.");
+            ShowAlert.showError("Error", "Ambos campos son obligatorios.");
             return false;
         }
 
@@ -101,28 +102,16 @@ public class VATConfigController {
             double surchargeRate = Double.parseDouble(surchargeText);
 
             if (vatRate < 0 || vatRate > 100 || surchargeRate < 0 || surchargeRate > 100) {
-                showAlert("Error", "Los valores deben estar entre 0 y 100.");
+                ShowAlert.showError("Error", "Los valores deben estar entre 0 y 100.");
                 return false;
             }
         } catch (NumberFormatException e) {
-            showAlert("Error", "Por favor, introduzca valores numéricos válidos.");
+            ShowAlert.showError("Error", "Por favor, introduzca valores numéricos válidos.");
             return false;
         }
 
         return true;
     }
 
-    /**
-     * Displays an alert dialog with the specified title and message.
-     *
-     * @param title   The title of the alert
-     * @param message The message to display
-     */
-    private void showAlert(String title, String message) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle(title);
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
-    }
+
 }

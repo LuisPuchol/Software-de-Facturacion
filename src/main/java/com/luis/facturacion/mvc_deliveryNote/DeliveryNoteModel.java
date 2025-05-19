@@ -2,7 +2,7 @@ package com.luis.facturacion.mvc_deliveryNote;
 
 import com.luis.facturacion.utils.PDFGenerator;
 import com.luis.facturacion.utils.PDFPrinter;
-import javafx.scene.control.Alert;
+import com.luis.facturacion.utils.ShowAlert;
 import javafx.scene.control.TextField;
 
 import java.io.File;
@@ -94,12 +94,12 @@ public class DeliveryNoteModel {
 
             // Show confirmation message if printed successfully
             if (printed) {
-                showInfoAlert("Impresión", "El albarán se ha enviado a la impresora correctamente.");
+                ShowAlert.showInfo("Impresión", "El albarán se ha enviado a la impresora correctamente.");
             }
         } catch (Exception e) {
             System.err.println("Error al imprimir el albarán: " + e.getMessage());
             e.printStackTrace();
-            showErrorAlert("Error de impresión", "No se ha podido imprimir el albarán: " + e.getMessage());
+            ShowAlert.showError("Error de impresión", "No se ha podido imprimir el albarán: " + e.getMessage());
         }
     }
 
@@ -201,25 +201,4 @@ public class DeliveryNoteModel {
         deliveryNoteNumberField.setText(nextNumber);
     }
 
-    /**
-     * Shows an information alert
-     */
-    private void showInfoAlert(String title, String message) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle(title);
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
-    }
-
-    /**
-     * Shows an error alert
-     */
-    private void showErrorAlert(String title, String message) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle(title);
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
-    }
 }

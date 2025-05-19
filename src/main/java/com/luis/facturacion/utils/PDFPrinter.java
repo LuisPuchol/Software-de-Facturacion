@@ -1,5 +1,6 @@
 package com.luis.facturacion.utils;
 
+import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
 import java.io.File;
 import java.io.IOException;
