@@ -9,7 +9,7 @@ import com.luis.facturacion.mvc_vatConfig.database.VATConfigDAO;
 import com.luis.facturacion.mvc_vatConfig.database.VATConfigEntity;
 import com.luis.facturacion.utils.HibernateUtil;
 import com.luis.facturacion.utils.PDFManager;
-import javafx.scene.control.Alert;
+import com.luis.facturacion.utils.ShowAlert;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
@@ -256,7 +256,7 @@ public class InvoiceListModel {
             InvoiceEntity invoice = InvoiceDAO.getInstance().getById(invoiceId);
 
             if (invoice == null) {
-                showAlert("Error", "No se encontró la factura con ID: " + invoiceId);
+                ShowAlert.showError("Error", "No se encontró la factura con ID: " + invoiceId);
                 return false;
             }
 
@@ -264,7 +264,7 @@ public class InvoiceListModel {
             List<DeliveryNoteEntity> deliveryNotes = getDeliveryNoteEntitiesForPDF(invoiceId);
 
             if (deliveryNotes.isEmpty()) {
-                showAlert("Error", "No se encontraron albaranes asociados a esta factura.");
+                ShowAlert.showError("Error", "No se encontraron albaranes asociados a esta factura.");
                 return false;
             }
 
@@ -273,7 +273,7 @@ public class InvoiceListModel {
 
         } catch (Exception e) {
             e.printStackTrace();
-            showAlert("Error", "Error al generar el PDF de la factura: " + e.getMessage());
+            ShowAlert.showError("Error", "Error al generar el PDF de la factura: " + e.getMessage());
             return false;
         }
     }
@@ -290,7 +290,7 @@ public class InvoiceListModel {
             InvoiceEntity invoice = InvoiceDAO.getInstance().getById(invoiceId);
 
             if (invoice == null) {
-                showAlert("Error", "No se encontró la factura con ID: " + invoiceId);
+                ShowAlert.showError("Error", "No se encontró la factura con ID: " + invoiceId);
                 return false;
             }
 
@@ -298,7 +298,7 @@ public class InvoiceListModel {
             List<DeliveryNoteEntity> deliveryNotes = getDeliveryNoteEntitiesForPDF(invoiceId);
 
             if (deliveryNotes.isEmpty()) {
-                showAlert("Error", "No se encontraron albaranes asociados a esta factura.");
+                ShowAlert.showError("Error", "No se encontraron albaranes asociados a esta factura.");
                 return false;
             }
 
@@ -307,7 +307,7 @@ public class InvoiceListModel {
 
         } catch (Exception e) {
             e.printStackTrace();
-            showAlert("Error", "Error al imprimir el PDF de la factura: " + e.getMessage());
+            ShowAlert.showError("Error", "Error al imprimir el PDF de la factura: " + e.getMessage());
             return false;
         }
     }
@@ -333,14 +333,4 @@ public class InvoiceListModel {
         }
     }
 
-    /**
-     * Helper method to show an alert
-     */
-    private void showAlert(String title, String message) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle(title);
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
-    }
 }

@@ -5,7 +5,6 @@ import com.luis.facturacion.mvc_vatConfig.database.VATConfigEntity;
 import com.luis.facturacion.utils.ShowAlert;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;

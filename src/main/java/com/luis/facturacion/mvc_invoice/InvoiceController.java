@@ -2,6 +2,7 @@ package com.luis.facturacion.mvc_invoice;
 
 import com.luis.facturacion.AppController;
 import com.luis.facturacion.mvc_deliveryNote.DeliveryNoteEntity;
+import com.luis.facturacion.utils.ShowAlert;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -123,7 +124,7 @@ public class InvoiceController {
         LocalDate toDate = toDateField.getValue();
 
         if (toDate == null) {
-            showAlert("Error", "Por favor, seleccione una fecha válida.");
+            ShowAlert.showError("Error", "Por favor, seleccione una fecha válida.");
             return;
         }
 
@@ -143,7 +144,7 @@ public class InvoiceController {
         clientInvoiceItems.addAll(clients);
 
         if (clientInvoiceItems.isEmpty()) {
-            showAlert("Información", "No se encontraron albaranes pendientes de facturar hasta la fecha seleccionada.");
+            ShowAlert.showInfo("Información", "No se encontraron albaranes pendientes de facturar hasta la fecha seleccionada.");
         }
     }
 
@@ -171,12 +172,12 @@ public class InvoiceController {
         ClientInvoiceItem selectedClient = deliveryNotesTable.getSelectionModel().getSelectedItem();
 
         if (selectedClient == null) {
-            showAlert("Error", "Por favor, seleccione un cliente para facturar.");
+            ShowAlert.showError("Error", "Por favor, seleccione un cliente para facturar.");
             return;
         }
 
         if (deliveryNoteItems.isEmpty()) {
-            showAlert("Error", "No hay albaranes disponibles para facturar.");
+            ShowAlert.showError("Error", "No hay albaranes disponibles para facturar.");
             return;
         }
 
@@ -187,37 +188,24 @@ public class InvoiceController {
                     clientId, toDateField.getValue());
 
             if (deliveryNotes.isEmpty()) {
-                showAlert("Error", "No se encontraron albaranes para facturar.");
+                ShowAlert.showError("Error", "No se encontraron albaranes para facturar.");
                 return;
             }
 
             // Create the invoice
             Integer invoiceId = model.createInvoice(clientId, deliveryNotes);
 
-            showAlert("Éxito", "Factura creada con éxito. Número de factura: " + invoiceId);
+            ShowAlert.showInfo("Éxito", "Factura creada con éxito. Número de factura: " + invoiceId);
 
             // Refresh the list to remove the invoiced client
             handleSearch();
 
         } catch (Exception e) {
             e.printStackTrace();
-            showAlert("Error", "Error al crear la factura: " + e.getMessage());
+            ShowAlert.showError("Error", "Error al crear la factura: " + e.getMessage());
         }
     }
 
-    /**
-     * Displays an alert dialog with the specified title and message.
-     *
-     * @param title   The title of the alert
-     * @param message The message to display
-     */
-    private void showAlert(String title, String message) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle(title);
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
-    }
 
     /**
      * Closes the invoice window.

@@ -2,9 +2,6 @@ package com.luis.facturacion.utils;
 
 import com.luis.facturacion.mvc_deliveryNote.DeliveryNoteEntity;
 import com.luis.facturacion.mvc_invoice.database.InvoiceEntity;
-import com.luis.facturacion.utils.PDFGenerator;
-import com.luis.facturacion.utils.PDFPrinter;
-import javafx.scene.control.Alert;
 
 import java.io.File;
 import java.util.List;
@@ -56,7 +53,7 @@ public class PDFManager {
                 return true;
             } catch (Exception e) {
                 System.err.println("Error opening PDF: " + e.getMessage());
-                showErrorAlert("Error", "No se pudo abrir el PDF: " + e.getMessage());
+                ShowAlert.showError("Error", "No se pudo abrir el PDF: " + e.getMessage());
                 return false;
             }
         }
@@ -85,40 +82,18 @@ public class PDFManager {
                 }
 
                 if (printed) {
-                    showInfoAlert("Impresión", "La factura se ha enviado a la impresora correctamente.");
+                    ShowAlert.showInfo("Impresión", "La factura se ha enviado a la impresora correctamente.");
                 }
 
                 return printed;
             } catch (Exception e) {
                 System.err.println("Error printing invoice: " + e.getMessage());
                 e.printStackTrace();
-                showErrorAlert("Error de impresión", "No se ha podido imprimir la factura: " + e.getMessage());
+                ShowAlert.showError("Error de impresión", "No se ha podido imprimir la factura: " + e.getMessage());
                 return false;
             }
         }
 
         return false;
-    }
-
-    /**
-     * Shows an information alert
-     */
-    private static void showInfoAlert(String title, String message) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle(title);
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
-    }
-
-    /**
-     * Shows an error alert
-     */
-    private static void showErrorAlert(String title, String message) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle(title);
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
     }
 }

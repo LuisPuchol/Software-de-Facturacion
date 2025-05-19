@@ -1,6 +1,7 @@
 package com.luis.facturacion.mvc_deliveryNoteList;
 
 import com.luis.facturacion.AppController;
+import com.luis.facturacion.utils.ShowAlert;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -114,12 +115,12 @@ public class DeliveryNoteListController {
         boolean includeInvoices = includeInvoicesCheck.isSelected();
 
         if (fromDate == null || toDate == null) {
-            showAlert("Error", "Por favor, seleccione un rango de fechas válido.");
+            ShowAlert.showError("Error", "Por favor, seleccione un rango de fechas válido.");
             return;
         }
 
         if (fromDate.isAfter(toDate)) {
-            showAlert("Error", "La fecha 'Desde' no puede ser posterior a la fecha 'Hasta'.");
+            ShowAlert.showError("Error", "La fecha 'Desde' no puede ser posterior a la fecha 'Hasta'.");
             return;
         }
 
@@ -140,23 +141,10 @@ public class DeliveryNoteListController {
         deliveryNoteItems.addAll(notes);
 
         if (deliveryNoteItems.isEmpty()) {
-            showAlert("Información", "No se encontraron albaranes para el período seleccionado.");
+            ShowAlert.showInfo("Información", "No se encontraron albaranes para el período seleccionado.");
         }
     }
 
-    /**
-     * Displays an alert dialog with the specified title and message.
-     *
-     * @param title   The title of the alert
-     * @param message The message to display
-     */
-    private void showAlert(String title, String message) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle(title);
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
-    }
 
     /**
      * Closes the list window.

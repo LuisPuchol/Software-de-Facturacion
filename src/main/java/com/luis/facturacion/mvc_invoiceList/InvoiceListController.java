@@ -3,6 +3,7 @@ package com.luis.facturacion.mvc_invoiceList;
 
 import com.luis.facturacion.AppController;
 import com.luis.facturacion.mvc_deliveryNoteList.DeliveryNoteListItem;
+import com.luis.facturacion.utils.ShowAlert;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -153,12 +154,12 @@ public class InvoiceListController {
         LocalDate toDate = toDateField.getValue();
 
         if (fromDate == null || toDate == null) {
-            showAlert("Error", "Por favor, seleccione un rango de fechas válido.");
+            ShowAlert.showError("Error", "Por favor, seleccione un rango de fechas válido.");
             return;
         }
 
         if (fromDate.isAfter(toDate)) {
-            showAlert("Error", "La fecha 'Desde' no puede ser posterior a la fecha 'Hasta'.");
+            ShowAlert.showError("Error", "La fecha 'Desde' no puede ser posterior a la fecha 'Hasta'.");
             return;
         }
 
@@ -179,7 +180,7 @@ public class InvoiceListController {
         invoiceItems.addAll(invoices);
 
         if (invoiceItems.isEmpty()) {
-            showAlert("Información", "No se encontraron facturas para el período seleccionado.");
+            ShowAlert.showInfo("Información", "No se encontraron facturas para el período seleccionado.");
         }
     }
 
@@ -197,20 +198,6 @@ public class InvoiceListController {
 
         List<DeliveryNoteListItem> notes = model.getDeliveryNotesForInvoice(invoiceId);
         deliveryNoteItems.addAll(notes);
-    }
-
-    /**
-     * Displays an alert dialog with the specified title and message.
-     *
-     * @param title   The title of the alert
-     * @param message The message to display
-     */
-    private void showAlert(String title, String message) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle(title);
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
     }
 
     /**
