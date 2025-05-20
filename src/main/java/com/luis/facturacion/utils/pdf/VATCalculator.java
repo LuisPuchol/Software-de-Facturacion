@@ -15,7 +15,7 @@ import java.util.logging.Logger;
  */
 public class VATCalculator {
     private static final Logger LOGGER = Logger.getLogger(VATCalculator.class.getName());
-    private static final double DEFAULT_VAT_RATE = 21.0;
+    private static final double DEFAULT_VAT_RATE = 4.0;
 
     public static class VATCalculation {
         private final BigDecimal baseAmount;
@@ -42,20 +42,15 @@ public class VATCalculator {
             BigDecimal baseAmount;
             BigDecimal vatAmount;
 
-            if (!applyVAT) {
-                // No VAT applies
-                baseAmount = invoiceTotal;
-                vatAmount = BigDecimal.ZERO;
-            } else if (isVATIncludedInTotal(invoice)) {
-                // VAT is included in the total, calculate backwards
+            if (applyVAT) {
+                // VAT is included in the total
                 BigDecimal vatMultiplier = BigDecimal.valueOf(1 + (vatRate / 100));
                 baseAmount = invoiceTotal.divide(vatMultiplier, 2, BigDecimal.ROUND_HALF_UP);
                 vatAmount = invoiceTotal.subtract(baseAmount);
             } else {
-                // VAT not included, calculate forward
+                // No VAT applies
                 baseAmount = invoiceTotal;
-                vatAmount = baseAmount.multiply(BigDecimal.valueOf(vatRate / 100))
-                        .setScale(2, BigDecimal.ROUND_HALF_UP);
+                vatAmount = BigDecimal.ZERO;
             }
 
             BigDecimal totalWithVAT = baseAmount.add(vatAmount);
@@ -73,6 +68,7 @@ public class VATCalculator {
     private double getVATRate() {
         try {
             VATConfigEntity vatConfig = VATConfigDAO.getInstance().getCurrentConfig();
+            //TODO shouldnt return null
             return (vatConfig != null) ? vatConfig.getVatRate() : DEFAULT_VAT_RATE;
         } catch (Exception e) {
             LOGGER.log(Level.WARNING, "Error getting VAT rate, using default", e);
@@ -81,10 +77,8 @@ public class VATCalculator {
     }
 
     private boolean shouldApplyVAT(ClientEntity client) {
+        //TODO client shouldnt return null
         return client != null && client.getClientType() != null && client.getClientType() == 1;
     }
 
-    private boolean isVATIncludedInTotal(InvoiceEntity invoice) {
-        return invoice.getType() != null && invoice.getType() == 1;
-    }
 }

@@ -59,7 +59,6 @@ public class PDFGenerator {
                     deliveryNote.getDate().format(DATE_FORMATTER), client);
             addItemsTable(document, List.of(deliveryNote), false);
             addSimpleTotal(document, deliveryNote.getTotalAmount());
-            addFooter(document);
 
             return tempFile;
 
@@ -145,16 +144,17 @@ public class PDFGenerator {
 
     /**
      * Adds items table for delivery notes - unified method
-     * @param document PDF document
+     *
+     * @param document      PDF document
      * @param deliveryNotes List of delivery notes
-     * @param showHeaders Whether to show delivery note headers (for invoices)
+     * @param showHeaders   Whether to show delivery note headers (for invoices)
      */
     private static void addItemsTable(Document document, List<DeliveryNoteEntity> deliveryNotes, boolean showHeaders) {
         Table itemsTable = createItemsTableStructure();
 
         Map<Integer, String> allArticleNames = preloadAllArticleNames(deliveryNotes);
 
-        for (DeliveryNoteEntity deliveryNote : deliveryNotes) {
+        deliveryNotes.forEach(deliveryNote -> {
             // delivery note header for invoices
             if (showHeaders) {
                 Cell noteHeaderCell = new Cell(1, 7);
@@ -164,12 +164,11 @@ public class PDFGenerator {
                 itemsTable.addCell(noteHeaderCell);
             }
 
-            List<DeliveryNoteItemEntity> items = DeliveryNoteItemDAO.getInstance().getItemsByDeliveryNoteId(deliveryNote.getId());
+            DeliveryNoteItemDAO.getInstance().
+                    getItemsByDeliveryNoteId(deliveryNote.getId())
+                    .forEach(item -> addItemRow(itemsTable, item, allArticleNames));
 
-            for (DeliveryNoteItemEntity item : items) {
-                addItemRow(itemsTable, item, allArticleNames);
-            }
-        }
+        });
 
         document.add(itemsTable);
     }
@@ -201,122 +200,111 @@ public class PDFGenerator {
             List<DeliveryNoteItemEntity> items = DeliveryNoteItemDAO.getInstance().getItemsByDeliveryNoteId(deliveryNote.getId());
             for (DeliveryNoteItemEntity item : items) {
                 Integer articleID = item.getArticleID();
-                if (articleID != null && !articleNames.containsKey(articleID)) {
-                    try {
-                        String name = ArticleDAO.getInstance().getNameById(articleID);
-                        articleNames.put(articleID, name != null ? name : "");
-                    } catch (Exception e) {
-                        LOGGER.log(Level.WARNING, "Error retrieving article name: " + articleID, e);
-                        articleNames.put(articleID, "");
-                    }
+                if (articleID == null || articleNames.containsKey(articleID)) continue;
+                try {
+                    String name = ArticleDAO.getInstance().getNameById(articleID);
+                    articleNames.put(articleID, name != null ? name : "");
+                } catch (Exception e) {
+                    LOGGER.log(Level.WARNING, "Error retrieving article name: " + articleID, e);
+                    articleNames.put(articleID, "");
                 }
             }
         }
-
         return articleNames;
     }
 
-    private static void addInvoiceTotals(Document document, InvoiceEntity invoice, ClientEntity client) {
-        VATCalculator.VATCalculation vatCalc = VAT_CALCULATOR.calculateVAT(invoice, client);
 
-        document.add(new Paragraph(" ").setMarginBottom(20));
+private static void addInvoiceTotals(Document document, InvoiceEntity invoice, ClientEntity client) {
+    VATCalculator.VATCalculation vatCalc = VAT_CALCULATOR.calculateVAT(invoice, client);
 
-        Table totalsTable = new Table(UnitValue.createPercentArray(new float[]{20, 20, 20, 20, 20}));
-        totalsTable.setWidth(UnitValue.createPercentValue(100));
+    document.add(new Paragraph(" ").setMarginBottom(20));
 
-        // Headers
-        String[] headers = {"Base Imponible", "IVA", "Total Factura", "", "Total a Pagar"};
-        for (String header : headers) {
-            Cell cell = new Cell();
-            cell.add(new Paragraph(header).setBold());
-            cell.setBackgroundColor(ColorConstants.LIGHT_GRAY);
-            cell.setTextAlignment(TextAlignment.CENTER);
-            totalsTable.addCell(cell);
-        }
+    Table totalsTable = new Table(UnitValue.createPercentArray(new float[]{20, 20, 20, 20, 20}));
+    totalsTable.setWidth(UnitValue.createPercentValue(100));
 
-        // Values
-        totalsTable.addCell(createCenteredBorderedCell(formatCurrency(vatCalc.getBaseAmount())));
-        totalsTable.addCell(createCenteredBorderedCell(formatCurrency(vatCalc.getVatAmount())));
-        totalsTable.addCell(createCenteredBorderedCell(formatCurrency(vatCalc.getTotalAmount())));
-        totalsTable.addCell(createBorderedCell()); // Empty cell
-        totalsTable.addCell(createCenteredBorderedCell(formatCurrency(vatCalc.getTotalAmount())));
-
-        document.add(totalsTable);
-    }
-
-    private static void addSimpleTotal(Document document, Double totalAmount) {
-        Table totalTable = new Table(UnitValue.createPercentArray(new float[]{70, 30}));
-        totalTable.setWidth(UnitValue.createPercentValue(100));
-        totalTable.setMarginTop(20);
-
-        totalTable.addCell(createBorderlessCell());
-
-        Cell totalCell = createBorderedCell();
-        totalCell.add(new Paragraph("TOTAL: " + formatCurrency(totalAmount)).setBold());
-        totalCell.setTextAlignment(TextAlignment.RIGHT);
-        totalTable.addCell(totalCell);
-
-        document.add(totalTable);
-    }
-
-    private static void addFooter(Document document) {
-        document.add(new Paragraph(" ").setMarginBottom(20));
-        Paragraph footerText = new Paragraph("Gracias por su confianza");
-        footerText.setTextAlignment(TextAlignment.CENTER);
-        footerText.setFontSize(10);
-        document.add(footerText);
-    }
-
-    private static File createTempFile(String prefix) throws IOException {
-        return File.createTempFile(prefix + "_", ".pdf");
-    }
-
-
-
-    private static Table createItemsTableStructure() {
-        Table table = new Table(UnitValue.createPercentArray(new float[]{8, 22, 20, 20, 9, 10, 11}));
-        table.setWidth(UnitValue.createPercentValue(100));
-
-        String[] headers = {"Código", "Concepto", "Trazabilidad 1", "Trazabilidad 2", "Cantidad", "Precio", "Importe"};
-        for (String header : headers) {
-            Cell cell = new Cell();
-            cell.add(new Paragraph(header).setBold());
-            cell.setBackgroundColor(ColorConstants.LIGHT_GRAY);
-            table.addHeaderCell(cell);
-        }
-        return table;
-    }
-
-    private static Cell createBorderlessCell() {
+    // Headers
+    String[] headers = {"Base Imponible", "IVA", "Total Factura", "", "Total a Pagar"};
+    for (String header : headers) {
         Cell cell = new Cell();
-        cell.setBorder(Border.NO_BORDER);
-        return cell;
-    }
-
-    private static Cell createBorderedCell() {
-        Cell cell = new Cell();
-        cell.setBorder(new SolidBorder(ColorConstants.BLACK, 1));
-        return cell;
-    }
-
-    private static Cell createCenteredBorderedCell(String text) {
-        Cell cell = createBorderedCell();
-        cell.add(new Paragraph(text));
+        cell.add(new Paragraph(header).setBold());
+        cell.setBackgroundColor(ColorConstants.LIGHT_GRAY);
         cell.setTextAlignment(TextAlignment.CENTER);
-        return cell;
+        totalsTable.addCell(cell);
     }
 
-    private static String safeString(String value) {
-        return value != null ? value : "";
-    }
+    // Values
+    totalsTable.addCell(createCenteredBorderedCell(formatCurrency(vatCalc.getBaseAmount())));
+    totalsTable.addCell(createCenteredBorderedCell(formatCurrency(vatCalc.getVatAmount())));
+    totalsTable.addCell(createCenteredBorderedCell(formatCurrency(vatCalc.getTotalAmount())));
+    totalsTable.addCell(createBorderedCell()); // TODO reserved for recargo de equivalencia
+    totalsTable.addCell(createCenteredBorderedCell(formatCurrency(vatCalc.getTotalAmount())));
 
-    private static String formatCurrency(Object amount) {
-        if (amount instanceof BigDecimal) {
-            return String.format("%.2f €", ((BigDecimal) amount).doubleValue());
-        }
-        if (amount instanceof Double) {
-            return String.format("%.2f €", (Double) amount);
-        }
-        return amount.toString() + " €";
+    document.add(totalsTable);
+}
+
+private static void addSimpleTotal(Document document, Double totalAmount) {
+    Table totalTable = new Table(UnitValue.createPercentArray(new float[]{70, 30}));
+    totalTable.setWidth(UnitValue.createPercentValue(100));
+    totalTable.setMarginTop(20);
+
+    totalTable.addCell(createBorderlessCell());
+
+    Cell totalCell = createBorderedCell();
+    totalCell.add(new Paragraph("TOTAL: " + formatCurrency(totalAmount)).setBold());
+    totalCell.setTextAlignment(TextAlignment.RIGHT);
+    totalTable.addCell(totalCell);
+
+    document.add(totalTable);
+}
+
+private static File createTempFile(String prefix) throws IOException {
+    return File.createTempFile(prefix + "_", ".pdf");
+}
+
+private static Table createItemsTableStructure() {
+    Table table = new Table(UnitValue.createPercentArray(new float[]{8, 22, 20, 20, 9, 10, 11}));
+    table.setWidth(UnitValue.createPercentValue(100));
+
+    String[] headers = {"Código", "Concepto", "Trazabilidad 1", "Trazabilidad 2", "Cantidad", "Precio", "Importe"};
+    for (String header : headers) {
+        Cell cell = new Cell();
+        cell.add(new Paragraph(header).setBold());
+        cell.setBackgroundColor(ColorConstants.LIGHT_GRAY);
+        table.addHeaderCell(cell);
     }
+    return table;
+}
+
+private static Cell createBorderlessCell() {
+    Cell cell = new Cell();
+    cell.setBorder(Border.NO_BORDER);
+    return cell;
+}
+
+private static Cell createBorderedCell() {
+    Cell cell = new Cell();
+    cell.setBorder(new SolidBorder(ColorConstants.BLACK, 1));
+    return cell;
+}
+
+private static Cell createCenteredBorderedCell(String text) {
+    Cell cell = createBorderedCell();
+    cell.add(new Paragraph(text));
+    cell.setTextAlignment(TextAlignment.CENTER);
+    return cell;
+}
+
+private static String safeString(String value) {
+    return value != null ? value : "";
+}
+
+private static String formatCurrency(Object amount) {
+    if (amount instanceof BigDecimal) {
+        return String.format("%.2f €", ((BigDecimal) amount).doubleValue());
+    }
+    if (amount instanceof Double) {
+        return String.format("%.2f €", (Double) amount);
+    }
+    return amount.toString() + " €";
+}
 }

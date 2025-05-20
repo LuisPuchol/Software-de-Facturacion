@@ -18,7 +18,6 @@ public class DeliveryNoteModel {
     private DeliveryNoteEntity currentDeliveryNoteEntity;
     private List<DeliveryNoteItemEntity> currentItems = new ArrayList<>();
 
-    //DDBB
     private DeliveryNoteDAO deliveryNoteDAO;
     private DeliveryNoteItemDAO deliveryNoteItemDAO;
 
