@@ -15,6 +15,7 @@ import com.luis.facturacion.mvc_article.database.ArticleDAO;
 import com.luis.facturacion.mvc_client.database.ClientDAO;
 import com.luis.facturacion.mvc_client.database.ClientEntity;
 import com.luis.facturacion.mvc_deliveryNote.DeliveryNoteEntity;
+import com.luis.facturacion.mvc_deliveryNote.DeliveryNoteItemDAO;
 import com.luis.facturacion.mvc_deliveryNote.DeliveryNoteItemEntity;
 import com.luis.facturacion.mvc_invoice.database.InvoiceEntity;
 import com.luis.facturacion.utils.HibernateUtil;
@@ -53,11 +54,10 @@ public class PDFGenerator {
              Document document = new Document(pdf)) {
 
             ClientEntity client = ClientDAO.getInstance().getById(deliveryNote.getClientId());
-            Map<Integer, String> articleNames = preloadArticleNames(items);
 
             addDocumentHeader(document, "Albarán nº: " + deliveryNote.getIndex(),
                     deliveryNote.getDate().format(DATE_FORMATTER), client);
-            addItemsTable(document, items, articleNames);
+            addItemsTable(document, List.of(deliveryNote), false);
             addSimpleTotal(document, deliveryNote.getTotalAmount());
             addFooter(document);
 
@@ -86,7 +86,7 @@ public class PDFGenerator {
 
             addDocumentHeader(document, "Factura nº: " + invoice.getId(),
                     invoice.getDate().format(DATE_FORMATTER), client);
-            addDeliveryNotesSection(document, deliveryNotes);
+            addItemsTable(document, deliveryNotes, true);
             addInvoiceTotals(document, invoice, client);
 
             return tempFile;
@@ -129,9 +129,9 @@ public class PDFGenerator {
         clientCell.add(infoTable);
 
         // Client details
-        String clientName = (client != null) ? client.getName() : "Cliente no encontrado";
-        String clientAddress = (client != null && client.getAddress() != null) ? client.getAddress() : "";
-        String clientNif = (client != null && client.getCif() != null) ? client.getCif() : "";
+        String clientName = client.getName();
+        String clientAddress = client.getAddress();
+        String clientNif = client.getCif();
 
         clientCell.add(new Paragraph("Cliente: " + clientName).setMarginTop(10));
         clientCell.add(new Paragraph("Dirección: " + clientAddress));
@@ -143,57 +143,77 @@ public class PDFGenerator {
         document.add(new Paragraph(" ").setMarginBottom(20));
     }
 
-    private static void addItemsTable(Document document, List<DeliveryNoteItemEntity> items, Map<Integer, String> articleNames) {
+    /**
+     * Adds items table for delivery notes - unified method
+     * @param document PDF document
+     * @param deliveryNotes List of delivery notes
+     * @param showHeaders Whether to show delivery note headers (for invoices)
+     */
+    private static void addItemsTable(Document document, List<DeliveryNoteEntity> deliveryNotes, boolean showHeaders) {
         Table itemsTable = createItemsTableStructure();
 
-        for (DeliveryNoteItemEntity item : items) {
-            Integer articleID = item.getArticleID();
-            String articleName = articleNames.getOrDefault(articleID, "");
-            BigDecimal amount = item.getPrice().multiply(BigDecimal.valueOf(item.getQuantity()));
+        Map<Integer, String> allArticleNames = preloadAllArticleNames(deliveryNotes);
 
-            itemsTable.addCell(new Cell().add(new Paragraph(articleID != null ? articleID.toString() : "")));
-            itemsTable.addCell(new Cell().add(new Paragraph(articleName)));
-            itemsTable.addCell(new Cell().add(new Paragraph(safeString(item.getTrace1()))));
-            itemsTable.addCell(new Cell().add(new Paragraph(safeString(item.getTrace2()))));
-            itemsTable.addCell(new Cell().add(new Paragraph(String.valueOf(item.getQuantity()))));
-            itemsTable.addCell(new Cell().add(new Paragraph(formatCurrency(item.getPrice()))));
-            itemsTable.addCell(new Cell().add(new Paragraph(formatCurrency(amount))));
+        for (DeliveryNoteEntity deliveryNote : deliveryNotes) {
+            // delivery note header for invoices
+            if (showHeaders) {
+                Cell noteHeaderCell = new Cell(1, 7);
+                noteHeaderCell.setBackgroundColor(ColorConstants.LIGHT_GRAY);
+                noteHeaderCell.add(new Paragraph("Albarán nº " + deliveryNote.getIndex() +
+                        " de fecha " + deliveryNote.getDate().format(DATE_FORMATTER)).setBold());
+                itemsTable.addCell(noteHeaderCell);
+            }
+
+            List<DeliveryNoteItemEntity> items = DeliveryNoteItemDAO.getInstance().getItemsByDeliveryNoteId(deliveryNote.getId());
+
+            for (DeliveryNoteItemEntity item : items) {
+                addItemRow(itemsTable, item, allArticleNames);
+            }
         }
 
         document.add(itemsTable);
     }
 
-    private static void addDeliveryNotesSection(Document document, List<DeliveryNoteEntity> deliveryNotes) {
-        Table itemsTable = createItemsTableStructure();
+    /**
+     * Adds a single item row to the table
+     */
+    private static void addItemRow(Table table, DeliveryNoteItemEntity item, Map<Integer, String> articleNames) {
+        Integer articleID = item.getArticleID();
+        String articleName = articleNames.get(articleID);
+        BigDecimal amount = item.getPrice().multiply(BigDecimal.valueOf(item.getQuantity()));
+
+        table.addCell(new Cell().add(new Paragraph(String.valueOf(articleID))));
+        table.addCell(new Cell().add(new Paragraph(articleName)));
+        table.addCell(new Cell().add(new Paragraph(safeString(item.getTrace1()))));
+        table.addCell(new Cell().add(new Paragraph(safeString(item.getTrace2()))));
+        table.addCell(new Cell().add(new Paragraph(String.valueOf(item.getQuantity()))));
+        table.addCell(new Cell().add(new Paragraph(formatCurrency(item.getPrice()))));
+        table.addCell(new Cell().add(new Paragraph(formatCurrency(amount))));
+    }
+
+    /**
+     * Preloads all article names for multiple delivery notes to avoid N+1 queries
+     */
+    private static Map<Integer, String> preloadAllArticleNames(List<DeliveryNoteEntity> deliveryNotes) {
+        Map<Integer, String> articleNames = new HashMap<>();
 
         for (DeliveryNoteEntity deliveryNote : deliveryNotes) {
-            // Header para cada albarán
-            Cell noteHeaderCell = new Cell(1, 7);
-            noteHeaderCell.setBackgroundColor(ColorConstants.LIGHT_GRAY);
-            noteHeaderCell.add(new Paragraph("Albarán nº " + deliveryNote.getIndex() +
-                    " de fecha " + deliveryNote.getDate().format(DATE_FORMATTER)).setBold());
-            itemsTable.addCell(noteHeaderCell);
-
-            // Items del albarán
-            List<DeliveryNoteItemEntity> items = getItemsForDeliveryNote(deliveryNote.getId());
-            Map<Integer, String> articleNames = preloadArticleNames(items);
-
+            List<DeliveryNoteItemEntity> items = DeliveryNoteItemDAO.getInstance().getItemsByDeliveryNoteId(deliveryNote.getId());
             for (DeliveryNoteItemEntity item : items) {
                 Integer articleID = item.getArticleID();
-                String articleName = articleNames.getOrDefault(articleID, "");
-                BigDecimal amount = item.getPrice().multiply(BigDecimal.valueOf(item.getQuantity()));
-
-                itemsTable.addCell(new Cell().add(new Paragraph(articleID != null ? articleID.toString() : "")));
-                itemsTable.addCell(new Cell().add(new Paragraph(articleName)));
-                itemsTable.addCell(new Cell().add(new Paragraph(safeString(item.getTrace1()))));
-                itemsTable.addCell(new Cell().add(new Paragraph(safeString(item.getTrace2()))));
-                itemsTable.addCell(new Cell().add(new Paragraph(String.valueOf(item.getQuantity()))));
-                itemsTable.addCell(new Cell().add(new Paragraph(formatCurrency(item.getPrice()))));
-                itemsTable.addCell(new Cell().add(new Paragraph(formatCurrency(amount))));
+                if (articleID != null && !articleNames.containsKey(articleID)) {
+                    try {
+                        String name = ArticleDAO.getInstance().getNameById(articleID);
+                        articleNames.put(articleID, name != null ? name : "");
+                    } catch (Exception e) {
+                        LOGGER.log(Level.WARNING, "Error retrieving article name: " + articleID, e);
+                        articleNames.put(articleID, "");
+                    }
+                }
             }
         }
 
-        document.add(itemsTable);
+        return articleNames;
     }
 
     private static void addInvoiceTotals(Document document, InvoiceEntity invoice, ClientEntity client) {
@@ -247,42 +267,14 @@ public class PDFGenerator {
         document.add(footerText);
     }
 
-    // Helper methods para eliminar duplicación
     private static File createTempFile(String prefix) throws IOException {
         return File.createTempFile(prefix + "_", ".pdf");
     }
 
-    private static Map<Integer, String> preloadArticleNames(List<DeliveryNoteItemEntity> items) {
-        Map<Integer, String> articleNames = new HashMap<>();
-        for (DeliveryNoteItemEntity item : items) {
-            Integer articleID = item.getArticleID();
-            if (articleID != null && !articleNames.containsKey(articleID)) {
-                try {
-                    String name = ArticleDAO.getInstance().getNameById(articleID);
-                    articleNames.put(articleID, name);
-                } catch (Exception e) {
-                    LOGGER.log(Level.WARNING, "Error retrieving article name: " + articleID, e);
-                    articleNames.put(articleID, "");
-                }
-            }
-        }
-        return articleNames;
-    }
 
-    private static List<DeliveryNoteItemEntity> getItemsForDeliveryNote(Integer deliveryNoteId) {
-        try (org.hibernate.Session session = HibernateUtil.getSessionFactory().openSession()) {
-            org.hibernate.query.Query<DeliveryNoteItemEntity> query = session.createQuery(
-                    "FROM DeliveryNoteItemEntity WHERE deliveryNoteID = :id", DeliveryNoteItemEntity.class);
-            query.setParameter("id", deliveryNoteId);
-            return query.list();
-        } catch (Exception e) {
-            LOGGER.log(Level.SEVERE, "Error getting items for delivery note: " + deliveryNoteId, e);
-            return List.of();
-        }
-    }
 
     private static Table createItemsTableStructure() {
-        Table table = new Table(UnitValue.createPercentArray(new float[]{10, 30, 10, 10, 10, 15, 15}));
+        Table table = new Table(UnitValue.createPercentArray(new float[]{8, 22, 20, 20, 9, 10, 11}));
         table.setWidth(UnitValue.createPercentValue(100));
 
         String[] headers = {"Código", "Concepto", "Trazabilidad 1", "Trazabilidad 2", "Cantidad", "Precio", "Importe"};
@@ -319,7 +311,6 @@ public class PDFGenerator {
     }
 
     private static String formatCurrency(Object amount) {
-        if (amount == null) return "0,00 €";
         if (amount instanceof BigDecimal) {
             return String.format("%.2f €", ((BigDecimal) amount).doubleValue());
         }
