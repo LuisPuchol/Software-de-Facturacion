@@ -1,12 +1,11 @@
 package com.luis.facturacion.mvc_deliveryNote;
 
-import com.luis.facturacion.utils.PDFGenerator;
-import com.luis.facturacion.utils.PDFPrinter;
+import com.luis.facturacion.utils.pdf.PDFGenerator;
+import com.luis.facturacion.utils.pdf.PDFPrinter;
 import com.luis.facturacion.utils.ShowAlert;
 import javafx.scene.control.TextField;
 
 import java.io.File;
-import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;

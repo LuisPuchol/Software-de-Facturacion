@@ -127,20 +127,10 @@ public class InvoiceListController {
             if (event.getButton().equals(MouseButton.PRIMARY) && event.getClickCount() == 2) {
                 InvoiceListItem selectedInvoice = invoicesTable.getSelectionModel().getSelectedItem();
                 if (selectedInvoice != null) {
-                    openInvoiceDetailView(selectedInvoice.getId());
+                    model.generateAndShowInvoicePDF(selectedInvoice.getId());
                 }
             }
         });
-    }
-
-    /**
-     * Opens invoice detail view for a selected invoice.
-     * This will be implemented later.
-     *
-     * @param Id The selected invoice
-     */
-    private void openInvoiceDetailView(Integer Id) {
-        model.generateAndShowInvoicePDF(Id);
     }
 
     /**

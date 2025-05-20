@@ -8,11 +8,12 @@ import com.luis.facturacion.mvc_invoice.database.InvoiceEntity;
 import com.luis.facturacion.mvc_vatConfig.database.VATConfigDAO;
 import com.luis.facturacion.mvc_vatConfig.database.VATConfigEntity;
 import com.luis.facturacion.utils.HibernateUtil;
-import com.luis.facturacion.utils.PDFManager;
+import com.luis.facturacion.utils.pdf.PDFGenerator;
 import com.luis.facturacion.utils.ShowAlert;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
+import java.io.File;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -89,12 +90,7 @@ public class InvoiceListModel {
      * @return List of delivery note entities
      */
     private List<DeliveryNoteEntity> getDeliveryNoteEntitiesForPDF(Integer invoiceId) {
-        // Llamar al método existente que devuelve List<DeliveryNoteListItem>
         List<DeliveryNoteListItem> items = getDeliveryNotesForInvoice(invoiceId);
-
-        // Convertir los items a entidades originales (no es necesario crear nuevas instancias)
-        // Como DeliveryNoteListItem extiende DeliveryNoteEntity, podemos usarlo directamente
-
         return new ArrayList<>(items);
     }
 
@@ -245,19 +241,17 @@ public class InvoiceListModel {
     }
 
     /**
-     * Example method to add to InvoiceModel for generating and showing a PDF for an invoice
+     * Generating and showing a PDF for an invoice
      *
      * @param invoiceId ID of the invoice to generate PDF for
-     * @return true if the PDF was successfully generated and shown
      */
-    public boolean generateAndShowInvoicePDF(Integer invoiceId) {
+    public void generateAndShowInvoicePDF(Integer invoiceId) {
         try {
             // Get the invoice entity
             InvoiceEntity invoice = InvoiceDAO.getInstance().getById(invoiceId);
 
             if (invoice == null) {
                 ShowAlert.showError("Error", "No se encontró la factura con ID: " + invoiceId);
-                return false;
             }
 
             // Get all delivery notes for this invoice
@@ -265,71 +259,14 @@ public class InvoiceListModel {
 
             if (deliveryNotes.isEmpty()) {
                 ShowAlert.showError("Error", "No se encontraron albaranes asociados a esta factura.");
-                return false;
             }
 
-            // Generate and show the PDF
-            return PDFManager.showInvoicePDF(invoice, deliveryNotes);
+            File pdfFile = PDFGenerator.generateInvoicePDF(invoice, deliveryNotes);
+            java.awt.Desktop.getDesktop().open(pdfFile);
 
         } catch (Exception e) {
             e.printStackTrace();
             ShowAlert.showError("Error", "Error al generar el PDF de la factura: " + e.getMessage());
-            return false;
-        }
-    }
-
-    /**
-     * Example method to add to InvoiceModel for generating and printing a PDF for an invoice
-     *
-     * @param invoiceId ID of the invoice to generate and print
-     * @return true if the PDF was successfully generated and printed
-     */
-    public boolean generateAndPrintInvoicePDF(Integer invoiceId) {
-        try {
-            // Get the invoice entity
-            InvoiceEntity invoice = InvoiceDAO.getInstance().getById(invoiceId);
-
-            if (invoice == null) {
-                ShowAlert.showError("Error", "No se encontró la factura con ID: " + invoiceId);
-                return false;
-            }
-
-            // Get all delivery notes for this invoice
-            List<DeliveryNoteEntity> deliveryNotes = getDeliveryNoteEntitiesForPDF(invoiceId);
-
-            if (deliveryNotes.isEmpty()) {
-                ShowAlert.showError("Error", "No se encontraron albaranes asociados a esta factura.");
-                return false;
-            }
-
-            // Generate and print the PDF
-            return PDFManager.printInvoicePDF(invoice, deliveryNotes);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            ShowAlert.showError("Error", "Error al imprimir el PDF de la factura: " + e.getMessage());
-            return false;
-        }
-    }
-
-    /**
-     * Helper method to get all delivery notes associated with an invoice
-     *
-     * @param invoiceId ID of the invoice
-     * @return List of delivery notes
-     */
-    private List<DeliveryNoteEntity> getDeliveryNotesForInvoice2(Integer invoiceId) {
-        try (org.hibernate.Session session = HibernateUtil.getSessionFactory().openSession()) {
-            org.hibernate.query.Query<DeliveryNoteEntity> query = session.createQuery(
-                    "FROM DeliveryNoteEntity WHERE invoiceNumber = :invoiceId",
-                    DeliveryNoteEntity.class
-            );
-            query.setParameter("invoiceId", invoiceId);
-            return query.list();
-        } catch (Exception e) {
-            System.err.println("Error getting delivery notes for invoice: " + e.getMessage());
-            e.printStackTrace();
-            return List.of(); // Return empty list in case of error
         }
     }
 

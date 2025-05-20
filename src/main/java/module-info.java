@@ -59,4 +59,6 @@ module com.luis.facturacion {
     // App base
     exports com.luis.facturacion;
     opens com.luis.facturacion.utils to javafx.base, javafx.fxml, org.hibernate.orm.core;
+    exports com.luis.facturacion.utils.pdf;
+    opens com.luis.facturacion.utils.pdf to javafx.base, javafx.fxml, org.hibernate.orm.core;
 }

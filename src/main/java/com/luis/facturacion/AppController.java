@@ -61,7 +61,7 @@ public class AppController {
     }
 
     public void showMainMenuView() {
-        viewLoader.loadView("/com/luis/facturacion/mainMenu.fxml", MainMenuController.class, mainMenuController, primaryStage, "MainMenu");
+        viewLoader.loadView("/com/luis/facturacion/mainMenu.fxml", MainMenuController.class, mainMenuController, primaryStage, "Menú Principal");
     }
 
     public void showArticleView(){

@@ -9,6 +9,7 @@ import javafx.beans.property.*;
 /**
  * Class that represents an item on a delivery note
  */
+
 public class DeliveryNoteItem {
     private final StringProperty code;
     private final StringProperty concept;
