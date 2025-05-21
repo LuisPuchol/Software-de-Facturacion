@@ -81,11 +81,11 @@ public class AppController {
     }
 
     public void showInvoiceView() {
-        viewLoader.loadViewInNewStage("/com/luis/facturacion/Invoice.fxml", InvoiceController.class, invoiceController, "Listado a Facturar");
+        viewLoader.loadViewInNewStage("/com/luis/facturacion/invoice.fxml", InvoiceController.class, invoiceController, "Listado a Facturar");
     }
 
     public void showInvoiceListView() {
-        viewLoader.loadViewInNewStage("/com/luis/facturacion/InvoiceList.fxml", InvoiceListController.class, invoiceListController, "Listado de facturas");
+        viewLoader.loadViewInNewStage("/com/luis/facturacion/invoiceList.fxml", InvoiceListController.class, invoiceListController, "Listado de facturas");
     }
 
     public void showVatConfigView() {
