@@ -36,7 +36,7 @@ public class ClientEntity {
 
     @Column(name = "tel2", length = 20)
     private String tel2;
-    //Change table name on MYSQL
+    // TODO Change table name on MYSQL
     @Column(name = "req_equivalencia")
     private Integer equivalenceSurcharge;
 

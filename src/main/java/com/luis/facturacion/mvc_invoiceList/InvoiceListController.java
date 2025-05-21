@@ -111,7 +111,7 @@ public class InvoiceListController {
      * Sets up event handlers for the tables.
      */
     private void setupEventHandlers() {
-        // Handle invoice table selection
+        // One row selected
         invoicesTable.getSelectionModel().selectedItemProperty().addListener(
                 (observable, oldValue, newValue) -> {
                     if (newValue != null) {
@@ -122,7 +122,7 @@ public class InvoiceListController {
                 }
         );
 
-        // Handle double-click on invoice to open detail view
+        // double-click on invoice
         invoicesTable.setOnMouseClicked(event -> {
             if (event.getButton().equals(MouseButton.PRIMARY) && event.getClickCount() == 2) {
                 InvoiceListItem selectedInvoice = invoicesTable.getSelectionModel().getSelectedItem();
@@ -142,16 +142,6 @@ public class InvoiceListController {
     public void handleSearch(ActionEvent actionEvent) {
         LocalDate fromDate = fromDateField.getValue();
         LocalDate toDate = toDateField.getValue();
-
-        if (fromDate == null || toDate == null) {
-            ShowAlert.showError("Error", "Por favor, seleccione un rango de fechas válido.");
-            return;
-        }
-
-        if (fromDate.isAfter(toDate)) {
-            ShowAlert.showError("Error", "La fecha 'Desde' no puede ser posterior a la fecha 'Hasta'.");
-            return;
-        }
 
         loadInvoices(fromDate, toDate);
     }
@@ -180,10 +170,6 @@ public class InvoiceListController {
      * @param invoiceId ID of the invoice
      */
     private void loadDeliveryNotesForInvoice(Integer invoiceId) {
-        if (invoiceId == null) {
-            return;
-        }
-
         deliveryNoteItems.clear();
 
         List<DeliveryNoteListItem> notes = model.getDeliveryNotesForInvoice(invoiceId);

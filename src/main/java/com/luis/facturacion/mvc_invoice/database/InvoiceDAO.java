@@ -6,6 +6,9 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
+import java.time.LocalDate;
+import java.util.List;
+
 public class InvoiceDAO extends GlobalDAO<InvoiceEntity, Integer> {
     private static InvoiceDAO instance;
 
@@ -35,6 +38,19 @@ public class InvoiceDAO extends GlobalDAO<InvoiceEntity, Integer> {
             return maxId.intValue() + 1;
         } catch (Exception e) {
             System.err.println("Error obtaining the next invoice number: " + e.getMessage());
+            throw e;
+        }
+    }
+
+    public List<InvoiceEntity> findByDateRange(LocalDate fromDate, LocalDate toDate) {
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            String hql = "FROM InvoiceEntity i WHERE i.date BETWEEN :fromDate AND :toDate";
+            Query<InvoiceEntity> query = session.createQuery(hql, InvoiceEntity.class);
+            query.setParameter("fromDate", fromDate);
+            query.setParameter("toDate", toDate);
+            return query.list();
+        } catch (Exception e) {
+            System.err.println("Error getting invoices by date range: " + e.getMessage());
             throw e;
         }
     }

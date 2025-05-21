@@ -1,7 +1,6 @@
 package com.luis.facturacion.mvc_invoice;
 
 import com.luis.facturacion.AppController;
-import com.luis.facturacion.mvc_deliveryNote.DeliveryNoteEntity;
 import com.luis.facturacion.utils.ShowAlert;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -158,6 +157,7 @@ public class InvoiceController {
         List<DeliveryNoteInvoiceItem> notes = model.getDeliveryNotesForClient(
                 Integer.parseInt(clientId), toDateField.getValue());
         deliveryNoteItems.addAll(notes);
+
     }
 
     /**

@@ -1,6 +1,7 @@
 package com.luis.facturacion.mvc_invoiceList;
 
 import com.luis.facturacion.mvc_client.database.ClientDAO;
+import com.luis.facturacion.mvc_deliveryNote.DeliveryNoteDAO;
 import com.luis.facturacion.mvc_deliveryNote.DeliveryNoteEntity;
 import com.luis.facturacion.mvc_deliveryNoteList.DeliveryNoteListItem;
 import com.luis.facturacion.mvc_invoice.database.InvoiceDAO;
@@ -28,10 +29,14 @@ public class InvoiceListModel {
     private InvoiceListController controller;
 
     private ClientDAO clientDAO;
+    private DeliveryNoteDAO deliveryNoteDAO;
+    private InvoiceDAO invoiceDAO;
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
     private InvoiceListModel() {
         this.clientDAO = ClientDAO.getInstance();
+        this.deliveryNoteDAO = DeliveryNoteDAO.getInstance();
+        this.invoiceDAO = InvoiceDAO.getInstance();
     }
 
     /**
@@ -65,33 +70,8 @@ public class InvoiceListModel {
      * @return List of InvoiceListItem objects
      */
     public List<InvoiceListItem> getInvoicesByDateRange(LocalDate fromDate, LocalDate toDate) {
-        List<InvoiceEntity> entities = new ArrayList<>();
-
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            StringBuilder queryBuilder = new StringBuilder();
-            queryBuilder.append("FROM InvoiceEntity i WHERE i.date BETWEEN :fromDate AND :toDate");
-
-            Query<InvoiceEntity> query = session.createQuery(queryBuilder.toString(), InvoiceEntity.class);
-            query.setParameter("fromDate", fromDate);
-            query.setParameter("toDate", toDate);
-
-            entities = query.list();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
+        List<InvoiceEntity> entities = invoiceDAO.findByDateRange(fromDate, toDate);
         return convertToInvoiceItems(entities);
-    }
-
-    /**
-     * Helper method to get delivery note entities for PDF generation
-     *
-     * @param invoiceId ID of the invoice
-     * @return List of delivery note entities
-     */
-    private List<DeliveryNoteEntity> getDeliveryNoteEntitiesForPDF(Integer invoiceId) {
-        List<DeliveryNoteListItem> items = getDeliveryNotesForInvoice(invoiceId);
-        return new ArrayList<>(items);
     }
 
     /**
@@ -101,20 +81,27 @@ public class InvoiceListModel {
      * @return List of DeliveryNoteListItem objects
      */
     public List<DeliveryNoteListItem> getDeliveryNotesForInvoice(Integer invoiceId) {
-        List<DeliveryNoteEntity> entities = new ArrayList<>();
+        List<DeliveryNoteEntity> entities = deliveryNoteDAO.findByInvoiceId(invoiceId);
+        return convertToDeliveryNoteItems(entities);
+    }
 
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            String hql = "FROM DeliveryNoteEntity d WHERE d.invoiceNumber = :invoiceId";
+    /**
+     * Generating and showing a PDF for an invoice
+     *
+     * @param invoiceId ID of the invoice to generate PDF for
+     */
+    public void generateAndShowInvoicePDF(Integer invoiceId) {
+        try {
+            InvoiceEntity invoice = invoiceDAO.getById(invoiceId);
+            List<DeliveryNoteEntity> deliveryNotes = deliveryNoteDAO.findByInvoiceId(invoiceId);
 
-            Query<DeliveryNoteEntity> query = session.createQuery(hql, DeliveryNoteEntity.class);
-            query.setParameter("invoiceId", invoiceId);
+            File pdfFile = PDFGenerator.generateInvoicePDF(invoice, deliveryNotes);
+            java.awt.Desktop.getDesktop().open(pdfFile);
 
-            entities = query.list();
         } catch (Exception e) {
             e.printStackTrace();
+            ShowAlert.showError("Error", "Error al generar el PDF de la factura: " + e.getMessage());
         }
-
-        return convertToDeliveryNoteItems(entities);
     }
 
     /**
@@ -125,35 +112,34 @@ public class InvoiceListModel {
      * @return List of InvoiceListItem objects
      */
     private List<InvoiceListItem> convertToInvoiceItems(List<InvoiceEntity> entities) {
-        List<InvoiceListItem> items = new ArrayList<>();
+        return entities.stream()
+                .map(this::createInvoiceListItem)
+                .toList();
+    }
 
-        for (InvoiceEntity entity : entities) {
-            InvoiceListItem item = new InvoiceListItem(entity);
+    /**
+     * Creates and configures a single InvoiceListItem from an InvoiceEntity.
+     * Sets client name and calculates amount fields for display.
+     *
+     * @param entity The invoice entity to convert
+     * @return Fully configured InvoiceListItem for table display
+     */
+    private InvoiceListItem createInvoiceListItem(InvoiceEntity entity) {
+        InvoiceListItem item = new InvoiceListItem(entity);
 
-            // Get client information
-            String clientName = "Cliente desconocido";
-            try {
-                String name = clientDAO.getNameById(entity.getClientId());
-                if (name != null && !name.isEmpty()) {
-                    clientName = name;
-                }
-            } catch (Exception e) {
-                System.err.println("Error getting client name: " + e.getMessage());
-            }
-            item.setClientName(clientName);
+        item.setClientName(clientDAO.getNameById(entity.getClientId()));
+        setAmountFields(item, entity);
 
-            // Calculate base amount and VAT amount
-            double totalAmount = entity.getTotalAmount();
-            double baseAmount = calculateBaseAmount(entity);
-            double vatAmount = totalAmount - baseAmount;
+        return item;
+    }
 
-            item.setBaseAmount(String.format("%.2f", baseAmount));
-            item.setVatAmount(String.format("%.2f", vatAmount));
+    private void setAmountFields(InvoiceListItem item, InvoiceEntity entity) {
+        double totalAmount = entity.getTotalAmount();
+        double baseAmount = calculateBaseAmount(entity);
+        double vatAmount = totalAmount - baseAmount;
 
-            items.add(item);
-        }
-
-        return items;
+        item.setBaseAmount(String.format("%.2f", baseAmount));
+        item.setVatAmount(String.format("%.2f", vatAmount));
     }
 
     /**
@@ -164,64 +150,10 @@ public class InvoiceListModel {
      * @return The calculated base amount
      */
     private double calculateBaseAmount(InvoiceEntity invoiceEntity) {
-        double baseAmount = 0.0;
+        return deliveryNoteDAO.getTotalAmountByInvoiceId(invoiceEntity.getId());
 
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            String hql = "SELECT SUM(d.totalAmount) FROM DeliveryNoteEntity d WHERE d.invoiceNumber = :invoiceId";
-
-            Query<Double> query = session.createQuery(hql, Double.class);
-            query.setParameter("invoiceId", invoiceEntity.getId());
-
-            Double sum = query.uniqueResult();
-            if (sum != null) {
-                baseAmount = sum;
-            } else {
-                // Fallback: Reverse calculate based on invoice type and VAT settings
-                baseAmount = calculateBaseAmountFromTotal(invoiceEntity);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            // Fallback: Reverse calculate based on invoice type and VAT settings
-            baseAmount = calculateBaseAmountFromTotal(invoiceEntity);
-        }
-
-        return baseAmount;
     }
 
-    /**
-     * Reverse calculates the base amount from the total amount using
-     * the client type and VAT settings.
-     *
-     * @param invoiceEntity The invoice entity
-     * @return The calculated base amount
-     */
-    private double calculateBaseAmountFromTotal(InvoiceEntity invoiceEntity) {
-        double totalAmount = invoiceEntity.getTotalAmount();
-        Integer clientType = invoiceEntity.getType();
-
-        // If client type doesn't require VAT, the base amount equals the total amount
-        if (clientType == null || clientType != 1) {
-            return totalAmount;
-        }
-
-        // Otherwise, reverse calculate based on VAT rate
-        try {
-            VATConfigEntity vatConfig = VATConfigDAO.getInstance().getCurrentConfig();
-            if (vatConfig != null) {
-                double vatRate = vatConfig.getVatRate();
-                if (vatRate > 0) {
-                    // totalAmount = baseAmount * (1 + vatRate/100)
-                    // baseAmount = totalAmount / (1 + vatRate/100)
-                    return totalAmount / (1 + vatRate / 100);
-                }
-            }
-        } catch (Exception e) {
-            System.err.println("Error getting VAT config: " + e.getMessage());
-        }
-
-        // If VAT calculation fails, return 90% as a fallback approximation
-        return totalAmount * 0.9;
-    }
 
     /**
      * Converts DeliveryNoteEntity objects to DeliveryNoteListItem objects.
@@ -230,44 +162,9 @@ public class InvoiceListModel {
      * @return List of DeliveryNoteListItem objects
      */
     private List<DeliveryNoteListItem> convertToDeliveryNoteItems(List<DeliveryNoteEntity> entities) {
-        List<DeliveryNoteListItem> items = new ArrayList<>();
-
-        for (DeliveryNoteEntity entity : entities) {
-            DeliveryNoteListItem item = new DeliveryNoteListItem(entity);
-            items.add(item);
-        }
-
-        return items;
-    }
-
-    /**
-     * Generating and showing a PDF for an invoice
-     *
-     * @param invoiceId ID of the invoice to generate PDF for
-     */
-    public void generateAndShowInvoicePDF(Integer invoiceId) {
-        try {
-            // Get the invoice entity
-            InvoiceEntity invoice = InvoiceDAO.getInstance().getById(invoiceId);
-
-            if (invoice == null) {
-                ShowAlert.showError("Error", "No se encontró la factura con ID: " + invoiceId);
-            }
-
-            // Get all delivery notes for this invoice
-            List<DeliveryNoteEntity> deliveryNotes = getDeliveryNoteEntitiesForPDF(invoiceId);
-
-            if (deliveryNotes.isEmpty()) {
-                ShowAlert.showError("Error", "No se encontraron albaranes asociados a esta factura.");
-            }
-
-            File pdfFile = PDFGenerator.generateInvoicePDF(invoice, deliveryNotes);
-            java.awt.Desktop.getDesktop().open(pdfFile);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            ShowAlert.showError("Error", "Error al generar el PDF de la factura: " + e.getMessage());
-        }
+        return entities.stream()
+                .map(DeliveryNoteListItem::new)
+                .toList();
     }
 
 }
