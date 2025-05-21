@@ -2,6 +2,7 @@ package com.luis.facturacion.utils;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 
 import java.io.Serializable;
 import java.util.List;
@@ -169,6 +170,49 @@ public abstract class GlobalDAO<T, ID extends Serializable> {
             }
         } catch (Exception e) {
             System.err.println("Error obtaining name by ID: " + e.getMessage());
+            throw e;
+        }
+    }
+
+    /**
+     * Find an entity by its index field
+     * @param index Index value to search for
+     * @return Entity or null if not found
+     */
+    public T getByIndex(Integer index) {
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            String hql = "FROM " + entityClass.getSimpleName() + " e WHERE e.index = :index";
+            Query<T> query = session.createQuery(hql, entityClass);
+            query.setParameter("index", index);
+            return query.uniqueResult();
+        } catch (Exception e) {
+            System.err.println("Error obtaining " + entityClass.getSimpleName() + " by index: " + e.getMessage());
+            throw e;
+        }
+    }
+
+    /**
+     * Get name of entity by index (requires getName() method in entity)
+     * @param index Index of the entity
+     * @return Name of the entity or null if not found
+     */
+    public String getNameByIndex(Integer index) {
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            T entity = getByIndex(index);
+
+            if (entity == null) {
+                return null;
+            }
+
+            try {
+                // Using reflection to call getName() if it exists
+                return (String) entity.getClass().getMethod("getName").invoke(entity);
+            } catch (Exception e) {
+                System.err.println("Error: Entity does not have getName() method: " + e.getMessage());
+                return null;
+            }
+        } catch (Exception e) {
+            System.err.println("Error obtaining name by index: " + e.getMessage());
             throw e;
         }
     }

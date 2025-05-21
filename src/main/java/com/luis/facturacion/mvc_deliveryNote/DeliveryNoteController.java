@@ -284,13 +284,13 @@ public class DeliveryNoteController {
      * Gets a client name by ID from the database.
      */
     private String getClientName(int id) {
-        return ClientDAO.getInstance().getNameById(id);
+        return ClientDAO.getInstance().getNameByIndex(id);
     }
 
     /**
      * Gets an article name by ID from the database.
      */
     private String getArticleName(int id) {
-        return ArticleDAO.getInstance().getNameById(id);
+        return ArticleDAO.getInstance().getNameByIndex(id);
     }
 }

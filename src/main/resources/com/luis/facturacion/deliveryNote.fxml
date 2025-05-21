@@ -9,7 +9,7 @@
             xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.luis.facturacion.mvc_deliveryNote.DeliveryNoteController"
-            prefHeight="400.0" prefWidth="600.0">
+            prefHeight="500.0" prefWidth="900.0">
     <children>
         <VBox spacing="10" AnchorPane.topAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0"
               AnchorPane.bottomAnchor="10.0">
@@ -19,8 +19,8 @@
                     <DatePicker fx:id="dateField" prefWidth="100" promptText="dd/MM/yyyy"/>
 
                     <Label text="Cliente"/>
-                    <TextField fx:id="clientIdField" prefWidth="150"/>
-                    <TextField fx:id="clientNameField" prefWidth="150" editable="false"/>
+                    <TextField fx:id="clientIdField" prefWidth="50"/>
+                    <TextField fx:id="clientNameField" prefWidth="250" editable="false"/>
 
                     <Label text="Num."/>
                     <TextField fx:id="deliveryNoteNumberField" prefWidth="80" editable="true"/>
@@ -44,37 +44,37 @@
 
             <TableView fx:id="itemsTable" VBox.vgrow="ALWAYS">
                 <columns>
-                    <TableColumn fx:id="codeColumn" text="Cod." prefWidth="80">
+                    <TableColumn fx:id="codeColumn" text="Cod." prefWidth="83">
                         <cellValueFactory>
                             <PropertyValueFactory property="code"/>
                         </cellValueFactory>
                     </TableColumn>
-                    <TableColumn fx:id="conceptColumn" text="Concepto" prefWidth="200">
+                    <TableColumn fx:id="conceptColumn" text="Concepto" prefWidth="313">
                         <cellValueFactory>
                             <PropertyValueFactory property="concept"/>
                         </cellValueFactory>
                     </TableColumn>
-                    <TableColumn fx:id="trace1Column" text="Traz.(1)" prefWidth="80">
+                    <TableColumn fx:id="trace1Column" text="Traz.(1)" prefWidth="89">
                         <cellValueFactory>
                             <PropertyValueFactory property="trace1"/>
                         </cellValueFactory>
                     </TableColumn>
-                    <TableColumn fx:id="trace2Column" text="Traz.(2)" prefWidth="80">
+                    <TableColumn fx:id="trace2Column" text="Traz.(2)" prefWidth="89">
                         <cellValueFactory>
                             <PropertyValueFactory property="trace2"/>
                         </cellValueFactory>
                     </TableColumn>
-                    <TableColumn fx:id="quantityColumn" text="Ctd." prefWidth="60">
+                    <TableColumn fx:id="quantityColumn" text="Ctd." prefWidth="89">
                         <cellValueFactory>
                             <PropertyValueFactory property="quantity"/>
                         </cellValueFactory>
                     </TableColumn>
-                    <TableColumn fx:id="priceColumn" text="Precio" prefWidth="80">
+                    <TableColumn fx:id="priceColumn" text="Precio" prefWidth="89">
                         <cellValueFactory>
                             <PropertyValueFactory property="price"/>
                         </cellValueFactory>
                     </TableColumn>
-                    <TableColumn fx:id="amountColumn" text="Importe" prefWidth="80">
+                    <TableColumn fx:id="amountColumn" text="Importe" prefWidth="89">
                         <cellValueFactory>
                             <PropertyValueFactory property="amount"/>
                         </cellValueFactory>

@@ -5,10 +5,12 @@
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.layout.BorderPane?>
 
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
 <BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.luis.facturacion.mvc_mainmenu.MainMenuController">
     <top>
         <MenuBar>
-
             <Menu fx:id="ProductsMenu" text="Productos">
                 <MenuItem fx:id="Article" text="Artículos" onAction="#handleArticlesClick"/>
                 <MenuItem fx:id="VATConfig" text="Tipos de IVA" onAction="#handleVATConfigClick"/>
@@ -32,8 +34,12 @@
                 <MenuItem fx:id="traceability" text="Trazabilidad de Productos"/>
             </Menu>
         </MenuBar>
-
     </top>
+
     <center>
+        <!-- StackPane con ImageView SIN imagen hardcodeada -->
+        <StackPane>
+            <ImageView fx:id="backgroundImage" preserveRatio="false"/>
+        </StackPane>
     </center>
 </BorderPane>

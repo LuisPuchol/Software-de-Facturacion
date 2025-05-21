@@ -1,18 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.shape.Circle?>
 
-<VBox alignment="CENTER" prefHeight="400.0" prefWidth="600.0" spacing="20" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.luis.facturacion.mvc_login.LoginController">
-    <HBox alignment="CENTER" spacing="10" onMouseClicked="#handleUserClick">
-        <ImageView fitHeight="70.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true" />
-        <VBox spacing="5">
-            <Label text="Usuario" />
-            <Label text="Último uso" />
-        </VBox>
-    </HBox>
-    <Button text="New User" />
+<VBox alignment="CENTER" prefHeight="400.0" prefWidth="600.0" spacing="30"
+      xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.luis.facturacion.mvc_login.LoginController"
+      style="-fx-background-color: linear-gradient(to bottom, #f0f0f0, #e0e0e0);">
+
+    <padding>
+        <Insets top="50" bottom="50" left="50" right="50"/>
+    </padding>
+
+    <!-- Tarjeta de usuario con sombra -->
+    <VBox alignment="CENTER" spacing="20"
+          style="-fx-background-color: white; -fx-background-radius: 15; -fx-padding: 30;">
+
+        <effect>
+            <DropShadow color="#00000030" radius="10" offsetX="0" offsetY="2"/>
+        </effect>
+
+        <!-- Usuario principal -->
+        <HBox alignment="CENTER" spacing="15" onMouseClicked="#handleUserClick"
+              style="-fx-cursor: hand;">
+
+            <!-- Placeholder para avatar (círculo con inicial) -->
+            <VBox alignment="CENTER" prefWidth="80" prefHeight="80"
+                  style="-fx-background-color: #4a90e2; -fx-background-radius: 40;">
+                <Label text="L" style="-fx-font-size: 32px; -fx-font-weight: bold; -fx-text-fill: white;"/>
+            </VBox>
+
+            <!-- Información del usuario -->
+            <VBox spacing="8" alignment="CENTER_LEFT">
+                <Label text="Luis Puchol" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #333;"/>
+                <Label text="Último acceso: Hoy 14:30" style="-fx-font-size: 12px; -fx-text-fill: #666;"/>
+            </VBox>
+        </HBox>
+
+    </VBox>
+
+    <!-- Logo o título de la aplicación -->
+    <Label text="Sistema de Facturación"
+           style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #333;"/>
 </VBox>

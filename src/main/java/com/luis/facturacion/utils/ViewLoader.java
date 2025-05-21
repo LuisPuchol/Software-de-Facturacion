@@ -4,10 +4,40 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.scene.image.Image;
+import java.io.InputStream;
 
 public class ViewLoader {
+    private static Image APP_ICON;
+
+    static {
+        loadApplicationIcon();
+    }
+
+    private static void loadApplicationIcon() {
+        try {
+            InputStream iconStream = ViewLoader.class.getResourceAsStream("/images/logo.png");
+            if (iconStream != null) {
+                APP_ICON = new Image(iconStream);
+                System.out.println("Icono de aplicación cargado correctamente");
+            } else {
+                System.out.println("No se encontró /images/logo.png");
+            }
+        } catch (Exception e) {
+            System.err.println("Error cargando icono de aplicación: " + e.getMessage());
+        }
+    }
+
+    private void applyApplicationIcon(Stage stage) {
+        if (APP_ICON != null) {
+            stage.getIcons().add(APP_ICON);
+        }
+    }
+
     public <T> T loadView(String fxmlPath, Class<T> controllerClass, T controller, Stage stage, String title) {
         try {
+            applyApplicationIcon(stage);
+
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
 
             loader.setControllerFactory(clazz -> {
