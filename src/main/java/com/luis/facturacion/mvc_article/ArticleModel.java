@@ -2,6 +2,7 @@ package com.luis.facturacion.mvc_article;
 
 import com.luis.facturacion.mvc_article.database.ArticleDAO;
 import com.luis.facturacion.mvc_article.database.ArticleEntity;
+import com.luis.facturacion.utils.ShowAlert;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -30,43 +31,63 @@ public class ArticleModel {
         }
     }
 
-    public void addArticle(String ind, String name) {
-        try {
-            // Validations
-            if (ind == null || ind.trim().isEmpty()) {
-                throw new IllegalArgumentException("Lack Index.");
-            }
-            if (name == null || name.trim().isEmpty()) {
-                throw new IllegalArgumentException("Lack Name");
-            }
+    public boolean addArticle(String ind, String name) {
 
+        if (!validateFields(ind, name)) {
+            return false;
+        }
+
+        try {
             // Conversion
-            int indice = castingToInt(ind, "Index");
+            int indice = castingToInt(ind, "Índice");
 
             // Create Entity
             ArticleEntity articleEntity = new ArticleEntity();
-
             articleEntity.setIndex(indice);
             articleEntity.setName(name);
 
-            // Save on DDBB
+            // Save to DDBB
             ArticleDAO.getInstance().save(articleEntity);
-
             System.out.println("Article Saved.");
+            return true;
 
         } catch (IllegalArgumentException e) {
-            System.err.println("Error adding article: " + e.getMessage());
+            ShowAlert.showError("Error de Validación", e.getMessage());
+            return false;
         } catch (Exception e) {
             System.err.println("Unexpected Error adding article: " + e.getMessage());
+            ShowAlert.showError("Error", "Error inesperado al guardar el artículo: " + e.getMessage());
             e.printStackTrace();
         }
+        return false;
+    }
+
+    /**
+     * Validates required fields and shows alerts for any errors.
+     *
+     * @param ind  Article index
+     * @param name Article name
+     * @return true if all validations pass, false otherwise
+     */
+    private boolean validateFields(String ind, String name) {
+        if (ind == null || ind.trim().isEmpty()) {
+            ShowAlert.showError("Campo Requerido", "El campo 'Índice' es obligatorio.");
+            return false;
+        }
+
+        if (name == null || name.trim().isEmpty()) {
+            ShowAlert.showError("Campo Requerido", "El campo 'Nombre' es obligatorio.");
+            return false;
+        }
+
+        return true;
     }
 
     private int castingToInt(String value, String field) {
         try {
             return Integer.parseInt(value);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("Field '" + field + "' must be a valid number.");
+            throw new IllegalArgumentException("El campo '" + field + "' debe ser un número válido.");
         }
     }
 
@@ -74,7 +95,7 @@ public class ArticleModel {
         try {
             return Double.parseDouble(value);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("Field '" + field + "' must be a valid double.");
+            throw new IllegalArgumentException("El campo '" + field + "' debe ser un número decimal válido.");
         }
     }
 

@@ -14,6 +14,7 @@ import javafx.scene.layout.GridPane;
 import java.util.List;
 
 public class ArticleController {
+    public GridPane articleValues;
     private ArticleModel articleModel;
     private AppController appController;
     private TabFunction tabFunction;
@@ -70,11 +71,12 @@ public class ArticleController {
      */
     @FXML
     private void handleNewButton() {
+        boolean success = articleModel.addArticle(indArticle.getText(), nameArticle.getText());
 
-        articleModel.addArticle(indArticle.getText(), nameArticle.getText());
-
-        cleanFields();
-        loadTableData();
+        if (success) {
+            cleanFields();
+            loadTableData();
+        }
     }
 
 

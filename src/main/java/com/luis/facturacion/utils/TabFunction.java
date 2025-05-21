@@ -17,11 +17,21 @@ public class TabFunction {
 
     /**
      * Configures tab functionality for all text fields in a form grid.
+     * Makes Enter key move to next field in order.
+     *
      * @param formGrid The grid pane containing form elements
      */
     public void configureTabFunction(GridPane formGrid) {
-        getAllTextFields(formGrid).forEach(this::configureEnterKeyBehavior);
+        List<TextField> textFields = getAllTextFields(formGrid);
 
+        for (int i = 0; i < textFields.size(); i++) {
+            TextField currentField = textFields.get(i);
+            TextField nextField = (i == textFields.size() - 1)
+                    ? textFields.get(0)
+                    : textFields.get(i + 1);
+
+            configureEnterToNextField(currentField, nextField);
+        }
         /**
          * List<TextField> textFields = getAllTextFields(formGrid);
          *
@@ -107,18 +117,13 @@ public class TabFunction {
     }
 
     /**
-     * Configures Enter key behavior for a text field to simulate Tab key press.
-     * @param textField The text field to configure
+     * Configures Enter key to move to next specific field.
      */
-    private void configureEnterKeyBehavior(TextField textField) {
-        textField.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
+    private void configureEnterToNextField(TextField currentField, TextField nextField) {
+        currentField.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER) {
                 event.consume();
-
-                KeyEvent tabEvent = new KeyEvent(
-                        KeyEvent.KEY_PRESSED,
-                        "", "", KeyCode.TAB,
-                        false, false, false, false);
+                nextField.requestFocus();
             }
         });
     }

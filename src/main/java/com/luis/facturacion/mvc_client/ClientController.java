@@ -15,6 +15,7 @@ import javafx.scene.layout.GridPane;
 import java.util.List;
 
 public class ClientController {
+    public GridPane clientValues;
     private ClientModel clientModel;
     private AppController appController;
     private TabFunction tabFunction;
@@ -95,13 +96,14 @@ public class ClientController {
             clientTypeCombo.setValue(null);
         }
         invoiceByDeliveryNoteCheck.setSelected(cliente.getInvoiceByDeliveryNote() == 1);
+
     }
 
     @FXML
     public void handleNewButton(MouseEvent mouseEvent) {
-        // Obtaining value from checkbox
         int tipoCliente = "BASE + IVA".equals(clientTypeCombo.getValue()) ? 2 : 1;
-        clientModel.addCliente(
+
+        boolean success = clientModel.addCliente(
                 parseInteger(clientIndexField.getText()),
                 nameField.getText(),
                 addressField.getText(),
@@ -115,8 +117,11 @@ public class ClientController {
                 tipoCliente,
                 invoiceByDeliveryNoteCheck.isSelected() ? 1 : 0
         );
-        cleanForm();
-        loadTableData();
+
+        if (success) {
+            cleanForm();
+            loadTableData();
+        }
     }
 
     private void loadTableData() {

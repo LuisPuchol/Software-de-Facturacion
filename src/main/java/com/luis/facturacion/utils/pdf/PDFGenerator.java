@@ -18,7 +18,6 @@ import com.luis.facturacion.mvc_deliveryNote.DeliveryNoteEntity;
 import com.luis.facturacion.mvc_deliveryNote.DeliveryNoteItemDAO;
 import com.luis.facturacion.mvc_deliveryNote.DeliveryNoteItemEntity;
 import com.luis.facturacion.mvc_invoice.database.InvoiceEntity;
-import com.luis.facturacion.utils.HibernateUtil;
 
 import java.io.File;
 import java.io.IOException;
