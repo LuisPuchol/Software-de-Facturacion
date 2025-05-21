@@ -36,7 +36,7 @@ public class ViewLoader {
 
     public <T> T loadView(String fxmlPath, Class<T> controllerClass, T controller, Stage stage, String title) {
         try {
-            applyApplicationIcon(stage);
+            //applyApplicationIcon(stage);
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
 

@@ -15,7 +15,6 @@ module com.luis.facturacion {
     requires layout;
     requires pdfbox;
 
-    // Opcional - solo si realmente los usas
     requires org.controlsfx.controls;
     requires com.dlsc.formsfx;
 

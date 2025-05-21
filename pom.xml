@@ -121,12 +121,6 @@
             <artifactId>pdfbox</artifactId>
             <version>2.0.16</version>
         </dependency>
-        <dependency>
-            <groupId>com.github.akman</groupId>
-            <artifactId>jpackage-maven-plugin</artifactId>
-            <version>0.1.5</version>
-        </dependency>
-
     </dependencies>
 
     <build>
@@ -175,21 +169,47 @@
                 <configuration>
                     <name>SistemaFacturacion</name>
                     <appVersion>1.0.0</appVersion>
-                    <vendor>Luis García</vendor>
+                    <vendor>Luis Puchol</vendor>
                     <destination>target/installer</destination>
-                    <module>com.luis.facturacion/com.luis.facturacion.Main</module>
-                    <runtimeImage>target/runtime</runtimeImage>
 
-                    <!-- Configuración Windows -->
+                    <mainJar>Facturacion-1.0-SNAPSHOT.jar</mainJar>
+                    <mainClass>com.luis.facturacion.Main</mainClass>
+
+                    <input>target/lib</input>
+
+                    <type>app-image</type>
                     <winDirChooser>true</winDirChooser>
                     <winShortcut>true</winShortcut>
                     <winMenu>true</winMenu>
-                    <winUpgradeUuid>12345678-1234-1234-1234-123456789012</winUpgradeUuid>
+                    <winUpgradeUuid>a1b2c3d4-e5f6-7890-1234-567890abcdef</winUpgradeUuid>
 
-                    <!-- Archivos adicionales -->
                     <icon>src/main/resources/images/logo.png</icon>
                     <description>Sistema de Facturación - Gestión de albaranes y facturas</description>
+
+                    <javaOptions>
+                        <option>-Dfile.encoding=UTF-8</option>
+                        <option>-Djava.awt.headless=false</option>
+                    </javaOptions>
                 </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>3.5.0</version>
+                <executions>
+                    <execution>
+                        <id>copy-dependencies</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/lib</outputDirectory>
+                            <includeScope>runtime</includeScope>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
