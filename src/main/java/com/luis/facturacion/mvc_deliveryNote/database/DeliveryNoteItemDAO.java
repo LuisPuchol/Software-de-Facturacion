@@ -1,4 +1,4 @@
-package com.luis.facturacion.mvc_deliveryNote;
+package com.luis.facturacion.mvc_deliveryNote.database;
 
 import com.luis.facturacion.utils.GlobalDAO;
 import com.luis.facturacion.utils.HibernateUtil;

@@ -17,21 +17,11 @@ public class TabFunction {
 
     /**
      * Configures tab functionality for all text fields in a form grid.
-     * Makes Enter key move to next field in order.
-     *
      * @param formGrid The grid pane containing form elements
      */
     public void configureTabFunction(GridPane formGrid) {
-        List<TextField> textFields = getAllTextFields(formGrid);
+        getAllTextFields(formGrid).forEach(this::configureEnterKeyBehavior);
 
-        for (int i = 0; i < textFields.size(); i++) {
-            TextField currentField = textFields.get(i);
-            TextField nextField = (i == textFields.size() - 1)
-                    ? textFields.get(0)
-                    : textFields.get(i + 1);
-
-            configureEnterToNextField(currentField, nextField);
-        }
         /**
          * List<TextField> textFields = getAllTextFields(formGrid);
          *
@@ -117,14 +107,42 @@ public class TabFunction {
     }
 
     /**
-     * Configures Enter key to move to next specific field.
+     * Configures Enter key behavior for a text field to simulate Tab key press.
+     * @param textField The text field to configure
      */
-    private void configureEnterToNextField(TextField currentField, TextField nextField) {
-        currentField.setOnKeyPressed(event -> {
+    private void configureEnterKeyBehavior(TextField textField) {
+        textField.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
             if (event.getCode() == KeyCode.ENTER) {
                 event.consume();
-                nextField.requestFocus();
+
+                Node nextNode = getNextFocusableNode(textField);
+                if (nextNode != null) {
+                    nextNode.requestFocus();
+                }
             }
         });
+    }
+
+    /**
+     * Gets the next focusable node in tab order.
+     * @param currentNode The current focused node
+     * @return The next focusable node or null if none found
+     */
+    private Node getNextFocusableNode(Node currentNode) {
+        Node parent = currentNode.getParent();
+        if (parent == null) return null;
+
+        if (parent instanceof GridPane gridPane) {
+            List<TextField> textFields = getAllTextFields(gridPane);
+            int currentIndex = textFields.indexOf(currentNode);
+
+            if (currentIndex >= 0 && currentIndex < textFields.size() - 1) {
+                return textFields.get(currentIndex + 1);
+            }
+
+            return textFields.isEmpty() ? null : textFields.get(0);
+        }
+
+        return null;
     }
 }

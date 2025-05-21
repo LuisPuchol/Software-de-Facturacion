@@ -29,8 +29,8 @@
         <!-- Mapped Classes -->
         <mapping class="com.luis.facturacion.mvc_article.database.ArticleEntity"/>
         <mapping class="com.luis.facturacion.mvc_client.database.ClientEntity"/>
-        <mapping class="com.luis.facturacion.mvc_deliveryNote.DeliveryNoteItemEntity"/>
-        <mapping class="com.luis.facturacion.mvc_deliveryNote.DeliveryNoteEntity"/>
+        <mapping class="com.luis.facturacion.mvc_deliveryNote.database.DeliveryNoteItemEntity"/>
+        <mapping class="com.luis.facturacion.mvc_deliveryNote.database.DeliveryNoteEntity"/>
         <mapping class="com.luis.facturacion.mvc_vatConfig.database.VATConfigEntity"/>
         <mapping class="com.luis.facturacion.mvc_invoice.database.InvoiceEntity"/>
         <mapping class="com.luis.facturacion.mvc_correctiveInvoice.database.CorrectiveInvoiceEntity"/>

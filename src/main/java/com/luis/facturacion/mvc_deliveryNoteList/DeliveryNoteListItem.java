@@ -1,6 +1,6 @@
 package com.luis.facturacion.mvc_deliveryNoteList;
 
-import com.luis.facturacion.mvc_deliveryNote.DeliveryNoteEntity;
+import com.luis.facturacion.mvc_deliveryNote.database.DeliveryNoteEntity;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 

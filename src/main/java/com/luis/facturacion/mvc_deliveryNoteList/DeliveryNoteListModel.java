@@ -2,8 +2,8 @@ package com.luis.facturacion.mvc_deliveryNoteList;
 
 import com.luis.facturacion.utils.HibernateUtil;
 import com.luis.facturacion.mvc_client.database.ClientDAO;
-import com.luis.facturacion.mvc_deliveryNote.DeliveryNoteDAO;
-import com.luis.facturacion.mvc_deliveryNote.DeliveryNoteEntity;
+import com.luis.facturacion.mvc_deliveryNote.database.DeliveryNoteDAO;
+import com.luis.facturacion.mvc_deliveryNote.database.DeliveryNoteEntity;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 

@@ -1,23 +1,17 @@
 package com.luis.facturacion.mvc_invoiceList;
 
 import com.luis.facturacion.mvc_client.database.ClientDAO;
-import com.luis.facturacion.mvc_deliveryNote.DeliveryNoteDAO;
-import com.luis.facturacion.mvc_deliveryNote.DeliveryNoteEntity;
+import com.luis.facturacion.mvc_deliveryNote.database.DeliveryNoteDAO;
+import com.luis.facturacion.mvc_deliveryNote.database.DeliveryNoteEntity;
 import com.luis.facturacion.mvc_deliveryNoteList.DeliveryNoteListItem;
 import com.luis.facturacion.mvc_invoice.database.InvoiceDAO;
 import com.luis.facturacion.mvc_invoice.database.InvoiceEntity;
-import com.luis.facturacion.mvc_vatConfig.database.VATConfigDAO;
-import com.luis.facturacion.mvc_vatConfig.database.VATConfigEntity;
-import com.luis.facturacion.utils.HibernateUtil;
 import com.luis.facturacion.utils.pdf.PDFGenerator;
 import com.luis.facturacion.utils.ShowAlert;
-import org.hibernate.Session;
-import org.hibernate.query.Query;
 
 import java.io.File;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.List;
 
 /**

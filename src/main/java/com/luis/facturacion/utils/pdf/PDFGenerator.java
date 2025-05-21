@@ -14,9 +14,9 @@ import com.itextpdf.layout.properties.UnitValue;
 import com.luis.facturacion.mvc_article.database.ArticleDAO;
 import com.luis.facturacion.mvc_client.database.ClientDAO;
 import com.luis.facturacion.mvc_client.database.ClientEntity;
-import com.luis.facturacion.mvc_deliveryNote.DeliveryNoteEntity;
-import com.luis.facturacion.mvc_deliveryNote.DeliveryNoteItemDAO;
-import com.luis.facturacion.mvc_deliveryNote.DeliveryNoteItemEntity;
+import com.luis.facturacion.mvc_deliveryNote.database.DeliveryNoteEntity;
+import com.luis.facturacion.mvc_deliveryNote.database.DeliveryNoteItemDAO;
+import com.luis.facturacion.mvc_deliveryNote.database.DeliveryNoteItemEntity;
 import com.luis.facturacion.mvc_invoice.database.InvoiceEntity;
 
 import java.io.File;

@@ -5,13 +5,9 @@ import com.luis.facturacion.mvc_invoice.database.InvoiceDAO;
 import com.luis.facturacion.mvc_invoice.database.InvoiceEntity;
 import com.luis.facturacion.mvc_vatConfig.database.VATConfigDAO;
 import com.luis.facturacion.mvc_vatConfig.database.VATConfigEntity;
-import com.luis.facturacion.utils.HibernateUtil;
 import com.luis.facturacion.mvc_client.database.ClientDAO;
-import com.luis.facturacion.mvc_deliveryNote.DeliveryNoteDAO;
-import com.luis.facturacion.mvc_deliveryNote.DeliveryNoteEntity;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
-import org.hibernate.query.Query;
+import com.luis.facturacion.mvc_deliveryNote.database.DeliveryNoteDAO;
+import com.luis.facturacion.mvc_deliveryNote.database.DeliveryNoteEntity;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;

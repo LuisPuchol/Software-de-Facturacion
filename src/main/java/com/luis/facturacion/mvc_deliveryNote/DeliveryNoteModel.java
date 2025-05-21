@@ -1,5 +1,9 @@
 package com.luis.facturacion.mvc_deliveryNote;
 
+import com.luis.facturacion.mvc_deliveryNote.database.DeliveryNoteDAO;
+import com.luis.facturacion.mvc_deliveryNote.database.DeliveryNoteEntity;
+import com.luis.facturacion.mvc_deliveryNote.database.DeliveryNoteItemDAO;
+import com.luis.facturacion.mvc_deliveryNote.database.DeliveryNoteItemEntity;
 import com.luis.facturacion.utils.pdf.PDFGenerator;
 import com.luis.facturacion.utils.pdf.PDFPrinter;
 import com.luis.facturacion.utils.ShowAlert;

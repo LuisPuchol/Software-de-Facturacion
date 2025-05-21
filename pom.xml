@@ -12,6 +12,11 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <junit.version>5.10.0</junit.version>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <javafx.version>21.0.1</javafx.version>
+        <javafx.maven.plugin.version>0.0.8</javafx.maven.plugin.version>
+        <app.main.class>com.luis.facturacion.Main</app.main.class>
     </properties>
 
     <dependencies>
@@ -116,6 +121,11 @@
             <artifactId>pdfbox</artifactId>
             <version>2.0.16</version>
         </dependency>
+        <dependency>
+            <groupId>com.github.akman</groupId>
+            <artifactId>jpackage-maven-plugin</artifactId>
+            <version>0.1.5</version>
+        </dependency>
 
     </dependencies>
 
@@ -157,6 +167,29 @@
                         </configuration>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.panteleyev</groupId>
+                <artifactId>jpackage-maven-plugin</artifactId>
+                <version>1.4.0</version>
+                <configuration>
+                    <name>SistemaFacturacion</name>
+                    <appVersion>1.0.0</appVersion>
+                    <vendor>Luis García</vendor>
+                    <destination>target/installer</destination>
+                    <module>com.luis.facturacion/com.luis.facturacion.Main</module>
+                    <runtimeImage>target/runtime</runtimeImage>
+
+                    <!-- Configuración Windows -->
+                    <winDirChooser>true</winDirChooser>
+                    <winShortcut>true</winShortcut>
+                    <winMenu>true</winMenu>
+                    <winUpgradeUuid>12345678-1234-1234-1234-123456789012</winUpgradeUuid>
+
+                    <!-- Archivos adicionales -->
+                    <icon>src/main/resources/images/logo.png</icon>
+                    <description>Sistema de Facturación - Gestión de albaranes y facturas</description>
+                </configuration>
             </plugin>
         </plugins>
     </build>
