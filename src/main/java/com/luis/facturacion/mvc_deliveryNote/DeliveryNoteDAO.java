@@ -5,6 +5,9 @@ import com.luis.facturacion.utils.GlobalDAO;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
+import java.time.LocalDate;
+import java.util.List;
+
 
 public class DeliveryNoteDAO extends GlobalDAO<DeliveryNoteEntity, Integer> {
     private static DeliveryNoteDAO instance;
@@ -30,6 +33,32 @@ public class DeliveryNoteDAO extends GlobalDAO<DeliveryNoteEntity, Integer> {
             return maxIndex.intValue() + 1;
         } catch (Exception e) {
             System.err.println("Error obtaining the number: " + e.getMessage());
+            throw e;
+        }
+    }
+
+    public List<DeliveryNoteEntity> findByDateBeforeAndNotInvoiced(LocalDate toDate) {
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            String hql = "FROM DeliveryNoteEntity d WHERE d.date <= :toDate";
+            Query<DeliveryNoteEntity> query = session.createQuery(hql, DeliveryNoteEntity.class);
+            query.setParameter("toDate", toDate);
+            return query.list();
+        } catch (Exception e) {
+            System.err.println("Error getting delivery notes up to date: " + e.getMessage());
+            throw e;
+        }
+    }
+
+    public List<DeliveryNoteEntity> findByClientAndDateBeforeAndNotInvoiced(Integer clientId, LocalDate toDate) {
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            String hql = "FROM DeliveryNoteEntity d WHERE d.clientId = :clientId " +
+                    "AND d.date <= :toDate AND d.invoiceNumber IS NULL";
+            Query<DeliveryNoteEntity> query = session.createQuery(hql, DeliveryNoteEntity.class);
+            query.setParameter("clientId", clientId);
+            query.setParameter("toDate", toDate);
+            return query.list();
+        } catch (Exception e) {
+            System.err.println("Error getting delivery notes for client: " + e.getMessage());
             throw e;
         }
     }

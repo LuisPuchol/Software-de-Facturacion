@@ -38,7 +38,6 @@ public class ClientInvoiceItem {
         }
     }
 
-    // Getters and property accessors
     public String getClientId() {
         return clientId.get();
     }

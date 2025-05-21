@@ -113,7 +113,6 @@ public class InvoiceController {
                 }
         );
 
-        // Load client data when Enter key is pressed on date field
         toDateField.setOnAction(event -> handleSearch());
     }
 
@@ -176,33 +175,16 @@ public class InvoiceController {
             return;
         }
 
-        if (deliveryNoteItems.isEmpty()) {
-            ShowAlert.showError("Error", "No hay albaranes disponibles para facturar.");
-            return;
-        }
-
         try {
-            // Get all delivery notes for this client
             Integer clientId = Integer.parseInt(selectedClient.getClientId());
-            List<DeliveryNoteEntity> deliveryNotes = model.getDeliveryNoteEntitiesForClient(
-                    clientId, toDateField.getValue());
-
-            if (deliveryNotes.isEmpty()) {
-                ShowAlert.showError("Error", "No se encontraron albaranes para facturar.");
-                return;
-            }
-
-            // Create the invoice
-            Integer invoiceId = model.createInvoice(clientId, deliveryNotes);
+            Integer invoiceId = model.createInvoiceForClient(clientId, toDateField.getValue());
 
             ShowAlert.showInfo("Éxito", "Factura creada con éxito. Número de factura: " + invoiceId);
-
-            // Refresh the list to remove the invoiced client
             handleSearch();
 
         } catch (Exception e) {
             e.printStackTrace();
-            ShowAlert.showError("Error", "Error al crear la factura: " + e.getMessage());
+            ShowAlert.showError("Error", "Error inesperado: " + e.getMessage());
         }
     }
 

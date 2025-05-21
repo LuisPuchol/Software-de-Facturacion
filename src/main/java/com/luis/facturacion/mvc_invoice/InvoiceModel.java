@@ -13,6 +13,8 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -72,30 +74,21 @@ public class InvoiceModel {
      * @return The ID of the created invoice
      */
     public Integer createInvoice(Integer clientId, List<DeliveryNoteEntity> deliveryNotes) {
-        ClientEntity client = null;
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            client = session.get(ClientEntity.class, clientId);
-        } catch (Exception e) {
-            throw new RuntimeException("Error fetching client: " + e.getMessage());
-        }
+        ClientEntity client = clientDAO.getById(clientId);
 
-        if (client == null) {
-            throw new RuntimeException("Client not found with ID: " + clientId);
-        }
-
-        // Calculate total amount from delivery notes
+        // Total from delivery notes
         double totalAmount = deliveryNotes.stream()
                 .mapToDouble(DeliveryNoteEntity::getTotalAmount)
                 .sum();
 
-        // Apply VAT and surcharge if needed
+        // Apply VAT and surcharge
         Integer clientType = client.getClientType();
-        boolean applyVAT = (clientType != null && clientType == 1);
-        boolean applySurcharge = (client.getEquivalenceSurcharge() != null && client.getEquivalenceSurcharge() == 1);
+        boolean applyVAT = clientType == 1;
+        boolean applySurcharge = client.getEquivalenceSurcharge() == 1;
 
         double finalAmount = calculateFinalAmount(totalAmount, applyVAT, applySurcharge);
 
-        // Create and save new invoice
+        // Create invoice
         InvoiceEntity invoice = new InvoiceEntity(
                 clientId,
                 LocalDate.now(),
@@ -124,21 +117,24 @@ public class InvoiceModel {
 
         if (applyVAT || applySurcharge) {
             VATConfigEntity vatConfig = VATConfigDAO.getInstance().getCurrentConfig();
-            if (vatConfig != null) {
-                if (applyVAT) {
-                    double vatAmount = baseAmount * (vatConfig.getVatRate() / 100);
-                    finalAmount += vatAmount;
-                }
-
-                if (applySurcharge) {
-                    double surchargeAmount = baseAmount * (vatConfig.getSurchargeRate() / 100);
-                    finalAmount += surchargeAmount;
-                }
+            if (applyVAT) {
+                double vatAmount = baseAmount * (vatConfig.getVatRate() / 100);
+                finalAmount += vatAmount;
             }
+
+            if (applySurcharge) {
+                double surchargeAmount = baseAmount * (vatConfig.getSurchargeRate() / 100);
+                finalAmount += surchargeAmount;
+            }
+
         }
 
-        finalAmount = Math.round(finalAmount * 100.0) / 100.0;
+        // Original, but i guess its easier using BigDecimal
+        // finalAmount = Math.round(finalAmount * 100.0) / 100.0;
 
+        finalAmount = BigDecimal.valueOf(finalAmount)
+                .setScale(2, RoundingMode.HALF_UP)
+                .doubleValue();
         return finalAmount;
     }
 
@@ -149,23 +145,22 @@ public class InvoiceModel {
      * @param invoiceId     ID of the invoice to reference
      */
     private void updateDeliveryNotesWithInvoice(List<DeliveryNoteEntity> deliveryNotes, Integer invoiceId) {
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            Transaction transaction = session.beginTransaction();
-
-            for (DeliveryNoteEntity note : deliveryNotes) {
-                note.setInvoiceNumber(invoiceId);
-                session.merge(note);
-            }
-
-            transaction.commit();
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw new RuntimeException("Error updating delivery notes: " + e.getMessage());
-        }
+        deliveryNotes.forEach(note -> {
+            note.setInvoiceNumber(invoiceId);
+            deliveryNoteDAO.update(note);
+        });
     }
 
+    /**
+     * Retrieves clients with pending delivery notes up to the specified date.
+     * Groups delivery notes by client and calculates total count and amount for each.
+     * Uses HashMap to avoid client duplicates and aggregate statistics efficiently.
+     *
+     * @param toDate Maximum date to include delivery notes
+     * @return List of ClientInvoiceItem with aggregated data per client
+     */
     public List<ClientInvoiceItem> getClientsWithDeliveryNotes(LocalDate toDate) {
-        List<DeliveryNoteEntity> deliveryNotes = getDeliveryNotesUpToDate(toDate);
+        List<DeliveryNoteEntity> deliveryNotes = deliveryNoteDAO.findByDateBeforeAndNotInvoiced(toDate);
         Map<Integer, ClientInvoiceItem> clientMap = new HashMap<>();
 
         for (DeliveryNoteEntity note : deliveryNotes) {
@@ -176,7 +171,7 @@ public class InvoiceModel {
                 continue;
             }
 
-            // Get or create client item
+            // Get / create client item
             if (!clientMap.containsKey(clientId)) {
                 String clientName = clientDAO.getNameById(clientId);
                 ClientInvoiceItem clientItem = new ClientInvoiceItem(
@@ -205,45 +200,8 @@ public class InvoiceModel {
      * @return List of DeliveryNoteInvoiceItem objects
      */
     public List<DeliveryNoteInvoiceItem> getDeliveryNotesForClient(int clientId, LocalDate toDate) {
-        List<DeliveryNoteEntity> entities = new ArrayList<>();
-
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            String hql = "FROM DeliveryNoteEntity d WHERE d.clientId = :clientId " +
-                    "AND d.date <= :toDate AND d.invoiceNumber IS NULL";
-
-            Query<DeliveryNoteEntity> query = session.createQuery(hql, DeliveryNoteEntity.class);
-            query.setParameter("clientId", clientId);
-            query.setParameter("toDate", toDate);
-
-            entities = query.list();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
+        List<DeliveryNoteEntity> entities = deliveryNoteDAO.findByClientAndDateBeforeAndNotInvoiced(clientId, toDate);
         return convertToDeliveryNoteItems(entities);
-    }
-
-    /**
-     * Retrieves all delivery notes up to the specified date.
-     *
-     * @param toDate End date for the search
-     * @return List of DeliveryNoteEntity objects
-     */
-    private List<DeliveryNoteEntity> getDeliveryNotesUpToDate(LocalDate toDate) {
-        List<DeliveryNoteEntity> entities = new ArrayList<>();
-
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            String hql = "FROM DeliveryNoteEntity d WHERE d.date <= :toDate";
-
-            Query<DeliveryNoteEntity> query = session.createQuery(hql, DeliveryNoteEntity.class);
-            query.setParameter("toDate", toDate);
-
-            entities = query.list();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return entities;
     }
 
     /**
@@ -253,45 +211,25 @@ public class InvoiceModel {
      * @return List of DeliveryNoteInvoiceItem objects
      */
     private List<DeliveryNoteInvoiceItem> convertToDeliveryNoteItems(List<DeliveryNoteEntity> entities) {
-        List<DeliveryNoteInvoiceItem> items = new ArrayList<>();
-
-        for (DeliveryNoteEntity entity : entities) {
-            DeliveryNoteInvoiceItem item = new DeliveryNoteInvoiceItem(
-                    entity.getDate() != null ? entity.getDate().format(DATE_FORMATTER) : "",
-                    String.valueOf(entity.getIndex()),
-                    String.valueOf(entity.getTotalAmount())
-            );
-
-            items.add(item);
-        }
-
-        return items;
+        return entities.stream()
+                .map(entity -> new DeliveryNoteInvoiceItem(
+                        entity.getDate().format(DATE_FORMATTER),
+                        String.valueOf(entity.getIndex()),
+                        String.valueOf(entity.getTotalAmount())
+                ))
+                .toList();
     }
 
     /**
-     * Gets delivery note entities for a specific client up to the specified date.
-     * This version returns the actual entities rather than display items.
+     * Creates an invoice for a specific client including all their pending delivery notes up to a date.
      *
-     * @param clientId ID of the client
-     * @param toDate   End date for the search
-     * @return List of DeliveryNoteEntity objects
+     * @param clientId The ID of the client to invoice
+     * @param toDate   The maximum date for delivery notes to include
+     * @return The ID of the created invoice
+     * @throws RuntimeException if client not found or no delivery notes available
      */
-    public List<DeliveryNoteEntity> getDeliveryNoteEntitiesForClient(int clientId, LocalDate toDate) {
-        List<DeliveryNoteEntity> entities = new ArrayList<>();
-
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            String hql = "FROM DeliveryNoteEntity d WHERE d.clientId = :clientId " +
-                    "AND d.date <= :toDate AND d.invoiceNumber IS NULL";
-
-            Query<DeliveryNoteEntity> query = session.createQuery(hql, DeliveryNoteEntity.class);
-            query.setParameter("clientId", clientId);
-            query.setParameter("toDate", toDate);
-
-            entities = query.list();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return entities;
+    public Integer createInvoiceForClient(Integer clientId, LocalDate toDate) {
+        List<DeliveryNoteEntity> deliveryNotes = deliveryNoteDAO.findByClientAndDateBeforeAndNotInvoiced(clientId, toDate);
+        return createInvoice(clientId, deliveryNotes);
     }
 }
