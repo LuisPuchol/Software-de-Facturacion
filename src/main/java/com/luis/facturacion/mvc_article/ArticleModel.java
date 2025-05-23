@@ -103,7 +103,4 @@ public class ArticleModel {
         return ArticleDAO.getInstance().getAll();
     }
 
-    public String getProductByID(Integer id) {
-        return ArticleDAO.getInstance().getNameById(id);
-    }
 }

@@ -26,7 +26,7 @@ public class DiagnosticMain {
             }
 
             // Check for FXML resources
-            checkResource("/com/luis/facturacion/mvc_login/login.fxml");
+            checkResource("/com/luis/facturacion/mvc_login/loginMenu.fxml");
             // Add checks for other important FXML files
 
             // Now try to start the real application

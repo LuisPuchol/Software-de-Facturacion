@@ -98,7 +98,7 @@ public class DeliveryNoteListModel {
             DeliveryNoteListItem item = new DeliveryNoteListItem(entity);
 
             try {
-                String clientName = clientDAO.getNameById(entity.getClientId());
+                String clientName = clientDAO.getNameByIndex(entity.getClientId());
                 item.setClientName(clientName);
             } catch (Exception e) {
                 item.setClientName("Cliente #" + entity.getClientId());

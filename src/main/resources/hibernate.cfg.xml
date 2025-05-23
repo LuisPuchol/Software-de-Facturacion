@@ -8,7 +8,7 @@
 
         <!-- DDBB Config -->
         <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
-        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/puchol</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/puchol?useSSL=false&amp;allowPublicKeyRetrieval=true&amp;serverTimezone=UTC</property>
         <property name="hibernate.connection.username">root</property>
         <property name="hibernate.connection.password">1234</property>
 
@@ -18,13 +18,11 @@
         <!-- Hibernate config -->
         <property name="hibernate.show_sql">false</property>  <!-- Show SQL query on console -->
         <property name="hibernate.format_sql">true</property>
-        <property name="hibernate.hbm2ddl.auto">update</property>
+        <property name="hibernate.hbm2ddl.auto">update</property> <!-- update -->
 
         <property name="hibernate.connection.autocommit">false</property>
         <property name="hibernate.transaction.coordinator_class">jdbc</property>
         <property name="hibernate.globally_quoted_identifiers">true</property>
-        <property name="hibernate.hbm2ddl.auto">update</property>
-
 
         <!-- Mapped Classes -->
         <mapping class="com.luis.facturacion.mvc_article.database.ArticleEntity"/>

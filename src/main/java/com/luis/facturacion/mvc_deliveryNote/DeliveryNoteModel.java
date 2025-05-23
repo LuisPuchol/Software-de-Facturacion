@@ -56,15 +56,6 @@ public class DeliveryNoteModel {
                 Double.valueOf(totalAmount)
         );
 
-        // Establecer deliveryNoteID en todos los elementos
-        for (DeliveryNoteItemEntity item : currentItems) {
-            item.setDeliveryNoteID(currentDeliveryNoteEntity.getIndex());
-        }
-
-        if (printDeliveryNote) {
-            printDeliveryNote();
-        }
-
         if (createInvoice) {
             // TODO: Create invoice object and save it to DDBB
         }
@@ -73,7 +64,7 @@ public class DeliveryNoteModel {
     /**
      * Generates and prints a PDF for the current delivery note
      */
-    private void printDeliveryNote() {
+    void printDeliveryNote() {
         try {
             // Log how many items we're sending to the PDF generator
             System.out.println("Printing delivery note with " + currentItems.size() + " items");
@@ -143,7 +134,7 @@ public class DeliveryNoteModel {
 
         // Establecer el ID del albarán si está disponible
         if (currentDeliveryNoteEntity != null && currentDeliveryNoteEntity.getId() != null) {
-            entity.setDeliveryNoteID(currentDeliveryNoteEntity.getId());
+            entity.setDeliveryNoteID(currentDeliveryNoteEntity.getIndex());
         } else if (currentDeliveryNoteEntity != null) {
             entity.setDeliveryNoteID(currentDeliveryNoteEntity.getIndex());
         }

@@ -154,15 +154,11 @@ public abstract class GlobalDAO<T, ID extends Serializable> {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             T entity = session.get(entityClass, id);
 
-            // This requires reflection or entity must implement an interface with getName()
-            // For simplicity, this method needs to be overridden in concrete DAOs
-            // or we need to add an interface for entities with getName()
             if (entity == null) {
                 return null;
             }
 
             try {
-                // Using reflection to call getName() if it exists
                 return (String) entity.getClass().getMethod("getName").invoke(entity);
             } catch (Exception e) {
                 System.err.println("Error: Entity does not have getName() method: " + e.getMessage());
@@ -198,14 +194,16 @@ public abstract class GlobalDAO<T, ID extends Serializable> {
      */
     public String getNameByIndex(Integer index) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            T entity = getByIndex(index);
+            String hql = "FROM " + entityClass.getSimpleName() + " e WHERE e.index = :index";
+            Query<T> query = session.createQuery(hql, entityClass);
+            query.setParameter("index", index);
+            T entity = query.uniqueResult();
 
             if (entity == null) {
                 return null;
             }
 
             try {
-                // Using reflection to call getName() if it exists
                 return (String) entity.getClass().getMethod("getName").invoke(entity);
             } catch (Exception e) {
                 System.err.println("Error: Entity does not have getName() method: " + e.getMessage());

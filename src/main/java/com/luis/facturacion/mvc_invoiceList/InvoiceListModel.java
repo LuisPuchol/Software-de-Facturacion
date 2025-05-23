@@ -86,7 +86,7 @@ public class InvoiceListModel {
      */
     public void generateAndShowInvoicePDF(Integer invoiceId) {
         try {
-            InvoiceEntity invoice = invoiceDAO.getById(invoiceId);
+            InvoiceEntity invoice = invoiceDAO.getByIndex(invoiceId);
             List<DeliveryNoteEntity> deliveryNotes = deliveryNoteDAO.findByInvoiceId(invoiceId);
 
             File pdfFile = PDFGenerator.generateInvoicePDF(invoice, deliveryNotes);
@@ -121,7 +121,7 @@ public class InvoiceListModel {
     private InvoiceListItem createInvoiceListItem(InvoiceEntity entity) {
         InvoiceListItem item = new InvoiceListItem(entity);
 
-        item.setClientName(clientDAO.getNameById(entity.getClientId()));
+        item.setClientName(clientDAO.getNameByIndex(entity.getClientId()));
         setAmountFields(item, entity);
 
         return item;

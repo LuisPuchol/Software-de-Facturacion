@@ -106,7 +106,4 @@ public class ClientModel {
         return clientDao.getAll();
     }
 
-    public String getClienteById(Integer id) {
-        return clientDao.getNameById(id);
-    }
 }

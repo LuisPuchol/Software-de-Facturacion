@@ -99,13 +99,6 @@ public class ArticleController {
         nameArticle.clear();
     }
 
-    /**
-     * Stuff model Asks
-     */
-    public String getProductByID(Integer id) {
-        return articleModel.getProductByID(id);
-    }
-
 
 }
 

@@ -182,7 +182,4 @@ public class ClientController {
         exitButton.getScene().getWindow().hide();
     }
 
-    public String getClienteById(Integer id) {
-        return clientModel.getClienteById(id);
-    }
 }

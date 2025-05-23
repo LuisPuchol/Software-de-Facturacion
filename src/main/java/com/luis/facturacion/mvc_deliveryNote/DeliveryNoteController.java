@@ -234,7 +234,6 @@ public class DeliveryNoteController {
     @FXML
     public void handleSave(ActionEvent actionEvent) {
 
-        deliveryNoteItems.forEach(model::convertAndAddItemToDeliveryNote);
 
         model.createNewDeliveryNote(
                 deliveryNoteNumberField.getText(),
@@ -245,7 +244,15 @@ public class DeliveryNoteController {
                 createInvoiceCheck.isSelected()
         );
 
+        deliveryNoteItems.forEach(model::convertAndAddItemToDeliveryNote);
+
         model.saveDeliveryNoteWithItems();
+
+        if(printDeliveryNoteCheck.isSelected()) {
+            model.printDeliveryNote();
+        }
+
+
         resetUI();
     }
 

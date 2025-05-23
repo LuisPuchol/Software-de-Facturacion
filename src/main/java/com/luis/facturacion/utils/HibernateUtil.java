@@ -8,29 +8,51 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class HibernateUtil {
-    private static final SessionFactory sessionFactory;
+    private static SessionFactory sessionFactory;
+    private static boolean initialized = false;
 
-    public static void initializeDatabase() {
-        try (Connection conn = DriverManager.getConnection(
-                "jdbc:mysql://localhost:3306/", "root", "1234")) {
+    public static synchronized void initializeDatabase() {
+        if (initialized) {
+            return;
+        }
 
-            // Check if database exists
-            try (Statement stmt = conn.createStatement()) {
-                stmt.executeUpdate("CREATE DATABASE IF NOT EXISTS puchol");
-            }
+        try {
+            // 1: Create DDBB
+            createDatabaseIfNotExists();
 
-            // Now that we've ensured the database exists, Hibernate can connect to it
-        } catch (SQLException e) {
-            // Show error dialog to user
-            ShowAlert.showError("Database Error", "Failed to initialize database: " + e.getMessage());
+            // 2: Start Hibernate
+            initializeHibernate();
+
+            initialized = true;
+            System.out.println("Base de datos y Hibernate inicializados correctamente");
+
+        } catch (Exception e) {
+            System.err.println("Error al inicializar la base de datos: " + e.getMessage());
+            ShowAlert.showError("Database Error",
+                    "No se pudo inicializar la base de datos: " + e.getMessage() +
+                            "\n\nVerifica que MySQL esté instalado y funcionando.");
+            throw new RuntimeException("Failed to initialize database", e);
         }
     }
 
-    static {
+    private static void createDatabaseIfNotExists() throws SQLException {
+        try (Connection conn = DriverManager.getConnection(
+                "jdbc:mysql://localhost:3306/?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC",
+                "root", "1234")) {
+
+            try (Statement stmt = conn.createStatement()) {
+                stmt.executeUpdate("CREATE DATABASE IF NOT EXISTS puchol CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci");
+                System.out.println("Base de datos 'puchol' verificada/creada");
+            }
+        }
+    }
+
+    private static void initializeHibernate() {
         try {
             Configuration configuration = new Configuration();
             configuration.configure("hibernate.cfg.xml");
             sessionFactory = configuration.buildSessionFactory();
+            System.out.println("Hibernate inicializado correctamente");
         } catch (Throwable ex) {
             System.err.println("Error al inicializar Hibernate: " + ex);
             throw new ExceptionInInitializerError(ex);
@@ -38,8 +60,23 @@ public class HibernateUtil {
     }
 
     public static SessionFactory getSessionFactory() {
+        if (!initialized || sessionFactory == null) {
+            throw new IllegalStateException(
+                    "HibernateUtil no ha sido inicializado. Llama a initializeDatabase() primero.");
+        }
         return sessionFactory;
     }
+
+    public static boolean isMySQLAvailable() {
+        try (Connection conn = DriverManager.getConnection(
+                "jdbc:mysql://localhost:3306/?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC",
+                "root", "1234")) {
+            return true;
+        } catch (SQLException e) {
+            return false;
+        }
+    }
+
 
     /**
      * Only call this method at the end

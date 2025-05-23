@@ -52,7 +52,7 @@ public class PDFGenerator {
              PdfDocument pdf = new PdfDocument(writer);
              Document document = new Document(pdf)) {
 
-            ClientEntity client = ClientDAO.getInstance().getById(deliveryNote.getClientId());
+            ClientEntity client = ClientDAO.getInstance().getByIndex(deliveryNote.getClientId());
 
             addDocumentHeader(document, "Albarán nº: " + deliveryNote.getIndex(),
                     deliveryNote.getDate().format(DATE_FORMATTER), client);
@@ -80,7 +80,7 @@ public class PDFGenerator {
              PdfDocument pdf = new PdfDocument(writer);
              Document document = new Document(pdf)) {
 
-            ClientEntity client = ClientDAO.getInstance().getById(invoice.getClientId());
+            ClientEntity client = ClientDAO.getInstance().getByIndex(invoice.getClientId());
 
             addDocumentHeader(document, "Factura nº: " + invoice.getId(),
                     invoice.getDate().format(DATE_FORMATTER), client);
@@ -195,13 +195,18 @@ public class PDFGenerator {
     private static Map<Integer, String> preloadAllArticleNames(List<DeliveryNoteEntity> deliveryNotes) {
         Map<Integer, String> articleNames = new HashMap<>();
 
+
         for (DeliveryNoteEntity deliveryNote : deliveryNotes) {
-            List<DeliveryNoteItemEntity> items = DeliveryNoteItemDAO.getInstance().getItemsByDeliveryNoteId(deliveryNote.getId());
+
+            int debug = deliveryNote.getIndex();
+
+
+            List<DeliveryNoteItemEntity> items = DeliveryNoteItemDAO.getInstance().getItemsByDeliveryNoteId(deliveryNote.getIndex());
             for (DeliveryNoteItemEntity item : items) {
                 Integer articleID = item.getArticleID();
                 if (articleID == null || articleNames.containsKey(articleID)) continue;
                 try {
-                    String name = ArticleDAO.getInstance().getNameById(articleID);
+                    String name = ArticleDAO.getInstance().getNameByIndex(articleID);
                     articleNames.put(articleID, name != null ? name : "");
                 } catch (Exception e) {
                     LOGGER.log(Level.WARNING, "Error retrieving article name: " + articleID, e);

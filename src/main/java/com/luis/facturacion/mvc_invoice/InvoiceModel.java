@@ -70,7 +70,7 @@ public class InvoiceModel {
      * @return The ID of the created invoice
      */
     public Integer createInvoice(Integer clientId, List<DeliveryNoteEntity> deliveryNotes) {
-        ClientEntity client = clientDAO.getById(clientId);
+        ClientEntity client = clientDAO.getByIndex(clientId);
 
         // Total from delivery notes
         double totalAmount = deliveryNotes.stream()
@@ -169,7 +169,7 @@ public class InvoiceModel {
 
             // Get / create client item
             if (!clientMap.containsKey(clientId)) {
-                String clientName = clientDAO.getNameById(clientId);
+                String clientName = clientDAO.getNameByIndex(clientId);
                 ClientInvoiceItem clientItem = new ClientInvoiceItem(
                         String.valueOf(clientId),
                         clientName,

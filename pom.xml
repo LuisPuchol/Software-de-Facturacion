@@ -190,7 +190,10 @@
                     <destination>target/installer</destination>
                     <input>target</input>
                     <mainJar>${project.artifactId}-${project.version}.jar</mainJar>
-                    <mainClass>${app.main.class}</mainClass>
+                    <mainClass>com.luis.facturacion.DiagnosticMain</mainClass>
+
+                    <runtimeImage>${java.home}</runtimeImage>
+
 
                     <!-- Windows specific -->
                     <winDirChooser>true</winDirChooser>
@@ -207,6 +210,21 @@
                         <option>--add-opens=javafx.graphics/com.sun.javafx.stage=ALL-UNNAMED</option>
                         <option>--add-opens=java.base/java.lang.reflect=ALL-UNNAMED</option>
                     </javaOptions>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.openjfx</groupId>
+                <artifactId>javafx-maven-plugin</artifactId>
+                <version>0.0.8</version>
+                <configuration>
+                    <stripDebug>true</stripDebug>
+                    <compress>2</compress>
+                    <noHeaderFiles>true</noHeaderFiles>
+                    <noManPages>true</noManPages>
+                    <launcher>facturacion</launcher>
+                    <jlinkImageName>hello</jlinkImageName>
+                    <jlinkZipName>hellozip</jlinkZipName>
+                    <mainClass>com.luis.facturacion.DiagnosticMain</mainClass>
                 </configuration>
             </plugin>
         </plugins>
