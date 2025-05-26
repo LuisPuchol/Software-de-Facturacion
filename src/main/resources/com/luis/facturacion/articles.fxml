@@ -10,12 +10,13 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 
+<?import java.net.URL?>
 <BorderPane fx:id="rootPane" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.luis.facturacion.mvc_article.ArticleController">
     <left>
         <TableView fx:id="articulosTable" prefWidth="300">
             <columns>
-                <TableColumn fx:id="columnInd" prefWidth="100" text="IND"/>
+                <TableColumn styleClass="column-right" fx:id="columnInd" prefWidth="100" text="IND"/>
                 <TableColumn fx:id="columnName" prefWidth="200" text="Nombre"/>
             </columns>
         </TableView>
@@ -46,4 +47,7 @@
             <Button fx:id="exitButton" text="Salir" onMouseClicked="#handleExitButton"/>
         </HBox>
     </bottom>
+    <stylesheets>
+        <URL value="@styles.css"/>
+    </stylesheets>
 </BorderPane>
