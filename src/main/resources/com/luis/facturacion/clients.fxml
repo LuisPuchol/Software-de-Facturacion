@@ -12,12 +12,12 @@
 <?import javafx.scene.layout.HBox?>
 
 <?import javafx.scene.control.ComboBox?>
+<?import java.net.URL?>
 <BorderPane fx:id="rootPane" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.luis.facturacion.mvc_client.ClientController">
     <left>
         <TableView fx:id="clientsTable" prefWidth="300">
             <columns>
-                <TableColumn fx:id="clientIdColumn" prefWidth="50" text="ID" />
-                <TableColumn fx:id="clientIndexColumn" prefWidth="50" text="Ind" />
+                <TableColumn styleClass="column-right" fx:id="clientIndexColumn" prefWidth="50" text="Ind" />
                 <TableColumn fx:id="clientNameColumn" prefWidth="200" text="Nombre" />
             </columns>
         </TableView>
@@ -79,4 +79,7 @@
             <Button fx:id="exitButton" text="Salir" onMouseClicked="#handleExitButton"/>
         </HBox>
     </bottom>
+    <stylesheets>
+        <URL value="@styles.css"/>
+    </stylesheets>
 </BorderPane>

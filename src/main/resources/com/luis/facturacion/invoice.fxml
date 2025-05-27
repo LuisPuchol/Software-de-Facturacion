@@ -8,6 +8,7 @@
 
 <?import javafx.scene.control.cell.PropertyValueFactory?>
 <?import javafx.geometry.Insets?>
+<?import java.net.URL?>
 <AnchorPane fx:id="rootPane"
             xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
@@ -34,7 +35,7 @@
                     <VBox spacing="10" HBox.hgrow="ALWAYS">
                         <TableView fx:id="deliveryNotesTable" VBox.vgrow="ALWAYS">
                             <columns>
-                                <TableColumn fx:id="codeColumn" text="Cod." prefWidth="60">
+                                <TableColumn styleClass="column-right" fx:id="codeColumn" text="Cod." prefWidth="60">
                                     <cellValueFactory>
                                         <PropertyValueFactory property="code"/>
                                     </cellValueFactory>
@@ -44,12 +45,12 @@
                                         <PropertyValueFactory property="clientName"/>
                                     </cellValueFactory>
                                 </TableColumn>
-                                <TableColumn fx:id="deliveryNoteCountColumn" text="Alb." prefWidth="60">
+                                <TableColumn styleClass="column-right" fx:id="deliveryNoteCountColumn" text="Alb." prefWidth="60">
                                     <cellValueFactory>
                                         <PropertyValueFactory property="deliveryNoteCount"/>
                                     </cellValueFactory>
                                 </TableColumn>
-                                <TableColumn fx:id="amountColumn" text="Importe" prefWidth="100">
+                                <TableColumn styleClass="column-right" fx:id="amountColumn" text="Importe" prefWidth="100">
                                     <cellValueFactory>
                                         <PropertyValueFactory property="amount"/>
                                     </cellValueFactory>
@@ -68,17 +69,17 @@
 
                             <TableView fx:id="invoiceDetailsTable" VBox.vgrow="ALWAYS">
                                 <columns>
-                                    <TableColumn fx:id="dateColumn" text="Fecha" prefWidth="100">
+                                    <TableColumn styleClass="column-center" fx:id="dateColumn" text="Fecha" prefWidth="100">
                                         <cellValueFactory>
                                             <PropertyValueFactory property="date"/>
                                         </cellValueFactory>
                                     </TableColumn>
-                                    <TableColumn fx:id="deliveryNoteNumberColumn" text="Alb." prefWidth="80">
+                                    <TableColumn styleClass="column-right" fx:id="deliveryNoteNumberColumn" text="Alb." prefWidth="80">
                                         <cellValueFactory>
                                             <PropertyValueFactory property="deliveryNoteNumber"/>
                                         </cellValueFactory>
                                     </TableColumn>
-                                    <TableColumn fx:id="invoiceAmountColumn" text="Importe" prefWidth="100">
+                                    <TableColumn styleClass="column-right" fx:id="invoiceAmountColumn" text="Importe" prefWidth="100">
                                         <cellValueFactory>
                                             <PropertyValueFactory property="amount"/>
                                         </cellValueFactory>
@@ -95,4 +96,7 @@
             </HBox>
         </VBox>
     </children>
+    <stylesheets>
+        <URL value="@styles.css"/>
+    </stylesheets>
 </AnchorPane>

@@ -8,6 +8,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.image.Image?>
+<?import java.net.URL?>
 <BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.luis.facturacion.mvc_mainmenu.MainMenuController">
     <top>
         <MenuBar>
@@ -42,4 +43,7 @@
             <ImageView fx:id="backgroundImage" preserveRatio="false"/>
         </StackPane>
     </center>
+    <stylesheets>
+        <URL value="@styles.css"/>
+    </stylesheets>
 </BorderPane>

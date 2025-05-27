@@ -6,6 +6,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import java.net.URL?>
 <AnchorPane fx:id="rootPane"
             xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
@@ -37,17 +38,17 @@
                     <VBox spacing="10" HBox.hgrow="ALWAYS">
                         <TableView fx:id="invoicesTable" VBox.vgrow="ALWAYS">
                             <columns>
-                                <TableColumn fx:id="dateColumn" text="Fecha" prefWidth="80">
+                                <TableColumn styleClass="column-center"  fx:id="dateColumn" text="Fecha" prefWidth="75">
                                     <cellValueFactory>
                                         <PropertyValueFactory property="formattedDate"/>
                                     </cellValueFactory>
                                 </TableColumn>
-                                <TableColumn fx:id="invoiceNumberColumn" text="Num." prefWidth="70">
+                                <TableColumn styleClass="column-right" fx:id="invoiceNumberColumn" text="Num." prefWidth="70">
                                     <cellValueFactory>
                                         <PropertyValueFactory property="invoiceNumber"/>
                                     </cellValueFactory>
                                 </TableColumn>
-                                <TableColumn fx:id="clientCodeColumn" text="Cod." prefWidth="60">
+                                <TableColumn styleClass="column-right" fx:id="clientCodeColumn" text="Cod." prefWidth="60">
                                     <cellValueFactory>
                                         <PropertyValueFactory property="clientCode"/>
                                     </cellValueFactory>
@@ -57,17 +58,17 @@
                                         <PropertyValueFactory property="clientName"/>
                                     </cellValueFactory>
                                 </TableColumn>
-                                <TableColumn fx:id="baseAmountColumn" text="Base" prefWidth="90">
+                                <TableColumn styleClass="column-right" fx:id="baseAmountColumn" text="Base" prefWidth="90">
                                     <cellValueFactory>
                                         <PropertyValueFactory property="baseAmount"/>
                                     </cellValueFactory>
                                 </TableColumn>
-                                <TableColumn fx:id="vatAmountColumn" text="IVA" prefWidth="70">
+                                <TableColumn styleClass="column-right" fx:id="vatAmountColumn" text="IVA" prefWidth="70">
                                     <cellValueFactory>
                                         <PropertyValueFactory property="vatAmount"/>
                                     </cellValueFactory>
                                 </TableColumn>
-                                <TableColumn fx:id="totalAmountColumn" text="Total" prefWidth="90">
+                                <TableColumn styleClass="column-right" fx:id="totalAmountColumn" text="Total" prefWidth="90">
                                     <cellValueFactory>
                                         <PropertyValueFactory property="totalAmount"/>
                                     </cellValueFactory>
@@ -111,5 +112,8 @@
             </HBox>
         </VBox>
     </children>
+    <stylesheets>
+        <URL value="@styles.css"/>
+    </stylesheets>
 </AnchorPane>
 

@@ -1,3 +1,11 @@
 .column-right {
  -fx-alignment: center-right
 }
+
+.column-left {
+-fx-alignment: center-left
+}
+
+.column-center {
+ -fx-alignment: center
+}

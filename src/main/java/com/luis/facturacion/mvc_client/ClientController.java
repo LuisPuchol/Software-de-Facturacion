@@ -56,7 +56,6 @@ public class ClientController {
 
     @FXML
     public void initialize() {
-        clientIdColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         clientIndexColumn.setCellValueFactory(new PropertyValueFactory<>("index"));
         clientNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         clientTypeCombo.getItems().addAll("BASE", "BASE + IVA");

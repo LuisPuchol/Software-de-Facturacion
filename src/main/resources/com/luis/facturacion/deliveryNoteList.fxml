@@ -5,6 +5,7 @@
 
 <?import javafx.scene.control.cell.PropertyValueFactory?>
 <?import javafx.geometry.Insets?>
+<?import java.net.URL?>
 <AnchorPane fx:id="rootPane"
             xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
@@ -33,17 +34,17 @@
 
             <TableView fx:id="deliveryNotesTable" VBox.vgrow="ALWAYS">
                 <columns>
-                    <TableColumn fx:id="dateColumn" text="Fecha" prefWidth="100">
+                    <TableColumn styleClass="column-center" fx:id="dateColumn" text="Fecha" prefWidth="75">
                         <cellValueFactory>
                             <PropertyValueFactory property="date"/>
                         </cellValueFactory>
                     </TableColumn>
-                    <TableColumn fx:id="deliveryNoteNumberColumn" text="N. Albaran" prefWidth="100">
+                    <TableColumn styleClass="column-right" fx:id="deliveryNoteNumberColumn" text="N. Albaran" prefWidth="100">
                         <cellValueFactory>
                             <PropertyValueFactory property="deliveryNoteNumber"/>
                         </cellValueFactory>
                     </TableColumn>
-                    <TableColumn fx:id="codeColumn" text="Cod." prefWidth="80">
+                    <TableColumn styleClass="column-right" fx:id="codeColumn" text="Cod." prefWidth="80">
                         <cellValueFactory>
                             <PropertyValueFactory property="code"/>
                         </cellValueFactory>
@@ -53,12 +54,12 @@
                             <PropertyValueFactory property="clientName"/>
                         </cellValueFactory>
                     </TableColumn>
-                    <TableColumn fx:id="amountColumn" text="Importe" prefWidth="100">
+                    <TableColumn styleClass="column-right" fx:id="amountColumn" text="Importe" prefWidth="100">
                         <cellValueFactory>
                             <PropertyValueFactory property="amount"/>
                         </cellValueFactory>
                     </TableColumn>
-                    <TableColumn fx:id="invoiceNumberColumn" text="N. Factura" prefWidth="100">
+                    <TableColumn styleClass="column-right" fx:id="invoiceNumberColumn" text="N. Factura" prefWidth="100">
                         <cellValueFactory>
                             <PropertyValueFactory property="invoiceNumber"/>
                         </cellValueFactory>
@@ -76,4 +77,7 @@
             </HBox>
         </VBox>
     </children>
+    <stylesheets>
+        <URL value="@styles.css"/>
+    </stylesheets>
 </AnchorPane>
