@@ -1,45 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.cell.PropertyValueFactory?>
 <?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane fx:id="rootPane"
-            xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.luis.facturacion.mvc_invoiceList.InvoiceListController"
-            prefHeight="600.0" prefWidth="1100.0"
-            style="-fx-background-color: #f8fafc;">
+<AnchorPane fx:id="rootPane" prefHeight="765.0" prefWidth="1175.0" style="-fx-background-color: #f8fafc;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.luis.facturacion.mvc_invoiceList.InvoiceListController">
 
     <children>
-        <VBox spacing="20" AnchorPane.topAnchor="20.0" AnchorPane.leftAnchor="20.0"
-              AnchorPane.rightAnchor="20.0" AnchorPane.bottomAnchor="20.0">
+        <VBox spacing="20" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
 
             <!-- Header Section -->
-            <VBox styleClass="header-section" spacing="8">
-                <Label text="Listado de Facturas" styleClass="title"/>
-                <Label text="Consulta y gestión de facturas emitidas" styleClass="muted"/>
+            <VBox spacing="8" styleClass="header-section">
+                <Label styleClass="title" text="Listado de Facturas" />
+                <Label styleClass="muted" text="Consulta y gestión de facturas emitidas" />
             </VBox>
 
             <!-- Filtros mejorados -->
-            <HBox spacing="20" alignment="CENTER_LEFT" styleClass="toolbar">
+            <HBox alignment="CENTER_LEFT" spacing="20" styleClass="toolbar">
                 <children>
                     <VBox spacing="4">
-                        <Label text="Fecha Desde" style="-fx-font-weight: 500; -fx-font-size: 12px; -fx-text-fill: #64748b;"/>
-                        <DatePicker fx:id="fromDateField" prefWidth="140" promptText="dd/MM/yyyy"/>
+                        <Label style="-fx-font-weight: 500; -fx-font-size: 12px; -fx-text-fill: #64748b;" text="Fecha Desde" />
+                        <DatePicker fx:id="fromDateField" prefWidth="140" promptText="dd/MM/yyyy" />
                     </VBox>
 
                     <VBox spacing="4">
-                        <Label text="Fecha Hasta" style="-fx-font-weight: 500; -fx-font-size: 12px; -fx-text-fill: #64748b;"/>
-                        <DatePicker fx:id="toDateField" prefWidth="140" promptText="dd/MM/yyyy"/>
+                        <Label style="-fx-font-weight: 500; -fx-font-size: 12px; -fx-text-fill: #64748b;" text="Fecha Hasta" />
+                        <DatePicker fx:id="toDateField" prefWidth="140" promptText="dd/MM/yyyy" />
                     </VBox>
 
-                    <VBox spacing="4" alignment="BOTTOM_LEFT">
-                        <Label text=" " style="-fx-font-size: 12px;"/> <!-- Espaciador -->
-                        <Button fx:id="searchButton" text="🔍 Actualizar" onAction="#handleSearch"
-                                style="-fx-font-size: 14px; -fx-font-weight: 600;"/>
+                    <VBox alignment="BOTTOM_LEFT" spacing="4">
+                        <Label style="-fx-font-size: 12px;" text=" " /> <!-- Espaciador -->
+                        <Button fx:id="searchButton" onAction="#handleSearch" style="-fx-font-size: 14px; -fx-font-weight: 600;" text="🔍 Actualizar" />
                     </VBox>
                 </children>
             </HBox>
@@ -48,47 +47,47 @@
             <HBox spacing="20" VBox.vgrow="ALWAYS">
                 <children>
                     <!-- Panel izquierdo - Tabla principal de facturas -->
-                    <VBox spacing="12" HBox.hgrow="ALWAYS" styleClass="card">
+                    <VBox spacing="12" styleClass="card" HBox.hgrow="ALWAYS">
                         <VBox spacing="8">
-                            <Label text="Facturas Emitidas" styleClass="subtitle"/>
-                            <Separator/>
+                            <Label styleClass="subtitle" text="Facturas Emitidas" />
+                            <Separator />
                         </VBox>
 
                         <TableView fx:id="invoicesTable" VBox.vgrow="ALWAYS">
                             <columns>
-                                <TableColumn styleClass="column-center" fx:id="dateColumn" text="📅 Fecha" prefWidth="90">
+                                <TableColumn fx:id="dateColumn" prefWidth="90" styleClass="column-center" text="📅 Fecha">
                                     <cellValueFactory>
-                                        <PropertyValueFactory property="formattedDate"/>
+                                        <PropertyValueFactory property="formattedDate" />
                                     </cellValueFactory>
                                 </TableColumn>
-                                <TableColumn styleClass="column-right" fx:id="invoiceNumberColumn" text="📄 Núm." prefWidth="80">
+                                <TableColumn fx:id="invoiceNumberColumn" prefWidth="80" styleClass="column-right" text="📄 Núm.">
                                     <cellValueFactory>
-                                        <PropertyValueFactory property="invoiceNumber"/>
+                                        <PropertyValueFactory property="invoiceNumber" />
                                     </cellValueFactory>
                                 </TableColumn>
-                                <TableColumn styleClass="column-right" fx:id="clientCodeColumn" text="🏷️ Cód." prefWidth="70">
+                                <TableColumn fx:id="clientCodeColumn" prefWidth="70" styleClass="column-right" text="🏷️ Cód.">
                                     <cellValueFactory>
-                                        <PropertyValueFactory property="clientCode"/>
+                                        <PropertyValueFactory property="clientCode" />
                                     </cellValueFactory>
                                 </TableColumn>
-                                <TableColumn fx:id="clientNameColumn" text="👤 Cliente" prefWidth="220">
+                                <TableColumn fx:id="clientNameColumn" prefWidth="220" text="👤 Cliente">
                                     <cellValueFactory>
-                                        <PropertyValueFactory property="clientName"/>
+                                        <PropertyValueFactory property="clientName" />
                                     </cellValueFactory>
                                 </TableColumn>
-                                <TableColumn styleClass="column-right" fx:id="baseAmountColumn" text="💰 Base" prefWidth="100">
+                                <TableColumn fx:id="baseAmountColumn" prefWidth="100" styleClass="column-right" text="💰 Base">
                                     <cellValueFactory>
-                                        <PropertyValueFactory property="baseAmount"/>
+                                        <PropertyValueFactory property="baseAmount" />
                                     </cellValueFactory>
                                 </TableColumn>
-                                <TableColumn styleClass="column-right" fx:id="vatAmountColumn" text="📊 IVA" prefWidth="80">
+                                <TableColumn fx:id="vatAmountColumn" prefWidth="80" styleClass="column-right" text="📊 IVA">
                                     <cellValueFactory>
-                                        <PropertyValueFactory property="vatAmount"/>
+                                        <PropertyValueFactory property="vatAmount" />
                                     </cellValueFactory>
                                 </TableColumn>
-                                <TableColumn styleClass="column-right" fx:id="totalAmountColumn" text="💳 Total" prefWidth="110">
+                                <TableColumn fx:id="totalAmountColumn" prefWidth="110" styleClass="column-right" text="💳 Total">
                                     <cellValueFactory>
-                                        <PropertyValueFactory property="totalAmount"/>
+                                        <PropertyValueFactory property="totalAmount" />
                                     </cellValueFactory>
                                 </TableColumn>
                             </columns>
@@ -96,27 +95,27 @@
                     </VBox>
 
                     <!-- Panel derecho - Albaranes relacionados -->
-                    <VBox spacing="12" prefWidth="320" styleClass="card">
+                    <VBox prefWidth="320" spacing="12" styleClass="card">
                         <VBox spacing="8">
-                            <Label text="Albaranes Relacionados" styleClass="subtitle"/>
-                            <Separator/>
+                            <Label styleClass="subtitle" text="Albaranes Relacionados" />
+                            <Separator />
                         </VBox>
 
                         <TableView fx:id="deliveryNotesTable" VBox.vgrow="ALWAYS">
                             <columns>
-                                <TableColumn styleClass="column-center" fx:id="noteDataColumn" text="📅 Fecha" prefWidth="90">
+                                <TableColumn fx:id="noteDataColumn" prefWidth="90" styleClass="column-center" text="📅 Fecha">
                                     <cellValueFactory>
-                                        <PropertyValueFactory property="date"/>
+                                        <PropertyValueFactory property="date" />
                                     </cellValueFactory>
                                 </TableColumn>
-                                <TableColumn styleClass="column-right" fx:id="noteNumberColumn" text="📋 N.Alb." prefWidth="80">
+                                <TableColumn fx:id="noteNumberColumn" prefWidth="80" styleClass="column-right" text="📋 N.Alb.">
                                     <cellValueFactory>
-                                        <PropertyValueFactory property="deliveryNoteNumber"/>
+                                        <PropertyValueFactory property="deliveryNoteNumber" />
                                     </cellValueFactory>
                                 </TableColumn>
-                                <TableColumn styleClass="column-right" fx:id="noteBaseAmountColumn" text="💰 Base" prefWidth="100">
+                                <TableColumn fx:id="noteBaseAmountColumn" prefWidth="100" styleClass="column-right" text="💰 Base">
                                     <cellValueFactory>
-                                        <PropertyValueFactory property="baseAmount"/>
+                                        <PropertyValueFactory property="baseAmount" />
                                     </cellValueFactory>
                                 </TableColumn>
                             </columns>
@@ -124,21 +123,20 @@
 
                         <!-- Botones de acción -->
                         <HBox alignment="CENTER_RIGHT" spacing="12" style="-fx-padding: 12px 0 0 0;">
-                            <Button fx:id="exitButton" text="❌ Salir" onAction="#handleExit" styleClass="secondary"/>
+                            <Button fx:id="exitButton" onAction="#handleExit" styleClass="secondary" text="❌ Salir" />
                         </HBox>
                     </VBox>
                 </children>
             </HBox>
 
             <!-- Footer con información adicional -->
-            <HBox alignment="CENTER_LEFT" styleClass="footer-section" spacing="20">
-                <Label text="💡 Selecciona una factura para ver sus albaranes relacionados"
-                       style="-fx-font-size: 12px; -fx-text-fill: #64748b;"/>
+            <HBox alignment="CENTER_LEFT" spacing="20" styleClass="footer-section">
+                <Label style="-fx-font-size: 12px; -fx-text-fill: #64748b;" text="💡 Selecciona una factura para ver sus albaranes relacionados" />
             </HBox>
         </VBox>
     </children>
 
     <stylesheets>
-        <URL value="@styles.css"/>
+        <URL value="@styles.css" />
     </stylesheets>
 </AnchorPane>

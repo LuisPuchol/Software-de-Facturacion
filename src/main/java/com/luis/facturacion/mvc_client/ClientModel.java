@@ -35,9 +35,9 @@ public class ClientModel {
 
     public boolean addCliente(Integer index, String name, String address, String postalCode, String city,
                            String province, String cif, String tel,
-                           String tel2, Integer eqSurcharge, Integer ClientType, Integer InvoiceByDeliveryNote) {
+                           String tel2, Integer eqSurcharge, Integer clientType, Integer InvoiceByDeliveryNote) {
 
-        if (!validateRequiredFields(index, name, address, cif)) {
+        if (!validateRequiredFields(index, name, address, cif, clientType)) {
             return false;
         }
 
@@ -53,7 +53,7 @@ public class ClientModel {
             client.setTel(tel);
             client.setTel2(tel2);
             client.setEquivalenceSurcharge(eqSurcharge);
-            client.setClientType(ClientType);
+            client.setClientType(clientType);
             client.setInvoiceByDeliveryNote(InvoiceByDeliveryNote);
 
             clientDao.save(client);
@@ -76,9 +76,10 @@ public class ClientModel {
      * @param name    Client name
      * @param address Client address
      * @param cif     Client CIF
+     * @param type    Client Type
      * @return true if all validations pass, false otherwise
      */
-    private boolean validateRequiredFields(Integer index, String name, String address, String cif) {
+    private boolean validateRequiredFields(Integer index, String name, String address, String cif, Integer type) {
         if (index == null || index <= 0) {
             ShowAlert.showError("Campo Requerido", "El campo 'Índice' es obligatorio y debe ser mayor que 0.");
             return false;
@@ -96,6 +97,11 @@ public class ClientModel {
 
         if (cif == null || cif.trim().isEmpty()) {
             ShowAlert.showError("Campo Requerido", "El campo 'CIF' es obligatorio.");
+            return false;
+        }
+
+        if (type == null) {
+            ShowAlert.showError("Campo Requerido", "El campo 'Tipo' es obligatorio.");
             return false;
         }
 

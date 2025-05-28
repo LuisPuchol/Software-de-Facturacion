@@ -19,7 +19,6 @@
     <!-- Título principal -->
     <VBox alignment="CENTER" spacing="8">
         <Label text="Sistema de Facturación" styleClass="login-title"/>
-        <Label text="Gestión empresarial moderna y eficiente" styleClass="login-subtitle"/>
     </VBox>
 
     <!-- Tarjeta de usuario con diseño moderno -->
@@ -52,7 +51,7 @@
 
     <!-- Información adicional -->
     <VBox alignment="CENTER" spacing="8">
-        <Label text="Versión 2.0" styleClass="login-footer"/>
+        <Label text="Versión 1.1" styleClass="login-footer"/>
         <Label text="© 2025 Sistema de Facturación" styleClass="login-footer"/>
     </VBox>
 

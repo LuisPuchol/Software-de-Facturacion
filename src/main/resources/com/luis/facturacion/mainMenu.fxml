@@ -16,30 +16,36 @@
 
     <top>
         <VBox>
+            <!-- Header con información -->
             <VBox styleClass="main-menu-header" spacing="8">
                 <Label text="Sistema de Facturación" styleClass="main-menu-title"/>
                 <Label text="Panel de Control Principal" styleClass="main-menu-description"/>
             </VBox>
 
+            <!-- Menu Bar reorganizado -->
             <MenuBar styleClass="main-menu-bar">
-                <Menu fx:id="ProductsMenu" text="📦 Productos">
+                <!-- Menú de Archivos/Maestros -->
+                <Menu fx:id="FilesMenu" text="📁 Archivos">
                     <MenuItem fx:id="Article" text="Artículos" onAction="#handleArticlesClick"/>
-                    <MenuItem fx:id="VATConfig" text="Tipos de IVA" onAction="#handleVATConfigClick"/>
+                    <MenuItem fx:id="Clients" text="Clientes" onAction="#handleClientsClick"/>
+                    <MenuItem fx:id="VATConfig" text="Configuración IVA" onAction="#handleVATConfigClick"/>
                 </Menu>
 
-                <Menu fx:id="ClientsMenu" text="👥 Clientes">
-                    <MenuItem fx:id="Clients" text="Listado de Clientes" onAction="#handleClientsClick"/>
-                </Menu>
-
-                <Menu fx:id="SalesMenu" text="💰 Ventas">
+                <!-- Menú de Albaranes -->
+                <Menu fx:id="DeliveryNotesMenu" text="📋 Albaranes">
                     <MenuItem fx:id="DeliveryNote" text="Crear Albarán" onAction="#handleDeliveryNoteClick"/>
-                    <MenuItem fx:id="DeliveryNoteList" text="Listado Albaranes" onAction="#handleDeliveryNoteListClick"/>
-                    <MenuItem fx:id="Invoice" text="Crear Factura" onAction="#handleInvoiceClick"/>
-                    <MenuItem fx:id="InvoiceList" text="Listado Facturas" onAction="#handleInvoiceListClick"/>
-                    <MenuItem fx:id="CorrectiveInvoice" text="Rectificativas" onAction="#handleCorrectiveInvoiceClick"/>
+                    <MenuItem fx:id="DeliveryNoteList" text="Listado de Albaranes" onAction="#handleDeliveryNoteListClick"/>
                 </Menu>
 
-                <Menu fx:id="SummaryMenu" text="📊 Reportes">
+                <!-- Menú de Facturas -->
+                <Menu fx:id="InvoicesMenu" text="🧾 Facturas">
+                    <MenuItem fx:id="Invoice" text="Crear Factura" onAction="#handleInvoiceClick"/>
+                    <MenuItem fx:id="InvoiceList" text="Listado de Facturas" onAction="#handleInvoiceListClick"/>
+                    <MenuItem fx:id="CorrectiveInvoice" text="Facturas Rectificativas" onAction="#handleCorrectiveInvoiceClick"/>
+                </Menu>
+
+                <!-- Menú de Resúmenes y Reportes -->
+                <Menu fx:id="SummaryMenu" text="📊 Resúmenes">
                     <MenuItem fx:id="EntryBook" text="Libro de Ingresos"/>
                     <MenuItem fx:id="clientsSummary" text="Resumen de Clientes"/>
                     <MenuItem fx:id="traceability" text="Trazabilidad de Productos"/>
@@ -50,24 +56,28 @@
 
     <center>
         <StackPane styleClass="main-menu-content">
+            <!-- Contenido central mejorado -->
             <VBox alignment="CENTER" spacing="30">
                 <Label text="Bienvenido al Sistema de Facturación" styleClass="welcome-title"/>
 
                 <VBox alignment="CENTER" spacing="16" styleClass="quick-access-card">
-                    <Label text="Accesos Rápidos" styleClass="quick-access-title"/>
+                    <Label text="Módulos del Sistema" styleClass="quick-access-title"/>
 
                     <VBox spacing="12">
-                        <Label text="• Crear nuevo albarán de entrega" styleClass="quick-access-item"/>
-                        <Label text="• Generar facturas pendientes" styleClass="quick-access-item"/>
-                        <Label text="• Consultar listados y reportes" styleClass="quick-access-item"/>
-                        <Label text="• Gestionar clientes y productos" styleClass="quick-access-item"/>
+                        <Label text="• Artículos: Catálogo completo de productos y servicios disponibles" styleClass="quick-access-item"/>
+                        <Label text="• Clientes: Base de datos con información detallada de contactos comerciales" styleClass="quick-access-item"/>
+                        <Label text="• Configuración IVA: Gestión de tipos impositivos y recargos de equivalencia" styleClass="quick-access-item"/>
+                        <Label text="• Albaranes: Creación y edición de documentos de entrega de mercancías" styleClass="quick-access-item"/>
+                        <Label text="• Listado de Albaranes: Consulta histórica y filtrado de albaranes registrados" styleClass="quick-access-item"/>
+                        <Label text="• Facturación: Generación automática de facturas desde albaranes pendientes" styleClass="quick-access-item"/>
+                        <Label text="• Listado de Facturas: Archivo completo de facturas emitidas con opciones de búsqueda" styleClass="quick-access-item"/>
                     </VBox>
                 </VBox>
 
                 <Label text="Selecciona una opción del menú superior para comenzar" styleClass="main-menu-footer"/>
             </VBox>
 
-            <!-- backgroundImage -->
+            <!-- Imagen de fondo opcional -->
             <ImageView fx:id="backgroundImage" preserveRatio="true" styleClass="background-image-container"/>
         </StackPane>
     </center>

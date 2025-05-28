@@ -285,7 +285,7 @@
 .table-view .table-row-cell {
     -fx-background-color: -bg-primary;
     -fx-border-color: transparent;
-    -fx-padding: 8px 0;
+    -fx-padding: 4px 0;
 }
 
 .table-view .table-row-cell:hover {
@@ -303,21 +303,74 @@
 
 .table-view .table-cell {
     -fx-border-color: transparent;
-    -fx-padding: 8px;
+    -fx-padding: 6px 8px;
     -fx-text-fill: -text-primary;
     -fx-font-size: 13px;
 }
 
-/* Alineaciones de columnas */
-.column-right .table-cell {
+/* ===== TABLAS - ALINEACIONES ESPECÍFICAS ===== */
+
+/* Alineación por ID de columna - Método más confiable */
+#columnInd .table-cell {
     -fx-alignment: center-right;
 }
 
-.column-left .table-cell {
+#columnName .table-cell {
     -fx-alignment: center-left;
 }
 
-.column-center .table-cell {
+#dateColumn .table-cell {
+    -fx-alignment: center;
+}
+
+#invoiceNumberColumn .table-cell,
+#clientCodeColumn .table-cell,
+#baseAmountColumn .table-cell,
+#vatAmountColumn .table-cell,
+#totalAmountColumn .table-cell,
+#deliveryNoteNumberColumn .table-cell,
+#codeColumn .table-cell,
+#amountColumn .table-cell,
+#quantityColumn .table-cell,
+#priceColumn .table-cell {
+    -fx-alignment: center-right;
+}
+
+#clientNameColumn .table-cell,
+#conceptColumn .table-cell {
+    -fx-alignment: center-left;
+}
+
+#noteDataColumn .table-cell,
+#trace1Column .table-cell,
+#trace2Column .table-cell {
+    -fx-alignment: center;
+}
+
+/* Alineaciones de columnas - Como respaldo */
+.table-view .column-right .table-cell {
+    -fx-alignment: center-right !important;
+    -fx-text-alignment: right !important;
+}
+
+.table-view .column-left .table-cell {
+    -fx-alignment: center-left;
+}
+
+.table-view .column-center .table-cell {
+    -fx-alignment: center;
+}
+
+/* También para los headers */
+.table-view .column-right .column-header .label {
+    -fx-alignment: center-right;
+}
+
+.table-view .column-left .column-header .label {
+    -fx-alignment: center-left;
+}
+
+.table-view .column-center .column-header .label {
     -fx-alignment: center;
 }
 

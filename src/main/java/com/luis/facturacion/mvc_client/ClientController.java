@@ -60,7 +60,7 @@ public class ClientController {
         clientNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         clientTypeCombo.getItems().addAll("BASE", "BASE + IVA");
 
-        tabFunction.configureTabFunction((GridPane) rootPane.getCenter());
+        tabFunction.configureTabFunction(clientValues);
 
         loadTableData();
 
@@ -87,9 +87,9 @@ public class ClientController {
         // Checkbox & TINYINT fields
         equivalenceSurchargeCheck.setSelected(cliente.getEquivalenceSurcharge() == 1);
         // in showClientDetails()
-        if (cliente.getClientType() == 1) {
+        if (cliente.getClientType() == 0) {
             clientTypeCombo.setValue("BASE");
-        } else if (cliente.getClientType() == 2) {
+        } else if (cliente.getClientType() == 1) {
             clientTypeCombo.setValue("BASE + IVA");
         } else {
             clientTypeCombo.setValue(null);

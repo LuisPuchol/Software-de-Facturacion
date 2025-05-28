@@ -3,83 +3,140 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
-
-<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.layout.VBox?>
 <?import java.net.URL?>
-<BorderPane fx:id="rootPane" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.luis.facturacion.mvc_client.ClientController">
-    <left>
-        <TableView fx:id="clientsTable" prefWidth="300">
-            <columns>
-                <TableColumn styleClass="column-right" fx:id="clientIndexColumn" prefWidth="50" text="Ind" />
-                <TableColumn fx:id="clientNameColumn" prefWidth="200" text="Nombre" />
-            </columns>
-        </TableView>
-    </left>
+
+<BorderPane fx:id="rootPane" prefHeight="880.0" prefWidth="900.0" style="-fx-background-color: #f8fafc;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.luis.facturacion.mvc_client.ClientController">
+
+    <!-- Header Section -->
+    <top>
+        <VBox spacing="8" styleClass="header-section">
+            <Label styleClass="title" text="👥 Gestión de Clientes" />
+            <Label styleClass="muted" text="Administra la información de clientes y contactos" />
+        </VBox>
+    </top>
 
     <center>
-        <GridPane fx:id="clientValues" hgap="10" vgap="10">
-            <padding>
-                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-            </padding>
-            <Label text="ID:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-            <TextField fx:id="clientIdField" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+        <HBox spacing="20" style="-fx-padding: 20px;">
 
-            <Label text="Índice:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-            <TextField fx:id="clientIndexField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <!-- Panel izquierdo - Tabla de clientes -->
+            <VBox spacing="10" styleClass="card" prefWidth="350.0">
+                <VBox spacing="6">
+                    <Label styleClass="subtitle" text="📋 Lista de Clientes" />
+                    <Separator />
+                </VBox>
 
-            <Label text="Nombre:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-            <TextField fx:id="nameField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                <TableView fx:id="clientsTable" VBox.vgrow="ALWAYS">
+                    <columns>
+                        <TableColumn fx:id="clientIndexColumn" prefWidth="80" text="🏷️ Índice" styleClass="column-right">
+                            <cellValueFactory>
+                                <PropertyValueFactory property="clientIndex" />
+                            </cellValueFactory>
+                        </TableColumn>
+                        <TableColumn fx:id="clientNameColumn" prefWidth="250" text="👤 Nombre" styleClass="column-left">
+                            <cellValueFactory>
+                                <PropertyValueFactory property="name" />
+                            </cellValueFactory>
+                        </TableColumn>
+                    </columns>
+                </TableView>
+            </VBox>
 
-            <Label text="Dirección:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
-            <TextField fx:id="addressField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <!-- Panel derecho - Formulario de datos del cliente -->
+            <VBox spacing="10" styleClass="form-section" HBox.hgrow="ALWAYS">
+                <VBox spacing="6">
+                    <Label styleClass="subtitle" text="✏️ Datos del Cliente" />
+                    <Separator />
+                </VBox>
 
-            <Label text="C.P.:" GridPane.columnIndex="0" GridPane.rowIndex="4" />
-            <TextField fx:id="postalCodeField" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                <GridPane fx:id="clientValues" hgap="20" style="-fx-padding: 20px;" vgap="16">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="NEVER" minWidth="120" prefWidth="120" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="200" prefWidth="250" />
+                    </columnConstraints>
 
-            <Label text="Población:" GridPane.columnIndex="0" GridPane.rowIndex="5" />
-            <TextField fx:id="cityField" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                    <!-- Fila 0: ID -->
+                    <Label text="ID:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                    <TextField fx:id="clientIdField" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="0" />
 
-            <Label text="Provincia:" GridPane.columnIndex="0" GridPane.rowIndex="6" />
-            <TextField fx:id="provinceField" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                    <!-- Fila 1: Índice -->
+                    <Label text="Índice:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                    <TextField fx:id="clientIndexField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
 
-            <Label text="CIF:" GridPane.columnIndex="0" GridPane.rowIndex="7" />
-            <TextField fx:id="cifField" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                    <!-- Fila 2: Nombre -->
+                    <Label text="Nombre:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                    <TextField fx:id="nameField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
 
-            <Label text="Teléfono:" GridPane.columnIndex="0" GridPane.rowIndex="8" />
-            <TextField fx:id="telField" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                    <!-- Fila 3: Dirección -->
+                    <Label text="Dirección:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+                    <TextField fx:id="addressField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
 
-            <Label text="Teléfono 2:" GridPane.columnIndex="0" GridPane.rowIndex="9" />
-            <TextField fx:id="tel2Field" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+                    <!-- Fila 4: Código Postal -->
+                    <Label text="C.P.:" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+                    <TextField fx:id="postalCodeField" GridPane.columnIndex="1" GridPane.rowIndex="4" />
 
-            <Label text="Req. Equivalencia:" GridPane.columnIndex="0" GridPane.rowIndex="10" />
-            <CheckBox fx:id="equivalenceSurchargeCheck" GridPane.columnIndex="1" GridPane.rowIndex="10" />
+                    <!-- Fila 5: Población -->
+                    <Label text="Población:" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+                    <TextField fx:id="cityField" GridPane.columnIndex="1" GridPane.rowIndex="5" />
 
-            <Label text="Tipo Cliente:" GridPane.columnIndex="0" GridPane.rowIndex="11" />
-            <ComboBox fx:id="clientTypeCombo" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="11" />
+                    <!-- Fila 6: Provincia -->
+                    <Label text="Provincia:" GridPane.columnIndex="0" GridPane.rowIndex="6" />
+                    <TextField fx:id="provinceField" GridPane.columnIndex="1" GridPane.rowIndex="6" />
 
-            <Label text="Factura por Albarán:" GridPane.columnIndex="0" GridPane.rowIndex="14" />
-            <CheckBox fx:id="invoiceByDeliveryNoteCheck" GridPane.columnIndex="1" GridPane.rowIndex="14" />
-        </GridPane>
+                    <!-- Fila 7: CIF -->
+                    <Label text="CIF:" GridPane.columnIndex="0" GridPane.rowIndex="7" />
+                    <TextField fx:id="cifField" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+
+                    <!-- Fila 8: Teléfono -->
+                    <Label text="Teléfono:" GridPane.columnIndex="0" GridPane.rowIndex="8" />
+                    <TextField fx:id="telField" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+
+                    <!-- Fila 9: Teléfono 2 -->
+                    <Label text="Teléfono 2:" GridPane.columnIndex="0" GridPane.rowIndex="9" />
+                    <TextField fx:id="tel2Field" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+
+                    <!-- Fila 10: Req. Equivalencia -->
+                    <Label text="Req. Equivalencia:" GridPane.columnIndex="0" GridPane.rowIndex="10" />
+                    <CheckBox fx:id="equivalenceSurchargeCheck" GridPane.columnIndex="1" GridPane.rowIndex="10" />
+
+                    <!-- Fila 11: Tipo Cliente -->
+                    <Label text="Tipo Cliente:" GridPane.columnIndex="0" GridPane.rowIndex="11" />
+                    <ComboBox fx:id="clientTypeCombo" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="11" />
+
+                    <!-- Fila 12: Factura por Albarán -->
+                    <Label text="Factura por Albarán:" GridPane.columnIndex="0" GridPane.rowIndex="12" />
+                    <CheckBox fx:id="invoiceByDeliveryNoteCheck" GridPane.columnIndex="1" GridPane.rowIndex="12" />
+                </GridPane>
+
+                <!-- Información adicional -->
+                <HBox alignment="CENTER_LEFT" style="-fx-padding: 8px 0 0 0;">
+                    <Label style="-fx-font-size: 12px; -fx-text-fill: #64748b;" text="💡 Presiona Enter para navegar entre campos" />
+                </HBox>
+            </VBox>
+        </HBox>
     </center>
 
+    <!-- Panel de botones en la parte inferior -->
     <bottom>
-        <HBox alignment="CENTER" spacing="10">
-            <padding>
-                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-            </padding>
-            <Button fx:id="newButton" text="Nuevo" onMouseClicked="#handleNewButton"/>
-            <Button fx:id="editButton" text="Editar" onMouseClicked="#handleEditButton"/>
-            <Button fx:id="exitButton" text="Salir" onMouseClicked="#handleExitButton"/>
+        <HBox alignment="CENTER" spacing="16" styleClass="footer-section">
+            <Button fx:id="newButton" onMouseClicked="#handleNewButton" style="-fx-pref-width: 120;" styleClass="success" text="➕ Nuevo Cliente" />
+            <Button fx:id="editButton" onMouseClicked="#handleEditButton" style="-fx-pref-width: 100;" styleClass="primary" text="✏️ Editar" />
+            <Button fx:id="exitButton" onMouseClicked="#handleExitButton" style="-fx-pref-width: 100;" styleClass="secondary" text="❌ Salir" />
         </HBox>
     </bottom>
+
     <stylesheets>
-        <URL value="@styles.css"/>
+        <URL value="@styles.css" />
     </stylesheets>
 </BorderPane>
