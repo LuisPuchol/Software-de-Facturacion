@@ -3,52 +3,59 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.effect.DropShadow?>
-<?import javafx.scene.shape.Circle?>
-
 <?import java.net.URL?>
-<VBox alignment="CENTER" prefHeight="400.0" prefWidth="600.0" spacing="30"
+
+<VBox alignment="CENTER" prefHeight="500.0" prefWidth="700.0" spacing="40"
       xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="com.luis.facturacion.mvc_login.LoginController"
-      style="-fx-background-color: linear-gradient(to bottom, #f0f0f0, #e0e0e0);">
+      styleClass="login-container">
 
     <padding>
-        <Insets top="50" bottom="50" left="50" right="50"/>
+        <Insets top="60" bottom="60" left="60" right="60"/>
     </padding>
 
-    <!-- Tarjeta de usuario con sombra -->
-    <VBox alignment="CENTER" spacing="20"
-          style="-fx-background-color: white; -fx-background-radius: 15; -fx-padding: 30;">
+    <!-- Título principal -->
+    <VBox alignment="CENTER" spacing="8">
+        <Label text="Sistema de Facturación" styleClass="login-title"/>
+        <Label text="Gestión empresarial moderna y eficiente" styleClass="login-subtitle"/>
+    </VBox>
 
-        <effect>
-            <DropShadow color="#00000030" radius="10" offsetX="0" offsetY="2"/>
-        </effect>
+    <!-- Tarjeta de usuario con diseño moderno -->
+    <VBox alignment="CENTER" spacing="24" styleClass="user-card" maxWidth="400">
 
         <!-- Usuario principal -->
-        <HBox alignment="CENTER" spacing="15" onMouseClicked="#handleUserClick"
-              style="-fx-cursor: hand;">
+        <HBox alignment="CENTER" spacing="20" onMouseClicked="#handleUserClick"
+              styleClass="user-profile-hover">
 
-            <!-- Placeholder para avatar (círculo con inicial) -->
-            <VBox alignment="CENTER" prefWidth="80" prefHeight="80"
-                  style="-fx-background-color: #4a90e2; -fx-background-radius: 40;">
-                <Label text="L" style="-fx-font-size: 32px; -fx-font-weight: bold; -fx-text-fill: white;"/>
+            <!-- Avatar mejorado -->
+            <VBox alignment="CENTER" prefWidth="80" prefHeight="80" styleClass="user-avatar">
+                <Label text="L" styleClass="user-avatar-letter"/>
             </VBox>
 
             <!-- Información del usuario -->
-            <VBox spacing="8" alignment="CENTER_LEFT">
-                <Label text="Luis Puchol" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #333;"/>
-                <Label text="Último acceso: Hoy 14:30" style="-fx-font-size: 12px; -fx-text-fill: #666;"/>
+            <VBox spacing="6" alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
+                <Label text="Luis Puchol" styleClass="user-name"/>
+                <Label text="Administrador del Sistema" styleClass="user-role"/>
+                <Label text="Último acceso: Hoy 14:30" styleClass="user-last-access"/>
             </VBox>
         </HBox>
 
+        <!-- Botón de acceso -->
+        <Button text="Acceder al Sistema"
+                prefWidth="200" prefHeight="45"
+                styleClass="login-button"
+                onAction="#handleUserClick"/>
+
     </VBox>
 
-    <!-- Logo o título de la aplicación -->
-    <Label text="Sistema de Facturación"
-           style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #333;"/>
+    <!-- Información adicional -->
+    <VBox alignment="CENTER" spacing="8">
+        <Label text="Versión 2.0" styleClass="login-footer"/>
+        <Label text="© 2025 Sistema de Facturación" styleClass="login-footer"/>
+    </VBox>
+
     <stylesheets>
         <URL value="@styles.css"/>
     </stylesheets>

@@ -3,46 +3,75 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.BorderPane?>
-
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.image.Image?>
+<?import javafx.geometry.Insets?>
 <?import java.net.URL?>
-<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.luis.facturacion.mvc_mainmenu.MainMenuController">
+
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.luis.facturacion.mvc_mainmenu.MainMenuController"
+            styleClass="main-menu-container">
+
     <top>
-        <MenuBar>
-            <Menu fx:id="ProductsMenu" text="Productos">
-                <MenuItem fx:id="Article" text="Artículos" onAction="#handleArticlesClick"/>
-                <MenuItem fx:id="VATConfig" text="Tipos de IVA" onAction="#handleVATConfigClick"/>
-            </Menu>
+        <VBox>
+            <VBox styleClass="main-menu-header" spacing="8">
+                <Label text="Sistema de Facturación" styleClass="main-menu-title"/>
+                <Label text="Panel de Control Principal" styleClass="main-menu-description"/>
+            </VBox>
 
-            <Menu fx:id="ClientsMenu" text="Clientes">
-                <MenuItem fx:id="Clients" text="Listado de Clientes" onAction="#handleClientsClick"/>
-            </Menu>
+            <MenuBar styleClass="main-menu-bar">
+                <Menu fx:id="ProductsMenu" text="📦 Productos">
+                    <MenuItem fx:id="Article" text="Artículos" onAction="#handleArticlesClick"/>
+                    <MenuItem fx:id="VATConfig" text="Tipos de IVA" onAction="#handleVATConfigClick"/>
+                </Menu>
 
-            <Menu fx:id="SalesMenu" text="Ventas">
-                <MenuItem fx:id="DeliveryNote" text="Crear Albaran" onAction="#handleDeliveryNoteClick"/>
-                <MenuItem fx:id="DeliveryNoteList" text="Listado Albaranes" onAction="#handleDeliveryNoteListClick"/>
-                <MenuItem fx:id="Invoice" text="Crear Factura" onAction="#handleInvoiceClick"/>
-                <MenuItem fx:id="InvoiceList" text="Listado Facturas" onAction="#handleInvoiceListClick"/>
-                <MenuItem fx:id="CorrectiveInvoice" text="Rectificativas" onAction="#handleCorrectiveInvoiceClick"/>
-            </Menu>
+                <Menu fx:id="ClientsMenu" text="👥 Clientes">
+                    <MenuItem fx:id="Clients" text="Listado de Clientes" onAction="#handleClientsClick"/>
+                </Menu>
 
-            <Menu fx:id="SummaryMenu" text="Reportes">
-                <MenuItem fx:id="EntryBook" text="Libro de Ingresos"/>
-                <MenuItem fx:id="clientsSummary" text="Resumen de Clientes"/>
-                <MenuItem fx:id="traceability" text="Trazabilidad de Productos"/>
-            </Menu>
-        </MenuBar>
+                <Menu fx:id="SalesMenu" text="💰 Ventas">
+                    <MenuItem fx:id="DeliveryNote" text="Crear Albarán" onAction="#handleDeliveryNoteClick"/>
+                    <MenuItem fx:id="DeliveryNoteList" text="Listado Albaranes" onAction="#handleDeliveryNoteListClick"/>
+                    <MenuItem fx:id="Invoice" text="Crear Factura" onAction="#handleInvoiceClick"/>
+                    <MenuItem fx:id="InvoiceList" text="Listado Facturas" onAction="#handleInvoiceListClick"/>
+                    <MenuItem fx:id="CorrectiveInvoice" text="Rectificativas" onAction="#handleCorrectiveInvoiceClick"/>
+                </Menu>
+
+                <Menu fx:id="SummaryMenu" text="📊 Reportes">
+                    <MenuItem fx:id="EntryBook" text="Libro de Ingresos"/>
+                    <MenuItem fx:id="clientsSummary" text="Resumen de Clientes"/>
+                    <MenuItem fx:id="traceability" text="Trazabilidad de Productos"/>
+                </Menu>
+            </MenuBar>
+        </VBox>
     </top>
 
     <center>
-        <!-- StackPane con ImageView SIN imagen hardcodeada -->
-        <StackPane>
-            <ImageView fx:id="backgroundImage" preserveRatio="false"/>
+        <StackPane styleClass="main-menu-content">
+            <VBox alignment="CENTER" spacing="30">
+                <Label text="Bienvenido al Sistema de Facturación" styleClass="welcome-title"/>
+
+                <VBox alignment="CENTER" spacing="16" styleClass="quick-access-card">
+                    <Label text="Accesos Rápidos" styleClass="quick-access-title"/>
+
+                    <VBox spacing="12">
+                        <Label text="• Crear nuevo albarán de entrega" styleClass="quick-access-item"/>
+                        <Label text="• Generar facturas pendientes" styleClass="quick-access-item"/>
+                        <Label text="• Consultar listados y reportes" styleClass="quick-access-item"/>
+                        <Label text="• Gestionar clientes y productos" styleClass="quick-access-item"/>
+                    </VBox>
+                </VBox>
+
+                <Label text="Selecciona una opción del menú superior para comenzar" styleClass="main-menu-footer"/>
+            </VBox>
+
+            <!-- backgroundImage -->
+            <ImageView fx:id="backgroundImage" preserveRatio="true" styleClass="background-image-container"/>
         </StackPane>
     </center>
+
     <stylesheets>
         <URL value="@styles.css"/>
     </stylesheets>

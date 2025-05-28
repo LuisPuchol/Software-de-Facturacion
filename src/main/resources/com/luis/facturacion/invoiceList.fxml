@@ -1,74 +1,92 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.cell.PropertyValueFactory?>
 <?import java.net.URL?>
+
 <AnchorPane fx:id="rootPane"
             xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.luis.facturacion.mvc_invoiceList.InvoiceListController"
-            prefHeight="500.0" prefWidth="900.0">
+            prefHeight="600.0" prefWidth="1100.0"
+            style="-fx-background-color: #f8fafc;">
+
     <children>
-        <VBox spacing="10" AnchorPane.topAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0"
-              AnchorPane.bottomAnchor="10.0">
+        <VBox spacing="20" AnchorPane.topAnchor="20.0" AnchorPane.leftAnchor="20.0"
+              AnchorPane.rightAnchor="20.0" AnchorPane.bottomAnchor="20.0">
 
-            <HBox spacing="15" alignment="CENTER_LEFT">
+            <!-- Header Section -->
+            <VBox styleClass="header-section" spacing="8">
+                <Label text="Listado de Facturas" styleClass="title"/>
+                <Label text="Consulta y gestión de facturas emitidas" styleClass="muted"/>
+            </VBox>
+
+            <!-- Filtros mejorados -->
+            <HBox spacing="20" alignment="CENTER_LEFT" styleClass="toolbar">
                 <children>
-                    <Label text="Desde"/>
-                    <DatePicker fx:id="fromDateField" prefWidth="120" promptText="dd/MM/yyyy"/>
+                    <VBox spacing="4">
+                        <Label text="Fecha Desde" style="-fx-font-weight: 500; -fx-font-size: 12px; -fx-text-fill: #64748b;"/>
+                        <DatePicker fx:id="fromDateField" prefWidth="140" promptText="dd/MM/yyyy"/>
+                    </VBox>
 
-                    <Label text="Hasta"/>
-                    <DatePicker fx:id="toDateField" prefWidth="120" promptText="dd/MM/yyyy"/>
+                    <VBox spacing="4">
+                        <Label text="Fecha Hasta" style="-fx-font-weight: 500; -fx-font-size: 12px; -fx-text-fill: #64748b;"/>
+                        <DatePicker fx:id="toDateField" prefWidth="140" promptText="dd/MM/yyyy"/>
+                    </VBox>
 
-                    <Button fx:id="searchButton" text="Actualiza" onAction="#handleSearch"/>
+                    <VBox spacing="4" alignment="BOTTOM_LEFT">
+                        <Label text=" " style="-fx-font-size: 12px;"/> <!-- Espaciador -->
+                        <Button fx:id="searchButton" text="🔍 Actualizar" onAction="#handleSearch"
+                                style="-fx-font-size: 14px; -fx-font-weight: 600;"/>
+                    </VBox>
                 </children>
-                <VBox.margin>
-                    <Insets bottom="10.0"/>
-                </VBox.margin>
             </HBox>
 
-            <!-- Main content with two tables -->
-            <HBox spacing="10" VBox.vgrow="ALWAYS">
+            <!-- Contenido principal con diseño mejorado -->
+            <HBox spacing="20" VBox.vgrow="ALWAYS">
                 <children>
-                    <!-- Left side - main invoice table -->
-                    <VBox spacing="10" HBox.hgrow="ALWAYS">
+                    <!-- Panel izquierdo - Tabla principal de facturas -->
+                    <VBox spacing="12" HBox.hgrow="ALWAYS" styleClass="card">
+                        <VBox spacing="8">
+                            <Label text="Facturas Emitidas" styleClass="subtitle"/>
+                            <Separator/>
+                        </VBox>
+
                         <TableView fx:id="invoicesTable" VBox.vgrow="ALWAYS">
                             <columns>
-                                <TableColumn styleClass="column-center"  fx:id="dateColumn" text="Fecha" prefWidth="75">
+                                <TableColumn styleClass="column-center" fx:id="dateColumn" text="📅 Fecha" prefWidth="90">
                                     <cellValueFactory>
                                         <PropertyValueFactory property="formattedDate"/>
                                     </cellValueFactory>
                                 </TableColumn>
-                                <TableColumn styleClass="column-right" fx:id="invoiceNumberColumn" text="Num." prefWidth="70">
+                                <TableColumn styleClass="column-right" fx:id="invoiceNumberColumn" text="📄 Núm." prefWidth="80">
                                     <cellValueFactory>
                                         <PropertyValueFactory property="invoiceNumber"/>
                                     </cellValueFactory>
                                 </TableColumn>
-                                <TableColumn styleClass="column-right" fx:id="clientCodeColumn" text="Cod." prefWidth="60">
+                                <TableColumn styleClass="column-right" fx:id="clientCodeColumn" text="🏷️ Cód." prefWidth="70">
                                     <cellValueFactory>
                                         <PropertyValueFactory property="clientCode"/>
                                     </cellValueFactory>
                                 </TableColumn>
-                                <TableColumn fx:id="clientNameColumn" text="Cliente" prefWidth="200">
+                                <TableColumn fx:id="clientNameColumn" text="👤 Cliente" prefWidth="220">
                                     <cellValueFactory>
                                         <PropertyValueFactory property="clientName"/>
                                     </cellValueFactory>
                                 </TableColumn>
-                                <TableColumn styleClass="column-right" fx:id="baseAmountColumn" text="Base" prefWidth="90">
+                                <TableColumn styleClass="column-right" fx:id="baseAmountColumn" text="💰 Base" prefWidth="100">
                                     <cellValueFactory>
                                         <PropertyValueFactory property="baseAmount"/>
                                     </cellValueFactory>
                                 </TableColumn>
-                                <TableColumn styleClass="column-right" fx:id="vatAmountColumn" text="IVA" prefWidth="70">
+                                <TableColumn styleClass="column-right" fx:id="vatAmountColumn" text="📊 IVA" prefWidth="80">
                                     <cellValueFactory>
                                         <PropertyValueFactory property="vatAmount"/>
                                     </cellValueFactory>
                                 </TableColumn>
-                                <TableColumn styleClass="column-right" fx:id="totalAmountColumn" text="Total" prefWidth="90">
+                                <TableColumn styleClass="column-right" fx:id="totalAmountColumn" text="💳 Total" prefWidth="110">
                                     <cellValueFactory>
                                         <PropertyValueFactory property="totalAmount"/>
                                     </cellValueFactory>
@@ -77,21 +95,26 @@
                         </TableView>
                     </VBox>
 
-                    <!-- Right side - delivery notes table -->
-                    <VBox spacing="10" prefWidth="260">
+                    <!-- Panel derecho - Albaranes relacionados -->
+                    <VBox spacing="12" prefWidth="320" styleClass="card">
+                        <VBox spacing="8">
+                            <Label text="Albaranes Relacionados" styleClass="subtitle"/>
+                            <Separator/>
+                        </VBox>
+
                         <TableView fx:id="deliveryNotesTable" VBox.vgrow="ALWAYS">
                             <columns>
-                                <TableColumn fx:id="noteDataColumn" text="Fecha" prefWidth="80">
+                                <TableColumn styleClass="column-center" fx:id="noteDataColumn" text="📅 Fecha" prefWidth="90">
                                     <cellValueFactory>
                                         <PropertyValueFactory property="date"/>
                                     </cellValueFactory>
                                 </TableColumn>
-                                <TableColumn fx:id="noteNumberColumn" text="N.Alb." prefWidth="80">
+                                <TableColumn styleClass="column-right" fx:id="noteNumberColumn" text="📋 N.Alb." prefWidth="80">
                                     <cellValueFactory>
                                         <PropertyValueFactory property="deliveryNoteNumber"/>
                                     </cellValueFactory>
                                 </TableColumn>
-                                <TableColumn fx:id="noteBaseAmountColumn" text="Base" prefWidth="90">
+                                <TableColumn styleClass="column-right" fx:id="noteBaseAmountColumn" text="💰 Base" prefWidth="100">
                                     <cellValueFactory>
                                         <PropertyValueFactory property="baseAmount"/>
                                     </cellValueFactory>
@@ -99,21 +122,23 @@
                             </columns>
                         </TableView>
 
-                        <HBox alignment="BOTTOM_RIGHT">
-                            <children>
-                                <Button fx:id="exitButton" text="Salir" onAction="#handleExit"/>
-                            </children>
-                            <padding>
-                                <Insets top="5"/>
-                            </padding>
+                        <!-- Botones de acción -->
+                        <HBox alignment="CENTER_RIGHT" spacing="12" style="-fx-padding: 12px 0 0 0;">
+                            <Button fx:id="exitButton" text="❌ Salir" onAction="#handleExit" styleClass="secondary"/>
                         </HBox>
                     </VBox>
                 </children>
             </HBox>
+
+            <!-- Footer con información adicional -->
+            <HBox alignment="CENTER_LEFT" styleClass="footer-section" spacing="20">
+                <Label text="💡 Selecciona una factura para ver sus albaranes relacionados"
+                       style="-fx-font-size: 12px; -fx-text-fill: #64748b;"/>
+            </HBox>
         </VBox>
     </children>
+
     <stylesheets>
         <URL value="@styles.css"/>
     </stylesheets>
 </AnchorPane>
-
