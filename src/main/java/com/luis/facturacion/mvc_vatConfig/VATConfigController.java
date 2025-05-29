@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 
 public class VATConfigController {
 
@@ -15,7 +16,7 @@ public class VATConfigController {
     private AppController appController;
 
     @FXML
-    private AnchorPane rootPane;
+    private BorderPane rootPane;
 
     @FXML
     private TextField vatField;

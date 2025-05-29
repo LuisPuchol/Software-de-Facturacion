@@ -13,6 +13,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -28,7 +29,7 @@ public class DeliveryNoteController {
     private ObservableList<DeliveryNoteItem> deliveryNoteItems = FXCollections.observableArrayList();
 
     @FXML
-    private AnchorPane rootPane;
+    private BorderPane rootPane;
 
     @FXML
     private DatePicker dateField;

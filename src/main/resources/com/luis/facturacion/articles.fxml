@@ -1,49 +1,101 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
+<?import java.net.URL?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
 
-<BorderPane fx:id="rootPane" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.luis.facturacion.mvc_article.ArticleController">
-    <left>
-        <TableView fx:id="articulosTable" prefWidth="300">
-            <columns>
-                <TableColumn fx:id="columnInd" prefWidth="100" text="IND"/>
-                <TableColumn fx:id="columnName" prefWidth="200" text="Nombre"/>
-            </columns>
-        </TableView>
-    </left>
+<BorderPane fx:id="rootPane" prefHeight="880.0" prefWidth="500.0" style="-fx-background-color: #f8fafc;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.luis.facturacion.mvc_article.ArticleController">
+
+    <!-- Header Section -->
+    <top>
+        <VBox spacing="8" styleClass="header-section">
+            <Label styleClass="title" text="📦 Gestión de Artículos" />
+            <Label styleClass="muted" text="Administra el catálogo de productos y servicios" />
+        </VBox>
+    </top>
 
     <center>
-        <GridPane fx:id="articleValues" hgap="10" vgap="10">
-            <padding>
-                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
-            </padding>
+        <!-- Contenedor principal -->
+        <VBox prefWidth="569.0" spacing="20" style="-fx-padding: 20px;">
 
-            <Label text="ID Artículo:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
-            <TextField fx:id="indArticle" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+            <!-- Tabla de artículos -->
+            <VBox spacing="10" styleClass="card" VBox.vgrow="ALWAYS">
+                <VBox spacing="6">
+                    <Label styleClass="subtitle" text="📋 Catálogo de Artículos" />
+                    <Separator />
+                </VBox>
 
-            <Label text="Nombre:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
-            <TextField fx:id="nameArticle" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                <TableView fx:id="articulosTable" VBox.vgrow="ALWAYS">
+                    <columns>
+                        <TableColumn fx:id="columnInd" prefWidth="120" text="🏷️ ID" styleClass="column-right">
+                            <cellValueFactory>
+                                <javafx.scene.control.cell.PropertyValueFactory property="ind" />
+                            </cellValueFactory>
+                        </TableColumn>
+                        <TableColumn fx:id="columnName" prefWidth="325" text="📝 Nombre">
+                            <cellValueFactory>
+                                <javafx.scene.control.cell.PropertyValueFactory property="name" />
+                            </cellValueFactory>
+                        </TableColumn>
+                    </columns>
+                </TableView>
 
-        </GridPane>
+                <!-- Información adicional -->
+                <HBox alignment="CENTER_LEFT" style="-fx-padding: 8px 0 0 0;" />
+            </VBox>
+
+            <!-- Formulario de edición debajo de la tabla -->
+            <VBox spacing="10" styleClass="form-section">
+                <VBox spacing="6">
+                    <Label styleClass="subtitle" text="✏️ Datos del Artículo" />
+                    <Separator />
+                </VBox>
+
+                <GridPane fx:id="articleValues" hgap="20" style="-fx-padding: 20px;" vgap="16">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="200" prefWidth="300" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="200" prefWidth="300" />
+                    </columnConstraints>
+
+                    <!-- ID del Artículo -->
+                    <TextField fx:id="indArticle" promptText="ID Artículo" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+
+                    <!-- Nombre del Artículo -->
+                    <TextField fx:id="nameArticle" promptText="Nombre" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+               <rowConstraints>
+                  <RowConstraints />
+               </rowConstraints>
+                </GridPane>
+
+                <!-- Información mínima -->
+                <HBox alignment="CENTER_LEFT" style="-fx-padding: 8px 0 0 0;">
+                    <Label style="-fx-font-size: 12px; -fx-text-fill: #64748b;" text="💡 Presiona Enter para navegar entre campos" />
+                </HBox>
+            </VBox>
+        </VBox>
     </center>
 
+    <!-- Panel de botones en la parte inferior -->
     <bottom>
-        <HBox alignment="CENTER" spacing="10">
-            <padding>
-                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
-            </padding>
-            <Button fx:id="newButton" text="Nuevo" onMouseClicked="#handleNewButton"/>
-            <Button fx:id="deleteButton" text="Eliminar" onMouseClicked="#handleDeleteButton"/>
-            <Button fx:id="exitButton" text="Salir" onMouseClicked="#handleExitButton"/>
-        </HBox>
-    </bottom>
+        <HBox alignment="CENTER" spacing="16" styleClass="footer-section">
+            <Button fx:id="newButton" onMouseClicked="#handleNewButton" style="-fx-pref-width: 140;" styleClass="success" text="Nuevo Artículo" />
+            <!-- <Button fx:id="deleteButton" onMouseClicked="#handleDeleteButton" style="-fx-pref-width: 120;" styleClass="danger" text="Eliminar" /> -->
+           <Button fx:id="exitButton" onMouseClicked="#handleExitButton" style="-fx-pref-width: 100;" styleClass="secondary" text="Salir" />
+       </HBox>
+   </bottom>
+
+   <stylesheets>
+       <URL value="@styles.css" />
+   </stylesheets>
 </BorderPane>

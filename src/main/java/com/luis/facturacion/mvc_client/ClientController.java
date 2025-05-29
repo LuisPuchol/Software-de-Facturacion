@@ -56,12 +56,11 @@ public class ClientController {
 
     @FXML
     public void initialize() {
-        clientIdColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         clientIndexColumn.setCellValueFactory(new PropertyValueFactory<>("index"));
         clientNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         clientTypeCombo.getItems().addAll("BASE", "BASE + IVA");
 
-        tabFunction.configureTabFunction((GridPane) rootPane.getCenter());
+        tabFunction.configureTabFunction(clientValues);
 
         loadTableData();
 
@@ -88,9 +87,9 @@ public class ClientController {
         // Checkbox & TINYINT fields
         equivalenceSurchargeCheck.setSelected(cliente.getEquivalenceSurcharge() == 1);
         // in showClientDetails()
-        if (cliente.getClientType() == 1) {
+        if (cliente.getClientType() == 0) {
             clientTypeCombo.setValue("BASE");
-        } else if (cliente.getClientType() == 2) {
+        } else if (cliente.getClientType() == 1) {
             clientTypeCombo.setValue("BASE + IVA");
         } else {
             clientTypeCombo.setValue(null);
@@ -101,7 +100,7 @@ public class ClientController {
 
     @FXML
     public void handleNewButton(MouseEvent mouseEvent) {
-        int tipoCliente = "BASE + IVA".equals(clientTypeCombo.getValue()) ? 2 : 1;
+        int tipoCliente = "BASE + IVA".equals(clientTypeCombo.getValue()) ? 1 : 0;
 
         boolean success = clientModel.addCliente(
                 parseInteger(clientIndexField.getText()),

@@ -83,10 +83,6 @@ public class DeliveryNoteListController {
                 column.setCellValueFactory(new PropertyValueFactory<>(property))
         );
 
-        columnMappings.keySet().forEach(column ->
-                column.setStyle("-fx-alignment: CENTER;")
-        );
-
         deliveryNotesTable.setItems(deliveryNoteItems);
     }
 

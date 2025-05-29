@@ -55,7 +55,7 @@ public class ArticleController {
         columnInd.setCellValueFactory(new PropertyValueFactory<>("index"));
         columnName.setCellValueFactory(new PropertyValueFactory<>("name"));
 
-        tabFunction.configureTabFunction((GridPane) rootPane.getCenter());
+        tabFunction.configureTabFunction(articleValues);
 
         loadTableData();
     }

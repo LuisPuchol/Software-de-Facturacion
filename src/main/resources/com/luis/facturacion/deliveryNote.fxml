@@ -1,107 +1,137 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.cell.PropertyValueFactory?>
-<?import javafx.geometry.Insets?>
-<AnchorPane fx:id="rootPane"
-            xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.luis.facturacion.mvc_deliveryNote.DeliveryNoteController"
-            prefHeight="500.0" prefWidth="900.0">
-    <children>
-        <VBox spacing="10" AnchorPane.topAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0"
-              AnchorPane.bottomAnchor="10.0">
-            <HBox spacing="10" alignment="CENTER_LEFT">
-                <children>
-                    <Label text="Fecha"/>
-                    <DatePicker fx:id="dateField" prefWidth="100" promptText="dd/MM/yyyy"/>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
 
-                    <Label text="Cliente"/>
-                    <TextField fx:id="clientIdField" prefWidth="50"/>
-                    <TextField fx:id="clientNameField" prefWidth="250" editable="false"/>
+<BorderPane fx:id="rootPane" prefHeight="800.0" prefWidth="1268.0" style="-fx-background-color: #f8fafc;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.luis.facturacion.mvc_deliveryNote.DeliveryNoteController">
 
-                    <Label text="Num."/>
-                    <TextField fx:id="deliveryNoteNumberField" prefWidth="80" editable="true"/>
+    <!-- Header Section -->
+    <top>
+        <VBox spacing="8" styleClass="header-section">
+            <Label styleClass="title" text="📋 Gestión de Albaranes" />
+            <Label styleClass="muted" text="Crea y administra albaranes de entrega" />
+        </VBox>
+    </top>
 
-                    <Label text="Total"/>
-                    <TextField fx:id="totalAmountField" prefWidth="100" editable="false" text="0.00"/>
-                </children>
+    <center>
+        <!-- Contenedor principal -->
+        <VBox spacing="15" style="-fx-padding: 20px;">
+
+            <!-- Bloque 1: Fecha y Cliente -->
+            <HBox alignment="CENTER_LEFT" spacing="15" style="-fx-padding: 15px;" styleClass="card">
+                <Label style="-fx-font-weight: 600;" text="📅 Fecha:" />
+                <DatePicker fx:id="dateField" prefHeight="40.0" prefWidth="140.0" promptText="dd/MM/yyyy" />
+
+                <Separator orientation="VERTICAL" />
+
+                <Label style="-fx-font-weight: 600;" text="👤 Cliente:" />
+                <TextField fx:id="clientIdField" prefWidth="60" promptText="ID" />
+                <TextField fx:id="clientNameField" editable="false" prefWidth="280" promptText="Nombre del cliente" />
+
+                <Separator orientation="VERTICAL" />
+
+                <Label style="-fx-font-weight: 600;" text="🏷️ Núm.:" />
+                <TextField fx:id="deliveryNoteNumberField" editable="true" prefWidth="90" promptText="Número" />
+
+                <Region HBox.hgrow="ALWAYS" />
+
+                <Label style="-fx-font-weight: 600;" text="💰 Total:" />
+                <TextField fx:id="totalAmountField" editable="false" prefWidth="100" styleClass="currency-field" text="0.00" />
             </HBox>
 
-            <HBox spacing="10" alignment="CENTER_LEFT">
-                <children>
-                    <TextField fx:id="codeField" prefWidth="80"/>
-                    <TextField fx:id="conceptField" prefWidth="300" editable="false"/>
-                    <TextField fx:id="trace1Field" prefWidth="80"/>
-                    <TextField fx:id="trace2Field" prefWidth="80"/>
-                    <TextField fx:id="quantityField" prefWidth="80"/>
-                    <TextField fx:id="priceField" prefWidth="80"/>
-                    <Button fx:id="addButton" text="Alta" onAction="#handleAddItem"/>
-                </children>
+            <HBox alignment="CENTER_LEFT" spacing="12" style="-fx-padding: 15px;" styleClass="card">
+                <TextField fx:id="codeField" prefWidth="90" promptText="Código" />
+                <TextField fx:id="conceptField" editable="false" prefHeight="40.0" prefWidth="496.0" promptText="Concepto - Descripción del artículo" />
+                <TextField fx:id="trace1Field" prefHeight="40.0" prefWidth="132.0" promptText="Traz.1" />
+                <TextField fx:id="trace2Field" prefHeight="40.0" prefWidth="133.0" promptText="Traz.2" />
+                <TextField fx:id="quantityField" prefWidth="90.0" promptText="Cantidad" />
+                <TextField fx:id="priceField" prefWidth="90.0" promptText="Precio" />
+                <Button fx:id="addButton" onAction="#handleAddItem" style="-fx-pref-width: 80;" styleClass="success" text="Alta" />
             </HBox>
 
-            <TableView fx:id="itemsTable" VBox.vgrow="ALWAYS">
-                <columns>
-                    <TableColumn fx:id="codeColumn" text="Cod." prefWidth="83">
-                        <cellValueFactory>
-                            <PropertyValueFactory property="code"/>
-                        </cellValueFactory>
-                    </TableColumn>
-                    <TableColumn fx:id="conceptColumn" text="Concepto" prefWidth="313">
-                        <cellValueFactory>
-                            <PropertyValueFactory property="concept"/>
-                        </cellValueFactory>
-                    </TableColumn>
-                    <TableColumn fx:id="trace1Column" text="Traz.(1)" prefWidth="89">
-                        <cellValueFactory>
-                            <PropertyValueFactory property="trace1"/>
-                        </cellValueFactory>
-                    </TableColumn>
-                    <TableColumn fx:id="trace2Column" text="Traz.(2)" prefWidth="89">
-                        <cellValueFactory>
-                            <PropertyValueFactory property="trace2"/>
-                        </cellValueFactory>
-                    </TableColumn>
-                    <TableColumn fx:id="quantityColumn" text="Ctd." prefWidth="89">
-                        <cellValueFactory>
-                            <PropertyValueFactory property="quantity"/>
-                        </cellValueFactory>
-                    </TableColumn>
-                    <TableColumn fx:id="priceColumn" text="Precio" prefWidth="89">
-                        <cellValueFactory>
-                            <PropertyValueFactory property="price"/>
-                        </cellValueFactory>
-                    </TableColumn>
-                    <TableColumn fx:id="amountColumn" text="Importe" prefWidth="89">
-                        <cellValueFactory>
-                            <PropertyValueFactory property="amount"/>
-                        </cellValueFactory>
-                    </TableColumn>
-                </columns>
-            </TableView>
+            <!-- Bloque 3: Tabla -->
+            <VBox spacing="10" styleClass="card" VBox.vgrow="ALWAYS">
+                <VBox spacing="6">
+                    <Label styleClass="subtitle" text="📦 Artículos del Albarán" />
+                    <Separator />
+                </VBox>
 
-            <HBox spacing="20" alignment="CENTER">
-                <children>
-                    <TextField fx:id="summaryField" prefWidth="100" editable="false" text="0"/>
+                <TableView fx:id="itemsTable" VBox.vgrow="ALWAYS">
+                    <columns>
+                        <TableColumn fx:id="codeColumn" prefWidth="90" styleClass="column-right" text="🏷️ Código">
+                            <cellValueFactory>
+                                <PropertyValueFactory property="code" />
+                            </cellValueFactory>
+                        </TableColumn>
+                        <TableColumn fx:id="conceptColumn" prefWidth="510.0" styleClass="column-left" text="📝 Concepto">
+                            <cellValueFactory>
+                                <PropertyValueFactory property="concept" />
+                            </cellValueFactory>
+                        </TableColumn>
+                        <TableColumn fx:id="trace1Column" minWidth="0.0" prefWidth="144.0" styleClass="column-right" text="📍 Traz.(1)">
+                            <cellValueFactory>
+                                <PropertyValueFactory property="trace1" />
+                            </cellValueFactory>
+                        </TableColumn>
+                        <TableColumn fx:id="trace2Column" prefWidth="147.0" styleClass="column-right" text="📍 Traz.(2)">
+                            <cellValueFactory>
+                                <PropertyValueFactory property="trace2" />
+                            </cellValueFactory>
+                        </TableColumn>
+                        <TableColumn fx:id="quantityColumn" prefWidth="98.0" styleClass="column-right" text="📊 Ctd.">
+                            <cellValueFactory>
+                                <PropertyValueFactory property="quantity" />
+                            </cellValueFactory>
+                        </TableColumn>
+                        <TableColumn fx:id="priceColumn" prefWidth="104.0" styleClass="column-right" text="💶 Precio">
+                            <cellValueFactory>
+                                <PropertyValueFactory property="price" />
+                            </cellValueFactory>
+                        </TableColumn>
+                        <TableColumn fx:id="amountColumn" prefWidth="91.0" styleClass="column-right" text="💰 Importe">
+                            <cellValueFactory>
+                                <PropertyValueFactory property="amount" />
+                            </cellValueFactory>
+                        </TableColumn>
+                    </columns>
+                </TableView>
+            </VBox>
 
-                    <VBox alignment="CENTER" spacing="5">
-                        <children>
-                            <CheckBox fx:id="printDeliveryNoteCheck" text="Imprime Albaran"/>
-                            <CheckBox fx:id="createInvoiceCheck" text="Emitir Factura"/>
-                        </children>
-                    </VBox>
+            <!-- Bloque 4: Botones y opciones -->
+            <HBox alignment="CENTER" spacing="25" styleClass="footer-section">
+                <Label style="-fx-font-weight: 600;" text="📋 Resumen:" />
+                <TextField fx:id="summaryField" editable="false" prefWidth="100" styleClass="currency-field" text="0" />
 
-                    <HBox spacing="10" alignment="CENTER_RIGHT">
-                        <Button fx:id="saveButton" text="Guardar" onAction="#handleSave"/>
-                        <Button fx:id="exitButton" text="Salir" onAction="#handleExit"/>
-                    </HBox>
-                </children>
-                <VBox.margin>
-                    <Insets top="10.0"/>
-                </VBox.margin>
+                <Separator orientation="VERTICAL" />
+
+                <VBox alignment="CENTER" spacing="8">
+                    <CheckBox fx:id="printDeliveryNoteCheck" text="🖨️ Imprime Albarán" />
+                    <CheckBox fx:id="createInvoiceCheck" text="📄 Emitir Factura" />
+                </VBox>
+
+                <Region HBox.hgrow="ALWAYS" />
+
+                <HBox alignment="CENTER_RIGHT" spacing="15">
+                    <Button fx:id="saveButton" onAction="#handleSave" style="-fx-pref-width: 120;" styleClass="success" text="💾 Guardar" />
+                    <Button fx:id="exitButton" onAction="#handleExit" style="-fx-pref-width: 100;" styleClass="secondary" text="❌ Salir" />
+                </HBox>
             </HBox>
         </VBox>
-    </children>
-</AnchorPane>
+    </center>
+
+    <stylesheets>
+        <URL value="@styles.css" />
+    </stylesheets>
+</BorderPane>
