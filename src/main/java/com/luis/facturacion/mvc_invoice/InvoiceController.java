@@ -177,7 +177,7 @@ public class InvoiceController {
 
         try {
             Integer clientId = Integer.parseInt(selectedClient.getClientId());
-            Integer invoiceId = model.createInvoiceForClient(clientId, toDateField.getValue());
+            Integer invoiceId = model.createInvoiceForClient(clientId);
 
             ShowAlert.showInfo("Éxito", "Factura creada con éxito. Número de factura: " + invoiceId);
             handleSearch();
@@ -197,5 +197,16 @@ public class InvoiceController {
     @FXML
     public void handleExit(ActionEvent actionEvent) {
         exitButton.getScene().getWindow().hide();
+    }
+
+    /**
+     * Creates an invoice for a specific client.
+     * This method is called from other controllers via AppController.
+     *
+     * @param clientId The ID of the client to create invoice for
+     * @return The ID of the created invoice
+     */
+    public Integer createInvoiceForClient(Integer clientId) {
+        return model.createInvoiceForClient(clientId);
     }
 }

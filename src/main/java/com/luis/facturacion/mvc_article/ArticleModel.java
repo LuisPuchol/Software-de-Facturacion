@@ -41,6 +41,15 @@ public class ArticleModel {
             // Conversion
             int indice = castingToInt(ind, "Índice");
 
+            //Checkea
+            ArticleEntity existingArticle = ArticleDAO.getInstance().getByIndex(indice);
+            if (existingArticle != null) {
+                ShowAlert.showError("Artículo Duplicado",
+                        "Ya existe un artículo con el índice '" + indice + "'. " +
+                                "Por favor, utilice un índice diferente.");
+                return false;
+            }
+
             // Create Entity
             ArticleEntity articleEntity = new ArticleEntity();
             articleEntity.setIndex(indice);

@@ -42,6 +42,15 @@ public class ClientModel {
         }
 
         try {
+
+            ClientEntity existingClient = clientDao.getByIndex(index);
+            if (existingClient != null) {
+                ShowAlert.showError("Cliente Duplicado",
+                        "Ya existe un cliente con el índice '" + index + "'. " +
+                                "Por favor, utilice un índice diferente.");
+                return false;
+            }
+
             ClientEntity client = new ClientEntity();
             client.setIndex(index);
             client.setName(name);

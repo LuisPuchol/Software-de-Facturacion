@@ -101,4 +101,19 @@ public class AppController {
     }
 
 
+    /**
+     * Creates an invoice for a specific client using the InvoiceController
+     * This delegates the invoice creation to the proper controller
+     *
+     * @param clientId The ID of the client to create invoice for
+     * @return The ID of the created invoice, or null if creation failed
+     */
+    public Integer createInvoiceForClient(Integer clientId) {
+        try {
+            return invoiceController.createInvoiceForClient(clientId);
+        } catch (Exception e) {
+            System.err.println("Error creating invoice from AppController: " + e.getMessage());
+            return null;
+        }
+    }
 }

@@ -124,7 +124,6 @@ public class DeliveryNoteController {
     }
 
 
-
     /**
      * Configures tab navigation between form fields.
      */
@@ -234,8 +233,6 @@ public class DeliveryNoteController {
      */
     @FXML
     public void handleSave(ActionEvent actionEvent) {
-
-
         model.createNewDeliveryNote(
                 deliveryNoteNumberField.getText(),
                 clientIdField.getText(),
@@ -249,10 +246,13 @@ public class DeliveryNoteController {
 
         model.saveDeliveryNoteWithItems();
 
-        if(printDeliveryNoteCheck.isSelected()) {
+        if (printDeliveryNoteCheck.isSelected()) {
             model.printDeliveryNote();
         }
 
+        if (createInvoiceCheck.isSelected()) {
+            model.createInvoice();
+        }
 
         resetUI();
     }
@@ -300,5 +300,9 @@ public class DeliveryNoteController {
      */
     private String getArticleName(int id) {
         return ArticleDAO.getInstance().getNameByIndex(id);
+    }
+
+    public AppController getAppController() {
+        return appController;
     }
 }

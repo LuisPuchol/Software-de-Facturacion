@@ -2,13 +2,13 @@ package com.luis.facturacion.mvc_deliveryNoteList;
 
 import com.luis.facturacion.AppController;
 import com.luis.facturacion.utils.ShowAlert;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseButton;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -64,6 +64,7 @@ public class DeliveryNoteListController {
     public void initialize() {
         setupTableColumns();
         setupInitialDates();
+        setupEventHandlers();
     }
 
     /**
@@ -96,6 +97,20 @@ public class DeliveryNoteListController {
 
         fromDateField.setValue(firstDayOfMonth);
         toDateField.setValue(now);
+    }
+
+    /**
+     * Sets up event handlers for the tables.
+     */
+    private void setupEventHandlers() {
+        deliveryNotesTable.setOnMouseClicked(event -> {
+            if (event.getButton().equals(MouseButton.PRIMARY) && event.getClickCount() == 2) {
+                DeliveryNoteListItem deliveryNoteListItem = deliveryNotesTable.getSelectionModel().getSelectedItem();
+                if (deliveryNoteListItem != null) {
+                    model.generateAndShowDeliveryNotePDF(deliveryNoteListItem.getId());
+                }
+            }
+        });
     }
 
     /**

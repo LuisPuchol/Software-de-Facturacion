@@ -74,8 +74,8 @@ public class DeliveryNoteModel {
                         ", Quantity=" + item.getQuantity());
             }
 
-            // Generate the PDF file
-            File pdfFile = PDFGenerator.generateDeliveryNotePDF(currentDeliveryNoteEntity, currentItems);
+            // Generate the PDF file // no longer adds , currentItems as parameter
+            File pdfFile = PDFGenerator.generateDeliveryNotePDF(currentDeliveryNoteEntity);
 
             // Print the PDF file
             boolean printed = PDFPrinter.showPrintDialog(pdfFile);
@@ -194,4 +194,30 @@ public class DeliveryNoteModel {
         deliveryNoteNumberField.setText(nextNumber);
     }
 
+
+    /**
+     * Creates an invoice for the current delivery note's client.
+     * Uses the AppController to delegate to the InvoiceController.
+     */
+    public void createInvoice() {
+        if (currentDeliveryNoteEntity == null) {
+            ShowAlert.showError("Error", "No hay albarán creado para facturar.");
+            return;
+        }
+
+        try {
+            Integer clientId = currentDeliveryNoteEntity.getClientId();
+            Integer invoiceId = deliveryNoteController.getAppController().createInvoiceForClient(clientId);
+
+            if (invoiceId != null) {
+                ShowAlert.showInfo("Éxito", "Factura creada correctamente con ID: " + invoiceId);
+            } else {
+                ShowAlert.showError("Error", "No se pudo crear la factura.");
+            }
+
+        } catch (Exception e) {
+            System.err.println("Error creating invoice from DeliveryNote: " + e.getMessage());
+            ShowAlert.showError("Error", "Error al crear la factura: " + e.getMessage());
+        }
+    }
 }

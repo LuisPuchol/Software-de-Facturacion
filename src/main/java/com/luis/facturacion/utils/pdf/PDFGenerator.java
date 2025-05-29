@@ -45,7 +45,7 @@ public class PDFGenerator {
     /**
      * Generates a PDF for a delivery note
      */
-    public static File generateDeliveryNotePDF(DeliveryNoteEntity deliveryNote, List<DeliveryNoteItemEntity> items) throws IOException {
+    public static File generateDeliveryNotePDF(DeliveryNoteEntity deliveryNote) throws IOException {
         File tempFile = createTempFile("albaran_" + deliveryNote.getIndex());
 
         try (PdfWriter writer = new PdfWriter(tempFile);

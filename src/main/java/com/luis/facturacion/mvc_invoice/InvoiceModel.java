@@ -220,12 +220,11 @@ public class InvoiceModel {
      * Creates an invoice for a specific client including all their pending delivery notes up to a date.
      *
      * @param clientId The ID of the client to invoice
-     * @param toDate   The maximum date for delivery notes to include
      * @return The ID of the created invoice
      * @throws RuntimeException if client not found or no delivery notes available
      */
-    public Integer createInvoiceForClient(Integer clientId, LocalDate toDate) {
-        List<DeliveryNoteEntity> deliveryNotes = deliveryNoteDAO.findByClientAndDateBeforeAndNotInvoiced(clientId, toDate);
+    public Integer createInvoiceForClient(Integer clientId) {
+        List<DeliveryNoteEntity> deliveryNotes = deliveryNoteDAO.findByClientAndDateBeforeAndNotInvoiced(clientId, LocalDate.now());
         return createInvoice(clientId, deliveryNotes);
     }
 }

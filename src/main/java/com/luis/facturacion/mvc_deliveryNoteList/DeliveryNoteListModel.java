@@ -4,9 +4,12 @@ import com.luis.facturacion.utils.HibernateUtil;
 import com.luis.facturacion.mvc_client.database.ClientDAO;
 import com.luis.facturacion.mvc_deliveryNote.database.DeliveryNoteDAO;
 import com.luis.facturacion.mvc_deliveryNote.database.DeliveryNoteEntity;
+import com.luis.facturacion.utils.ShowAlert;
+import com.luis.facturacion.utils.pdf.PDFGenerator;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
+import java.io.File;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -68,8 +71,8 @@ public class DeliveryNoteListModel {
             StringBuilder queryBuilder = new StringBuilder();
             queryBuilder.append("FROM DeliveryNoteEntity d WHERE d.date BETWEEN :fromDate AND :toDate");
 
-            if (includeInvoices) {
-                queryBuilder.append(" AND d.invoiceNumber IS NOT NULL");
+            if (!includeInvoices) {
+                queryBuilder.append(" AND d.invoiceNumber IS NULL");
             }
 
             Query<DeliveryNoteEntity> query = session.createQuery(queryBuilder.toString(), DeliveryNoteEntity.class);
@@ -110,4 +113,17 @@ public class DeliveryNoteListModel {
         return items;
     }
 
+    public void generateAndShowDeliveryNotePDF(Integer id) {
+        try {
+            DeliveryNoteEntity deliveryNote = deliveryNoteDAO.getByIndex(id);
+            //List<DeliveryNoteEntity> deliveryNotes = deliveryNoteDAO.findByInvoiceId(invoiceId);
+
+            File pdfFile = PDFGenerator.generateDeliveryNotePDF(deliveryNote);
+            java.awt.Desktop.getDesktop().open(pdfFile);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            ShowAlert.showError("Error", "Error al generar el PDF de la factura: " + e.getMessage());
+        }
+    }
 }

@@ -8,7 +8,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.geometry.Insets?>
 <?import java.net.URL?>
 
 <BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.luis.facturacion.mvc_mainmenu.MainMenuController"
@@ -38,7 +37,7 @@
                 </Menu>
 
                 <!-- Menú de Facturas -->
-                <Menu fx:id="InvoicesMenu" text="🧾 Facturas">
+                <Menu fx:id="InvoicesMenu" text="💰 Facturas">
                     <MenuItem fx:id="Invoice" text="Crear Factura" onAction="#handleInvoiceClick"/>
                     <MenuItem fx:id="InvoiceList" text="Listado de Facturas" onAction="#handleInvoiceListClick"/>
                     <MenuItem fx:id="CorrectiveInvoice" text="Facturas Rectificativas" onAction="#handleCorrectiveInvoiceClick"/>
