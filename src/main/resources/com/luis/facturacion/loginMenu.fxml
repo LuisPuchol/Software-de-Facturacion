@@ -40,13 +40,6 @@
                 <Label text="Último acceso: Hoy 14:30" styleClass="user-last-access"/>
             </VBox>
         </HBox>
-
-        <!-- Botón de acceso -->
-        <Button text="Acceder al Sistema"
-                prefWidth="200" prefHeight="45"
-                styleClass="login-button"
-                onAction="#handleUserClick"/>
-
     </VBox>
 
     <!-- Información adicional -->

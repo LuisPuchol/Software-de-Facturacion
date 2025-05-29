@@ -89,13 +89,13 @@
     <!-- Panel de botones en la parte inferior -->
     <bottom>
         <HBox alignment="CENTER" spacing="16" styleClass="footer-section">
-            <Button fx:id="newButton" onMouseClicked="#handleNewButton" style="-fx-pref-width: 140;" styleClass="success" text="➕ Nuevo Artículo" />
-            <Button fx:id="deleteButton" onMouseClicked="#handleDeleteButton" style="-fx-pref-width: 120;" styleClass="danger" text="🗑️ Eliminar" />
-            <Button fx:id="exitButton" onMouseClicked="#handleExitButton" style="-fx-pref-width: 100;" styleClass="secondary" text="❌ Salir" />
-        </HBox>
-    </bottom>
+            <Button fx:id="newButton" onMouseClicked="#handleNewButton" style="-fx-pref-width: 140;" styleClass="success" text="Nuevo Artículo" />
+            <!-- <Button fx:id="deleteButton" onMouseClicked="#handleDeleteButton" style="-fx-pref-width: 120;" styleClass="danger" text="Eliminar" /> -->
+           <Button fx:id="exitButton" onMouseClicked="#handleExitButton" style="-fx-pref-width: 100;" styleClass="secondary" text="Salir" />
+       </HBox>
+   </bottom>
 
-    <stylesheets>
-        <URL value="@styles.css" />
-    </stylesheets>
+   <stylesheets>
+       <URL value="@styles.css" />
+   </stylesheets>
 </BorderPane>

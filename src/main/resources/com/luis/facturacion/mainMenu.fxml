@@ -64,13 +64,13 @@
                     <Label text="Módulos del Sistema" styleClass="quick-access-title"/>
 
                     <VBox spacing="12">
-                        <Label text="• Artículos: Catálogo completo de productos y servicios disponibles" styleClass="quick-access-item"/>
-                        <Label text="• Clientes: Base de datos con información detallada de contactos comerciales" styleClass="quick-access-item"/>
+                        <Label text="• Artículos: Catálogo completo de productos" styleClass="quick-access-item"/>
+                        <Label text="• Clientes: Base de datos con información detallada" styleClass="quick-access-item"/>
                         <Label text="• Configuración IVA: Gestión de tipos impositivos y recargos de equivalencia" styleClass="quick-access-item"/>
                         <Label text="• Albaranes: Creación y edición de documentos de entrega de mercancías" styleClass="quick-access-item"/>
                         <Label text="• Listado de Albaranes: Consulta histórica y filtrado de albaranes registrados" styleClass="quick-access-item"/>
                         <Label text="• Facturación: Generación automática de facturas desde albaranes pendientes" styleClass="quick-access-item"/>
-                        <Label text="• Listado de Facturas: Archivo completo de facturas emitidas con opciones de búsqueda" styleClass="quick-access-item"/>
+                        <Label text="• Listado de Facturas: Consulta histórica y filtrado de facturas registradas" styleClass="quick-access-item"/>
                     </VBox>
                 </VBox>
 

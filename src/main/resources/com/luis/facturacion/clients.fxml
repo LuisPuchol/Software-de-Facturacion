@@ -130,8 +130,7 @@
     <!-- Panel de botones en la parte inferior -->
     <bottom>
         <HBox alignment="CENTER" spacing="16" styleClass="footer-section">
-            <Button fx:id="newButton" onMouseClicked="#handleNewButton" style="-fx-pref-width: 120;" styleClass="success" text="➕ Nuevo Cliente" />
-            <Button fx:id="editButton" onMouseClicked="#handleEditButton" style="-fx-pref-width: 100;" styleClass="primary" text="✏️ Editar" />
+            <Button fx:id="newButton" onMouseClicked="#handleNewButton" style="-fx-pref-width: 120;" styleClass="success" text="Nuevo" />
             <Button fx:id="exitButton" onMouseClicked="#handleExitButton" style="-fx-pref-width: 100;" styleClass="secondary" text="❌ Salir" />
         </HBox>
     </bottom>

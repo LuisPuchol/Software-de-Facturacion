@@ -100,7 +100,7 @@ public class ClientController {
 
     @FXML
     public void handleNewButton(MouseEvent mouseEvent) {
-        int tipoCliente = "BASE + IVA".equals(clientTypeCombo.getValue()) ? 2 : 1;
+        int tipoCliente = "BASE + IVA".equals(clientTypeCombo.getValue()) ? 1 : 0;
 
         boolean success = clientModel.addCliente(
                 parseInteger(clientIndexField.getText()),
